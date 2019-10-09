@@ -11,28 +11,20 @@
 	src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
-* {
-	padding: 0;
-	margin: 0;
+#myProgress {
+	width: 100%;
+	background-color: grey;
 }
 
-.main-container {
-	width: 50%;
-	background-color: blue;
+#myBar {
+	width: 1%;
+	height: 30px;
+	background-color: green;
 }
 
-.col-sm {
-	background-color: yellow;
-	align-content: center;
-
-}
-
-.container {
-	background-color: orange;
-}
-
-.row{
-background-color: blue;
+.container{
+align-content: center;
+justify-content: center;
 }
 </style>
 </head>
@@ -46,7 +38,7 @@ background-color: blue;
 			<s:submit class="btn btn-danger" align="center" />
 		</s:form>
 	</div> --%>
-	<div class="container">
+	<%-- <div class="container">
 		<div class="row">
 			<div class="col-sm 1"></div>
 			<div class="col-sm 2">
@@ -60,6 +52,32 @@ background-color: blue;
 			<div class="col-sm 3"></div>
 			<div class="col-sm 4"></div>
 		</div>
+	</div> --%>
+	<!-- <div class="progress">
+		<div class="progress-bar progress-bar-striped progress-bar-animated"
+			role="progressbar" aria-valuenow="75" aria-valuemin="0"
+			aria-valuemax="100" style="width: 75%"></div>
+	</div> -->
+	<div class="container">
+		<div id="myProgress">
+			<div id="myBar"></div>
+		</div>
 	</div>
 </body>
+<script type="text/javascript">
+$(document).ready(function move() {
+	  var elem = document.getElementById("myBar");
+	  var width = 1;
+	  var id = setInterval(frame, 10);
+	  function frame() {
+	    if (width >= 100) {
+	      clearInterval(id);
+	      location.href = "login";
+	    } else {
+	      width++;
+	      elem.style.width = width + '%';
+	    }
+	  }
+	} )
+</script>
 </html>
