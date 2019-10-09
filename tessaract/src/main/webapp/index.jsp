@@ -20,9 +20,19 @@
 	width: 50%;
 	background-color: blue;
 }
-.col-sm{
-background-color: yellow;
-align-content: center;
+
+.col-sm {
+	background-color: yellow;
+	align-content: center;
+
+}
+
+.container {
+	background-color: orange;
+}
+
+.row{
+background-color: blue;
 }
 </style>
 </head>
@@ -38,7 +48,8 @@ align-content: center;
 	</div> --%>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm">
+			<div class="col-sm 1"></div>
+			<div class="col-sm 2">
 				<s:form action="login">
 					<s:textfield name="name" />
 					<br>
@@ -46,6 +57,8 @@ align-content: center;
 					<s:submit class="btn btn-danger" align="center" />
 				</s:form>
 			</div>
+			<div class="col-sm 3"></div>
+			<div class="col-sm 4"></div>
 		</div>
 	</div>
 </body>
