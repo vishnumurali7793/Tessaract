@@ -62,7 +62,7 @@ height: 10cm;
 	$(document).ready(function move() {
 		var elem = document.getElementById("myBar");
 		var width = 1;
-		var id = setInterval(frame, 100);
+		var id = setInterval(frame, 200);
 		function frame() {
 			if (width >= 100) {
 				clearInterval(id);

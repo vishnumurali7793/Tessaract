@@ -12,7 +12,7 @@
 
 	<package name="default" extends="struts-default">
 		<action name="login" class="org.tesseract.action.LoginAction">
-			<result name="success">home.jsp</result>
+			<result name="success">/jsp/home.jsp</result>
 		</action>
 	</package>
 
