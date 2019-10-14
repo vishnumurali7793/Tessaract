@@ -9,7 +9,7 @@
 <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>Home Page</title>
 <style type="text/css">
 body {
 	background-color: #ebebeb;
@@ -62,7 +62,7 @@ height: 10cm;
 	$(document).ready(function move() {
 		var elem = document.getElementById("myBar");
 		var width = 1;
-		var id = setInterval(frame, 200);
+		var id = setInterval(frame, 100);
 		function frame() {
 			if (width >= 100) {
 				clearInterval(id);
