@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h3>
-		Welcome Home, <s:property value="name" /> !
+		Welcome HomE !
 	</h3>
 </body>
 </html>
