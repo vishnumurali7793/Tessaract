@@ -20,7 +20,6 @@ body {
 #myProgress {
 	width: 100%;
 	background-color: grey;azimuth: 
-	
 }
 
 #myBar {

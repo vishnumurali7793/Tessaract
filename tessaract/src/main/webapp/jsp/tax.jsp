@@ -5,6 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel='stylesheet'
+	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
+<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>tessaract</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 
@@ -76,8 +81,12 @@ td, th {
 				<td>1</td>
 				<td>1</td>
 				<td>1</td>
-				<td><input type="button" value="EDIT" id="edit" />&nbsp<input
-					type="button" value="DELETE" id="delete" /></td>
+				<td><div class="btn-group">
+						<input type="button" class="btn btn-info" value="EDIT"
+							id="edit"/>&nbsp<input
+							type="button" class="btn btn-danger" value="DELETE"
+							id="delete" />
+					</div></td>
 			</tr>
 		</table>
 	</div>

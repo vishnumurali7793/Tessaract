@@ -17,7 +17,7 @@
 
 		<action name="login" class="org.tesseract.action.LoginAction"
 			method="authenticateUser">
-			<result name="success">tax.jsp</result>
+			<result name="success">/jsp/tax.jsp</result>
 			<result name="input">/jsp/home.jsp</result>
 		</action>
 	</package>

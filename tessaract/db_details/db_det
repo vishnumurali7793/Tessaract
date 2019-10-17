@@ -1,0 +1,10 @@
+
+-----------18/10/2019 master DB-----------------
+
+CREATE DATABASE tesseract;
+
+CREATE TABLE `tesseract`.`user_details` (
+  `user_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`user_id`));

@@ -24,7 +24,7 @@
         <property name="connection.pool_size">1</property>
 
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
         <!-- Disable the second-level cache  -->
         <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
@@ -33,7 +33,8 @@
         <property name="show_sql">true</property>
 
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">update</property>
+<!--         <property name="hbm2ddl.auto">validate</property> -->
+        <property name="javax.persistence.schema-generation.database.action">update</property>
 
         <!-- Names the annotated entity class -->
         <mapping class="org.tesseract.entities.LoginBean"/>

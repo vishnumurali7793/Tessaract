@@ -24,9 +24,9 @@ body {
 	color: white;
 }
 
-#login {
-	border: 2px solid white;
-	padding: 10px;
+#loginPane {
+	border: 4px solid #4f0f1c;
+	padding: 0 10px;
 	margin-right: 50px;
 	margin-left: 50px;
 }
@@ -34,26 +34,42 @@ body {
 #submit {
 	margin: 0px;
 }
+
+#header {
+	margin-left: 10px;
+	height: 70px;
+	font-weight: bold;
+}
+
+.form-group {
+	color: black;
+}
+
+#label {
+	color: white;
+}
 </style>
 <body>
-	<h3 align="center">Tesseract</h3>
+	<!-- 	<h3 align="center">Tesseract</h3> -->
+	<div id="header">
+		<h3>Tesseract</h3>
+	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-md-12" id="login-panel">
 				<s:form action="login">
 
-					<div id="login" align="center">
+					<div id="loginPane" align="center">
 						<h3 align="center" class="header">Login</h3>
-						<div class="input-group">
-							<label>Username</label>&emsp;<input type="text"
+						<div class="input-group form-group">
+							<label id="label">Username</label>&emsp;<input type="text"
 								name="loginBean.userName" id="name" />
 						</div>
 						<br>
-						<div class="input-group">
-							<label>Password</label>&emsp;<input type="password"
-								name="loginBean.password" id="password" /><br>
-							<br>
-							<div id="input-group">
+						<div class="input-group form-group">
+							<label id="label">Password</label>&emsp;<input type="password"
+								name="loginBean.password" id="password" /><br> <br>
+							<div id="input-group form-group">
 								<input type="submit" name="submit" value="login"
 									class="btn btn-warning btn-block" />
 							</div>
