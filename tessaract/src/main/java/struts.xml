@@ -20,6 +20,11 @@
 			<result name="success">/jsp/tax.jsp</result>
 			<result name="input">/jsp/home.jsp</result>
 		</action>
+		
+		<action name="logout" class="org.tesseract.action.LoginAction"
+			method="logoutUser">
+			<result name="success">/jsp/home.jsp</result>
+		</action>
 	</package>
 
 </struts>

@@ -42,11 +42,41 @@ td, th {
 #tablecolor {
 	background-color: #563d7c;
 }
+.bar{
+border-radius: 0px;
+}
 </style>
-<header
+<%-- <header
 	class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar"
-	id="allign">TAX</header>
+	id="allign">
+	TAX -
+	<s:property value="loginBean.userName" />
+</header> --%>
 <body>
+	<nav class="navbar navbar-inverse bar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Tesseract</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Page 1-1</a></li>
+						<li><a href="#">Page 1-2</a></li>
+						<li><a href="#">Page 1-3</a></li>
+					</ul></li>
+				<li><a href="#">Page 2</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
+						Sign Up</a></li> --%>
+				<li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>
+						Logout</a></li>
+			</ul>
+		</div>
+	</nav>
 	<form align="center">
 		<div class="tax">
 			<br> <label>SGST</label> <input type="text" name="name" />&nbsp
@@ -82,13 +112,14 @@ td, th {
 				<td>1</td>
 				<td>1</td>
 				<td><div class="btn-group">
-						<input type="button" class="btn btn-info" value="EDIT"
-							id="edit"/>&nbsp<input
-							type="button" class="btn btn-danger" value="DELETE"
-							id="delete" />
+						<input type="button" class="btn btn-info" value="EDIT" id="edit" />&nbsp<input
+							type="button" class="btn btn-danger" value="DELETE" id="delete" />
 					</div></td>
 			</tr>
 		</table>
+	</div>
+	<div class="footer">
+	<s:property value="loginBean.userName"/>
 	</div>
 </body>
 
