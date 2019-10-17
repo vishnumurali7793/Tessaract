@@ -1,0 +1,14 @@
+@CHARSET "ISO-8859-1";
+
+.body{
+margin-left:200px;
+margin-right:200px;
+margin-top:5px;
+margin-bottom:5px;
+border:2px solid #119EE6;
+}
+.head{
+background-color:#495f61;
+}
+.menu{padding-top:20px;padding-bottom:10px;padding-left:10px;padding-right:100px}
+

@@ -6,9 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>tessaract</title>
-	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
 	
 </head>
+<style type="text/css">
+.login{
+background-color:red;
+}
+</style>
 <body>
 	<h3 align="center">
 		Welcome HomE !
