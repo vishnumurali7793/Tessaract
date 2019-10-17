@@ -24,7 +24,7 @@ body {
 	color: white;
 }
 
-.login {
+#login {
 	border: 2px solid white;
 	padding: 10px;
 	margin-right: 50px;
@@ -42,7 +42,7 @@ body {
 			<div class="col-xs-12 col-md-12" id="login-panel">
 				<s:form action="login">
 
-					<div class="login" align="center">
+					<div id="login" align="center">
 						<h3 align="center" class="header">Login</h3>
 						<div class="input-group">
 							<label>Username</label>&emsp;<input type="text"

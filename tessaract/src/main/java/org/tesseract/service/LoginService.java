@@ -4,6 +4,6 @@ import org.tesseract.entities.LoginBean;
 
 public interface LoginService {
 
-	boolean authenticateUser(LoginBean loginBean);
+	public boolean authenticateUser(LoginBean loginBean);
 
 }
