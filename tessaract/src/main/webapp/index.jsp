@@ -66,7 +66,7 @@ height: 10cm;
 		function frame() {
 			if (width >= 100) {
 				clearInterval(id);
-				location.href = "login";
+				location.href = "redir";
 			} else {
 				width++;
 				elem.style.width = width + '%';

@@ -11,7 +11,13 @@
 		value="ApplicationResources" />
 
 	<package name="default" extends="struts-default">
-		<action name="login" class="org.tesseract.action.LoginAction">
+		<action name="redir" class="org.tesseract.action.LoginAction">
+			<result name="success">/jsp/home.jsp</result>
+		</action>
+
+		<action name="login" class="org.tesseract.action.LoginAction"
+			method="authenticateUser">
+			<result name="success">index.jsp</result>
 			<result name="success">/jsp/home.jsp</result>
 		</action>
 	</package>

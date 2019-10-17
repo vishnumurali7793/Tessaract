@@ -16,7 +16,7 @@
         <!-- Database connection settings -->
 <!--         <property name="connection.driver_class">com.mysql.jdbc.Driver</property> for older versions -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost/happy</property>
+        <property name="connection.url">jdbc:mysql://localhost/tesseract</property>
         <property name="connection.username">root</property>
         <property name="connection.password">pass</property>
 
@@ -36,7 +36,7 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!-- Names the annotated entity class -->
-<!--         <mapping class="com.happy.entities.LoginBean"/> -->
+        <mapping class="org.tesseract.entities.LoginBean"/>
 <!--         <mapping class="com.happy.entities.ProductBean"/> -->
 <!--         <mapping class="com.happy.entities.AccountHeadBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesBean"/> -->
