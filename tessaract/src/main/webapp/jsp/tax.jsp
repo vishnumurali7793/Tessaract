@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/jQuery.js" /></script>
 <link rel='stylesheet'
 	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
 <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
@@ -15,6 +17,11 @@
 
 </head>
 <style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+}
+
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
@@ -42,8 +49,30 @@ td, th {
 #tablecolor {
 	background-color: #563d7c;
 }
-.bar{
-border-radius: 0px;
+
+.bar {
+	border-radius: 0px;
+}
+
+#accordion {
+	max-height: 100%;
+}
+
+.panel, .tax {
+	margin: 10px;
+}
+
+/* #submitButton {
+	float: right;
+} */
+
+/* #statusDropdown {
+	float: right;
+	align-items: left;
+} */
+.tax {
+	justify-content: center;
+	align-items: center;
 }
 </style>
 <%-- <header
@@ -56,14 +85,14 @@ border-radius: 0px;
 	<nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Tesseract</a>
+				<a class="navbar-brand" href="goToHome">Tesseract</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
+				<li><a href="goToHome">Home</a></li>
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Page 1-1</a></li>
+						<li class="active"><a href="goToTaxMaster">Tax Master</a></li>
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
@@ -72,55 +101,126 @@ border-radius: 0px;
 			<ul class="nav navbar-nav navbar-right">
 				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
 						Sign Up</a></li> --%>
-				<li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>
-						Logout</a></li>
+				<li><a href="logout"><span
+						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
 	</nav>
-	<form align="center">
-		<div class="tax">
-			<br> <label>SGST</label> <input type="text" name="name" />&nbsp
-			<label>CGST</label> <input type="text" name="name" />&nbsp <label>IGST</label>
-			<input type="text" name="name" />&nbsp <label>DATE</label> <input
-				type="date" value="dd/mm/yyyy" />&nbsp <label>STATUS</label> <select
-				name="">
-				<option value="A">active</option>
-				<option value="D">deactive</option>
-			</select>&nbsp
-			<div class="btnn">
-				<br> <input type="submit" name="submit" />
-			</div>
-			<br>
-		</div>
-	</form>
-	<div class="table">
-		<table>
-			<tr id="tablecolor">
-				<th>sl.no</th>
-				<th>SGST</th>
-				<th>CGST</th>
-				<th>IGST</th>
-				<th>DATE</th>
-				<th>STATUS</th>
-				<th>ACTION</th>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td><div class="btn-group">
-						<input type="button" class="btn btn-info" value="EDIT" id="edit" />&nbsp<input
-							type="button" class="btn btn-danger" value="DELETE" id="delete" />
-					</div></td>
-			</tr>
-		</table>
-	</div>
-	<div class="footer">
-	<s:property value="loginBean.userName"/>
-	</div>
-</body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="panel">
+				<h2>Tax Master</h2>
+				<div class="panel-group" id="accordion">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion"
+									href="#collapse1">Add TAX</a>
+							</h4>
+						</div>
+						<div id="collapse1" class="panel-collapse collapse in">
+							<div class="panel-body ">
+								<s:form action="addTax">
+									<div class="tax">
+										<div class="col-xs-2">
+											<div class="tax-row">
+												<input type="text" placeholder="SGST" name="taxBean.sgst" />
+											</div>
+										</div>
+										<div class="col-xs-2">
+											<div class="tax-row">
+												<input type="text" placeholder="CGST" name="taxBean.cgst" />
+											</div>
+										</div>
+										<div class="col-xs-2">
+											<div class="tax-row">
+												<input type="text" placeholder="IGST" name="taxBean.igst" />
+											</div>
+										</div>
+										<div class="col-xs-5">
+											<!-- <div class="form-group form-group-sm"> -->
+											<!-- <div class="col-xs-6">
+													<input type="date"
+														name="taxBean.addedOn" value="dd/mm/yyyy"
+														placeholder="Date" />
+												</div>
+												<div class="col-xs-6"> -->
+											<select class="form-control" name="taxBean.activeStatus">
+												<option></option>
+												<option>Active</option>
+												<option>De-active</option>
+											</select>
+											<!-- </div> -->
+											<!-- </div> -->
 
+										</div>
+										<div class="col-xs-1" id="submitButton">
+											<button type="submit" class="btn btn-warning">
+												<span class="glyphicon glyphicon-save"></span>&nbsp;Add
+											</button>
+										</div>
+									</div>
+								</s:form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading" role="tab" id="collapse-two">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion"
+								class="collapsed" role="button" aria-expanded="true"
+								aria-controls="collapse2" href="#collapse2">Tax Details</a>
+						</h4>
+					</div>
+					<div id="collapse2" class="panel-collapse collapse" role="tabpanel"
+						aria-labelledby="collapse-two">
+						<div class="panel-body">
+							<div class="container">
+								<h2>Tax Table</h2>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>CGST %</th>
+											<th>SGST %</th>
+											<th>IGST %</th>
+											<th>GST %</th>
+											<th>Active Status</th>
+											<th>Added On</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<s:if test="taxList!=null && taxList.size()>0">
+											<tr>
+												<s:iterator value="taxList" status="row">
+													<td><s:property value="#row.count" /></td>
+													<td><s:property value="cgst" /></td>
+													<td><s:property value="sgst" /></td>
+													<td><s:property value="igst" /></td>
+													<td><s:property value="cgst + sgst" /></td>
+													<td><s:property value="activeStatus" /></td>
+													<td><s:property value="addedOn" /></td>
+													<td><button>TEST</button></td>
+											</tr>
+											</s:iterator>
+										</s:if>
+									</tbody>
+								</table>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+
+
+</body>
 </html>
