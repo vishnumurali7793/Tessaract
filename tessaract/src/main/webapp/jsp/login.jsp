@@ -21,24 +21,40 @@ body {
 	background: rgb(196, 85, 42);
 	background: linear-gradient(90deg, rgba(196, 85, 42, 1) 10%,
 		rgba(195, 12, 157, 1) 100%);
+		background-image:url("images/Bg.jpg");
 	color: white;
 }
+#body-sub{
+  position: fixed;
+  top: 0;
+  left: 0;
+  border: 3px solid #8a6d3b;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 
+}
+.container-fluid{padding-top:100px;}
 #loginPane {
-	border: 4px solid #4f0f1c;
+	border: 4px solid #fe905b;
 	padding: 0 10px;
 	margin-right: 50px;
 	margin-left: 50px;
+	
 }
+input{background-color: #f0ad4e}
 
 #submit {
 	margin: 0px;
 }
 
 #header {
-	margin-left: 10px;
+	margin-left: 0px;
 	height: 70px;
 	font-weight: bold;
+	text-align:center;
 }
 
 .form-group {
@@ -46,21 +62,24 @@ body {
 }
 
 #label {
-	color: white;
+	color: #fe905b;
 }
 </style>
 <body>
+<div id="body-sub">
 	<!-- 	<h3 align="center">Tesseract</h3> -->
-	<div id="header">
-		<h3>Tesseract</h3>
-	</div>
+	 <div id="header">
+		<h3>Welcome to Tesseract</h3>
+	</div> 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-12 col-md-12" id="login-panel">
+		<div class="col-xs-4 col-md-4"></div>
+			<div class="col-xs-12 col-md-4" id="login-panel">
 				<s:form action="login">
 
 					<div id="loginPane" align="center">
-						<h3 align="center" class="header">Login</h3>
+						<!-- <h3 align="center" class="header">Login</h3> -->
+						<img src="images/logo.png" alt="logo" height="100" width="200">
 						<div class="input-group form-group">
 							<label id="label">Username</label>&emsp;<input type="text"
 								name="loginBean.userName" id="name" />
@@ -71,14 +90,16 @@ body {
 								name="loginBean.password" id="password" /><br> <br>
 							<div id="input-group form-group">
 								<input type="submit" name="submit" value="login"
-									class="btn btn-warning btn-block" />
+									class="btn btn-warning" />
 							</div>
 						</div>
 						<br>
 					</div>
 				</s:form>
 			</div>
+			<div class="col-xs-4 col-md-4"></div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>
