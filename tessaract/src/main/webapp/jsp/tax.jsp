@@ -75,6 +75,13 @@ td, th {
 	align-items: center;
 }
 </style>
+<script type="text/javascript">
+function edittax(taxid){
+	alert(taxid);
+	location.href="editTax?taxBean.taxId="+taxid;
+}
+</script>
+
 <%-- <header
 	class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar"
 	id="allign">
@@ -124,31 +131,28 @@ td, th {
 									<div class="tax">
 										<div class="col-xs-2">
 											<div class="tax-row">
-												<input type="text" placeholder="SGST" name="taxBean.sgst" />
+												<s:textfield type="text" placeholder="SGST" name="taxBean.sgst" />
 											</div>
 										</div>
 										<div class="col-xs-2">
 											<div class="tax-row">
-												<input type="text" placeholder="CGST" name="taxBean.cgst" />
+												<s:textfield type="text" placeholder="CGST" name="taxBean.cgst" />
 											</div>
 										</div>
 										<div class="col-xs-2">
 											<div class="tax-row">
-												<input type="text" placeholder="IGST" name="taxBean.igst" />
+												<s:textfield type="text" placeholder="IGST" name="taxBean.igst" />
 											</div>
 										</div>
 										<div class="col-xs-5">
 											<div class="form-group form-group-sm">
 												<div class="col-xs-6">
-													<input type="date" name="taxBean.addedOn"
-														value="dd/mm/yyyy" placeholder="Date" />
+													<s:date name="taxBean.addedOn"
+														format="dd/mm/yyyy"  />
 												</div>
 												<div class="col-xs-6">
-													<select class="form-control" name="taxBean.activeStatus">
-														<option></option>
-														<option>Active</option>
-														<option>De-active</option>
-													</select>
+													<s:select class="form-control" name="taxBean.activeStatus" list="#{'A':'Active','D':'De-Active'}" />
+													
 												</div>
 											</div>
 
@@ -201,7 +205,7 @@ td, th {
 													<td><s:property value="cgst + sgst" /></td>
 													<td><s:property value="activeStatus" /></td>
 													<td><s:property value="addedOn" /></td>
-													<td><button>TEST</button></td>
+													<td><button onclick="edittax('<s:property value="taxId"/>')">EDIT</button></td>
 											</tr>
 											</s:iterator>
 										</s:if>

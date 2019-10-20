@@ -16,7 +16,7 @@ public class MasterHibernateDao {
 		Transaction transaction = session.beginTransaction();
 
 		try {
-			session.save(taxBean);
+			session.saveOrUpdate(taxBean);
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -25,7 +25,25 @@ public class MasterHibernateDao {
 		}
 
 	}
+	
+	public TaxBean getTaxById(TaxBean taxBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		                  session.beginTransaction();
 
+		try {
+			return session.get(TaxBean.class, taxBean.getTaxId());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
+
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public List<TaxBean> getTaxList() {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();

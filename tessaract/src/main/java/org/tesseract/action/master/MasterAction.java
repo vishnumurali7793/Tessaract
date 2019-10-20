@@ -24,7 +24,11 @@ public class MasterAction extends ActionSupport {
 		}
 		return INPUT;
 	}
-
+	
+	public String editTax() {
+		taxBean=masterHibernateDao.getTaxById(taxBean);
+		return SUCCESS;
+	}
 	public TaxBean getTaxBean() {
 		return taxBean;
 	}

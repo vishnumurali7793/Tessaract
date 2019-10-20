@@ -45,6 +45,11 @@
 			<result name="success" type="redirectAction">goToTaxMaster</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
+		
+		<action name="editTax"
+			class="org.tesseract.action.master.MasterAction" method="editTax">
+			<result name="success">/jsp/tax.jsp</result>
+		</action>
 
 	</package>
 
