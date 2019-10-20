@@ -14,7 +14,7 @@ CREATE TABLE `tesseract`.`user_details` (
   `tax_cgst` DECIMAL(13,3) NULL,
   `tax_sgst` DECIMAL(13,3) NULL,
   `tax_igst` DECIMAL(13,3) NULL,
-  `added_on` DATETIME NULL,
+  `added_on` VARCHAR(10) NULL,
   `active_status` VARCHAR(10) NULL,
   `delete_status` VARCHAR(2) NULL,
-  PRIMARY KEY (`tax_id`));
+  PRIMARY KEY (`tax_id`)

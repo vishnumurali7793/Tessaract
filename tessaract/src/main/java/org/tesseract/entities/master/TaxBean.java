@@ -28,7 +28,7 @@ public class TaxBean {
 	private Double igst;
 	
 	@Column(name = "added_on")
-	private Date addedOn;
+	private String addedOn;
 	
 	@Column(name = "active_status")
 	private String activeStatus;
@@ -70,11 +70,11 @@ public class TaxBean {
 		this.igst = igst;
 	}
 
-	public Date getAddedOn() {
+	public String getAddedOn() {
 		return addedOn;
 	}
 
-	public void setAddedOn(Date addedOn) {
+	public void setAddedOn(String addedOn) {
 		this.addedOn = addedOn;
 	}
 

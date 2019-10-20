@@ -1,6 +1,5 @@
 package org.tesseract.action.master;
 
-import java.util.Date;
 
 import org.tesseract.entities.master.TaxBean;
 import org.tesseract.persistance.master.MasterHibernateDao;
@@ -18,7 +17,7 @@ public class MasterAction extends ActionSupport {
 	public String addTax() {
 		if (taxBean != null) {
 			if ((taxBean.getSgst() > 0 && taxBean.getCgst() > 0) || taxBean.getIgst() > 0) {
-				taxBean.setAddedOn(new Date());
+//				taxBean.setAddedOn(new Date());
 				masterHibernateDao.addTax(taxBean);
 				return SUCCESS;
 			}

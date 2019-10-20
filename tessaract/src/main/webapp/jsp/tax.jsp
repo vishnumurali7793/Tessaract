@@ -138,20 +138,19 @@ td, th {
 											</div>
 										</div>
 										<div class="col-xs-5">
-											<!-- <div class="form-group form-group-sm"> -->
-											<!-- <div class="col-xs-6">
-													<input type="date"
-														name="taxBean.addedOn" value="dd/mm/yyyy"
-														placeholder="Date" />
+											<div class="form-group form-group-sm">
+												<div class="col-xs-6">
+													<input type="date" name="taxBean.addedOn"
+														value="dd/mm/yyyy" placeholder="Date" />
 												</div>
-												<div class="col-xs-6"> -->
-											<select class="form-control" name="taxBean.activeStatus">
-												<option></option>
-												<option>Active</option>
-												<option>De-active</option>
-											</select>
-											<!-- </div> -->
-											<!-- </div> -->
+												<div class="col-xs-6">
+													<select class="form-control" name="taxBean.activeStatus">
+														<option></option>
+														<option>Active</option>
+														<option>De-active</option>
+													</select>
+												</div>
+											</div>
 
 										</div>
 										<div class="col-xs-1" id="submitButton">
