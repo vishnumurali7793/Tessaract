@@ -11,9 +11,41 @@
 		value="ApplicationResources" />
 
 	<package name="default" extends="struts-default">
-		<action name="login" class="org.tesseract.action.LoginAction">
-			<result name="success">home.jsp</result>
+		<action name="redir" class="org.tesseract.action.LoginAction">
+			<result name="success">/jsp/login.jsp</result>
 		</action>
+
+		<action name="login" class="org.tesseract.action.LoginAction"
+			method="authenticateUser">
+			<result name="success">/jsp/Home.jsp</result>
+			<result name="input">/jsp/login.jsp</result>
+		</action>
+
+		<action name="logout" class="org.tesseract.action.LoginAction"
+			method="logoutUser">
+			<result name="success">/jsp/login.jsp</result>
+		</action>
+
+		<!-- ******LoginAction mappings ends here and RedirAction starts below***** -->
+
+		<action name="goToTaxMaster"
+			class="org.tesseract.action.RedirAction" method="goToTaxMaster">
+			<result name="success">/jsp/tax.jsp</result>
+		</action>
+
+		<action name="goToHome"
+			class="org.tesseract.action.RedirAction" method="goToHome">
+			<result name="success">/jsp/Home.jsp</result>
+		</action>
+
+		<!-- ******RedirAction mappings ends here and MasterAction starts below***** -->
+
+		<action name="addTax"
+			class="org.tesseract.action.master.MasterAction" method="addTax">
+			<result name="success" type="redirectAction">goToTaxMaster</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+
 	</package>
 
 </struts>

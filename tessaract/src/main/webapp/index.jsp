@@ -9,44 +9,68 @@
 <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>Home Page</title>
 <style type="text/css">
-* {
-	padding: 0;
-	margin: 0;
+body {
+	background-color: #ebebeb;
+	margin: 0px;
+	padding: 0px;
 }
 
-.main-container {
-	width: 50%;
-	background-color: blue;
+#myProgress {
+	width: 100%;
+	background-color: grey;azimuth: 
 }
-.col-sm{
-background-color: yellow;
-align-content: center;
+
+#myBar {
+	width: 1%;
+	height: 30px;
+	background-color: #3da5ff;
+}
+
+h3 {
+	font-family: serif;
+	font-size: 40px;
+	color: #707070;
+	margin-left: 10px;
+	margin-top: 15px;
+ 	padding-top: 15px;
+}
+
+#header {
+	height: 70px;
+	background-color: #fcfcfc;
+}
+#contentpane{
+height: 10cm;
 }
 </style>
 </head>
 <body>
-	<%-- <div class="main-container">
-		<h1 style="color: white;">Hello World!</h1>
-		<s:form action="login">
-			<s:textfield name="name" />
-			<br>
-			<s:password name="password" />
-			<s:submit class="btn btn-danger" align="center" />
-		</s:form>
-	</div> --%>
+	<div id="header">
+		<h3>Tesseract</h3>
+	</div>
+	<div id="contentpane"></div>
 	<div class="container">
-		<div class="row">
-			<div class="col-sm">
-				<s:form action="login">
-					<s:textfield name="name" />
-					<br>
-					<s:password name="password" tooltip="password" />
-					<s:submit class="btn btn-danger" align="center" />
-				</s:form>
-			</div>
+		<div id="myProgress">
+			<div id="myBar"></div>
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	$(document).ready(function move() {
+		var elem = document.getElementById("myBar");
+		var width = 1;
+		var id = setInterval(frame, 10);
+		function frame() {
+			if (width >= 100) {
+				clearInterval(id);
+				location.href = "redir";
+			} else {
+				width++;
+				elem.style.width = width + '%';
+			}
+		}
+	})
+</script>
 </html>

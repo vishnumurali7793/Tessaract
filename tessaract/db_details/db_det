@@ -1,0 +1,20 @@
+
+-----------18/10/2019 master DB-----------------
+
+CREATE DATABASE tesseract;
+
+CREATE TABLE `tesseract`.`user_details` (
+  `user_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`user_id`));
+  
+ CREATE TABLE `tesseract`.`master_tax` (
+  `tax_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `tax_cgst` DECIMAL(13,3) NULL,
+  `tax_sgst` DECIMAL(13,3) NULL,
+  `tax_igst` DECIMAL(13,3) NULL,
+  `added_on` VARCHAR(10) NULL,
+  `active_status` VARCHAR(10) NULL,
+  `delete_status` VARCHAR(2) NULL,
+  PRIMARY KEY (`tax_id`)
