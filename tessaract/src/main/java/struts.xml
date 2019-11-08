@@ -50,6 +50,28 @@
 			class="org.tesseract.action.MasterAction" method="deleteTax">
 			<result name="success" type="redirectAction">goToTaxMaster</result>
 		</action>
+		
+		<!-- ********category page************* -->
+		<action name="goToCategory"
+			class="org.tesseract.action.RedirAction" method="goToCategory">
+			<result name="success">/jsp/category.jsp</result>
+		</action>
+		
+		<action name="saveCategory"
+			class="org.tesseract.action.MasterAction" method="saveCategory">
+			<result name="success" type="redirectAction">goToCategory</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+		
+		<action name="deleteCategory"
+			class="org.tesseract.action.MasterAction" method="deleteCategory">
+			<result name="success" type="redirectAction">goToCategory</result>
+		</action>
+		
+		<action name="editCategory"
+			class="org.tesseract.action.MasterAction" method="editCategory">
+			<result name="success">/jsp/category.jsp</result>
+		</action>
 
 	</package>
 

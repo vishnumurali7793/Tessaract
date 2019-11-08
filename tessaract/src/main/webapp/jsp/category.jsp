@@ -76,8 +76,12 @@ td, th {
 }
 </style>
 <script type="text/javascript">
-	function deleteTax(taxid) {
-		location.href = "deleteTax?taxBean.taxId=" + taxid;
+	function editCategory(catid) {
+		location.href = "editCategory?categoryBean.categoryId=" + catid;
+	}
+	
+	function deleteCategory(catid) {
+		location.href = "deleteCategory?categoryBean.categoryId=" + catid;
 	}
 </script>
 
@@ -98,8 +102,8 @@ td, th {
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li class="active"><a href="goToTaxMaster">Tax Master</a></li>
-						<li><a href="goToCategory">Category</a></li>
+						<li><a href="goToTaxMaster">Tax</a></li>
+						<li class="active"><a href="goToCategory">Category</a></li>
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
@@ -116,31 +120,27 @@ td, th {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel">
-				<h2>Tax Master</h2>
+				<h2>CATEGORY</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapse1">Add TAX</a>
+									href="#collapse1">Add Category</a>
 							</h4>
 						</div>
 						<div id="collapse1" class="panel-collapse collapse in">
 							<div class="panel-body ">
-								<s:form action="addTax">
+								<s:form action="saveCategory">
 									<div class="row">
 										<div class=" col s12">
-											<label>SGST</label> <input name="taxBean.sgst" type="text"
-												class="validate" placeholder="SGST"> <label>CGST</label>
-											<input name="taxBean.cgst" type="text" class="validate"
-												placeholder="CGST"> <label>IGST</label> <input
-												name="taxBean.igst" type="text" class="validate"
-												placeholder="IGST"> <label>Date
-											</label> <input name="taxBean.addedOn" type="date" class="validate"
-												required="required"> <i class="fa fa-calendar"
-												style="font-size: 22px; float: right; margin: -46px auto;"></i>
+											<label>Category Code</label> <input name="categoryBean.categoryCode" type="text"
+												class="validate" placeholder="CategoryCode">
+												 <label>Category Name</label>
+											<input name="categoryBean.categoryName" type="text" class="validate"
+												placeholder="CategoryName"> 
 
-											<label>Status</label> <select name="taxBean.activeStatus"
+											<label>Status</label> <select name="categoryBean.activeStatus"
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
@@ -148,41 +148,7 @@ td, th {
                                   <button class="waves-effect waves-light btn" type="submit">Submit</button>
 										</div>
 									</div>
-									<%-- <div class="tax">
-										<div class="col-xs-2">
-											<div class="tax-row">
-												<s:textfield type="text" placeholder="SGST" name="taxBean.sgst" />
-											</div>
-										</div>
-										<div class="col-xs-2">
-											<div class="tax-row">
-												<s:textfield type="text" placeholder="CGST" name="taxBean.cgst" />
-											</div>
-										</div>
-										<div class="col-xs-2">
-											<div class="tax-row">
-												<s:textfield type="text" placeholder="IGST" name="taxBean.igst" />
-											</div>
-										</div>
-										<div class="col-xs-5">
-											<div class="form-group form-group-sm">
-												<div class="col-xs-6">
-													<s:date name="taxBean.addedOn"
-														format="dd/mm/yyyy"  />
-												</div>
-												<div class="col-xs-6">
-													<s:select class="form-control" name="taxBean.activeStatus" list="#{'A':'Active','D':'De-Active'}" />
-													
-												</div>
-											</div>
-
-										</div>
-										<div class="col-xs-1" id="submitButton">
-											<button type="submit" class="btn btn-warning">
-												<span class="glyphicon glyphicon-save"></span>&nbsp;Add
-											</button>
-										</div>
-									</div> --%>
+									
 								</s:form>
 							</div>
 						</div>
@@ -193,42 +159,40 @@ td, th {
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion"
 								class="collapsed" role="button" aria-expanded="true"
-								aria-controls="collapse2" href="#collapse2">Tax Details</a>
+								aria-controls="collapse2" href="#collapse2">Category Details</a>
 						</h4>
 					</div>
 					<div id="collapse2" class="panel-collapse collapse" role="tabpanel"
 						aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
-								<h2>Tax Table</h2>
+								<h2>Category Table</h2>
 								<table class="table">
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>CGST %</th>
-											<th>SGST %</th>
-											<th>IGST %</th>
-											<th>GST %</th>
+											<th>CATEGORY CODE</th>
+											<th>CATEGORY NAME</th>
 											<th>Active Status</th>
-											<th>Added On</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
-										<s:if test="taxList!=null && taxList.size()>0">
+									<!-- ***list name from redirectaction*** -->
+										<s:if test="catList!=null && catList.size()>0">
 											<tr>
-												<s:iterator value="taxList" status="row">
+												<s:iterator value="catList" status="row">
 													<td><s:property value="#row.count" /></td>
-													<td><s:property value="cgst" /></td>
-													<td><s:property value="sgst" /></td>
-													<td><s:property value="igst" /></td>
-													<td><s:property value="cgst + sgst" /></td>
+													<td><s:property value="categoryCode" /></td>
+													<td><s:property value="categoryName" /></td>
 													<td><s:property value="activeStatus" /></td>
-													<td><s:property value="addedOn" /></td>
 													<td><button class="btn-xs btn-link"
-															onclick="deleteTax('<s:property value="taxId"/>')">[DELETE]</button></td>
+															onclick="editCategory('<s:property value="categoryId"/>')">[EDIT]</button>
+															<button class="btn-xs btn-link"
+															onclick="deleteCategory('<s:property value="categoryId"/>')">[DELETE]</button></td>
+											   </s:iterator>
 											</tr>
-											</s:iterator>
+											
 										</s:if>
 									</tbody>
 								</table>
