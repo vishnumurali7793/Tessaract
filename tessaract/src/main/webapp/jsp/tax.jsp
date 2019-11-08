@@ -76,10 +76,10 @@ td, th {
 }
 </style>
 <script type="text/javascript">
-function edittax(taxid){
-	alert(taxid);
-	location.href="editTax?taxBean.taxId="+taxid;
-}
+	function edittax(taxid) {
+		alert(taxid);
+		location.href = "editTax?taxBean.taxId=" + taxid;
+	}
 </script>
 
 <%-- <header
@@ -128,7 +128,27 @@ function edittax(taxid){
 						<div id="collapse1" class="panel-collapse collapse in">
 							<div class="panel-body ">
 								<s:form action="addTax">
-									<div class="tax">
+									<div class="row">
+										<div class=" col s12">
+											<label>SGST</label> <input name="taxBean.sgst" type="text"
+												class="validate" placeholder="SGST"> <label>CGST</label>
+											<input name="taxBean.cgst" type="text" class="validate"
+												placeholder="CGST"> <label>IGST</label> <input
+												name="taxBean.igst" type="text" class="validate"
+												placeholder="IGST"> <label>Date
+											</label> <input name="taxBean.addedOn" type="date" class="validate"
+												required="required"> <i class="fa fa-calendar"
+												style="font-size: 22px; float: right; margin: -46px auto;"></i>
+
+											<label>Status</label> <select name="taxBean.activeStatus"
+												required="required" class="">
+												<option value="Active">Active</option>
+												<option value="Inactive">Inactive</option>
+											</select>
+                                  <button class="waves-effect waves-light btn" type="submit">Submit</button>
+										</div>
+									</div>
+									<%-- <div class="tax">
 										<div class="col-xs-2">
 											<div class="tax-row">
 												<s:textfield type="text" placeholder="SGST" name="taxBean.sgst" />
@@ -162,7 +182,7 @@ function edittax(taxid){
 												<span class="glyphicon glyphicon-save"></span>&nbsp;Add
 											</button>
 										</div>
-									</div>
+									</div> --%>
 								</s:form>
 							</div>
 						</div>
@@ -205,7 +225,8 @@ function edittax(taxid){
 													<td><s:property value="cgst + sgst" /></td>
 													<td><s:property value="activeStatus" /></td>
 													<td><s:property value="addedOn" /></td>
-													<td><button onclick="edittax('<s:property value="taxId"/>')">EDIT</button></td>
+													<td><button
+															onclick="edittax('<s:property value="taxId"/>')">EDIT</button></td>
 											</tr>
 											</s:iterator>
 										</s:if>
