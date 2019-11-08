@@ -1,4 +1,4 @@
-package org.tesseract.entities.master;
+package org.tesseract.entities;
 
 import java.util.Date;
 

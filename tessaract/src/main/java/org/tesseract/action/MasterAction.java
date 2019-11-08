@@ -1,10 +1,10 @@
-package org.tesseract.action.master;
+package org.tesseract.action;
 
 
 import java.util.List;
 
-import org.tesseract.entities.master.TaxBean;
-import org.tesseract.persistance.master.MasterHibernateDao;
+import org.tesseract.entities.TaxBean;
+import org.tesseract.persistance.MasterHibernateDao;
 
 import com.opensymphony.xwork2.ActionSupport;
 

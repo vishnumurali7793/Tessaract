@@ -1,4 +1,4 @@
-package org.tesseract.persistance.master;
+package org.tesseract.persistance;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.tesseract.entities.master.TaxBean;
+import org.tesseract.entities.TaxBean;
 
 public class MasterHibernateDao {
 

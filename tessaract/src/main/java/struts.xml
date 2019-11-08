@@ -41,13 +41,13 @@
 		<!-- ******RedirAction mappings ends here and MasterAction starts below***** -->
 
 		<action name="addTax"
-			class="org.tesseract.action.master.MasterAction" method="addTax">
+			class="org.tesseract.action.MasterAction" method="addTax">
 			<result name="success" type="redirectAction">goToTaxMaster</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
 		
 		<action name="deleteTax"
-			class="org.tesseract.action.master.MasterAction" method="deleteTax">
+			class="org.tesseract.action.MasterAction" method="deleteTax">
 			<result name="success" type="redirectAction">goToTaxMaster</result>
 		</action>
 

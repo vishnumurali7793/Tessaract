@@ -38,7 +38,7 @@
 
         <!-- Names the annotated entity class -->
         <mapping class="org.tesseract.entities.LoginBean"/>
-        <mapping class="org.tesseract.entities.master.TaxBean"/>
+        <mapping class="org.tesseract.entities.TaxBean"/>
 <!--         <mapping class="com.happy.entities.ProductBean"/> -->
 <!--         <mapping class="com.happy.entities.AccountHeadBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesBean"/> -->
