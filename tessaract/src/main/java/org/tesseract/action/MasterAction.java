@@ -52,7 +52,7 @@ public class MasterAction extends ActionSupport {
 		if(categoryBean!=null && categoryBean.getCategoryId()!=null) {
 			masterHibernateDao.deleteCategoryById(categoryBean);
 		}
-		setCategoryList(masterHibernateDao.getCategryList());
+		setCatList(masterHibernateDao.getCategryList());
 		return SUCCESS;
 	}
 	
@@ -62,6 +62,13 @@ public class MasterAction extends ActionSupport {
 		}
 		catList = masterHibernateDao.getCategryList();
 		return SUCCESS;
+	}
+	
+	public String updateCategory() {
+		if(categoryBean!=null && categoryBean.getCategoryId()!=null) {
+			masterHibernateDao.updateCategory(categoryBean);
+		}
+		return null;
 	}
 	
 	public TaxBean getTaxBean() {
@@ -88,12 +95,12 @@ public class MasterAction extends ActionSupport {
 		this.categoryBean = categoryBean;
 	}
 
-	public List<CategoryBean> getCategoryList() {
+	public List<CategoryBean> getCatList() {
 		return catList;
 	}
 
-	public void setCategoryList(List<CategoryBean> categoryList) {
-		this.catList = categoryList;
+	public void setCatList(List<CategoryBean> catList) {
+		this.catList = catList;
 	}
 
 }

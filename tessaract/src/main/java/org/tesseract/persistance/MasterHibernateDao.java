@@ -130,4 +130,21 @@ public class MasterHibernateDao {
 			}
 
 		}
+
+
+		public void updateCategory(CategoryBean categoryBean) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+
+			try {
+				session.update("CategoryBean", categoryBean);
+				transaction.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				session.close();
+			}
+			
+		}
 }

@@ -79,7 +79,7 @@ td, th {
 	function editCategory(catid) {
 		location.href = "editCategory?categoryBean.categoryId=" + catid;
 	}
-	
+
 	function deleteCategory(catid) {
 		location.href = "deleteCategory?categoryBean.categoryId=" + catid;
 	}
@@ -134,21 +134,32 @@ td, th {
 								<s:form action="saveCategory">
 									<div class="row">
 										<div class=" col s12">
-											<label>Category Code</label> <input name="categoryBean.categoryCode" type="text"
-												class="validate" placeholder="CategoryCode">
-												 <label>Category Name</label>
-											<input name="categoryBean.categoryName" type="text" class="validate"
-												placeholder="CategoryName"> 
-
-											<label>Status</label> <select name="categoryBean.activeStatus"
+											<s:hidden name="categoryBean.categoryId" />
+											<label>Category Code</label> <input
+												name="categoryBean.categoryCode" type="text"
+												value="<s:property value="categoryBean.categoryCode"/>"
+												class="validate" placeholder="CategoryCode"> <label>Category
+												Name</label> <input name="categoryBean.categoryName" type="text"
+												class="validate"
+												value="<s:property value="categoryBean.categoryName"/>"
+												placeholder="CategoryName"> <label>Status</label> <select
+												name="categoryBean.activeStatus"
+												value="<s:property value="categoryBean.activeStatus"/>"
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
 											</select>
-                                  <button class="waves-effect waves-light btn" type="submit">Submit</button>
+											<s:if test="categoryBean==null">
+												<button class="waves-effect waves-light btn" type="submit">Submit</button>
+												
+											</s:if>
+											<s:elseif test="categoryBean!=null">
+												<button class="btn btn-success waves-effect waves-light btn"
+												type="submit">Update</button>
+											</s:elseif>
 										</div>
 									</div>
-									
+
 								</s:form>
 							</div>
 						</div>
@@ -178,27 +189,27 @@ td, th {
 										</tr>
 									</thead>
 									<tbody>
-									<!-- ***list name from redirectaction*** -->
+										<!-- ***list name from redirectaction*** -->
 										<s:if test="catList!=null && catList.size()>0">
-											<tr>
-												<s:iterator value="catList" status="row">
+
+											<s:iterator value="catList" status="row">
+												<tr>
 													<td><s:property value="#row.count" /></td>
 													<td><s:property value="categoryCode" /></td>
 													<td><s:property value="categoryName" /></td>
 													<td><s:property value="activeStatus" /></td>
 													<td><button class="btn-xs btn-link"
 															onclick="editCategory('<s:property value="categoryId"/>')">[EDIT]</button>
-															<button class="btn-xs btn-link"
+														<button class="btn-xs btn-link"
 															onclick="deleteCategory('<s:property value="categoryId"/>')">[DELETE]</button></td>
-											   </s:iterator>
-											</tr>
-											
+												</tr>
+											</s:iterator>
+
+
 										</s:if>
 									</tbody>
 								</table>
 							</div>
-
-
 						</div>
 					</div>
 				</div>
