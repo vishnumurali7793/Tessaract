@@ -76,9 +76,8 @@ td, th {
 }
 </style>
 <script type="text/javascript">
-	function edittax(taxid) {
-		alert(taxid);
-		location.href = "editTax?taxBean.taxId=" + taxid;
+	function deleteTax(taxid) {
+		location.href = "deleteTax?taxBean.taxId=" + taxid;
 	}
 </script>
 
@@ -225,8 +224,8 @@ td, th {
 													<td><s:property value="cgst + sgst" /></td>
 													<td><s:property value="activeStatus" /></td>
 													<td><s:property value="addedOn" /></td>
-													<td><button
-															onclick="edittax('<s:property value="taxId"/>')">EDIT</button></td>
+													<td><button class="btn-xs btn-link"
+															onclick="deleteTax('<s:property value="taxId"/>')">[DELETE]</button></td>
 											</tr>
 											</s:iterator>
 										</s:if>
