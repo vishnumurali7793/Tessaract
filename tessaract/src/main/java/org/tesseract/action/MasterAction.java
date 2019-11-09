@@ -64,12 +64,6 @@ public class MasterAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public String updateCategory() {
-		if(categoryBean!=null && categoryBean.getCategoryId()!=null) {
-			masterHibernateDao.updateCategory(categoryBean);
-		}
-		return null;
-	}
 	
 	public TaxBean getTaxBean() {
 		return taxBean;

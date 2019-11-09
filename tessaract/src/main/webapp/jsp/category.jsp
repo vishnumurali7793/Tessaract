@@ -148,15 +148,9 @@ td, th {
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
-											</select>
-											<s:if test="categoryBean==null">
+											</select>&nbsp &nbsp
 												<button class="waves-effect waves-light btn" type="submit">Submit</button>
-												
-											</s:if>
-											<s:elseif test="categoryBean!=null">
-												<button class="btn btn-success waves-effect waves-light btn"
-												type="submit">Update</button>
-											</s:elseif>
+											
 										</div>
 									</div>
 

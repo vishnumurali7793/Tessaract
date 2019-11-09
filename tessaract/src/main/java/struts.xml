@@ -72,11 +72,7 @@
 			class="org.tesseract.action.MasterAction" method="editCategory">
 			<result name="success">/jsp/category.jsp</result>
 		</action>
-
-		<action name="updateCategory"
-			class="org.tesseract.action.MasterAction" method="updateCategory">
-			<result name="success" type="redirectAction">goToCategory</result>
-		</action>
+<!-- category page finished -->
 
 	</package>
 
