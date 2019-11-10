@@ -3,6 +3,7 @@ package org.tesseract.action;
 import java.util.List;
 
 import org.tesseract.entities.CategoryBean;
+import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.TaxBean;
 import org.tesseract.persistance.MasterHibernateDao;
 
@@ -14,6 +15,7 @@ public class RedirAction extends ActionSupport {
 	
 	private List<TaxBean> taxList;
 	private List<CategoryBean> catList;
+	private List<ProductBean> prodList;
 	
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -24,6 +26,11 @@ public class RedirAction extends ActionSupport {
 	
 	public String goToCategory() {
 		catList = masterHibernateDao.getCategryList();
+		return SUCCESS;
+	}
+	
+	public String goToProduct() {
+		prodList = masterHibernateDao.getProductList();
 		return SUCCESS;
 	}
 	
@@ -45,6 +52,14 @@ public class RedirAction extends ActionSupport {
 
 	public void setCatList(List<CategoryBean> catList) {
 		this.catList = catList;
+	}
+
+	public List<ProductBean> getProdList() {
+		return prodList;
+	}
+
+	public void setProdList(List<ProductBean> prodList) {
+		this.prodList = prodList;
 	}
 	
 	

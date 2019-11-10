@@ -4,6 +4,7 @@ package org.tesseract.action;
 import java.util.List;
 
 import org.tesseract.entities.CategoryBean;
+import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.TaxBean;
 import org.tesseract.persistance.MasterHibernateDao;
 
@@ -15,8 +16,10 @@ public class MasterAction extends ActionSupport {
 
 	private TaxBean taxBean;
 	private CategoryBean categoryBean;
+	private ProductBean productBean;
 	private List<TaxBean> taxList;
 	private List<CategoryBean> catList;
+	private List<ProductBean> prodList;
 
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -64,6 +67,33 @@ public class MasterAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	//Product page action 
+		public String saveProduct(){
+			if (productBean != null) {
+				productBean.setCategory(new CategoryBean());
+				productBean.getCategory().getCategoryId();
+				masterHibernateDao.addProductdata(productBean);
+				return SUCCESS;
+			}
+			
+			return INPUT;
+		}
+		
+		public String deleteProduct() {
+			if(productBean!=null && productBean.getProductId()!=null) {
+				masterHibernateDao.deleteProductById(productBean);
+			}
+			setProdList(masterHibernateDao.getProductList());
+			return SUCCESS;
+		}
+		
+		public String editProduct() {
+			if(productBean!=null && productBean.getProductId()!=null) {
+				setProductBean(masterHibernateDao.getProdEditById(productBean));
+			}
+			prodList = masterHibernateDao.getProductList();
+			return SUCCESS;
+		}
 	
 	public TaxBean getTaxBean() {
 		return taxBean;
@@ -95,6 +125,22 @@ public class MasterAction extends ActionSupport {
 
 	public void setCatList(List<CategoryBean> catList) {
 		this.catList = catList;
+	}
+
+	public ProductBean getProductBean() {
+		return productBean;
+	}
+
+	public void setProductBean(ProductBean productBean) {
+		this.productBean = productBean;
+	}
+
+	public List<ProductBean> getProdList() {
+		return prodList;
+	}
+
+	public void setProdList(List<ProductBean> prodList) {
+		this.prodList = prodList;
 	}
 
 }

@@ -73,7 +73,28 @@
 			<result name="success">/jsp/category.jsp</result>
 		</action>
 <!-- category page finished -->
-
+<!-- ********product page************* -->
+		<action name="goToProduct"
+			class="org.tesseract.action.RedirAction" method="goToProduct">
+			<result name="success">/jsp/product.jsp</result>
+		</action>
+		
+		<action name="saveProduct"
+			class="org.tesseract.action.MasterAction" method="saveProduct">
+			<result name="success" type="redirectAction">goToProduct</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+		
+		<action name="deleteProduct"
+			class="org.tesseract.action.MasterAction" method="deleteProduct">
+			<result name="success" type="redirectAction">goToProduct</result>
+		</action>
+		
+		<action name="editProduct"
+			class="org.tesseract.action.MasterAction" method="editProduct">
+			<result name="success">/jsp/product.jsp</result>
+		</action>
+<!-- product page finished -->
 	</package>
 
 </struts>
