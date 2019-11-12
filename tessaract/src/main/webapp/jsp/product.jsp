@@ -130,11 +130,16 @@ td, th {
 										<div class=" col s12">
 											<s:hidden name="categoryBean.categoryId" />
 											<s:hidden name="productBean.productId" />
-											<label>CategoryName</label> 
-											<s:select name="productBean.category"  class="billlistbox2"
-                                            listKey="--categoryName--"  list="%{catList}">
-                                            </s:select>
-											<label>ProductCode</label> <input
+											<label>CategoryName</label>
+											<%-- <s:select name="productBean.category"  class="billlistbox2"
+                                            listKey="--categoryName--"  list="catList">
+                                            </s:select> --%>
+											<select class="custom-select custom-select-sm">
+												<s:iterator value="catList" status="row">
+													<option value="<s:property value='categoryId'/>"><s:property
+															value='categoryName' /></option>
+												</s:iterator>
+											</select> <label>ProductCode</label> <input
 												name="productBean.productCode" type="text"
 												value="<s:property value="productBean.productCode"/>"
 												class="validate" placeholder="ProductCode"> <label>ProductName</label>

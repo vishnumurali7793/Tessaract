@@ -104,7 +104,7 @@ td, th {
 					<ul class="dropdown-menu">
 						<li><a href="goToTaxMaster">Tax</a></li>
 						<li class="active"><a href="goToCategory">Category</a></li>
-						<li><a href="#">Page 1-2</a></li>
+						<li><a href="goToProduct">Product</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li><a href="#">Page 2</a></li>
@@ -167,7 +167,7 @@ td, th {
 								aria-controls="collapse2" href="#collapse2">Category Details</a>
 						</h4>
 					</div>
-					<div id="collapse2" class="panel-collapse collapse" role="tabpanel"
+					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
 						aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
