@@ -131,7 +131,7 @@ td, th {
 										<div class=" col s12">
 											<s:hidden name="modelBean.modelId" />
 											 <label>ModelCode</label> <input
-												name="modelBean.productCode" type="text"
+												name="modelBean.modelCode" type="text"
 												value="<s:property value="modelBean.modelCode"/>"
 												class="validate" placeholder="modelCode">
 												 <label>ModelName</label>

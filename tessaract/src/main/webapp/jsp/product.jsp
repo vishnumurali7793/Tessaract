@@ -98,6 +98,7 @@ td, th {
 						<li><a href="goToTaxMaster">Tax</a></li>
 						<li><a href="goToCategory">Category</a></li>
 						<li class="active"><a href="goToProduct">Product</a></li>
+						<li><a href="goToModel">Model</a></li>
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
