@@ -6,6 +6,7 @@ import java.util.List;
 import org.tesseract.entities.CategoryBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.TaxBean;
+import org.tesseract.entities.modelBean;
 import org.tesseract.persistance.MasterHibernateDao;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -17,9 +18,11 @@ public class MasterAction extends ActionSupport {
 	private TaxBean taxBean;
 	private CategoryBean categoryBean;
 	private ProductBean productBean;
+	private modelBean modelBean;
 	private List<TaxBean> taxList;
 	private List<CategoryBean> catList;
 	private List<ProductBean> prodList;
+	private List<modelBean> modelList;
 
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -95,6 +98,32 @@ public class MasterAction extends ActionSupport {
 			return SUCCESS;
 		}
 	
+		//add modeldata
+		public String saveModel() {
+			if (modelBean != null) {
+					masterHibernateDao.saveModell(modelBean);
+					return SUCCESS;
+			}
+			return INPUT;
+		}
+		//deleteModel
+		public String deleteModel() {
+			if(modelBean!=null && modelBean.getModelId()!=null) {
+				masterHibernateDao.deleteModelById(modelBean);
+			}
+			setProdList(masterHibernateDao.getProductList());
+			return SUCCESS;
+		}
+		
+		//edit model
+		public String editModel() {
+			if(modelBean!=null && modelBean.getModelId()!=null) {
+				setModelBean(masterHibernateDao.getModelEditById(modelBean));
+			}
+			modelList = masterHibernateDao.getModelList();
+			return SUCCESS;
+		}
+		
 	public TaxBean getTaxBean() {
 		return taxBean;
 	}
@@ -141,6 +170,22 @@ public class MasterAction extends ActionSupport {
 
 	public void setProdList(List<ProductBean> prodList) {
 		this.prodList = prodList;
+	}
+
+	public modelBean getModelBean() {
+		return modelBean;
+	}
+
+	public void setModelBean(modelBean modelBean) {
+		this.modelBean = modelBean;
+	}
+
+	public List<modelBean> getModelList() {
+		return modelList;
+	}
+
+	public void setModelList(List<modelBean> modelList) {
+		this.modelList = modelList;
 	}
 
 }

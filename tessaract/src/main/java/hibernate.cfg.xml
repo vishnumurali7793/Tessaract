@@ -41,6 +41,7 @@
         <mapping class="org.tesseract.entities.TaxBean"/>
         <mapping class="org.tesseract.entities.CategoryBean"/>
         <mapping class="org.tesseract.entities.ProductBean"/>
+        <mapping class="org.tesseract.entities.modelBean"/>
 <!--         <mapping class="com.happy.entities.AccountHeadBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesProductMappingBean"/> -->

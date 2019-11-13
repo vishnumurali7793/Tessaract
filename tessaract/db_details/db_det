@@ -37,3 +37,11 @@ CREATE TABLE `tesseract`.`user_details` (
    `delete_status` VARCHAR(255) NULL , 
    `category` INT(11) NULL , 
    PRIMARY KEY (`product_id`)) ENGINE = InnoDB;
+   
+   CREATE TABLE `tesseract`.`model` (
+    `model_id` INT NOT NULL AUTO_INCREMENT , 
+    `model_code` VARCHAR(255) NULL ,
+     `model_name` VARCHAR(255) NULL , 
+     `active_status` VARCHAR(255) NULL , 
+     `added_on` DATE NULL , 
+     PRIMARY KEY (`model_id`)) ENGINE = InnoDB;

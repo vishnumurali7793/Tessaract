@@ -9,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.tesseract.entities.CategoryBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.TaxBean;
+import org.tesseract.entities.modelBean;
 
 public class MasterHibernateDao {
 
@@ -191,6 +192,74 @@ public class MasterHibernateDao {
 
 					try {
 						return session.get(ProductBean.class, prodBean.getProductId());
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//get model list
+				@SuppressWarnings("unchecked")
+				public List<modelBean> getModelList() {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.createQuery("from modelBean where deleteStatus='N'").list();
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				public void saveModell(modelBean modelBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.saveOrUpdate(modelBean);
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//delete model
+				public void deleteModelById(modelBean modelBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.createQuery("update modelBean as mol set mol.deleteStatus='Y' where mol.modelId=:modelId")
+								.setParameter("modelId", modelBean.getModelId()).executeUpdate();
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						session.close();
+					}
+				}
+				// Edit model
+				public modelBean getModelEditById(modelBean modBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.get(modelBean.class, modBean.getModelId());
 
 					} catch (Exception e) {
 						e.printStackTrace();

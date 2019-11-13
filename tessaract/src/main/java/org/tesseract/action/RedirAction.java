@@ -5,6 +5,7 @@ import java.util.List;
 import org.tesseract.entities.CategoryBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.TaxBean;
+import org.tesseract.entities.modelBean;
 import org.tesseract.persistance.MasterHibernateDao;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,6 +17,7 @@ public class RedirAction extends ActionSupport {
 	private List<TaxBean> taxList;
 	private List<CategoryBean> catList;
 	private List<ProductBean> prodList;
+	private List<modelBean> modelList;
 	
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -32,6 +34,11 @@ public class RedirAction extends ActionSupport {
 	public String goToProduct() {
 		prodList = masterHibernateDao.getProductList();
 		catList = masterHibernateDao.getCategryList();
+		return SUCCESS;
+	}
+	
+	public String goToModel() {
+		modelList = masterHibernateDao.getModelList();
 		return SUCCESS;
 	}
 	
@@ -61,6 +68,14 @@ public class RedirAction extends ActionSupport {
 
 	public void setProdList(List<ProductBean> prodList) {
 		this.prodList = prodList;
+	}
+
+	public List<modelBean> getModelList() {
+		return modelList;
+	}
+
+	public void setModelList(List<modelBean> modelList) {
+		this.modelList = modelList;
 	}
 	
 	
