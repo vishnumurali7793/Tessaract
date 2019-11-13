@@ -95,6 +95,28 @@
 			<result name="success">/jsp/product.jsp</result>
 		</action>
 <!-- product page finished -->
+<!-- ********model page************* -->
+		<action name="goToModel"
+			class="org.tesseract.action.RedirAction" method="goToModel">
+			<result name="success">/jsp/model.jsp</result>
+		</action>
+		
+		<action name="saveModel"
+			class="org.tesseract.action.MasterAction" method="saveModel">
+			<result name="success" type="redirectAction">goToModel</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+		
+		<action name="deleteModel"
+			class="org.tesseract.action.MasterAction" method="deleteModel">
+			<result name="success" type="redirectAction">goToModel</result>
+		</action>
+		
+		<action name="editModel"
+			class="org.tesseract.action.MasterAction" method="editModel">
+			<result name="success">/jsp/model.jsp</result>
+		</action>
+		<!-- model page finished -->
 	</package>
 
 </struts>

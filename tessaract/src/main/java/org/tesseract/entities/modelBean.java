@@ -27,6 +27,9 @@ public class modelBean {
 	
 	@Column(name = "added_on")
 	private String addedOn;
+	
+	@Column(name = "delete_status")
+	private String deleteStatus = "N";
 
 	public Integer getModelId() {
 		return modelId;
@@ -66,6 +69,14 @@ public class modelBean {
 
 	public void setAddedOn(String addedOn) {
 		this.addedOn = addedOn;
+	}
+
+	public String getDeleteStatus() {
+		return deleteStatus;
+	}
+
+	public void setDeleteStatus(String deleteStatus) {
+		this.deleteStatus = deleteStatus;
 	}
 	
 	
