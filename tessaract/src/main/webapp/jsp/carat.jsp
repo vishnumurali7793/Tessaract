@@ -76,14 +76,21 @@ td, th {
 }
 </style>
 <script type="text/javascript">
-	function editModel(modelid) {
-		location.href = "editModel?modelBean.modelId=" + modelid;
+	function editCarat(carid) {
+		location.href = "editCarat?caratBean.caratId=" + carid;
 	}
 
-	function deleteModel(modelid) {
-		location.href = "deleteModel?modelBean.modelId=" + modelid;
+	function deleteCarat(carid) {
+		location.href = "deleteCarat?caratBean.caratId=" + carid;
 	}
 </script>
+
+<%-- <header
+	class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar"
+	id="allign">
+	TAX -
+	<s:property value="loginBean.userName" />
+</header> --%>
 <body>
 	<nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
@@ -98,9 +105,7 @@ td, th {
 						<li><a href="goToTaxMaster">Tax</a></li>
 						<li><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
-						<li class="active"><a href="goToModel">Model</a></li>
-						<li><a href="goToCarat">Carat</a></li>
-						<li><a href="#">Page 1-2</a></li>
+						<li class="active"><a href="goToCarat">Carat</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li><a href="#">Page 2</a></li>
@@ -116,42 +121,37 @@ td, th {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel">
-				<h2>MODEL</h2>
+				<h2>CARAT</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapse1">Add Model</a>
+									href="#collapse1">Add Carat</a>
 							</h4>
 						</div>
 						<div id="collapse1" class="panel-collapse collapse in">
 							<div class="panel-body ">
-								<s:form action="saveModel">
+								<s:form action="saveCarat">
 									<div class="row">
 										<div class=" col s12">
-											<s:hidden name="modelBean.modelId" />
-											 <label>ModelCode</label> <input
-												name="modelBean.modelCode" type="text"
-												value="<s:property value="modelBean.modelCode"/>"
-												class="validate" placeholder="modelCode">
-												 <label>ModelName</label>
-											<input name="modelBean.modelName" type="text"
+											<s:hidden name="caratBean.caratId" />
+											<label>Carat Code</label> <input
+												name="caratBean.caratCode" type="text"
+												value="<s:property value="caratBean.caratCode"/>"
+												class="validate" placeholder="CaratCode"> <label>Carat
+												Name</label> <input name="caratBean.caratName" type="text"
 												class="validate"
-												value="<s:property value="modelBean.modelName"/>"
-												placeholder="modelName"> <label>Date</label> <input
-												name="modelBean.addedOn" type="date" class="validate"
-												value="<s:property value="modelBean.addedOn"/>"
-												required="required"> <i class="fa fa-calendar"
-												style="font-size: 22px; float: right; margin: -46px auto;"></i>
-											<label>Status</label> <select name="modelBean.activeStatus"
-												value="<s:property value="modelBean.activeStatus"/>"
+												value="<s:property value="caratBean.caratName"/>"
+												placeholder="CaratName"> <label>Status</label> <select
+												name="caratBean.activeStatus"
+												value="<s:property value="caratBean.activeStatus"/>"
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
 											</select>&nbsp &nbsp
-											<button class="waves-effect waves-light btn" type="submit">Submit</button>
-
+												<button class="waves-effect waves-light btn" type="submit">Submit</button>
+											
 										</div>
 									</div>
 
@@ -165,40 +165,38 @@ td, th {
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion"
 								class="collapsed" role="button" aria-expanded="true"
-								aria-controls="collapse2" href="#collapse2">Model Details</a>
+								aria-controls="collapse2" href="#collapse2">Carat Details</a>
 						</h4>
 					</div>
-					<div id="collapse2" class="panel-collapse collapse" role="tabpanel"
+					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
 						aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
-								<h2>Model Table</h2>
+								<h2>Carat Table</h2>
 								<table class="table">
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>MODEL CODE</th>
-											<th>MODEL NAME</th>
-											<th>DATE</th>
-											<th>ACTIVE STATUS</th>
-											<th>ACTIONS</th>
+											<th>CARAT CODE</th>
+											<th>CARAT NAME</th>
+											<th>Active Status</th>
+											<th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
 										<!-- ***list name from redirectaction*** -->
-										<s:if test="modelList!=null && modelList.size()>0">
+										<s:if test="caratList!=null && caratList.size()>0">
 
-											<s:iterator value="modelList" status="row">
+											<s:iterator value="caratList" status="row">
 												<tr>
 													<td><s:property value="#row.count" /></td>
-													<td><s:property value="modelCode" /></td>
-													<td><s:property value="modelName" /></td>
-													<td><s:property value="addedOn" /></td>
+													<td><s:property value="caratCode" /></td>
+													<td><s:property value="caratName" /></td>
 													<td><s:property value="activeStatus" /></td>
 													<td><button class="btn-xs btn-link"
-															onclick="editModel('<s:property value="modelId"/>')">[EDIT]</button>
+															onclick="editCarat('<s:property value="caratId"/>')">[EDIT]</button>
 														<button class="btn-xs btn-link"
-															onclick="deleteModel('<s:property value="modelId"/>')">[DELETE]</button></td>
+															onclick="deleteCarat('<s:property value="caratId"/>')">[DELETE]</button></td>
 												</tr>
 											</s:iterator>
 

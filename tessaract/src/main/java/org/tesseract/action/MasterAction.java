@@ -3,6 +3,7 @@ package org.tesseract.action;
 
 import java.util.List;
 
+import org.tesseract.entities.CaratBean;
 import org.tesseract.entities.CategoryBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.TaxBean;
@@ -19,10 +20,12 @@ public class MasterAction extends ActionSupport {
 	private CategoryBean categoryBean;
 	private ProductBean productBean;
 	private modelBean modelBean;
+	private CaratBean caratBean;
 	private List<TaxBean> taxList;
 	private List<CategoryBean> catList;
 	private List<ProductBean> prodList;
 	private List<modelBean> modelList;
+	private List<CaratBean> caratList;
 
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -124,6 +127,32 @@ public class MasterAction extends ActionSupport {
 			return SUCCESS;
 		}
 		
+		//carat page action
+		public String saveCarat(){
+			if (caratBean != null) {
+				masterHibernateDao.addCaratdata(caratBean);
+				return SUCCESS;
+			}
+			
+			return INPUT;
+		}
+		
+		public String deleteCarat() {
+			if(caratBean!=null && caratBean.getCaratId()!=null) {
+				masterHibernateDao.deleteCaratById(caratBean);
+			}
+			setCaratList(masterHibernateDao.getCaratList());
+			return SUCCESS;
+		}
+		
+		public String editCarat() {
+			if(caratBean!=null && caratBean.getCaratId()!=null) {
+				setCaratBean(masterHibernateDao.getCaratEditById(caratBean));
+			}
+			caratList = masterHibernateDao.getCaratList();
+			return SUCCESS;
+		}
+		
 	public TaxBean getTaxBean() {
 		return taxBean;
 	}
@@ -187,5 +216,23 @@ public class MasterAction extends ActionSupport {
 	public void setModelList(List<modelBean> modelList) {
 		this.modelList = modelList;
 	}
+
+	public CaratBean getCaratBean() {
+		return caratBean;
+	}
+
+	public void setCaratBean(CaratBean caratBean) {
+		this.caratBean = caratBean;
+	}
+
+	public List<CaratBean> getCaratList() {
+		return caratList;
+	}
+
+	public void setCaratList(List<CaratBean> caratList) {
+		this.caratList = caratList;
+	}
+
+
 
 }
