@@ -117,6 +117,28 @@
 			<result name="success">/jsp/model.jsp</result>
 		</action>
 		<!-- model page finished -->
+		<!-- ********carat page************* -->
+		<action name="goToCarat"
+			class="org.tesseract.action.RedirAction" method="goToCarat">
+			<result name="success">/jsp/carat.jsp</result>
+		</action>
+		
+		<action name="saveCarat"
+			class="org.tesseract.action.MasterAction" method="saveCarat">
+			<result name="success" type="redirectAction">goToCarat</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+		
+		<action name="deleteCarat"
+			class="org.tesseract.action.MasterAction" method="deleteCarat">
+			<result name="success" type="redirectAction">goToCarat</result>
+		</action>
+		
+		<action name="editCarat"
+			class="org.tesseract.action.MasterAction" method="editCarat">
+			<result name="success">/jsp/carat.jsp</result>
+		</action>
+<!-- category page finished -->
 	</package>
 
 </struts>

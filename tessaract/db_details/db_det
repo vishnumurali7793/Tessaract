@@ -47,3 +47,22 @@ CREATE TABLE `tesseract`.`user_details` (
      PRIMARY KEY (`model_id`)) ENGINE = InnoDB;
      
      ALTER TABLE `model` ADD `delete_status` VARCHAR(255) NULL AFTER `added_on`;
+     
+    CREATE TABLE `tesseract`.`carat` (
+     `carat_id` INT NOT NULL AUTO_INCREMENT ,
+      `carat_code` VARCHAR(255) NULL , 
+      `carat_name` VARCHAR(255) NULL , 
+      `active_status` VARCHAR(255) NULL , 
+      `delete_status` VARCHAR(255) NULL , 
+      PRIMARY KEY (`carat_id`)) ENGINE = InnoDB;
+      
+      CREATE TABLE `tesseract`.`rate` (
+       `rate_id` INT NOT NULL AUTO_INCREMENT , 
+       `categoryId` INT(11) NULL , 
+       `caratId` INT(11) NULL , 
+       `amount` DOUBLE NULL , 
+       `active_status` VARCHAR(255) NULL ,
+        `delete_status` VARCHAR(255) NULL , 
+        `added_on` DATE NULL , 
+        PRIMARY KEY (`rate_id`)) ENGINE = InnoDB;
+        

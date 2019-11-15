@@ -2,6 +2,7 @@ package org.tesseract.action;
 
 import java.util.List;
 
+import org.tesseract.entities.CaratBean;
 import org.tesseract.entities.CategoryBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.TaxBean;
@@ -18,6 +19,7 @@ public class RedirAction extends ActionSupport {
 	private List<CategoryBean> catList;
 	private List<ProductBean> prodList;
 	private List<modelBean> modelList;
+	private List<CaratBean> caratList;
 	
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -39,6 +41,11 @@ public class RedirAction extends ActionSupport {
 	
 	public String goToModel() {
 		modelList = masterHibernateDao.getModelList();
+		return SUCCESS;
+	}
+	
+	public String goToCarat() {
+		caratList = masterHibernateDao.getCaratList();
 		return SUCCESS;
 	}
 	
@@ -76,6 +83,14 @@ public class RedirAction extends ActionSupport {
 
 	public void setModelList(List<modelBean> modelList) {
 		this.modelList = modelList;
+	}
+
+	public List<CaratBean> getCaratList() {
+		return caratList;
+	}
+
+	public void setCaratList(List<CaratBean> caratList) {
+		this.caratList = caratList;
 	}
 	
 	

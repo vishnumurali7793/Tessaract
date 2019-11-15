@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.tesseract.entities.CaratBean;
 import org.tesseract.entities.CategoryBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.TaxBean;
@@ -260,6 +261,76 @@ public class MasterHibernateDao {
 
 					try {
 						return session.get(modelBean.class, modBean.getModelId());
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//get carat list
+				@SuppressWarnings("unchecked")
+				public List<CaratBean> getCaratList() {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.createQuery("from CaratBean where deleteStatus='N'").list();
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//save category data
+				public void addCaratdata(CaratBean caratBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.saveOrUpdate(caratBean);
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//delete carat
+				public void deleteCaratById(CaratBean caratBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.createQuery("update CaratBean as car set car.deleteStatus='Y' where car.caratId=:carId")
+								.setParameter("carId", caratBean.getCaratId()).executeUpdate();
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						session.close();
+					}
+				}
+				
+				// Edit carat
+				public CaratBean getCaratEditById(CaratBean carBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.get(CaratBean.class, carBean.getCaratId());
 
 					} catch (Exception e) {
 						e.printStackTrace();
