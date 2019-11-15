@@ -55,3 +55,14 @@ CREATE TABLE `tesseract`.`user_details` (
       `active_status` VARCHAR(255) NULL , 
       `delete_status` VARCHAR(255) NULL , 
       PRIMARY KEY (`carat_id`)) ENGINE = InnoDB;
+      
+      CREATE TABLE `tesseract`.`rate` (
+       `rate_id` INT NOT NULL AUTO_INCREMENT , 
+       `categoryId` INT(11) NULL , 
+       `caratId` INT(11) NULL , 
+       `amount` DOUBLE NULL , 
+       `active_status` VARCHAR(255) NULL ,
+        `delete_status` VARCHAR(255) NULL , 
+        `added_on` DATE NULL , 
+        PRIMARY KEY (`rate_id`)) ENGINE = InnoDB;
+        
