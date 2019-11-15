@@ -131,11 +131,10 @@ td, th {
 										<div class=" col s12">
 											<s:hidden name="categoryBean.categoryId" />
 											<s:hidden name="productBean.productId" />
-											<label>CategoryName</label>
-											<%-- <s:select name="productBean.category"  class="billlistbox2"
-                                            listKey="--categoryName--"  list="catList">
-                                            </s:select> --%>
-											<select class="custom-select custom-select-sm">
+											<label>CategoryName</label> <select
+												class="custom-select custom-select-sm" id="select"
+												value="<s:property value="productBean.category.categoryName" />"
+												name="productBean.category.categoryId">
 												<s:iterator value="catList" status="row">
 													<option value="<s:property value='categoryId'/>"><s:property
 															value='categoryName' /></option>
@@ -211,8 +210,6 @@ td, th {
 															onclick="deleteCategory('<s:property value="productId"/>')">[DELETE]</button></td>
 												</tr>
 											</s:iterator>
-
-
 										</s:if>
 									</tbody>
 								</table>
@@ -224,9 +221,5 @@ td, th {
 		</div>
 	</div>
 	</div>
-
-
-
-
 </body>
 </html>

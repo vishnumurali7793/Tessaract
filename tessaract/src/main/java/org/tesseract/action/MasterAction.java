@@ -73,8 +73,6 @@ public class MasterAction extends ActionSupport {
 	//Product page action 
 		public String saveProduct(){
 			if (productBean != null) {
-				productBean.setCategory(new CategoryBean());
-				productBean.getCategory().getCategoryId();
 				masterHibernateDao.addProductdata(productBean);
 				return SUCCESS;
 			}
@@ -95,6 +93,7 @@ public class MasterAction extends ActionSupport {
 				setProductBean(masterHibernateDao.getProdEditById(productBean));
 			}
 			prodList = masterHibernateDao.getProductList();
+			catList = masterHibernateDao.getCategryList();
 			return SUCCESS;
 		}
 	
