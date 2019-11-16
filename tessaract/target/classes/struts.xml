@@ -138,7 +138,51 @@
 			class="org.tesseract.action.MasterAction" method="editCarat">
 			<result name="success">/jsp/carat.jsp</result>
 		</action>
-<!-- category page finished -->
+<!-- carat page finished -->
+<!-- ********rate page************* -->
+		<action name="goToRate"
+			class="org.tesseract.action.RedirAction" method="goToRate">
+			<result name="success">/jsp/rate.jsp</result>
+		</action>
+		
+		<action name="saveRate"
+			class="org.tesseract.action.MasterAction" method="saveRate">
+			<result name="success" type="redirectAction">goToRate</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+		
+		<action name="deleteRate"
+			class="org.tesseract.action.MasterAction" method="deleteRate">
+			<result name="success" type="redirectAction">goToRate</result>
+		</action>
+		
+		<action name="editRate"
+			class="org.tesseract.action.MasterAction" method="editRate">
+			<result name="success">/jsp/rate.jsp</result>
+		</action>
+<!-- rate page finished -->
+<!-- ********customer page************* -->
+		<action name="goToCustomer"
+			class="org.tesseract.action.RedirAction" method="goToCustomer">
+			<result name="success">/jsp/customer.jsp</result>
+		</action>
+		
+		<action name="saveCustomer"
+			class="org.tesseract.action.MasterAction" method="saveCustomer">
+			<result name="success" type="redirectAction">goToCustomer</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+		
+		<action name="deleteCustomer"
+			class="org.tesseract.action.MasterAction" method="deleteCustomer">
+			<result name="success" type="redirectAction">goToCustomer</result>
+		</action>
+		
+		<action name="editCustomer"
+			class="org.tesseract.action.MasterAction" method="editCustomer">
+			<result name="success">/jsp/customer.jsp</result>
+		</action>
+		<!-- customer page finished -->
 	</package>
 
 </struts>

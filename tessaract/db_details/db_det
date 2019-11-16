@@ -66,3 +66,18 @@ CREATE TABLE `tesseract`.`user_details` (
         `added_on` DATE NULL , 
         PRIMARY KEY (`rate_id`)) ENGINE = InnoDB;
         
+        CREATE TABLE `tesseract`.`customer` ( 
+        `customer_id` INT NOT NULL AUTO_INCREMENT , 
+        `customer_name` VARCHAR(255) NULL , 
+        `address1` VARCHAR(255) NULL , 
+        `address2` VARCHAR(255) NULL , 
+        `email` VARCHAR(255) NULL ,
+         `contact` VARCHAR(255) NULL , 
+         `pin` VARCHAR(255) NULL ,
+          `event` VARCHAR(255) NULL , 
+          `added_on` DATE NULL , 
+          `active_status` VARCHAR(255) NULL , 
+          PRIMARY KEY (`customer_id`)) ENGINE = InnoDB;
+          
+          ALTER TABLE `customer` ADD `event_date` DATE NULL AFTER `event`;
+          ALTER TABLE `customer` ADD `delete_status` VARCHAR(255) NULL AFTER `active_status`;

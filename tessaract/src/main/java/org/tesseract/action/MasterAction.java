@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.tesseract.entities.CaratBean;
 import org.tesseract.entities.CategoryBean;
+import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
+import org.tesseract.entities.RateBean;
 import org.tesseract.entities.TaxBean;
 import org.tesseract.entities.modelBean;
 import org.tesseract.persistance.MasterHibernateDao;
@@ -21,11 +23,15 @@ public class MasterAction extends ActionSupport {
 	private ProductBean productBean;
 	private modelBean modelBean;
 	private CaratBean caratBean;
+	private RateBean rateBean;
+	private CustomerBean customerBean;
 	private List<TaxBean> taxList;
 	private List<CategoryBean> catList;
 	private List<ProductBean> prodList;
 	private List<modelBean> modelList;
 	private List<CaratBean> caratList;
+	private List<RateBean> rateList;
+	private List<CustomerBean> customerList;
 
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -152,6 +158,60 @@ public class MasterAction extends ActionSupport {
 			return SUCCESS;
 		}
 		
+		//Rate page action
+				public String saveRate(){
+					if (rateBean != null) {
+						masterHibernateDao.addRatedata(rateBean);
+						return SUCCESS;
+					}
+					
+					return INPUT;
+				}
+				
+				public String deleteRate() {
+					if(rateBean!=null && rateBean.getRateId()!=null) {
+						masterHibernateDao.deleteRateById(rateBean);
+					}
+					setRateList(masterHibernateDao.getRateList());
+					return SUCCESS;
+				}
+		
+				public String editRate() {
+					if(rateBean!=null && rateBean.getRateId()!=null) {
+						setRateBean(masterHibernateDao.getRateEditById(rateBean));
+					}
+					rateList = masterHibernateDao.getRateList();
+					return SUCCESS;
+				}
+				
+				//Customer page action 
+				public String saveCustomer(){
+					if (customerBean != null) {
+						masterHibernateDao.addCustomerdata(customerBean);
+						return SUCCESS;
+					}
+					
+					return INPUT;
+				}
+				
+				//delete customer
+				public String deleteCustomer() {
+					if(customerBean!=null && customerBean.getCustomerId() !=null) {
+						masterHibernateDao.deleteCustomerById(customerBean);
+					}
+					setCustomerList(masterHibernateDao.getCustomerList());
+					return SUCCESS;
+				}
+				
+				//edit customer
+				public String editCustomer() {
+					if(customerBean!=null && customerBean.getCustomerId()!=null) {
+						setCustomerBean(masterHibernateDao.getCustomerEditById(customerBean));
+					}
+					customerList = masterHibernateDao.getCustomerList();
+					return SUCCESS;
+				}
+				
 	public TaxBean getTaxBean() {
 		return taxBean;
 	}
@@ -230,6 +290,38 @@ public class MasterAction extends ActionSupport {
 
 	public void setCaratList(List<CaratBean> caratList) {
 		this.caratList = caratList;
+	}
+
+	public RateBean getRateBean() {
+		return rateBean;
+	}
+
+	public void setRateBean(RateBean rateBean) {
+		this.rateBean = rateBean;
+	}
+
+	public List<RateBean> getRateList() {
+		return rateList;
+	}
+
+	public void setRateList(List<RateBean> rateList) {
+		this.rateList = rateList;
+	}
+
+	public CustomerBean getCustomerBean() {
+		return customerBean;
+	}
+
+	public void setCustomerBean(CustomerBean customerBean) {
+		this.customerBean = customerBean;
+	}
+
+	public List<CustomerBean> getCustomerList() {
+		return customerList;
+	}
+
+	public void setCustomerList(List<CustomerBean> customerList) {
+		this.customerList = customerList;
 	}
 
 

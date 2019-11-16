@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.tesseract.entities.CaratBean;
 import org.tesseract.entities.CategoryBean;
+import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
+import org.tesseract.entities.RateBean;
 import org.tesseract.entities.TaxBean;
 import org.tesseract.entities.modelBean;
 import org.tesseract.persistance.MasterHibernateDao;
@@ -20,6 +22,8 @@ public class RedirAction extends ActionSupport {
 	private List<ProductBean> prodList;
 	private List<modelBean> modelList;
 	private List<CaratBean> caratList;
+	private List<RateBean> rateList;
+	private List<CustomerBean> customerList;
 	
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -46,6 +50,18 @@ public class RedirAction extends ActionSupport {
 	
 	public String goToCarat() {
 		caratList = masterHibernateDao.getCaratList();
+		return SUCCESS;
+	}
+	
+	public String goToRate() {
+		rateList = masterHibernateDao.getRateList();
+		catList = masterHibernateDao.getCategryList();
+		caratList = masterHibernateDao.getCaratList();
+		return SUCCESS;
+	}
+	
+	public String goToCustomer() {
+		customerList = masterHibernateDao.getCustomerList();
 		return SUCCESS;
 	}
 	
@@ -91,6 +107,22 @@ public class RedirAction extends ActionSupport {
 
 	public void setCaratList(List<CaratBean> caratList) {
 		this.caratList = caratList;
+	}
+
+	public List<RateBean> getRateList() {
+		return rateList;
+	}
+
+	public void setRateList(List<RateBean> rateList) {
+		this.rateList = rateList;
+	}
+
+	public List<CustomerBean> getCustomerList() {
+		return customerList;
+	}
+
+	public void setCustomerList(List<CustomerBean> customerList) {
+		this.customerList = customerList;
 	}
 	
 	

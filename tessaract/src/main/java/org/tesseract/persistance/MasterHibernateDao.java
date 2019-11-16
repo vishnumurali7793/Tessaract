@@ -8,7 +8,9 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.tesseract.entities.CaratBean;
 import org.tesseract.entities.CategoryBean;
+import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
+import org.tesseract.entities.RateBean;
 import org.tesseract.entities.TaxBean;
 import org.tesseract.entities.modelBean;
 
@@ -331,6 +333,146 @@ public class MasterHibernateDao {
 
 					try {
 						return session.get(CaratBean.class, carBean.getCaratId());
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//get rate list
+				@SuppressWarnings("unchecked")
+				public List<RateBean> getRateList() {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.createQuery("from RateBean where deleteStatus='N'").list();
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//save category data
+				public void addRatedata(RateBean rateBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.saveOrUpdate(rateBean);
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//delete rate
+				public void deleteRateById(RateBean rateBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.createQuery("update RateBean as rat set rat.deleteStatus='Y' where rat.rateId=:ratId")
+								.setParameter("ratId", rateBean.getRateId()).executeUpdate();
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						session.close();
+					}
+				}
+				
+				// Edit rate
+				public RateBean getRateEditById(RateBean rateBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.get(RateBean.class, rateBean.getRateId());
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//get customer list
+				@SuppressWarnings("unchecked")
+				public List<CustomerBean> getCustomerList() {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.createQuery("from CustomerBean where deleteStatus='N'").list();
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//save CUSTOMER data
+				public void addCustomerdata(CustomerBean cusBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.saveOrUpdate(cusBean);
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//delete rate
+				public void deleteCustomerById(CustomerBean custBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.createQuery("update CustomerBean as cus set cus.deleteStatus='Y' where cus.customerId=:customerId")
+								.setParameter("customerId", custBean.getCustomerId()).executeUpdate();
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						session.close();
+					}
+				}
+				
+				// Edit customer
+				public CustomerBean getCustomerEditById(CustomerBean cusBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.get(CustomerBean.class, cusBean.getCustomerId());
 
 					} catch (Exception e) {
 						e.printStackTrace();

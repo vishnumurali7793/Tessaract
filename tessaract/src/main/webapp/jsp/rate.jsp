@@ -76,21 +76,14 @@ td, th {
 }
 </style>
 <script type="text/javascript">
-	function editCarat(carid) {
-		location.href = "editCarat?caratBean.caratId=" + carid;
+	function editRate(rateId) {
+		location.href = "editRate?rateBean.rateId=" + rateId;
 	}
 
-	function deleteCarat(carid) {
-		location.href = "deleteCarat?caratBean.caratId=" + carid;
+	function deleteRate(rateId) {
+		location.href = "deleteRate?rateBean.rateId=" + rateId;
 	}
 </script>
-
-<%-- <header
-	class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar"
-	id="allign">
-	TAX -
-	<s:property value="loginBean.userName" />
-</header> --%>
 <body>
 	<nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
@@ -105,8 +98,11 @@ td, th {
 						<li><a href="goToTaxMaster">Tax</a></li>
 						<li><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
-						<li class="active"><a href="goToCarat">Carat</a></li>
-						<li><a href="goToRate">Rate</a></li>
+						<li><a href="goToModel">Model</a></li>
+						<li><a href="goToCarat">Carat</a></li>
+						<li class="active"><a href="goToRate">Rate</a></li>
+						<li><a href="goToCustomer">Customer</a></li>
+						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li><a href="#">Page 2</a></li>
@@ -122,37 +118,58 @@ td, th {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel">
-				<h2>CARAT</h2>
+				<h2>RATE</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapse1">Add Carat</a>
+									href="#collapse1">Add Rate</a>
 							</h4>
 						</div>
 						<div id="collapse1" class="panel-collapse collapse in">
 							<div class="panel-body ">
-								<s:form action="saveCarat">
+								<s:form action="saveRate">
 									<div class="row">
 										<div class=" col s12">
+										    <s:hidden name="rateBean.rateId" />
+											<s:hidden name="categoryBean.categoryId" />
 											<s:hidden name="caratBean.caratId" />
-											<label>Carat Code</label> <input
-												name="caratBean.caratCode" type="text"
-												value="<s:property value="caratBean.caratCode"/>"
-												class="validate" placeholder="CaratCode"> <label>Carat
-												Name</label> <input name="caratBean.caratName" type="text"
+											<label>CategoryName</label> <select
+												class="custom-select custom-select-sm" id="select"
+												value="<s:property value="rateBean.categoryId.categoryName" />"
+												name="rateBean.categoryId.categoryId">
+												<s:iterator value="catList" status="row">
+													<option value="<s:property value='categoryId'/>"><s:property
+															value='categoryName' /></option>
+												</s:iterator>
+											</select> 
+											<label>Carat</label> <select
+												class="custom-select custom-select-sm" id="select"
+												value="<s:property value="rateBean.caratId.caratName" />"
+												name="rateBean.caratId.caratId">
+												<s:iterator value="caratList" status="row">
+													<option value="<s:property value='caratId'/>"><s:property
+															value='caratName' /></option>
+												</s:iterator>
+											</select> 
+												<label>Amount</label>
+											<input name="rateBean.amount" type="text"
 												class="validate"
-												value="<s:property value="caratBean.caratName"/>"
-												placeholder="CaratName"> <label>Status</label> <select
-												name="caratBean.activeStatus"
-												value="<s:property value="caratBean.activeStatus"/>"
+												value="<s:property value="rateBean.amount"/>"
+												placeholder="amount"> <label>Date</label> <input
+												name="rateBean.addedOn" type="date" class="validate"
+												value="<s:property value="rateBean.addedOn"/>"
+												required="required"> <i class="fa fa-calendar"
+												style="font-size: 22px; float: right; margin: -46px auto;"></i>
+											<label>Status</label> <select name="rateBean.activeStatus"
+												value="<s:property value="rateBean.activeStatus"/>"
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
 											</select>&nbsp &nbsp
-												<button class="waves-effect waves-light btn" type="submit">Submit</button>
-											
+											<button class="waves-effect waves-light btn" type="submit">Submit</button>
+
 										</div>
 									</div>
 
@@ -166,42 +183,44 @@ td, th {
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion"
 								class="collapsed" role="button" aria-expanded="true"
-								aria-controls="collapse2" href="#collapse2">Carat Details</a>
+								aria-controls="collapse2" href="#collapse2">Rate Details</a>
 						</h4>
 					</div>
-					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
+					<div id="collapse2" class="panel-collapse collapse" role="tabpanel"
 						aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
-								<h2>Carat Table</h2>
+								<h2>Rate Table</h2>
 								<table class="table">
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>CARAT CODE</th>
-											<th>CARAT NAME</th>
-											<th>Active Status</th>
-											<th>Actions</th>
+											<th>CATEGORY NAME</th>
+											<th>CARAT</th>
+											<th>AMOUNT</th>
+											<th>DATE</th>
+											<th>ACTIVE STATUS</th>
+											<th>ACTIONS</th>
 										</tr>
 									</thead>
 									<tbody>
 										<!-- ***list name from redirectaction*** -->
-										<s:if test="caratList!=null && caratList.size()>0">
+										<s:if test="rateList!=null && rateList.size()>0">
 
-											<s:iterator value="caratList" status="row">
+											<s:iterator value="rateList" status="row">
 												<tr>
 													<td><s:property value="#row.count" /></td>
-													<td><s:property value="caratCode" /></td>
-													<td><s:property value="caratName" /></td>
+													<td><s:property value="categoryId.categoryName" /></td>
+													<td><s:property value="caratId.caratName" /></td>
+													<td><s:property value="amount" /></td>
+													<td><s:property value="addedOn" /></td>
 													<td><s:property value="activeStatus" /></td>
 													<td><button class="btn-xs btn-link"
-															onclick="editCarat('<s:property value="caratId"/>')">[EDIT]</button>
+															onclick="editRate('<s:property value="rateId"/>')">[EDIT]</button>
 														<button class="btn-xs btn-link"
-															onclick="deleteCarat('<s:property value="caratId"/>')">[DELETE]</button></td>
+															onclick="deleteRate('<s:property value="rateId"/>')">[DELETE]</button></td>
 												</tr>
 											</s:iterator>
-
-
 										</s:if>
 									</tbody>
 								</table>
@@ -213,9 +232,5 @@ td, th {
 		</div>
 	</div>
 	</div>
-
-
-
-
 </body>
 </html>

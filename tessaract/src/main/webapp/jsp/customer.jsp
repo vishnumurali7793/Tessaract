@@ -76,12 +76,12 @@ td, th {
 }
 </style>
 <script type="text/javascript">
-	function editCarat(carid) {
-		location.href = "editCarat?caratBean.caratId=" + carid;
+	function editCustomer(custid) {
+		location.href = "editCustomer?customerBean.customerId=" + custid;
 	}
 
-	function deleteCarat(carid) {
-		location.href = "deleteCarat?caratBean.caratId=" + carid;
+	function deleteCustomer(custid) {
+		location.href = "deleteCustomer?customerBean.customerId=" + custid;
 	}
 </script>
 
@@ -103,10 +103,12 @@ td, th {
 					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="goToTaxMaster">Tax</a></li>
-						<li><a href="goToCategory">Category</a></li>
+						<li class="active"><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
-						<li class="active"><a href="goToCarat">Carat</a></li>
+						<li><a href="goToModel">Model</a></li>
+						<li><a href="goToCarat">Carat</a></li>
 						<li><a href="goToRate">Rate</a></li>
+						<li class="active"><a href="goToCustomer">Customer</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li><a href="#">Page 2</a></li>
@@ -122,31 +124,77 @@ td, th {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel">
-				<h2>CARAT</h2>
+				<h2>CUSTOMER</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapse1">Add Carat</a>
+									href="#collapse1">Add Customer</a>
 							</h4>
 						</div>
 						<div id="collapse1" class="panel-collapse collapse in">
 							<div class="panel-body ">
-								<s:form action="saveCarat">
+								<s:form action="saveCustomer">
 									<div class="row">
 										<div class=" col s12">
-											<s:hidden name="caratBean.caratId" />
-											<label>Carat Code</label> <input
-												name="caratBean.caratCode" type="text"
-												value="<s:property value="caratBean.caratCode"/>"
-												class="validate" placeholder="CaratCode"> <label>Carat
-												Name</label> <input name="caratBean.caratName" type="text"
+											<s:hidden name="customerBean.customerId" />
+											<label>Customer Name</label> <input
+												name="customerBean.customerName" type="text"
+												value="<s:property value="customerBean.customerName"/>"
+												class="validate" placeholder="customerName">
+												
+												 <label>Category
+												Address1</label> <input name="customerBean.address1" type="text"
 												class="validate"
-												value="<s:property value="caratBean.caratName"/>"
-												placeholder="CaratName"> <label>Status</label> <select
-												name="caratBean.activeStatus"
-												value="<s:property value="caratBean.activeStatus"/>"
+												value="<s:property value="customerBean.address1"/>"
+												placeholder="address"> 
+												
+												 <label>Customer
+												Address2</label> <input name="customerBean.address2" type="text"
+												class="validate"
+												value="<s:property value="customerBean.address2"/>"
+												placeholder="address"> 
+												
+												 <label>Customer
+												Address2</label> <input name="customerBean.email" type="text"
+												class="validate"
+												value="<s:property value="customerBean.email"/>"
+												placeholder="email"> 
+												
+												<label>Customer
+												Contact</label> <input name="customerBean.contact" type="text"
+												class="validate"
+												value="<s:property value="customerBean.contact"/>"
+												placeholder="contactNumber">
+												
+												<label>Customer
+												Pin</label> <input name="customerBean.pin" type="text"
+												class="validate"
+												value="<s:property value="customerBean.pin"/>"
+												placeholder="CustomerPin">
+												
+												<label>Customer
+												Event</label> <input name="customerBean.event" type="text"
+												class="validate"
+												value="<s:property value="customerBean.event"/>"
+												placeholder="EventName">
+												
+												<label>Event Date</label> <input
+												name="customerBean.eventDate" type="date" class="validate"
+												value="<s:property value="customerBean.eventDate"/>"
+												required="required"> <i class="fa fa-calendar"
+												style="font-size: 22px; float: right; margin: -46px auto;"></i>
+												
+												<label>Date</label> <input
+												name="customerBean.addedOn" type="date" class="validate"
+												value="<s:property value="customerBean.addedOn"/>"
+												required="required"> <i class="fa fa-calendar"
+												style="font-size: 22px; float: right; margin: -46px auto;"></i>
+												
+												<label>Status</label> <select
+												name="customerBean.activeStatus"
+												value="<s:property value="customerBean.activeStatus"/>"
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
@@ -166,38 +214,51 @@ td, th {
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion"
 								class="collapsed" role="button" aria-expanded="true"
-								aria-controls="collapse2" href="#collapse2">Carat Details</a>
+								aria-controls="collapse2" href="#collapse2">Customer Details</a>
 						</h4>
 					</div>
 					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
 						aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
-								<h2>Carat Table</h2>
+								<h2>Customer Table</h2>
 								<table class="table">
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>CARAT CODE</th>
-											<th>CARAT NAME</th>
+											<th>CUSTOMER NAME</th>
+											<th>CUSTOMER ADDRESS</th>
+											<th>CUSTOMER CONTACT</th>
+											<th>EVENT</th>
+											<th>EVENT DATE</th>
+											<th>DATE</th>
 											<th>Active Status</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
 										<!-- ***list name from redirectaction*** -->
-										<s:if test="caratList!=null && caratList.size()>0">
+										<s:if test="customerList!=null && customerList.size()>0">
 
-											<s:iterator value="caratList" status="row">
+											<s:iterator value="customerList" status="row">
 												<tr>
 													<td><s:property value="#row.count" /></td>
-													<td><s:property value="caratCode" /></td>
-													<td><s:property value="caratName" /></td>
+													<td><s:property value="customerName" /></td>
+													<td>
+													<s:property value="address1" /></br>
+													<s:property value="address2" /></br>
+													<s:property value="email" /></br>
+													<s:property value="pin" />
+													</td>
+													<td><s:property value="contact" /></td>
+													<td><s:property value="event" /></td>
+													<td><s:property value="eventDate" /></td>
+													<td><s:property value="addedOn" /></td>
 													<td><s:property value="activeStatus" /></td>
 													<td><button class="btn-xs btn-link"
-															onclick="editCarat('<s:property value="caratId"/>')">[EDIT]</button>
+															onclick="editCustomer('<s:property value="customerId"/>')">[EDIT]</button>
 														<button class="btn-xs btn-link"
-															onclick="deleteCarat('<s:property value="caratId"/>')">[DELETE]</button></td>
+															onclick="deleteCustomer('<s:property value="customerId"/>')">[DELETE]</button></td>
 												</tr>
 											</s:iterator>
 
