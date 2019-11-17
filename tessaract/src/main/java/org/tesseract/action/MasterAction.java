@@ -9,6 +9,7 @@ import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.RateBean;
 import org.tesseract.entities.TaxBean;
+import org.tesseract.entities.VendorBean;
 import org.tesseract.entities.modelBean;
 import org.tesseract.persistance.MasterHibernateDao;
 
@@ -25,6 +26,7 @@ public class MasterAction extends ActionSupport {
 	private CaratBean caratBean;
 	private RateBean rateBean;
 	private CustomerBean customerBean;
+	private VendorBean vendorBean;
 	private List<TaxBean> taxList;
 	private List<CategoryBean> catList;
 	private List<ProductBean> prodList;
@@ -32,6 +34,7 @@ public class MasterAction extends ActionSupport {
 	private List<CaratBean> caratList;
 	private List<RateBean> rateList;
 	private List<CustomerBean> customerList;
+	private List<VendorBean> vendorList;
 
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -212,6 +215,34 @@ public class MasterAction extends ActionSupport {
 					return SUCCESS;
 				}
 				
+				//vendor page action 
+				public String saveVendor(){
+					if (vendorBean != null) {
+						masterHibernateDao.addVendordata(vendorBean);
+						return SUCCESS;
+					}
+					
+					return INPUT;
+				}
+				
+				//delete vendor
+				public String deleteVendor() {
+					if(vendorBean!=null && vendorBean.getVendorId() !=null) {
+						masterHibernateDao.deleteVendorById(vendorBean);
+					}
+					setVendorList(masterHibernateDao.getVendorList());
+					return SUCCESS;
+				}
+				
+				//edit vendor
+				public String editVendor() {
+					if(vendorBean!=null && vendorBean.getVendorId()!=null) {
+						setVendorBean(masterHibernateDao.getVendorEditById(vendorBean));
+					}
+					vendorList = masterHibernateDao.getVendorList();
+					return SUCCESS;
+				}
+				
 	public TaxBean getTaxBean() {
 		return taxBean;
 	}
@@ -322,6 +353,22 @@ public class MasterAction extends ActionSupport {
 
 	public void setCustomerList(List<CustomerBean> customerList) {
 		this.customerList = customerList;
+	}
+
+	public VendorBean getVendorBean() {
+		return vendorBean;
+	}
+
+	public void setVendorBean(VendorBean vendorBean) {
+		this.vendorBean = vendorBean;
+	}
+
+	public List<VendorBean> getVendorList() {
+		return vendorList;
+	}
+
+	public void setVendorList(List<VendorBean> vendorList) {
+		this.vendorList = vendorList;
 	}
 
 

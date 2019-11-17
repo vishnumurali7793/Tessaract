@@ -8,6 +8,7 @@ import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.RateBean;
 import org.tesseract.entities.TaxBean;
+import org.tesseract.entities.VendorBean;
 import org.tesseract.entities.modelBean;
 import org.tesseract.persistance.MasterHibernateDao;
 
@@ -24,6 +25,7 @@ public class RedirAction extends ActionSupport {
 	private List<CaratBean> caratList;
 	private List<RateBean> rateList;
 	private List<CustomerBean> customerList;
+	private List<VendorBean> vendorList;
 	
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -62,6 +64,11 @@ public class RedirAction extends ActionSupport {
 	
 	public String goToCustomer() {
 		customerList = masterHibernateDao.getCustomerList();
+		return SUCCESS;
+	}
+	
+	public String goToVendor() {
+		vendorList = masterHibernateDao.getVendorList();
 		return SUCCESS;
 	}
 	
@@ -123,6 +130,14 @@ public class RedirAction extends ActionSupport {
 
 	public void setCustomerList(List<CustomerBean> customerList) {
 		this.customerList = customerList;
+	}
+
+	public List<VendorBean> getVendorList() {
+		return vendorList;
+	}
+
+	public void setVendorList(List<VendorBean> vendorList) {
+		this.vendorList = vendorList;
 	}
 	
 	

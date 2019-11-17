@@ -76,12 +76,12 @@ td, th {
 }
 </style>
 <script type="text/javascript">
-	function editCustomer(custid) {
-		location.href = "editCustomer?customerBean.customerId=" + custid;
+	function editVendor(venid) {
+		location.href = "editVendor?vendorBean.vendorId=" + venid;
 	}
 
-	function deleteCustomer(custid) {
-		location.href = "deleteCustomer?customerBean.customerId=" + custid;
+	function deleteVendor(venid) {
+		location.href = "deleteVendor?vendorBean.vendorId=" + venid;
 	}
 </script>
 
@@ -108,8 +108,8 @@ td, th {
 						<li><a href="goToModel">Model</a></li>
 						<li><a href="goToCarat">Carat</a></li>
 						<li><a href="goToRate">Rate</a></li>
-						<li class="active"><a href="goToCustomer">Customer</a></li>
-						<li><a href="goToVendor">Vendor</a></li>
+						<li><a href="goToCustomer">Customer</a></li>
+						<li class="active"><a href="goToVendor">Vendor</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li><a href="#">Page 2</a></li>
@@ -125,77 +125,65 @@ td, th {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel">
-				<h2>CUSTOMER</h2>
+				<h2>VENDOR</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapse1">Add Customer</a>
+									href="#collapse1">Add Vendor</a>
 							</h4>
 						</div>
 						<div id="collapse1" class="panel-collapse collapse in">
 							<div class="panel-body ">
-								<s:form action="saveCustomer">
+								<s:form action="saveVendor">
 									<div class="row">
 										<div class=" col s12">
-											<s:hidden name="customerBean.customerId" />
-											<label>Customer Name</label> <input
-												name="customerBean.customerName" type="text"
-												value="<s:property value="customerBean.customerName"/>"
-												class="validate" placeholder="customerName">
+											<s:hidden name="vendorBean.vendorId" />
+											<label>Vendor Code</label> <input
+												name="vendorBean.vendorCode" type="text"
+												value="<s:property value="vendorBean.vendorCode"/>"
+												class="validate" placeholder="vendorCode">
 												
-												 <label>Category
-												Address1</label> <input name="customerBean.address1" type="text"
+											<label>Vendor Name</label> <input
+												name="vendorBean.vendorName" type="text"
+												value="<s:property value="vendorBean.vendorName"/>"
+												class="validate" placeholder="vendorName">
+												
+												 <label>Vendor
+												Address1</label> <input name="vendorBean.address1" type="text"
 												class="validate"
-												value="<s:property value="customerBean.address1"/>"
+												value="<s:property value="vendorBean.address1"/>"
 												placeholder="address"> 
 												
-												 <label>Customer
-												Address2</label> <input name="customerBean.address2" type="text"
+												 <label>Vendor
+												Address2</label> <input name="vendorBean.address2" type="text"
 												class="validate"
-												value="<s:property value="customerBean.address2"/>"
+												value="<s:property value="vendorBean.address2"/>"
 												placeholder="address"> 
 												
-												 <label>Customer
-												Address2</label> <input name="customerBean.email" type="text"
-												class="validate"
-												value="<s:property value="customerBean.email"/>"
-												placeholder="email"> 
 												
-												<label>Customer
-												Contact</label> <input name="customerBean.contact" type="text"
+												<label>Vendor
+												Contact</label> <input name="vendorBean.contact" type="text"
 												class="validate"
-												value="<s:property value="customerBean.contact"/>"
+												value="<s:property value="vendorBean.contact"/>"
 												placeholder="contactNumber">
 												
-												<label>Customer
-												Pin</label> <input name="customerBean.pin" type="text"
+												<label>Vendor
+												Pin</label> <input name="vendorBean.pin" type="text"
 												class="validate"
-												value="<s:property value="customerBean.pin"/>"
-												placeholder="CustomerPin">
-												
-												<label>Customer
-												Event</label> <input name="customerBean.event" type="text"
-												class="validate"
-												value="<s:property value="customerBean.event"/>"
-												placeholder="EventName">
-												
-												<label>Event Date</label> <input
-												name="customerBean.eventDate" type="date" class="validate"
-												value="<s:property value="customerBean.eventDate"/>"
-												required="required"> <i class="fa fa-calendar"
-												style="font-size: 22px; float: right; margin: -46px auto;"></i>
+												value="<s:property value="vendorBean.pin"/>"
+												placeholder="VendorPin">
 												
 												<label>Date</label> <input
-												name="customerBean.addedOn" type="date" class="validate"
-												value="<s:property value="customerBean.addedOn"/>"
+												name="vendorBean.addedOn" type="date" class="validate"
+												value="<s:property value="vendorBean.addedOn"/>"
 												required="required"> <i class="fa fa-calendar"
 												style="font-size: 22px; float: right; margin: -46px auto;"></i>
 												
 												<label>Status</label> <select
-												name="customerBean.activeStatus"
-												value="<s:property value="customerBean.activeStatus"/>"
+												name="vendorBean.activeStatus"
+												value="<s:property value="vendorBean.activeStatus"/>"
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
@@ -215,23 +203,22 @@ td, th {
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion"
 								class="collapsed" role="button" aria-expanded="true"
-								aria-controls="collapse2" href="#collapse2">Customer Details</a>
+								aria-controls="collapse2" href="#collapse2">Vendor Details</a>
 						</h4>
 					</div>
 					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
 						aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
-								<h2>Customer Table</h2>
+								<h2>Vendor Table</h2>
 								<table class="table">
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>CUSTOMER NAME</th>
-											<th>CUSTOMER ADDRESS</th>
-											<th>CUSTOMER CONTACT</th>
-											<th>EVENT</th>
-											<th>EVENT DATE</th>
+											<th>VENDOR CODE</th>
+											<th>VENDOR NAME</th>
+											<th>VENDOR ADDRESS</th>
+											<th>VENDOR CONTACT</th>
 											<th>DATE</th>
 											<th>Active Status</th>
 											<th>Actions</th>
@@ -239,27 +226,25 @@ td, th {
 									</thead>
 									<tbody>
 										<!-- ***list name from redirectaction*** -->
-										<s:if test="customerList!=null && customerList.size()>0">
+										<s:if test="vendorList!=null && vendorList.size()>0">
 
-											<s:iterator value="customerList" status="row">
+											<s:iterator value="vendorList" status="row">
 												<tr>
 													<td><s:property value="#row.count" /></td>
-													<td><s:property value="customerName" /></td>
+													<td><s:property value="vendorCode" /></td>
+													<td><s:property value="vendorName" /></td>
 													<td>
 													<s:property value="address1" /></br>
 													<s:property value="address2" /></br>
-													<s:property value="email" /></br>
 													<s:property value="pin" />
 													</td>
 													<td><s:property value="contact" /></td>
-													<td><s:property value="event" /></td>
-													<td><s:property value="eventDate" /></td>
 													<td><s:property value="addedOn" /></td>
 													<td><s:property value="activeStatus" /></td>
 													<td><button class="btn-xs btn-link"
-															onclick="editCustomer('<s:property value="customerId"/>')">[EDIT]</button>
+															onclick="editVendor('<s:property value="vendorId"/>')">[EDIT]</button>
 														<button class="btn-xs btn-link"
-															onclick="deleteCustomer('<s:property value="customerId"/>')">[DELETE]</button></td>
+															onclick="deleteVendor('<s:property value="vendorId"/>')">[DELETE]</button></td>
 												</tr>
 											</s:iterator>
 

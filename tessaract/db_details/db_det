@@ -81,3 +81,16 @@ CREATE TABLE `tesseract`.`user_details` (
           
           ALTER TABLE `customer` ADD `event_date` DATE NULL AFTER `event`;
           ALTER TABLE `customer` ADD `delete_status` VARCHAR(255) NULL AFTER `active_status`;
+          
+          CREATE TABLE `tesseract`.`vendor` ( 
+          `vendor_id` INT NOT NULL AUTO_INCREMENT ,
+           `vendor_code` VARCHAR(255) NULL , 
+           `vendor_name` VARCHAR(255) NULL , 
+           `address1` VARCHAR(255) NULL , 
+           `address2` VARCHAR(255) NULL , 
+           `contact` VARCHAR(255) NULL , 
+           `pin` VARCHAR(255) NULL , 
+           `active_status` VARCHAR(255) NULL , 
+           `delete_status` VARCHAR(255) NULL , 
+           `added_on` DATE NULL , 
+           PRIMARY KEY (`vendor_id`)) ENGINE = InnoDB;

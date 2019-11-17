@@ -183,6 +183,30 @@
 			<result name="success">/jsp/customer.jsp</result>
 		</action>
 		<!-- customer page finished -->
+		
+		<!-- ********vendor page************* -->
+		<action name="goToVendor"
+			class="org.tesseract.action.RedirAction" method="goToVendor">
+			<result name="success">/jsp/vendor.jsp</result>
+		</action>
+		
+		<action name="saveVendor"
+			class="org.tesseract.action.MasterAction" method="saveVendor">
+			<result name="success" type="redirectAction">goToVendor</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+		
+		<action name="deleteVendor"
+			class="org.tesseract.action.MasterAction" method="deleteVendor">
+			<result name="success" type="redirectAction">goToVendor</result>
+		</action>
+		
+		<action name="editVendor"
+			class="org.tesseract.action.MasterAction" method="editVendor">
+			<result name="success">/jsp/vendor.jsp</result>
+		</action>
+		<!-- vendor page finished -->
+		
 	</package>
 
 </struts>

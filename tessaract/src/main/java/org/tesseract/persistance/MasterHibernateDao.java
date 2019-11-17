@@ -12,6 +12,7 @@ import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.RateBean;
 import org.tesseract.entities.TaxBean;
+import org.tesseract.entities.VendorBean;
 import org.tesseract.entities.modelBean;
 
 public class MasterHibernateDao {
@@ -448,7 +449,7 @@ public class MasterHibernateDao {
 
 				}
 				
-				//delete rate
+				//delete customer
 				public void deleteCustomerById(CustomerBean custBean) {
 					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 					Session session = sessionFactory.openSession();
@@ -473,6 +474,76 @@ public class MasterHibernateDao {
 
 					try {
 						return session.get(CustomerBean.class, cusBean.getCustomerId());
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//get Vendor list
+				@SuppressWarnings("unchecked")
+				public List<VendorBean> getVendorList() {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.createQuery("from VendorBean where deleteStatus='N'").list();
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//save vendor data
+				public void addVendordata(VendorBean vendorBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.saveOrUpdate(vendorBean);
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//delete customer
+				public void deleteVendorById(VendorBean vendorBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.createQuery("update VendorBean as ven set ven.deleteStatus='Y' where ven.vendorId=:vendorId")
+								.setParameter("vendorId", vendorBean.getVendorId()).executeUpdate();
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						session.close();
+					}
+				}
+				
+				// Edit customer
+				public VendorBean getVendorEditById(VendorBean venBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.get(VendorBean.class, venBean.getVendorId());
 
 					} catch (Exception e) {
 						e.printStackTrace();
