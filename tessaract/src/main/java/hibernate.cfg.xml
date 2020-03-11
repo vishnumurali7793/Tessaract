@@ -46,6 +46,9 @@
         <mapping class="org.tesseract.entities.RateBean"/>
         <mapping class="org.tesseract.entities.CustomerBean"/>
         <mapping class="org.tesseract.entities.VendorBean"/>
+        <mapping class="org.tesseract.entities.PurchaseBean"/>
+        <mapping class="org.tesseract.entities.PurchaseScreenBean"/>
+        <mapping class="org.tesseract.entities.PurchaseAmountBean"/>
 <!--         <mapping class="com.happy.entities.AccountHeadBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesProductMappingBean"/> -->

@@ -94,3 +94,17 @@ CREATE TABLE `tesseract`.`user_details` (
            `delete_status` VARCHAR(255) NULL , 
            `added_on` DATE NULL , 
            PRIMARY KEY (`vendor_id`)) ENGINE = InnoDB;
+           
+           CREATE TABLE `tesseract`.`purchaseBase` ( `purchase_id` INT NOT NULL AUTO_INCREMENT ,
+            `vendorId` INT(11) NULL , `gst_code` VARCHAR(255) NULL , `purchase_date` DATE NULL , 
+            `invoice_date` DATE NULL , `gold_rate` DOUBLE NULL , `silver_rate` DOUBLE NULL , 
+            `platinum_rate` DOUBLE NULL , PRIMARY KEY (`purchase_id`)) ENGINE = InnoDB;
+            
+            CREATE TABLE `tesseract`.`purchasedetails` ( `purchase_screen_id` INT NOT NULL AUTO_INCREMENT , 
+            `purchaseId` INT NULL , `hsn_code` DOUBLE NULL , `categoryId` INT NULL , `purity` DOUBLE NULL , 
+            `goldweight` DOUBLE NULL , `touch` DOUBLE NULL , `netweight` DOUBLE NULL , `rate` DOUBLE NULL , 
+            `totalamount` DOUBLE NULL , PRIMARY KEY (`purchase_screen_id`)) ENGINE = InnoDB;
+            
+            CREATE TABLE `tesseract`.`purchaseamount` ( `purchase_amount_id` INT NOT NULL AUTO_INCREMENT , 
+            `purchaseId` INT NULL , `grossamount` DOUBLE NULL , `roundoff` DOUBLE NULL , 
+            `netamount` DOUBLE NULL , PRIMARY KEY (`purchase_amount_id`)) ENGINE = InnoDB;
