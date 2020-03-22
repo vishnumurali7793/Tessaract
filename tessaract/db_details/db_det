@@ -95,10 +95,15 @@ CREATE TABLE `tesseract`.`user_details` (
            `added_on` DATE NULL , 
            PRIMARY KEY (`vendor_id`)) ENGINE = InnoDB;
            
+           ALTER TABLE `vendor` ADD `state` VARCHAR(255) NULL AFTER `added_on`;
+           
            CREATE TABLE `tesseract`.`purchaseBase` ( `purchase_id` INT NOT NULL AUTO_INCREMENT ,
             `vendorId` INT(11) NULL , `gst_code` VARCHAR(255) NULL , `purchase_date` DATE NULL , 
             `invoice_date` DATE NULL , `gold_rate` DOUBLE NULL , `silver_rate` DOUBLE NULL , 
             `platinum_rate` DOUBLE NULL , PRIMARY KEY (`purchase_id`)) ENGINE = InnoDB;
+            
+            ALTER TABLE `purchasebase` ADD `invoice` VARCHAR(255) NULL AFTER `platinum_rate`;
+            ALTER TABLE `purchasebase` ADD `pur_Bill_no` VARCHAR(255) NULL AFTER `invoice`;
             
             CREATE TABLE `tesseract`.`purchasedetails` ( `purchase_screen_id` INT NOT NULL AUTO_INCREMENT , 
             `purchaseId` INT NULL , `hsn_code` DOUBLE NULL , `categoryId` INT NULL , `purity` DOUBLE NULL , 

@@ -43,6 +43,9 @@ public class VendorBean {
 	@Column(name = "added_on")
 	private String addedOn;
 
+	@Column(name = "state")
+	private String state;
+	
 	public Integer getVendorId() {
 		return vendorId;
 	}
@@ -121,6 +124,14 @@ public class VendorBean {
 
 	public void setVendorCode(String vendorCode) {
 		this.vendorCode = vendorCode;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	

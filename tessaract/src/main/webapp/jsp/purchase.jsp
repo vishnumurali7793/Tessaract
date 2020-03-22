@@ -103,13 +103,14 @@ td, th {
 					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="goToTaxMaster">Tax</a></li>
-						<li class="active"><a href="goToCategory">Category</a></li>
+						<li><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
 						<li><a href="goToModel">Model</a></li>
 						<li><a href="goToCarat">Carat</a></li>
 						<li><a href="goToRate">Rate</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
-						<li class="active"><a href="goToVendor">Vendor</a></li>
+						<li><a href="goToVendor">Vendor</a></li>
+						<li class="active"><a href="goToPurchase">Purchase</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li><a href="#">Page 2</a></li>
@@ -125,7 +126,7 @@ td, th {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel">
-				<h2>VENDOR</h2>
+				<h2>PURCHASE SCREEN</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
@@ -140,62 +141,58 @@ td, th {
 									<div class="row">
 										<div class=" col s12">
 											<s:hidden name="vendorBean.vendorId" />
-											<label>Vendor Code</label> <input
-												name="vendorBean.vendorCode" type="text"
-												value="<s:property value="vendorBean.vendorCode"/>"
-												class="validate" placeholder="vendorCode">
-												
-											<label>Vendor Name</label> <input
-												name="vendorBean.vendorName" type="text"
-												value="<s:property value="vendorBean.vendorName"/>"
-												class="validate" placeholder="vendorName">
-												
-												 <label>Vendor
-												Address1</label> <input name="vendorBean.address1" type="text"
-												class="validate"
-												value="<s:property value="vendorBean.address1"/>"
-												placeholder="address"> 
-												
-												 <label>Vendor
-												Address2</label> <input name="vendorBean.address2" type="text"
-												class="validate"
-												value="<s:property value="vendorBean.address2"/>"
-												placeholder="address"> 
-												
-												
-												<label>Vendor
-												Contact</label> <input name="vendorBean.contact" type="text"
-												class="validate"
-												value="<s:property value="vendorBean.contact"/>"
-												placeholder="contactNumber">
-												
-												<label>Vendor
-												Pin</label> <input name="vendorBean.pin" type="text"
-												class="validate"
-												value="<s:property value="vendorBean.pin"/>"
-												placeholder="VendorPin">
-												
-												<label>
-												State</label> <input name="vendorBean.state" type="text"
-												class="validate"
-												value="<s:property value="vendorBean.state"/>"
-												placeholder="Vendorstate">
-												
-												<label>Date</label> <input
-												name="vendorBean.addedOn" type="date" class="validate"
-												value="<s:property value="vendorBean.addedOn"/>"
-												required="required"> <i class="fa fa-calendar"
-												style="font-size: 22px; float: right; margin: -46px auto;"></i>
-												
-												<label>Status</label> <select
-												name="vendorBean.activeStatus"
-												value="<s:property value="vendorBean.activeStatus"/>"
-												required="required" class="">
-												<option value="Active">Active</option>
-												<option value="Inactive">Inactive</option>
-											</select>&nbsp &nbsp
-												<button class="waves-effect waves-light btn" type="submit">Submit</button>
-											
+
+											<div class="col-md-6">
+												<label>Ivoice Number</label> <input
+													name="purchaseBean.invoice" type="text"
+													value="<s:property value="purchaseBean.invoice"/>"
+													class="validate" placeholder="invoice"> <label>Bill
+													No</label> <input name="purchaseBean.purBillNo" type="text"
+													value="<s:property value="purchaseBean.purBillNo"/>"
+													class="validate" placeholder="purBillNo"> <label>GST</label>
+												<input name="purchaseBean.gstCode" type="text"
+													value="<s:property value="purchaseBean.gstCode"/>"
+													class="validate" placeholder="GST"> <label>Vendor
+													Code</label> <input name="purchaseBean.vendor.vendorCode"
+													type="text"
+													value="<s:property value="purchaseBean.vendor.vendorCode"/>"
+													class="validate" placeholder="vendorCode"> <label>Vendor
+													Name</label>:<label><s:property
+														value="purchaseBean.vendor.vendorName" /></label> <label>Vendor
+													Address1</label> :<label><s:property
+														value="purchaseBean.vendor.address1" /></label> <label>Vendor
+													Address2</label> :<label><s:property
+														value="purchaseBean.vendor.address2" /></label> <label>Vendor
+													Contact</label> :<label><s:property
+														value="purchaseBean.vendor.contact" /></label> <label>Vendor
+													Pin</label>:<label><s:property
+														value="purchaseBean.vendor.pin" /></label> <label>State </label>:<label><s:property
+														value="purchaseBean.vendor.state" /></label>
+											</div>
+											<div class="col-md-6">
+												<label>Date</label> <input name="purchaseBean.purchaseDate"
+													type="date" class="validate"
+													value="<s:property value="purchaseBean.purchaseDate"/>"
+													required="required"> <i class="fa fa-calendar"
+													style="font-size: 22px; float: right; margin: -46px auto;"></i>
+
+												<label>GoldRate</label> <input name="purchaseBean.goldRate"
+													type="text"
+													value="<s:property value="purchaseBean.goldRate"/>"
+													class="validate" placeholder="goldRate"> <label>8Gram
+												</label>:<label></label> <label>SilverRate</label> <input
+													name="purchaseBean.silverRate" type="text"
+													value="<s:property value="purchaseBean.silverRate"/>"
+													class="validate" placeholder="silverRate"> <label>10Gram
+												</label>:<label></label> <label>PlatinumRate</label> <input
+													name="purchaseBean.platinumRate" type="text"
+													value="<s:property value="purchaseBean.platinumRate"/>"
+													class="validate" placeholder="platinumRate"> <label>10Gram
+												</label>:<label></label>
+											</div>
+											&nbsp &nbsp
+											<button class="waves-effect waves-light btn" type="submit">Submit</button>
+
 										</div>
 									</div>
 
@@ -212,8 +209,8 @@ td, th {
 								aria-controls="collapse2" href="#collapse2">Vendor Details</a>
 						</h4>
 					</div>
-					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
-						aria-labelledby="collapse-two">
+					<div id="collapse2" class="panel-collapse collapse in"
+						role="tabpanel" aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
 								<h2>Vendor Table</h2>
@@ -239,11 +236,8 @@ td, th {
 													<td><s:property value="#row.count" /></td>
 													<td><s:property value="vendorCode" /></td>
 													<td><s:property value="vendorName" /></td>
-													<td>
-													<s:property value="address1" /></br>
-													<s:property value="address2" /></br>
-													<s:property value="pin" />
-													</td>
+													<td><s:property value="address1" /></br> <s:property
+															value="address2" /></br> <s:property value="pin" /></td>
 													<td><s:property value="contact" /></td>
 													<td><s:property value="addedOn" /></td>
 													<td><s:property value="activeStatus" /></td>

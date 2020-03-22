@@ -42,6 +42,12 @@ public class PurchaseBean {
 	
 	@Column(name = "platinum_rate")
 	private Double platinumRate;
+	
+	@Column(name = "invoice")
+	private String invoice;
+	
+	@Column(name = "pur_Bill_no")
+	private String purBillNo;
 
 	public Integer getPurchaseId() {
 		return purchaseId;
@@ -105,6 +111,22 @@ public class PurchaseBean {
 
 	public void setPlatinumRate(Double platinumRate) {
 		this.platinumRate = platinumRate;
+	}
+
+	public String getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(String invoice) {
+		this.invoice = invoice;
+	}
+
+	public String getPurBillNo() {
+		return purBillNo;
+	}
+
+	public void setPurBillNo(String purBillNo) {
+		this.purBillNo = purBillNo;
 	}
 	
 	

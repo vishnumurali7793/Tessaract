@@ -6,6 +6,7 @@ import org.tesseract.entities.CaratBean;
 import org.tesseract.entities.CategoryBean;
 import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
+import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.RateBean;
 import org.tesseract.entities.TaxBean;
 import org.tesseract.entities.VendorBean;
@@ -26,6 +27,7 @@ public class RedirAction extends ActionSupport {
 	private List<RateBean> rateList;
 	private List<CustomerBean> customerList;
 	private List<VendorBean> vendorList;
+	private List<PurchaseBean> purchaseList;
 	
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -69,6 +71,11 @@ public class RedirAction extends ActionSupport {
 	
 	public String goToVendor() {
 		vendorList = masterHibernateDao.getVendorList();
+		return SUCCESS;
+	}
+	
+	public String goToPurchase() {
+		//purchaseList = masterHibernateDao.getVendorList();
 		return SUCCESS;
 	}
 	
