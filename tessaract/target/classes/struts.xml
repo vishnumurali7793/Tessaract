@@ -207,6 +207,10 @@
 		</action>
 		<!-- vendor page finished -->
 		
+		<action name="goToPurchase"
+			class="org.tesseract.action.RedirAction" method="goToPurchase">
+			<result name="success">/jsp/purchase.jsp</result>
+		</action>
 	</package>
 
 </struts>

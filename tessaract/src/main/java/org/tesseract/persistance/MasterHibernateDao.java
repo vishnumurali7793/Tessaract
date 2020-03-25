@@ -10,6 +10,7 @@ import org.tesseract.entities.CaratBean;
 import org.tesseract.entities.CategoryBean;
 import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
+import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.RateBean;
 import org.tesseract.entities.TaxBean;
 import org.tesseract.entities.VendorBean;
@@ -545,6 +546,24 @@ public class MasterHibernateDao {
 					try {
 						return session.get(VendorBean.class, venBean.getVendorId());
 
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//get Purchase list
+				@SuppressWarnings("unchecked")
+				public List<PurchaseBean> getPurchaseList() {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.createQuery("from PurchaseBean").list();
 					} catch (Exception e) {
 						e.printStackTrace();
 						return null;

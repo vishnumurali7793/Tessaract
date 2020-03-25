@@ -75,7 +75,7 @@ public class RedirAction extends ActionSupport {
 	}
 	
 	public String goToPurchase() {
-		//purchaseList = masterHibernateDao.getVendorList();
+		purchaseList = masterHibernateDao.getPurchaseList();
 		return SUCCESS;
 	}
 	
@@ -145,6 +145,14 @@ public class RedirAction extends ActionSupport {
 
 	public void setVendorList(List<VendorBean> vendorList) {
 		this.vendorList = vendorList;
+	}
+
+	public List<PurchaseBean> getPurchaseList() {
+		return purchaseList;
+	}
+
+	public void setPurchaseList(List<PurchaseBean> purchaseList) {
+		this.purchaseList = purchaseList;
 	}
 	
 	
