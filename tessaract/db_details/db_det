@@ -9,7 +9,7 @@ CREATE TABLE `tesseract`.`user_details` (
   `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_id`));
   
- CREATE TABLE `tesseract`.`master_tax` (
+CREATE TABLE `tesseract`.`master_tax` (
   `tax_id` INT(11) NOT NULL AUTO_INCREMENT,
   `tax_cgst` DECIMAL(13,3) NULL,
   `tax_sgst` DECIMAL(13,3) NULL,
@@ -17,10 +17,10 @@ CREATE TABLE `tesseract`.`user_details` (
   `added_on` VARCHAR(10) NULL,
   `active_status` VARCHAR(10) NULL,
   `delete_status` VARCHAR(2) NULL,
-  PRIMARY KEY (`tax_id`)
+  PRIMARY KEY (`tax_id`));
   
   
-  CREATE TABLE `tesseract`.`category` ( 
+CREATE TABLE `tesseract`.`category` ( 
   `category_id` INT NOT NULL AUTO_INCREMENT , 
   `category_code` VARCHAR(255) NULL , 
   `category_name` VARCHAR(255) NULL , 
@@ -28,7 +28,7 @@ CREATE TABLE `tesseract`.`user_details` (
   `delete_status` VARCHAR(2) NULL , 
   PRIMARY KEY (`category_id`)) ENGINE = InnoDB;
   
-  CREATE TABLE `tesseract`.`product` ( 
+CREATE TABLE `tesseract`.`product` ( 
   `product_id` INT NOT NULL AUTO_INCREMENT ,
    `product_code` VARCHAR(255) NULL , 
    `product_name` VARCHAR(255) NULL , 
@@ -38,7 +38,7 @@ CREATE TABLE `tesseract`.`user_details` (
    `category` INT(11) NULL , 
    PRIMARY KEY (`product_id`)) ENGINE = InnoDB;
    
-   CREATE TABLE `tesseract`.`model` (
+CREATE TABLE `tesseract`.`model` (
     `model_id` INT NOT NULL AUTO_INCREMENT , 
     `model_code` VARCHAR(255) NULL ,
      `model_name` VARCHAR(255) NULL , 
@@ -46,15 +46,15 @@ CREATE TABLE `tesseract`.`user_details` (
      `added_on` DATE NULL , 
      PRIMARY KEY (`model_id`)) ENGINE = InnoDB;
      
-     ALTER TABLE `model` ADD `delete_status` VARCHAR(255) NULL AFTER `added_on`;
+ALTER TABLE `tesseract`.`model` ADD `delete_status` VARCHAR(255) NULL AFTER `added_on`;
      
-    CREATE TABLE `tesseract`.`carat` (
-     `carat_id` INT NOT NULL AUTO_INCREMENT ,
-      `carat_code` VARCHAR(255) NULL , 
-      `carat_name` VARCHAR(255) NULL , 
-      `active_status` VARCHAR(255) NULL , 
-      `delete_status` VARCHAR(255) NULL , 
-      PRIMARY KEY (`carat_id`)) ENGINE = InnoDB;
+CREATE TABLE `tesseract`.`carat` (
+   `carat_id` INT NOT NULL AUTO_INCREMENT ,
+   `carat_code` VARCHAR(255) NULL , 
+   `carat_name` VARCHAR(255) NULL , 
+   `active_status` VARCHAR(255) NULL , 
+   `delete_status` VARCHAR(255) NULL , 
+    PRIMARY KEY (`carat_id`)) ENGINE = InnoDB;
       
       CREATE TABLE `tesseract`.`rate` (
        `rate_id` INT NOT NULL AUTO_INCREMENT , 
@@ -79,8 +79,8 @@ CREATE TABLE `tesseract`.`user_details` (
           `active_status` VARCHAR(255) NULL , 
           PRIMARY KEY (`customer_id`)) ENGINE = InnoDB;
           
-          ALTER TABLE `customer` ADD `event_date` DATE NULL AFTER `event`;
-          ALTER TABLE `customer` ADD `delete_status` VARCHAR(255) NULL AFTER `active_status`;
+          ALTER TABLE `tesseract`.`customer` ADD `event_date` DATE NULL AFTER `event`;
+          ALTER TABLE `tesseract`.`customer` ADD `delete_status` VARCHAR(255) NULL AFTER `active_status`;
           
           CREATE TABLE `tesseract`.`vendor` ( 
           `vendor_id` INT NOT NULL AUTO_INCREMENT ,
@@ -95,15 +95,15 @@ CREATE TABLE `tesseract`.`user_details` (
            `added_on` DATE NULL , 
            PRIMARY KEY (`vendor_id`)) ENGINE = InnoDB;
            
-           ALTER TABLE `vendor` ADD `state` VARCHAR(255) NULL AFTER `added_on`;
+            ALTER TABLE `tesseract`.`vendor` ADD `state` VARCHAR(255) NULL AFTER `added_on`;
            
            CREATE TABLE `tesseract`.`purchaseBase` ( `purchase_id` INT NOT NULL AUTO_INCREMENT ,
             `vendorId` INT(11) NULL , `gst_code` VARCHAR(255) NULL , `purchase_date` DATE NULL , 
             `invoice_date` DATE NULL , `gold_rate` DOUBLE NULL , `silver_rate` DOUBLE NULL , 
             `platinum_rate` DOUBLE NULL , PRIMARY KEY (`purchase_id`)) ENGINE = InnoDB;
             
-            ALTER TABLE `purchasebase` ADD `invoice` VARCHAR(255) NULL AFTER `platinum_rate`;
-            ALTER TABLE `purchasebase` ADD `pur_Bill_no` VARCHAR(255) NULL AFTER `invoice`;
+           ALTER TABLE `tesseract`.`purchaseBase` ADD `invoice` VARCHAR(255) NULL AFTER `platinum_rate`;
+            ALTER TABLE `tesseract`.`purchaseBase` ADD `pur_Bill_no` VARCHAR(255) NULL AFTER `invoice`;
             
             CREATE TABLE `tesseract`.`purchasedetails` ( `purchase_screen_id` INT NOT NULL AUTO_INCREMENT , 
             `purchaseId` INT NULL , `hsn_code` DOUBLE NULL , `categoryId` INT NULL , `purity` DOUBLE NULL , 
