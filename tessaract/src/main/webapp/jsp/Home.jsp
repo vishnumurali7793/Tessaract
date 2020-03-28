@@ -5,12 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome</title>
-<link rel='stylesheet'
-	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<title>tessaract</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 body {
@@ -28,7 +22,7 @@ body {
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-inverse bar">
+	<%-- <nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="goToHome">Tesseract</a>
@@ -58,12 +52,12 @@ body {
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						Sign Up</a></li> --%>
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+						Sign Up</a></li>
 				<li><a href="logout"><span
 						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
-	</nav>
+	</nav> --%>
 </body>
 </html>

@@ -1,27 +1,168 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
-       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+   "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+   "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 
-	<definition name="home"
-		template="/jsp/layout/baseLayout.jsp">
-		<put-attribute name="title" value="Tesseract" />
-		<put-attribute name="header"
-			value="/jsp/layout/header.jsp" />
-		<put-attribute name="body" value="/jsp/Home.jsp" />
-		<put-attribute name="footer"
-			value="/jsp/layout/footer.jsp" />
+<!-- Basic Layout -->
+
+	<definition name="baseLayout" template="/jsp/layout/layout.jsp">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/login.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
 	</definition>
 
-	<definition name="input"
-		template="/jsp/layout/baseLayout.jsp">
-		<put-attribute name="title" value="Tesseract" />
-		<put-attribute name="header"
-			value="/jsp/layout/header.jsp" />
+	<definition name="baseLayoutLogin" template="/jsp/layout/layoutLogin.jsp">
+		<put-attribute name="title" value="Login" />
 		<put-attribute name="body" value="/jsp/login.jsp" />
-		<put-attribute name="footer"
-			value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	
+	
+	
+<!-- Action mappings -->
+
+	<definition name="login" extends="baseLayoutLogin">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="body" value="/jsp/login.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="input" extends="baseLayoutLogin">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="body" value="/jsp/login.jsp" />
+	</definition>
+	
+	<definition name="logout" extends="baseLayoutLogin">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="body" value="/jsp/login.jsp" />
+	</definition>
+
+	<definition name="home" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/Home.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="goToTaxMaster" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/tax.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="goToHome" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/Home.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="goToCategory" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/category.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="editCategory" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/category.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="goToProduct" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/product.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="editProduct" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/product.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="goToModel" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/model.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="editModel" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/model.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="goToCarat" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/carat.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="editCarat" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/carat.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="goToRate" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/rate.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="editRate" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/rate.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="goToCustomer" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/customer.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="editCustomer" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/customer.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="goToVendor" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/vendor.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="editVendor" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/vendor.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="goToPurchase" extends="baseLayout">
+		<put-attribute name="title" value="Tesseract" />
+		<put-attribute name="header" value="/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="/jsp/purchase.jsp" />
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp" />
 	</definition>
 
 </tiles-definitions>

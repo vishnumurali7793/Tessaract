@@ -27,6 +27,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
 	@Override
 	public String execute() throws Exception {
+		HttpSession session = ServletActionContext.getRequest().getSession(true);
+		session.setAttribute("redir", "redir");
 		return SUCCESS;
 	}
 

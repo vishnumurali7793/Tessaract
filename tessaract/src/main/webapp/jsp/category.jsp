@@ -92,7 +92,7 @@ td, th {
 	<s:property value="loginBean.userName" />
 </header> --%>
 <body>
-	<nav class="navbar navbar-inverse bar">
+	<%-- <nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="goToHome">Tesseract</a>
@@ -110,13 +110,13 @@ td, th {
 				<li><a href="#">Page 2</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						Sign Up</a></li> --%>
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+						Sign Up</a></li>
 				<li><a href="logout"><span
 						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
-	</nav>
+	</nav> --%>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel">
