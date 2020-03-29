@@ -223,6 +223,11 @@
 			class="org.tesseract.action.RedirAction" method="goToPurchase">
 			<result name="success" type="tiles">goToPurchase</result>
 		</action>
+		
+		<action name="getProductListForPurchase"
+			class="org.tesseract.action.MasterAction" method="getProductListForPurchase">
+			<result name="success">/jsp/productListForPurchase.jsp</result>
+		</action>
 
 	</package>
 

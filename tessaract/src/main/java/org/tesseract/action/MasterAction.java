@@ -1,6 +1,5 @@
 package org.tesseract.action;
 
-
 import java.util.List;
 
 import org.tesseract.entities.CaratBean;
@@ -47,202 +46,208 @@ public class MasterAction extends ActionSupport {
 		}
 		return INPUT;
 	}
-	
+
 	public String deleteTax() {
-		if(taxBean!=null && taxBean.getTaxId()!=null) {
+		if (taxBean != null && taxBean.getTaxId() != null) {
 			masterHibernateDao.deleteTaxById(taxBean);
 		}
 		setTaxList(masterHibernateDao.getTaxList());
 		return SUCCESS;
 	}
-	
-	//category page action
-	public String saveCategory(){
+
+	// category page action
+	public String saveCategory() {
 		if (categoryBean != null) {
 			masterHibernateDao.addCategorydata(categoryBean);
 			return SUCCESS;
 		}
-		
+
 		return INPUT;
 	}
-	
+
 	public String deleteCategory() {
-		if(categoryBean!=null && categoryBean.getCategoryId()!=null) {
+		if (categoryBean != null && categoryBean.getCategoryId() != null) {
 			masterHibernateDao.deleteCategoryById(categoryBean);
 		}
 		setCatList(masterHibernateDao.getCategryList());
 		return SUCCESS;
 	}
-	
+
 	public String editCategory() {
-		if(categoryBean!=null && categoryBean.getCategoryId()!=null) {
+		if (categoryBean != null && categoryBean.getCategoryId() != null) {
 			setCategoryBean(masterHibernateDao.getCatEditById(categoryBean));
 		}
 		catList = masterHibernateDao.getCategryList();
 		return SUCCESS;
 	}
+
+	// Product page action
+	public String saveProduct() {
+		if (productBean != null) {
+			masterHibernateDao.addProductdata(productBean);
+			return SUCCESS;
+		}
+
+		return INPUT;
+	}
+
+	public String deleteProduct() {
+		if (productBean != null && productBean.getProductId() != null) {
+			masterHibernateDao.deleteProductById(productBean);
+		}
+		setProdList(masterHibernateDao.getProductList());
+		return SUCCESS;
+	}
+
+	public String editProduct() {
+		if (productBean != null && productBean.getProductId() != null) {
+			setProductBean(masterHibernateDao.getProdEditById(productBean));
+		}
+		prodList = masterHibernateDao.getProductList();
+		catList = masterHibernateDao.getCategryList();
+		return SUCCESS;
+	}
+
+	// add modeldata
+	public String saveModel() {
+		if (modelBean != null) {
+			masterHibernateDao.saveModell(modelBean);
+			return SUCCESS;
+		}
+		return INPUT;
+	}
+
+	// deleteModel
+	public String deleteModel() {
+		if (modelBean != null && modelBean.getModelId() != null) {
+			masterHibernateDao.deleteModelById(modelBean);
+		}
+		setProdList(masterHibernateDao.getProductList());
+		return SUCCESS;
+	}
+
+	// edit model
+	public String editModel() {
+		if (modelBean != null && modelBean.getModelId() != null) {
+			setModelBean(masterHibernateDao.getModelEditById(modelBean));
+		}
+		modelList = masterHibernateDao.getModelList();
+		return SUCCESS;
+	}
+
+	// carat page action
+	public String saveCarat() {
+		if (caratBean != null) {
+			masterHibernateDao.addCaratdata(caratBean);
+			return SUCCESS;
+		}
+
+		return INPUT;
+	}
+
+	public String deleteCarat() {
+		if (caratBean != null && caratBean.getCaratId() != null) {
+			masterHibernateDao.deleteCaratById(caratBean);
+		}
+		setCaratList(masterHibernateDao.getCaratList());
+		return SUCCESS;
+	}
+
+	public String editCarat() {
+		if (caratBean != null && caratBean.getCaratId() != null) {
+			setCaratBean(masterHibernateDao.getCaratEditById(caratBean));
+		}
+		caratList = masterHibernateDao.getCaratList();
+		return SUCCESS;
+	}
+
+	// Rate page action
+	public String saveRate() {
+		if (rateBean != null) {
+			masterHibernateDao.addRatedata(rateBean);
+			return SUCCESS;
+		}
+
+		return INPUT;
+	}
+
+	public String deleteRate() {
+		if (rateBean != null && rateBean.getRateId() != null) {
+			masterHibernateDao.deleteRateById(rateBean);
+		}
+		setRateList(masterHibernateDao.getRateList());
+		return SUCCESS;
+	}
+
+	public String editRate() {
+		if (rateBean != null && rateBean.getRateId() != null) {
+			setRateBean(masterHibernateDao.getRateEditById(rateBean));
+		}
+		rateList = masterHibernateDao.getRateList();
+		return SUCCESS;
+	}
+
+	// Customer page action
+	public String saveCustomer() {
+		if (customerBean != null) {
+			masterHibernateDao.addCustomerdata(customerBean);
+			return SUCCESS;
+		}
+
+		return INPUT;
+	}
+
+	// delete customer
+	public String deleteCustomer() {
+		if (customerBean != null && customerBean.getCustomerId() != null) {
+			masterHibernateDao.deleteCustomerById(customerBean);
+		}
+		setCustomerList(masterHibernateDao.getCustomerList());
+		return SUCCESS;
+	}
+
+	// edit customer
+	public String editCustomer() {
+		if (customerBean != null && customerBean.getCustomerId() != null) {
+			setCustomerBean(masterHibernateDao.getCustomerEditById(customerBean));
+		}
+		customerList = masterHibernateDao.getCustomerList();
+		return SUCCESS;
+	}
+
+	// vendor page action
+	public String saveVendor() {
+		if (vendorBean != null) {
+			masterHibernateDao.addVendordata(vendorBean);
+			return SUCCESS;
+		}
+
+		return INPUT;
+	}
+
+	// delete vendor
+	public String deleteVendor() {
+		if (vendorBean != null && vendorBean.getVendorId() != null) {
+			masterHibernateDao.deleteVendorById(vendorBean);
+		}
+		setVendorList(masterHibernateDao.getVendorList());
+		return SUCCESS;
+	}
+
+	// edit vendor
+	public String editVendor() {
+		if (vendorBean != null && vendorBean.getVendorId() != null) {
+			setVendorBean(masterHibernateDao.getVendorEditById(vendorBean));
+		}
+		vendorList = masterHibernateDao.getVendorList();
+		return SUCCESS;
+	}
 	
-	//Product page action 
-		public String saveProduct(){
-			if (productBean != null) {
-				masterHibernateDao.addProductdata(productBean);
-				return SUCCESS;
-			}
-			
-			return INPUT;
-		}
-		
-		public String deleteProduct() {
-			if(productBean!=null && productBean.getProductId()!=null) {
-				masterHibernateDao.deleteProductById(productBean);
-			}
-			setProdList(masterHibernateDao.getProductList());
-			return SUCCESS;
-		}
-		
-		public String editProduct() {
-			if(productBean!=null && productBean.getProductId()!=null) {
-				setProductBean(masterHibernateDao.getProdEditById(productBean));
-			}
-			prodList = masterHibernateDao.getProductList();
-			catList = masterHibernateDao.getCategryList();
-			return SUCCESS;
-		}
-	
-		//add modeldata
-		public String saveModel() {
-			if (modelBean != null) {
-					masterHibernateDao.saveModell(modelBean);
-					return SUCCESS;
-			}
-			return INPUT;
-		}
-		//deleteModel
-		public String deleteModel() {
-			if(modelBean!=null && modelBean.getModelId()!=null) {
-				masterHibernateDao.deleteModelById(modelBean);
-			}
-			setProdList(masterHibernateDao.getProductList());
-			return SUCCESS;
-		}
-		
-		//edit model
-		public String editModel() {
-			if(modelBean!=null && modelBean.getModelId()!=null) {
-				setModelBean(masterHibernateDao.getModelEditById(modelBean));
-			}
-			modelList = masterHibernateDao.getModelList();
-			return SUCCESS;
-		}
-		
-		//carat page action
-		public String saveCarat(){
-			if (caratBean != null) {
-				masterHibernateDao.addCaratdata(caratBean);
-				return SUCCESS;
-			}
-			
-			return INPUT;
-		}
-		
-		public String deleteCarat() {
-			if(caratBean!=null && caratBean.getCaratId()!=null) {
-				masterHibernateDao.deleteCaratById(caratBean);
-			}
-			setCaratList(masterHibernateDao.getCaratList());
-			return SUCCESS;
-		}
-		
-		public String editCarat() {
-			if(caratBean!=null && caratBean.getCaratId()!=null) {
-				setCaratBean(masterHibernateDao.getCaratEditById(caratBean));
-			}
-			caratList = masterHibernateDao.getCaratList();
-			return SUCCESS;
-		}
-		
-		//Rate page action
-				public String saveRate(){
-					if (rateBean != null) {
-						masterHibernateDao.addRatedata(rateBean);
-						return SUCCESS;
-					}
-					
-					return INPUT;
-				}
-				
-				public String deleteRate() {
-					if(rateBean!=null && rateBean.getRateId()!=null) {
-						masterHibernateDao.deleteRateById(rateBean);
-					}
-					setRateList(masterHibernateDao.getRateList());
-					return SUCCESS;
-				}
-		
-				public String editRate() {
-					if(rateBean!=null && rateBean.getRateId()!=null) {
-						setRateBean(masterHibernateDao.getRateEditById(rateBean));
-					}
-					rateList = masterHibernateDao.getRateList();
-					return SUCCESS;
-				}
-				
-				//Customer page action 
-				public String saveCustomer(){
-					if (customerBean != null) {
-						masterHibernateDao.addCustomerdata(customerBean);
-						return SUCCESS;
-					}
-					
-					return INPUT;
-				}
-				
-				//delete customer
-				public String deleteCustomer() {
-					if(customerBean!=null && customerBean.getCustomerId() !=null) {
-						masterHibernateDao.deleteCustomerById(customerBean);
-					}
-					setCustomerList(masterHibernateDao.getCustomerList());
-					return SUCCESS;
-				}
-				
-				//edit customer
-				public String editCustomer() {
-					if(customerBean!=null && customerBean.getCustomerId()!=null) {
-						setCustomerBean(masterHibernateDao.getCustomerEditById(customerBean));
-					}
-					customerList = masterHibernateDao.getCustomerList();
-					return SUCCESS;
-				}
-				
-				//vendor page action 
-				public String saveVendor(){
-					if (vendorBean != null) {
-						masterHibernateDao.addVendordata(vendorBean);
-						return SUCCESS;
-					}
-					
-					return INPUT;
-				}
-				
-				//delete vendor
-				public String deleteVendor() {
-					if(vendorBean!=null && vendorBean.getVendorId() !=null) {
-						masterHibernateDao.deleteVendorById(vendorBean);
-					}
-					setVendorList(masterHibernateDao.getVendorList());
-					return SUCCESS;
-				}
-				
-				//edit vendor
-				public String editVendor() {
-					if(vendorBean!=null && vendorBean.getVendorId()!=null) {
-						setVendorBean(masterHibernateDao.getVendorEditById(vendorBean));
-					}
-					vendorList = masterHibernateDao.getVendorList();
-					return SUCCESS;
-				}
-				
+	public String getProductListForPurchase() {
+		prodList = masterHibernateDao.getProductList();
+		return SUCCESS;
+	}
+
 	public TaxBean getTaxBean() {
 		return taxBean;
 	}
@@ -370,7 +375,5 @@ public class MasterAction extends ActionSupport {
 	public void setVendorList(List<VendorBean> vendorList) {
 		this.vendorList = vendorList;
 	}
-
-
 
 }
