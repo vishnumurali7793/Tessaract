@@ -7,6 +7,7 @@ import org.tesseract.entities.CaratBean;
 import org.tesseract.entities.CategoryBean;
 import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
+import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.RateBean;
 import org.tesseract.entities.TaxBean;
 import org.tesseract.entities.VendorBean;
@@ -27,6 +28,7 @@ public class MasterAction extends ActionSupport {
 	private RateBean rateBean;
 	private CustomerBean customerBean;
 	private VendorBean vendorBean;
+	private PurchaseBean purchaseBean;
 	private List<TaxBean> taxList;
 	private List<CategoryBean> catList;
 	private List<ProductBean> prodList;
@@ -35,6 +37,7 @@ public class MasterAction extends ActionSupport {
 	private List<RateBean> rateList;
 	private List<CustomerBean> customerList;
 	private List<VendorBean> vendorList;
+	private List<PurchaseBean> purbeanList;
 
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -243,6 +246,29 @@ public class MasterAction extends ActionSupport {
 					return SUCCESS;
 				}
 				
+				//purchse list
+				public String getProductListForPurchase() {
+					prodList = masterHibernateDao.getProductList();
+					return SUCCESS;
+				}
+				
+				public String getmodalForPurchase() {
+					return SUCCESS;
+				}
+				
+				//vendor page action 
+				public String savepurchaseVendor(){
+					if (purchaseBean != null) {
+					Integer vendid=	masterHibernateDao.getvendorDetails(purchaseBean.getVendor().getVendorCode());
+					purchaseBean.setVendor(new VendorBean());
+					purchaseBean.getVendor().setVendorId(vendid);
+						masterHibernateDao.addPurchasevendor(purchaseBean);
+						return SUCCESS;
+					}
+					
+					return INPUT;
+				}
+				
 	public TaxBean getTaxBean() {
 		return taxBean;
 	}
@@ -370,6 +396,24 @@ public class MasterAction extends ActionSupport {
 	public void setVendorList(List<VendorBean> vendorList) {
 		this.vendorList = vendorList;
 	}
+
+	public PurchaseBean getPurchaseBean() {
+		return purchaseBean;
+	}
+
+	public void setPurchaseBean(PurchaseBean purchaseBean) {
+		this.purchaseBean = purchaseBean;
+	}
+
+	public List<PurchaseBean> getPurbeanList() {
+		return purbeanList;
+	}
+
+	public void setPurbeanList(List<PurchaseBean> purbeanList) {
+		this.purbeanList = purbeanList;
+	}
+
+	
 
 
 

@@ -1,7 +1,10 @@
 package org.tesseract.persistance;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -570,6 +573,44 @@ public class MasterHibernateDao {
 					} finally {
 						session.close();
 					}
+
+				}
+				
+				//save purchasevendor data
+				public void addPurchasevendor(PurchaseBean purBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.saveOrUpdate(purBean);
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				public Integer getvendorDetails(String ss) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+					String qr="SELECT * FROM VendorBean where vendorCode=:vencode";
+					StringBuilder sbs=new StringBuilder();
+					sbs.append(qr);
+					Query q=sessionFactory.getCurrentSession().createQuery(qr.toString()).setParameter("vencode", ss);
+					return (Integer) q.uniqueResult();
+					}catch (Exception e) {
+						e.printStackTrace();
+						return 0;
+					} finally {
+						session.close();
+					}
+
 
 				}
 }

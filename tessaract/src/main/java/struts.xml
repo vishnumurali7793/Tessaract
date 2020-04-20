@@ -10,7 +10,7 @@
 	<constant name="struts.custom.i18n.resources"
 		value="ApplicationResources" />
 
-	<package name="default" extends="struts-default">
+	<package name="default" extends="json-default">
 		<action name="redir" class="org.tesseract.action.LoginAction">
 			<result name="success">/jsp/login.jsp</result>
 		</action>
@@ -210,6 +210,29 @@
 		<action name="goToPurchase"
 			class="org.tesseract.action.RedirAction" method="goToPurchase">
 			<result name="success">/jsp/purchase.jsp</result>
+		</action>
+		
+		<action name="getProductListForPurchase"
+			class="org.tesseract.action.MasterAction" method="getProductListForPurchase">
+			<result name="success">/jsp/productListForPurchase.jsp</result>
+		</action>
+		
+		<action name="getmodalForPurchase"
+			class="org.tesseract.action.MasterAction" method="getmodalForPurchase">
+			<result name="success">/jsp/addnewvendor.jsp</result>
+		</action>
+		
+		<action name="savepurchaseVendor"
+			class="org.tesseract.action.TransactionAction" method="savepurchaseVendor">
+			<result name="success" type="redirectAction">goToPurchase</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+		
+		<action name="autovenCode"
+			class="org.tesseract.action.TransactionAction" method="autovenCode">
+			<result type="json">
+			<param name="root">objectlist</param>
+			</result>
 		</action>
 	</package>
 

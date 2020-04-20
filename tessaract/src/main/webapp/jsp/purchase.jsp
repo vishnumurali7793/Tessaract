@@ -21,51 +21,44 @@ body {
 	margin: 0;
 	padding: 0;
 }
-
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
 }
-
 td, th {
 	border: 1px solid #dddddd;
 	text-align: left;
 	padding: 8px;
 }
-
 .bd-navbar {
 	min-height: 4rem;
 	background-color: #563d7c;
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0
 		rgba(0, 0, 0, .1);
 }
-
 #allign {
 	text-align: center;
 	font-weight: bold;
 }
-
 #tablecolor {
 	background-color: #563d7c;
 }
-
 .bar {
 	border-radius: 0px;
 }
-
 #accordion {
 	max-height: 100%;
 }
-
 .panel, .tax {
 	margin: 10px;
 }
-
+.element {
+	margin-top: 15px;
+}
 /* #submitButton {
 	float: right;
 } */
-
 /* #statusDropdown {
 	float: right;
 	align-items: left;
@@ -79,9 +72,39 @@ td, th {
 	function editVendor(venid) {
 		location.href = "editVendor?vendorBean.vendorId=" + venid;
 	}
-
 	function deleteVendor(venid) {
 		location.href = "deleteVendor?vendorBean.vendorId=" + venid;
+	}
+	function getProductList() {
+		$('#productModal #modalTitle').html("Add items to purchase bill");
+		$.ajax({
+			type : "GET",
+			url : "getProductListForPurchase",
+			beforeSend : function() {
+				$('#productModal .modal-body').html('Loading..');
+			},
+			success : function(msg) {
+				$('#productModal .modal-body').html(msg);
+			}
+		});
+		$('#productModal').modal('show');
+		return false;
+	}
+	
+	function addvendor() {
+		$('#productModal #modalTitle').html("Add items to purchase bill");
+		$.ajax({
+			type : "GET",
+			url : "getmodalForPurchase",
+			beforeSend : function() {
+				$('#productModal .modal-body').html('Loading..');
+			},
+			success : function(msg) {
+				$('#productModal .modal-body').html(msg);
+			}
+		});
+		$('#productModal').modal('show');
+		return false;
 	}
 </script>
 
@@ -92,7 +115,7 @@ td, th {
 	<s:property value="loginBean.userName" />
 </header> --%>
 <body>
-	<nav class="navbar navbar-inverse bar">
+	<%-- <nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="goToHome">Tesseract</a>
@@ -116,17 +139,17 @@ td, th {
 				<li><a href="#">Page 2</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						Sign Up</a></li> --%>
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+						Sign Up</a></li>
 				<li><a href="logout"><span
 						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
-	</nav>
+	</nav> --%>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel">
-				<h2>PURCHASE SCREEN</h2>
+				<h2>PURCHASE</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
@@ -137,159 +160,295 @@ td, th {
 						</div>
 						<div id="collapse1" class="panel-collapse collapse in">
 							<div class="panel-body ">
-								<s:form action="saveVendor">
+								<s:form action="">
+								<div class="row">
+								<div class="col-md-12">
+									<button type="button" class="btn btn-primary"
+										data-toggle="modal" onclick="addvendor()">+++</button>
+								</div>
+							</div>
 									<div class="row">
+										<div class="form-group">
+										
+											<div class="col-xs-2">
+												<label>GST</label> <input
+													name="purchaseBean.vendor.vendorCode" type="text"
+													value="<s:property value="purchaseBean.vendor.vendorCode"/>"
+													class="form-control-plaintext" placeholder="vendorCode">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-2">
+												<label>Vendor Code</label> <input
+													name="purchaseBean.vendor.vendorCode" type="text"
+													value="<s:property value="purchaseBean.vendor.vendorCode"/>"
+													class="form-control-plaintext" placeholder="vendorCode">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-2">
+												<label>Gold Rate</label> <input name="purchaseBean.goldRate"
+													type="text"
+													value="<s:property value="purchaseBean.goldRate"/>"
+													class="form-control-plaintext" placeholder="goldRate"><br>
+												<label>8Gram </label>:<label></label>
+											</div>
+											<div class="form-group">
+												<div class="col-xs-2">
+													<label>Silver Rate</label> <input
+														name="purchaseBean.silverRate" type="text"
+														value="<s:property value="purchaseBean.silverRate"/>"
+														class="form-control-plaintext" placeholder="silverRate"><br>
+													<label>10Gram </label>:<label></label>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-xs-2">
+														<label>PlatinumRate</label> <input
+															name="purchaseBean.platinumRate" type="text"
+															value="<s:property value="purchaseBean.platinumRate"/>"
+															class="validate" placeholder="platinumRate"><br>
+														<label>10Gram </label>:<label></label>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-xs-2">
+														<label>Date</label> <input
+															name="purchaseBean.purchaseDate" type="date"
+															class="form-control-plaintext"
+															value="<s:property value="purchaseBean.purchaseDate"/>"
+															required="required"> <i class="fa fa-calendar"
+															style="font-size: 22px; float: right; margin: -46px auto;"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+							<%-- <div class="row">
+										<div class="form-group">
+											<div class="col-xs-6">
+												<label>Gold Rate</label> <input name="purchaseBean.goldRate"
+													type="text"
+													value="<s:property value="purchaseBean.goldRate"/>"
+													class="form-control-plaintext" placeholder="goldRate"><br> <label>8Gram
+												</label>:<label></label>
+											</div>
+											<div class="form-group">
+												<div class="col-xs-6">
+													<label>Date</label> <input name="purchaseBean.purchaseDate"
+														type="date" class="form-control-plaintext"
+														value="<s:property value="purchaseBean.purchaseDate"/>"
+														required="required"> <i class="fa fa-calendar"
+														style="font-size: 22px; float: right; margin: -46px auto;"></i>
+												</div>
+											</div>
+										</div>
+									</div> --%>
+							<%-- <div class="row">
+											<div class="form-group">
+												<div class="col-xs-6">
+													<label>Silver Rate</label> <input
+														name="purchaseBean.silverRate" type="text"
+														value="<s:property value="purchaseBean.silverRate"/>"
+														class="form-control-plaintext" placeholder="silverRate"><br>
+													<label>10Gram </label>:<label></label>
+												</div>
+												<div class="form-group">
+													<div class="col-xs-6">
+														<label>Date</label> <input
+															name="purchaseBean.purchaseDate" type="date"
+															class="form-control-plaintext"
+															value="<s:property value="purchaseBean.purchaseDate"/>"
+															required="required"> <i class="fa fa-calendar"
+															style="font-size: 22px; float: right; margin: -46px auto;"></i>
+													</div>
+												</div>
+											</div>
+										</div> --%>
+							<%-- <div class="row">
+											<div class="form-group">
+												<div class="col-xs-6">
+													<label>PlatinumRate</label> <input
+														name="purchaseBean.platinumRate" type="text"
+														value="<s:property value="purchaseBean.platinumRate"/>"
+														class="validate" placeholder="platinumRate"><br>
+													<label>10Gram </label>:<label></label>
+												</div>
+												<div class="form-group">
+													<div class="col-xs-6">
+														<label>Date</label> <input
+															name="purchaseBean.purchaseDate" type="date"
+															class="form-control-plaintext"
+															value="<s:property value="purchaseBean.purchaseDate"/>"
+															required="required"> <i class="fa fa-calendar"
+															style="font-size: 22px; float: right; margin: -46px auto;"></i>
+													</div>
+												</div>
+											</div>
+										</div> --%>
+							<%-- <div class="row">
 										<div class=" col-sm-12">
 											<s:hidden name="vendorBean.vendorId" />
-
-											<div class="col-md-6">
-												<label>Ivoice Number</label> <input
-													name="purchaseBean.invoice" type="text"
-													value="<s:property value="purchaseBean.invoice"/>"
-													class="validate" placeholder="invoice"></br> <label>Bill
-													No</label> <input name="purchaseBean.purBillNo" type="text"
-													value="<s:property value="purchaseBean.purBillNo"/>"
-													class="validate" placeholder="purBillNo"></br> <label>GST</label>
-												<input name="purchaseBean.gstCode" type="text"
+											<div class="col-md-6" style="background-color: red">
+												<label>GST</label> <input name="purchaseBean.gstCode"
+													type="text"
 													value="<s:property value="purchaseBean.gstCode"/>"
-													class="validate" placeholder="GST"></br> <label>Vendor
+													class="validate" placeholder="GST"><br> <label>Vendor
 													Code</label> <input name="purchaseBean.vendor.vendorCode"
 													type="text"
 													value="<s:property value="purchaseBean.vendor.vendorCode"/>"
-													class="validate" placeholder="vendorCode"></br> <label>Vendor
-													Name</label>:<label><s:property
-														value="purchaseBean.vendor.vendorName" /></label></br> <label>Vendor
+													class="validate" placeholder="vendorCode"><br>
+												<label>Vendor Name</label>:<label><s:property
+														value="purchaseBean.vendor.vendorName" /></label><br> <label>Vendor
 													Address1</label> :<label><s:property
-														value="purchaseBean.vendor.address1" /></label></br> <label>Vendor
+														value="purchaseBean.vendor.address1" /></label><br> <label>Vendor
 													Address2</label> :<label><s:property
-														value="purchaseBean.vendor.address2" /></label></br> <label>Vendor
+														value="purchaseBean.vendor.address2" /></label><br> <label>Vendor
 													Contact</label> :<label><s:property
-														value="purchaseBean.vendor.contact" /></label></br> <label>Vendor
+														value="purchaseBean.vendor.contact" /></label><br> <label>Vendor
 													Pin</label>:<label><s:property
-														value="purchaseBean.vendor.pin" /></label></br> <label>State </label>:<label><s:property
-														value="purchaseBean.vendor.state" /></label></br>
+														value="purchaseBean.vendor.pin" /></label><br> <label>State
+												</label>:<label><s:property
+														value="purchaseBean.vendor.state" /></label><br>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6" style="background-color: blue">
 												<label>Date</label> <input name="purchaseBean.purchaseDate"
 													type="date" class="validate"
 													value="<s:property value="purchaseBean.purchaseDate"/>"
 													required="required"> <i class="fa fa-calendar"
-													style="font-size: 22px; float: right; margin: -46px auto;"></i></br>
-
+													style="font-size: 22px; float: right; margin: -46px auto;"></i><br>
 												<label>GoldRate</label> <input name="purchaseBean.goldRate"
 													type="text"
 													value="<s:property value="purchaseBean.goldRate"/>"
-													class="validate" placeholder="goldRate"></br> <label>8Gram
-												</label>:<label></label></br> <label>SilverRate</label> <input
+													class="validate" placeholder="goldRate"><br> <label>8Gram
+												</label>:<label></label><br> <label>SilverRate</label> <input
 													name="purchaseBean.silverRate" type="text"
 													value="<s:property value="purchaseBean.silverRate"/>"
-													class="validate" placeholder="silverRate"></br> <label>10Gram
-												</label>:<label></label></br> <label>PlatinumRate</label> <input
-													name="purchaseBean.platinumRate" type="text"
+													class="validate" placeholder="silverRate"><br>
+												<label>10Gram </label>:<label></label><br> <label>PlatinumRate</label>
+												<input name="purchaseBean.platinumRate" type="text"
 													value="<s:property value="purchaseBean.platinumRate"/>"
-													class="validate" placeholder="platinumRate"></br> <label>10Gram
-												</label>:<label></label>
+													class="validate" placeholder="platinumRate"><br>
+												<label>10Gram </label>:<label></label>
 											</div>
-											&nbsp &nbsp
+											&nbsp;&nbsp;
 											<button class="waves-effect waves-light btn" type="submit">Submit</button>
-
 										</div>
-									</div>
+									</div> --%>
 							<div class="row">
-							<div class="container">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>HSN CODE</th>
-										<th>ITEM NAME</th>
-										<th>PURITY</th>
-										<th>GRAM WT</th>
-										<th>TOUCH</th>
-										<th>NET WT</th>
-										<th>RATE</th>
-										<th>TOTAL AMT</th>
-										<th>ACTIONS</th>
-									</tr>
-								</thead>
-								<%int i=0;%>
-								<tbody>
-								<tr>
-								<td><% %></td>
-								</tr>
-								
-								</tbody>
-								<%i++; %>
-								</table>
+								<div class="col-md-12">
+									<button type="button" class="btn btn-primary"
+										data-toggle="modal" onclick="getProductList()">A</button>
 								</div>
+							</div>
+							<div class="row">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>HSN CODE</th>
+											<th>ITEM NAME</th>
+											<th>PURITY</th>
+											<th>GRAM WT</th>
+											<th>TOUCH</th>
+											<th>NET WT</th>
+											<th>RATE</th>
+											<th>TOTAL AMT</th>
+											<th>ACTIONS</th>
+										</tr>
+									</thead>
+									<%
+													int i = 0;
+												%>
+									<tbody>
+										<tr>
+											<td>
+												<%
+																
+															%>
+											</td>
+										</tr>
+
+									</tbody>
+									<%
+													i++;
+												%>
+								</table>
 							</div>
 							</s:form>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-primary">
-				<div class="panel-heading" role="tab" id="collapse-two">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion"
-							class="collapsed" role="button" aria-expanded="true"
-							aria-controls="collapse2" href="#collapse2">Vendor Details</a>
-					</h4>
-				</div>
-				<div id="collapse2" class="panel-collapse collapse in"
-					role="tabpanel" aria-labelledby="collapse-two">
-					<div class="panel-body">
-						<div class="container">
-							<h2>Vendor Table</h2>
-							<table class="table">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>VENDOR CODE</th>
-										<th>VENDOR NAME</th>
-										<th>VENDOR ADDRESS</th>
-										<th>VENDOR CONTACT</th>
-										<th>DATE</th>
-										<th>Active Status</th>
-										<th>Actions</th>
-									</tr>
-								</thead>
-								<tbody>
-									<!-- ***list name from redirectaction*** -->
-									<s:if test="vendorList!=null && vendorList.size()>0">
-
-										<s:iterator value="vendorList" status="row">
-											<tr>
-												<td><s:property value="#row.count" /></td>
-												<td><s:property value="vendorCode" /></td>
-												<td><s:property value="vendorName" /></td>
-												<td><s:property value="address1" /></br> <s:property
-														value="address2" /></br> <s:property value="pin" /></td>
-												<td><s:property value="contact" /></td>
-												<td><s:property value="addedOn" /></td>
-												<td><s:property value="activeStatus" /></td>
-												<td><button class="btn-xs btn-link"
-														onclick="editVendor('<s:property value="vendorId"/>')">[EDIT]</button>
-													<button class="btn-xs btn-link"
-														onclick="deleteVendor('<s:property value="vendorId"/>')">[DELETE]</button></td>
-											</tr>
-										</s:iterator>
-
-
-									</s:if>
-								</tbody>
-							</table>
-						</div>
+			<%-- <div class="panel panel-primary">
+					<div class="panel-heading" role="tab" id="collapse-two">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion"
+								class="collapsed" role="button" aria-expanded="true"
+								aria-controls="collapse2" href="#collapse2">Vendor Details</a>
+						</h4>
 					</div>
-				</div>
-			</div>
+					<div id="collapse2" class="panel-collapse collapse in"
+						role="tabpanel" aria-labelledby="collapse-two">
+						<div class="panel-body">
+							<div class="container">
+								<h2>Vendor Table</h2>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>VENDOR CODE</th>
+											<th>VENDOR NAME</th>
+											<th>VENDOR ADDRESS</th>
+											<th>VENDOR CONTACT</th>
+											<th>DATE</th>
+											<th>Active Status</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- ***list name from redirectaction*** -->
+										<s:if test="vendorList!=null && vendorList.size()>0">
+											<s:iterator value="vendorList" status="row">
+												<tr>
+													<td><s:property value="#row.count" /></td>
+													<td><s:property value="vendorCode" /></td>
+													<td><s:property value="vendorName" /></td>
+													<td><s:property value="address1" /><br> <s:property
+															value="address2" /><br> <s:property value="pin" /></td>
+													<td><s:property value="contact" /></td>
+													<td><s:property value="addedOn" /></td>
+													<td><s:property value="activeStatus" /></td>
+													<td><button class="btn-xs btn-link"
+															onclick="editVendor('<s:property value="vendorId"/>')">[EDIT]</button>
+														<button class="btn-xs btn-link"
+															onclick="deleteVendor('<s:property value="vendorId"/>')">[DELETE]</button></td>
+												</tr>
+											</s:iterator>
+										</s:if>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div> --%>
 		</div>
 	</div>
 	</div>
+	<div class="modal fade" id="productModal" role="dialog">
+		<div class="modal-dialog modal-lg modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">
+						<span class="label label-primary" id="modalTitle"></span>
+					</h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
 	</div>
-
-
-
-
 </body>
 </html>
