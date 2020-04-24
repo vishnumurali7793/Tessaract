@@ -14,26 +14,24 @@ public class TransactionAction extends ActionSupport {
 	private TransactionHibernateDao transHibernateDao = new TransactionHibernateDao();
 	private PurchaseBean purchaseBean;
 	private List<PurchaseBean> purbeanList;
-	
-	//vendor page action 
-		public String savepurchaseVendor(){
-			if (purchaseBean != null) {
-			Integer vendid=	transHibernateDao.getvendorDetails(purchaseBean.getVendor().getVendorCode());
+
+	// vendor page action
+	public String savepurchaseVendor() {
+		if (purchaseBean != null) {
+			Integer vendid = transHibernateDao.getvendorDetails(purchaseBean.getVendor().getVendorCode());
 			purchaseBean.setVendor(new VendorBean());
 			purchaseBean.getVendor().setVendorId(vendid);
 			transHibernateDao.addPurchasevendor(purchaseBean);
-				return SUCCESS;
-			}
-			
-			return INPUT;
+			return SUCCESS;
 		}
-	
-	@SuppressWarnings("unchecked")
-	private String autovenCode(){
-		ArrayList<Object> objectlist=new ArrayList();
-		objectlist=(ArrayList<Object>) transHibernateDao.addvendordetails(purchaseBean.getVendor().getVendorId());
+
+		return INPUT;
+	}
+
+	private String getVendorDetails() {
+		List<Object> objectlist = new ArrayList();
+		objectlist = (List<Object>) transHibernateDao.addvendordetails(purchaseBean.getVendor().getVendorCode());
 		return "sucess";
-		
 	}
 
 	public PurchaseBean getPurchaseBean() {
@@ -51,6 +49,5 @@ public class TransactionAction extends ActionSupport {
 	public void setPurbeanList(List<PurchaseBean> purbeanList) {
 		this.purbeanList = purbeanList;
 	}
-	
 
 }

@@ -10,12 +10,14 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	var vendorCode = $('#vendor-code').val();
 	$("#vendor-code").keyup(function(){
 		$.ajax({
-		type: "POST",
-		url: "autovenCode",
-		data: ['purchaseBean.vendor.vendorCode': $('#vendor-code').val()],
+		type: "GET",
+		url: "getVendorDetails",
+		data: 'purchaseBean.vendor.vendorCode'+vendorCode,
 		beforeSend: function(){
+			alert(vendorCode);
 			$("#suggesstion-box").show();
 			$("#suggesstion-box").html("pleasewait");
 		},

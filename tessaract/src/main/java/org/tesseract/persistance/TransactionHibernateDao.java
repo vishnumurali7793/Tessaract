@@ -51,14 +51,14 @@ public class TransactionHibernateDao {
 
 	}
 	//autocomplete for vendor code
-	public Object addvendordetails(Integer vendorId) {
+	@SuppressWarnings("unused")
+	public Object addvendordetails(String vendorCode) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-
 		try {
-		String qr="SELECT * FROM VendorBean where vendorCode=:vencode";
-		Query q=sessionFactory.getCurrentSession().createQuery(qr.toString()).setParameter("vencode", vendorId);
+		String qr="FROM VendorBean WHERE vendorCode=:vencode";
+		Query q=sessionFactory.getCurrentSession().createQuery(qr).setParameter("vencode", vendorCode);
 		return  q.list();
 		}catch (Exception e) {
 			e.printStackTrace();
