@@ -5,14 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel='stylesheet'
-	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<title>tessaract</title>
+<script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
 <link href="css/style.css" rel="stylesheet" type="text/css">
-
+<title>tessaract</title>
 </head>
 <style type="text/css">
 body {
@@ -21,7 +18,7 @@ body {
 	background: rgb(196, 85, 42);
 	background: linear-gradient(90deg, rgba(196, 85, 42, 1) 10%,
 		rgba(195, 12, 157, 1) 100%);
-		background-image:url("images/Bg.jpg");
+		background-image:url("resources/images/Bg.jpg");
 	color: white;
 }
 #body-sub{
@@ -79,7 +76,7 @@ input{background-color: #f0ad4e}
 
 					<div id="loginPane" align="center">
 						<!-- <h3 align="center" class="header">Login</h3> -->
-						<img src="images/logo.png" alt="logo" height="100" width="200">
+						<img src="resources/images/logo.png" alt="logo" height="100" width="200">
 						<div class="input-group form-group">
 							<label id="label">Username</label>&emsp;<input type="text"
 								name="loginBean.userName" id="name" />

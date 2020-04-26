@@ -5,32 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
-<script type="text/javascript">
-
-$(document).ready(function(){
-	var vendorCode = $('#vendor-code').val();
-	$("#vendor-code").keyup(function(){
-		$.ajax({
-		type: "GET",
-		url: "getVendorDetails",
-		data: 'purchaseBean.vendor.vendorCode'+vendorCode,
-		beforeSend: function(){
-			alert(vendorCode);
-			$("#suggesstion-box").show();
-			$("#suggesstion-box").html("pleasewait");
-		},
-		success: function(data){
-			$("#suggesstion-box").show();
-			$("#suggesstion-box").html(data);
-			$("#search-box").css("background","#FFF");
-		}
-		});
-	});
-});
-
-</script>
 <body>
 	<div class="container-fluid">
 		<!-- <div class="row">
@@ -39,19 +14,18 @@ $(document).ready(function(){
 			</div>
 		</div> -->
 
-		<form action="savepurchaseVendor">
+		<form action="savepurchaseVendor" id="addVendor">
 			<div class="row">
-				<div class="col-xs-3">
-					<label class="form-group" for="gst-code">GST</label>
-					<s:textfield name="purchaseBean.gstCode" type="text" value=""
-						id="gst-code" class="form-control" placeholder="GSTCODE" />
-				</div>
 				<div class="col-xs-3">
 					<label class="form-group" for="vendor-code">Vendor Code</label>
 					<s:textfield name="purchaseBean.vendor.vendorCode" type="text"
 						id="vendor-code" value="" class="form-control"
-						placeholder="vendorCode" />
-						<div id="suggesstion-box"></div>
+						onkeyup="getValue(this)" placeholder="vendorCode" />
+				</div>
+				<div class="col-xs-3">
+					<label class="form-group" for="gst-code">GST</label>
+					<s:textfield name="purchaseBean.gstCode" type="text" value=""
+						id="gst-code" class="form-control" placeholder="GSTCODE" />
 				</div>
 				<div class="col-xs-3">
 					<label class="form-group" for="purch-date">PURCHASE Date</label> <input
@@ -105,7 +79,38 @@ $(document).ready(function(){
 						id="submit-btn">Submit</button>
 				</div>
 			</div>
+		</form>
 	</div>
-	</form>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#vendor-code').autocomplete({
+				source : function(request, response) {
+					$.ajax({
+						url : 'getVendorDetails',
+						data : {
+							'purchaseBean.vendor.vendorCode' : request.term,
+						},
+						success : function(data) {
+							if (data == null || !data.length) {
+								var result = [ {
+									label : '--No Matches Found--',
+									value : 0
+								} ];
+								response(result);
+							} else {
+								response($.map(data, function(i) {
+									return {
+										label : i[1] + "-" + i[2],
+										value : i[0]
+									};
+								}));
+							}
+						},
+					});
+				},
+				appendTo : '#addVendor',
+			});
+		});
+	</script>
 </body>
 </html>

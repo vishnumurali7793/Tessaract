@@ -5,54 +5,65 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="resources/jquery/jquery-3.5.0.js"></script>
+<script type="text/javascript" src="resources/jquery-ui/jquery-ui.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/jQuery.js" /></script>
-<link rel='stylesheet'
-	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<title>tessaract</title>
-<link href="css/style.css" rel="stylesheet" type="text/css">
+	src="resources/bootstrap/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" type="text/css"
+	href="resources/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.structure.css">
+<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.theme.css">
+<title>tessaract</title>
 </head>
 <style type="text/css">
 body {
 	margin: 0;
 	padding: 0;
 }
+
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
 }
+
 td, th {
 	border: 1px solid #dddddd;
 	text-align: left;
 	padding: 8px;
 }
+
 .bd-navbar {
 	min-height: 4rem;
 	background-color: #563d7c;
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0
 		rgba(0, 0, 0, .1);
 }
+
 #allign {
 	text-align: center;
 	font-weight: bold;
 }
+
 #tablecolor {
 	background-color: #563d7c;
 }
+
 .bar {
 	border-radius: 0px;
 }
+
 #accordion {
 	max-height: 100%;
 }
+
 .panel, .tax {
 	margin: 10px;
 }
+
 .element {
 	margin-top: 15px;
 }
@@ -90,7 +101,7 @@ td, th {
 		$('#productModal').modal('show');
 		return false;
 	}
-	
+
 	function addvendor() {
 		$('#productModal #modalTitle').html("Add items to purchase bill");
 		$.ajax({
@@ -161,18 +172,18 @@ td, th {
 						<div id="collapse1" class="panel-collapse collapse in">
 							<div class="panel-body ">
 								<s:form action="">
-								<div class="row">
-								<div class="col-md-12">
-									<button type="button" class="btn btn-primary"
-										data-toggle="modal" onclick="addvendor()">+++</button>
-								</div>
-							</div>
+									<div class="row">
+										<div class="col-md-12">
+											<button type="button" class="btn btn-primary"
+												data-toggle="modal" onclick="addvendor()">+++</button>
+										</div>
+									</div>
 									<div class="row">
 										<div class="form-group">
-										
+
 											<div class="col-xs-2">
 												<label>GST</label> <input
-													name="purchaseBean.vendor.vendorCode" type="text"
+													name="purchaseBean.vendor.vendorCode" type="text" id="gst"
 													value="<s:property value="purchaseBean.vendor.vendorCode"/>"
 													class="form-control-plaintext" placeholder="vendorCode">
 											</div>
@@ -204,26 +215,25 @@ td, th {
 											</div>
 											<div class="form-group">
 												<div class="col-xs-2">
-														<label>PlatinumRate</label> <input
-															name="purchaseBean.platinumRate" type="text"
-															value="<s:property value="purchaseBean.platinumRate"/>"
-															class="validate" placeholder="platinumRate"><br>
-														<label>10Gram </label>:<label></label>
-													</div>
+													<label>PlatinumRate</label> <input
+														name="purchaseBean.platinumRate" type="text"
+														value="<s:property value="purchaseBean.platinumRate"/>"
+														class="validate" placeholder="platinumRate"><br>
+													<label>10Gram </label>:<label></label>
 												</div>
-												<div class="form-group">
-													<div class="col-xs-2">
-														<label>Date</label> <input
-															name="purchaseBean.purchaseDate" type="date"
-															class="form-control-plaintext"
-															value="<s:property value="purchaseBean.purchaseDate"/>"
-															required="required"> <i class="fa fa-calendar"
-															style="font-size: 22px; float: right; margin: -46px auto;"></i>
-													</div>
+											</div>
+											<div class="form-group">
+												<div class="col-xs-2">
+													<label>Date</label> <input name="purchaseBean.purchaseDate"
+														type="date" class="form-control-plaintext"
+														value="<s:property value="purchaseBean.purchaseDate"/>"
+														required="required"> <i class="fa fa-calendar"
+														style="font-size: 22px; float: right; margin: -46px auto;"></i>
 												</div>
 											</div>
 										</div>
 									</div>
+							</div>
 							<%-- <div class="row">
 										<div class="form-group">
 											<div class="col-xs-6">
@@ -358,21 +368,21 @@ td, th {
 										</tr>
 									</thead>
 									<%
-													int i = 0;
-												%>
+										int i = 0;
+									%>
 									<tbody>
 										<tr>
 											<td>
 												<%
-																
-															%>
+													
+												%>
 											</td>
 										</tr>
 
 									</tbody>
 									<%
-													i++;
-												%>
+										i++;
+									%>
 								</table>
 							</div>
 							</s:form>
@@ -437,13 +447,13 @@ td, th {
 	<div class="modal fade" id="productModal" role="dialog">
 		<div class="modal-dialog modal-lg modal-xl">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header" style="background-color: purple;">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">
-						<span class="label label-primary" id="modalTitle"></span>
+					<h4 class="modal-title" align="center">
+						<span style="color: white;" class="" id="modalTitle"></span>
 					</h4>
 				</div>
 				<div class="modal-body"></div>

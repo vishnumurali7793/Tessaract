@@ -5,13 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome</title>
-<link rel='stylesheet'
-	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<title>tessaract</title>
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
 <style type="text/css">
 body {
 	margin: 0;

@@ -235,11 +235,9 @@
 		<action name="getVendorDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="getVendorDetails">
-			<param name="purchaseBean.vendor.vendorCode">purchaseBean.vendor.vendorCode</param>
-			<!-- <result type="json">
-				<param name="root">objectlist</param>
-			</result> -->
-			<result name="success" type="redirectAction">goToVendor</result>
+			<result type="json">
+				<param name="root">vendorList</param>
+			</result>
 		</action>
 	</package>
 

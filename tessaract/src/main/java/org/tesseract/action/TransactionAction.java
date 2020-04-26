@@ -1,6 +1,7 @@
 package org.tesseract.action;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.tesseract.entities.PurchaseBean;
@@ -14,6 +15,7 @@ public class TransactionAction extends ActionSupport {
 	private TransactionHibernateDao transHibernateDao = new TransactionHibernateDao();
 	private PurchaseBean purchaseBean;
 	private List<PurchaseBean> purbeanList;
+	private Collection<Object> vendorList;
 
 	// vendor page action
 	public String savepurchaseVendor() {
@@ -28,10 +30,12 @@ public class TransactionAction extends ActionSupport {
 		return INPUT;
 	}
 
-	private String getVendorDetails() {
-		List<Object> objectlist = new ArrayList();
-		objectlist = (List<Object>) transHibernateDao.addvendordetails(purchaseBean.getVendor().getVendorCode());
-		return "sucess";
+	public String getVendorDetails() throws Exception {
+		if (purchaseBean != null && purchaseBean.getVendor() != null) {
+			vendorList = new ArrayList<Object>();
+			vendorList = transHibernateDao.getVendorListByVendorCode(purchaseBean.getVendor().getVendorCode());
+		}
+		return SUCCESS;
 	}
 
 	public PurchaseBean getPurchaseBean() {
@@ -48,6 +52,14 @@ public class TransactionAction extends ActionSupport {
 
 	public void setPurbeanList(List<PurchaseBean> purbeanList) {
 		this.purbeanList = purbeanList;
+	}
+
+	public Collection<Object> getVendorList() {
+		return vendorList;
+	}
+
+	public void setVendorList(Collection<Object> vendorList) {
+		this.vendorList = vendorList;
 	}
 
 }

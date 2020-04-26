@@ -15,27 +15,12 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- Servlet Library -->
-		<!-- http://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>javax.servlet-api</artifactId> 
-			<version>3.1.0</version> <scope>provided</scope> </dependency> -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- Jstl for jsp page -->
-		<!-- http://mvnrepository.com/artifact/javax.servlet/jstl -->
-		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>jstl</artifactId> 
-			<version>1.2</version> </dependency> -->
-
-
-		<!-- JSP API -->
-		<!-- http://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api -->
-		<!-- <dependency> <groupId>javax.servlet.jsp</groupId> <artifactId>jsp-api</artifactId> 
-			<version>2.2</version> <scope>provided</scope> </dependency> -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
@@ -43,12 +28,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- http://mvnrepository.com/artifact/org.apache.struts/struts2-core -->
-		<!--<dependency> <groupId>org.apache.struts</groupId> <artifactId>struts2-core</artifactId> 
-			<version>2.3.20</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-core -->
-		<!-- <dependency> <groupId>org.apache.struts</groupId> <artifactId>struts2-core</artifactId> 
-			<version>2.3.35</version> </dependency> -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
@@ -72,8 +51,6 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
 			<version>3.2.0</version>
-			<!-- <exclusions> <exclusion> <groupId>org.webjars</groupId> <artifactId>jquery</artifactId> 
-				</exclusion> </exclusions> -->
 		</dependency>
 
 		<!-- hibernate -->
@@ -82,10 +59,6 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.0.2.Final</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
-			<version>8.0.17</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -133,6 +106,12 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>5.4.14.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars/jquery-ui -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery-ui</artifactId>
+			<version>1.12.1</version>
 		</dependency>
 	</dependencies>
 	<build>
