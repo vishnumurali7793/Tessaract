@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
-<body>
+<body id="modalBody">
 	<div class="container-fluid">
 		<!-- <div class="row">
 			<div class="panel">
@@ -109,6 +109,8 @@
 					});
 				},
 				appendTo : '#addVendor',
+				autoFocus : true,
+				delay : 100
 			});
 		});
 	</script>

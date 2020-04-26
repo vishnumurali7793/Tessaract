@@ -447,7 +447,7 @@ td, th {
 	<div class="modal fade" id="productModal" role="dialog">
 		<div class="modal-dialog modal-lg modal-xl">
 			<div class="modal-content">
-				<div class="modal-header" style="background-color: purple;">
+				<div class="modal-header" style="background-color:  #581845;">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
