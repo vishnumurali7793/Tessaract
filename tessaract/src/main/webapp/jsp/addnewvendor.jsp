@@ -101,7 +101,7 @@
 								response($.map(data, function(i) {
 									return {
 										label : i[1] + "-" + i[2],
-										value : i[0]
+										value : i[2]
 									};
 								}));
 							}

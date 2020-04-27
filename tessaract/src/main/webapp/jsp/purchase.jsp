@@ -234,117 +234,7 @@ td, th {
 										</div>
 									</div>
 							</div>
-							<%-- <div class="row">
-										<div class="form-group">
-											<div class="col-xs-6">
-												<label>Gold Rate</label> <input name="purchaseBean.goldRate"
-													type="text"
-													value="<s:property value="purchaseBean.goldRate"/>"
-													class="form-control-plaintext" placeholder="goldRate"><br> <label>8Gram
-												</label>:<label></label>
-											</div>
-											<div class="form-group">
-												<div class="col-xs-6">
-													<label>Date</label> <input name="purchaseBean.purchaseDate"
-														type="date" class="form-control-plaintext"
-														value="<s:property value="purchaseBean.purchaseDate"/>"
-														required="required"> <i class="fa fa-calendar"
-														style="font-size: 22px; float: right; margin: -46px auto;"></i>
-												</div>
-											</div>
-										</div>
-									</div> --%>
-							<%-- <div class="row">
-											<div class="form-group">
-												<div class="col-xs-6">
-													<label>Silver Rate</label> <input
-														name="purchaseBean.silverRate" type="text"
-														value="<s:property value="purchaseBean.silverRate"/>"
-														class="form-control-plaintext" placeholder="silverRate"><br>
-													<label>10Gram </label>:<label></label>
-												</div>
-												<div class="form-group">
-													<div class="col-xs-6">
-														<label>Date</label> <input
-															name="purchaseBean.purchaseDate" type="date"
-															class="form-control-plaintext"
-															value="<s:property value="purchaseBean.purchaseDate"/>"
-															required="required"> <i class="fa fa-calendar"
-															style="font-size: 22px; float: right; margin: -46px auto;"></i>
-													</div>
-												</div>
-											</div>
-										</div> --%>
-							<%-- <div class="row">
-											<div class="form-group">
-												<div class="col-xs-6">
-													<label>PlatinumRate</label> <input
-														name="purchaseBean.platinumRate" type="text"
-														value="<s:property value="purchaseBean.platinumRate"/>"
-														class="validate" placeholder="platinumRate"><br>
-													<label>10Gram </label>:<label></label>
-												</div>
-												<div class="form-group">
-													<div class="col-xs-6">
-														<label>Date</label> <input
-															name="purchaseBean.purchaseDate" type="date"
-															class="form-control-plaintext"
-															value="<s:property value="purchaseBean.purchaseDate"/>"
-															required="required"> <i class="fa fa-calendar"
-															style="font-size: 22px; float: right; margin: -46px auto;"></i>
-													</div>
-												</div>
-											</div>
-										</div> --%>
-							<%-- <div class="row">
-										<div class=" col-sm-12">
-											<s:hidden name="vendorBean.vendorId" />
-											<div class="col-md-6" style="background-color: red">
-												<label>GST</label> <input name="purchaseBean.gstCode"
-													type="text"
-													value="<s:property value="purchaseBean.gstCode"/>"
-													class="validate" placeholder="GST"><br> <label>Vendor
-													Code</label> <input name="purchaseBean.vendor.vendorCode"
-													type="text"
-													value="<s:property value="purchaseBean.vendor.vendorCode"/>"
-													class="validate" placeholder="vendorCode"><br>
-												<label>Vendor Name</label>:<label><s:property
-														value="purchaseBean.vendor.vendorName" /></label><br> <label>Vendor
-													Address1</label> :<label><s:property
-														value="purchaseBean.vendor.address1" /></label><br> <label>Vendor
-													Address2</label> :<label><s:property
-														value="purchaseBean.vendor.address2" /></label><br> <label>Vendor
-													Contact</label> :<label><s:property
-														value="purchaseBean.vendor.contact" /></label><br> <label>Vendor
-													Pin</label>:<label><s:property
-														value="purchaseBean.vendor.pin" /></label><br> <label>State
-												</label>:<label><s:property
-														value="purchaseBean.vendor.state" /></label><br>
-											</div>
-											<div class="col-md-6" style="background-color: blue">
-												<label>Date</label> <input name="purchaseBean.purchaseDate"
-													type="date" class="validate"
-													value="<s:property value="purchaseBean.purchaseDate"/>"
-													required="required"> <i class="fa fa-calendar"
-													style="font-size: 22px; float: right; margin: -46px auto;"></i><br>
-												<label>GoldRate</label> <input name="purchaseBean.goldRate"
-													type="text"
-													value="<s:property value="purchaseBean.goldRate"/>"
-													class="validate" placeholder="goldRate"><br> <label>8Gram
-												</label>:<label></label><br> <label>SilverRate</label> <input
-													name="purchaseBean.silverRate" type="text"
-													value="<s:property value="purchaseBean.silverRate"/>"
-													class="validate" placeholder="silverRate"><br>
-												<label>10Gram </label>:<label></label><br> <label>PlatinumRate</label>
-												<input name="purchaseBean.platinumRate" type="text"
-													value="<s:property value="purchaseBean.platinumRate"/>"
-													class="validate" placeholder="platinumRate"><br>
-												<label>10Gram </label>:<label></label>
-											</div>
-											&nbsp;&nbsp;
-											<button class="waves-effect waves-light btn" type="submit">Submit</button>
-										</div>
-									</div> --%>
+							
 							<div class="row">
 								<div class="col-md-12">
 									<button type="button" class="btn btn-primary"
@@ -367,22 +257,29 @@ td, th {
 											<th>ACTIONS</th>
 										</tr>
 									</thead>
-									<%
-										int i = 0;
-									%>
-									<tbody>
-										<tr>
-											<td>
-												<%
-													
-												%>
-											</td>
-										</tr>
+									<!-- ***list name from redirectaction*** -->
+										<s:if test="purchaseList!=null && purchaseList.size()>0">
 
-									</tbody>
-									<%
-										i++;
-									%>
+											<s:iterator value="purchaseList" status="row">
+												<tr>
+													<td><s:property value="#row.count" /></td>
+													<td><s:property value="vendor.vendorCode" /></td>
+													<td><s:property value="vendor.vendorName" /></td>
+													<td><s:property value="gstCode" /></td>
+													<td><s:property value="goldRate" /></td>
+													<td>
+													<s:property value="silverRate" /></br>
+													<s:property value="platinumRate" /></br>
+													<s:property value="pin" />
+													</td>
+													<td><s:property value="invoice" /></td>
+													<td><s:property value="purBillNo" /></td>
+
+												</tr>
+											</s:iterator>
+
+
+										</s:if>
 								</table>
 							</div>
 							</s:form>

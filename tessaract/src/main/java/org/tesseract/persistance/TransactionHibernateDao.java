@@ -1,5 +1,6 @@
 package org.tesseract.persistance;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,10 +20,8 @@ public class TransactionHibernateDao {
 		Transaction transaction = session.beginTransaction();
 
 		try {
-			String qr = "SELECT * FROM VendorBean where vendorCode=:vencode";
-			StringBuilder sbs = new StringBuilder();
-			sbs.append(qr);
-			Query q = sessionFactory.getCurrentSession().createQuery(qr.toString()).setParameter("vencode", ss);
+			String qr = "SELECT vendorId FROM VendorBean where vendorCode=:vencode";
+			Query q = session.createQuery(qr).setParameter("vencode", ss);
 			return (Integer) q.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,5 +59,6 @@ public class TransactionHibernateDao {
 			return null;
 		}
 	}
-
+		
+	
 }

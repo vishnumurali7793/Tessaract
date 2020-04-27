@@ -6,11 +6,12 @@
 <struts>
 	<constant name="struts.enable.DynamicMethodInvocation"
 		value="false" />
-	<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="false" />
 	<constant name="struts.custom.i18n.resources"
 		value="ApplicationResources" />
 
-	<package name="default" extends="struts-default">
+	<package name="default" extends="json-default">
+		<!-- <package name="default" extends="struts-default"> -->
 		<action name="redir" class="org.tesseract.action.LoginAction">
 			<result name="success">/jsp/login.jsp</result>
 		</action>
@@ -72,46 +73,46 @@
 			class="org.tesseract.action.MasterAction" method="editCategory">
 			<result name="success">/jsp/category.jsp</result>
 		</action>
-<!-- category page finished -->
-<!-- ********product page************* -->
+		<!-- category page finished -->
+		<!-- ********product page************* -->
 		<action name="goToProduct"
 			class="org.tesseract.action.RedirAction" method="goToProduct">
 			<result name="success">/jsp/product.jsp</result>
 		</action>
-		
+
 		<action name="saveProduct"
 			class="org.tesseract.action.MasterAction" method="saveProduct">
 			<result name="success" type="redirectAction">goToProduct</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-		
+
 		<action name="deleteProduct"
 			class="org.tesseract.action.MasterAction" method="deleteProduct">
 			<result name="success" type="redirectAction">goToProduct</result>
 		</action>
-		
+
 		<action name="editProduct"
 			class="org.tesseract.action.MasterAction" method="editProduct">
 			<result name="success">/jsp/product.jsp</result>
 		</action>
-<!-- product page finished -->
-<!-- ********model page************* -->
+		<!-- product page finished -->
+		<!-- ********model page************* -->
 		<action name="goToModel"
 			class="org.tesseract.action.RedirAction" method="goToModel">
 			<result name="success">/jsp/model.jsp</result>
 		</action>
-		
+
 		<action name="saveModel"
 			class="org.tesseract.action.MasterAction" method="saveModel">
 			<result name="success" type="redirectAction">goToModel</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-		
+
 		<action name="deleteModel"
 			class="org.tesseract.action.MasterAction" method="deleteModel">
 			<result name="success" type="redirectAction">goToModel</result>
 		</action>
-		
+
 		<action name="editModel"
 			class="org.tesseract.action.MasterAction" method="editModel">
 			<result name="success">/jsp/model.jsp</result>
@@ -122,94 +123,121 @@
 			class="org.tesseract.action.RedirAction" method="goToCarat">
 			<result name="success">/jsp/carat.jsp</result>
 		</action>
-		
+
 		<action name="saveCarat"
 			class="org.tesseract.action.MasterAction" method="saveCarat">
 			<result name="success" type="redirectAction">goToCarat</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-		
+
 		<action name="deleteCarat"
 			class="org.tesseract.action.MasterAction" method="deleteCarat">
 			<result name="success" type="redirectAction">goToCarat</result>
 		</action>
-		
+
 		<action name="editCarat"
 			class="org.tesseract.action.MasterAction" method="editCarat">
 			<result name="success">/jsp/carat.jsp</result>
 		</action>
-<!-- carat page finished -->
-<!-- ********rate page************* -->
+		<!-- carat page finished -->
+		<!-- ********rate page************* -->
 		<action name="goToRate"
 			class="org.tesseract.action.RedirAction" method="goToRate">
 			<result name="success">/jsp/rate.jsp</result>
 		</action>
-		
+
 		<action name="saveRate"
 			class="org.tesseract.action.MasterAction" method="saveRate">
 			<result name="success" type="redirectAction">goToRate</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-		
+
 		<action name="deleteRate"
 			class="org.tesseract.action.MasterAction" method="deleteRate">
 			<result name="success" type="redirectAction">goToRate</result>
 		</action>
-		
+
 		<action name="editRate"
 			class="org.tesseract.action.MasterAction" method="editRate">
 			<result name="success">/jsp/rate.jsp</result>
 		</action>
-<!-- rate page finished -->
-<!-- ********customer page************* -->
+		<!-- rate page finished -->
+		<!-- ********customer page************* -->
 		<action name="goToCustomer"
 			class="org.tesseract.action.RedirAction" method="goToCustomer">
 			<result name="success">/jsp/customer.jsp</result>
 		</action>
-		
+
 		<action name="saveCustomer"
 			class="org.tesseract.action.MasterAction" method="saveCustomer">
 			<result name="success" type="redirectAction">goToCustomer</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-		
+
 		<action name="deleteCustomer"
 			class="org.tesseract.action.MasterAction" method="deleteCustomer">
 			<result name="success" type="redirectAction">goToCustomer</result>
 		</action>
-		
+
 		<action name="editCustomer"
 			class="org.tesseract.action.MasterAction" method="editCustomer">
 			<result name="success">/jsp/customer.jsp</result>
 		</action>
 		<!-- customer page finished -->
-		
+
 		<!-- ********vendor page************* -->
 		<action name="goToVendor"
 			class="org.tesseract.action.RedirAction" method="goToVendor">
 			<result name="success">/jsp/vendor.jsp</result>
 		</action>
-		
+
 		<action name="saveVendor"
 			class="org.tesseract.action.MasterAction" method="saveVendor">
 			<result name="success" type="redirectAction">goToVendor</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-		
+
 		<action name="deleteVendor"
 			class="org.tesseract.action.MasterAction" method="deleteVendor">
 			<result name="success" type="redirectAction">goToVendor</result>
 		</action>
-		
+
 		<action name="editVendor"
 			class="org.tesseract.action.MasterAction" method="editVendor">
 			<result name="success">/jsp/vendor.jsp</result>
 		</action>
 		<!-- vendor page finished -->
-		
+
 		<action name="goToPurchase"
 			class="org.tesseract.action.RedirAction" method="goToPurchase">
 			<result name="success">/jsp/purchase.jsp</result>
+		</action>
+
+		<action name="getProductListForPurchase"
+			class="org.tesseract.action.MasterAction"
+			method="getProductListForPurchase">
+			<result name="success">/jsp/productListForPurchase.jsp</result>
+		</action>
+
+		<action name="getmodalForPurchase"
+			class="org.tesseract.action.MasterAction"
+			method="getmodalForPurchase">
+			<result name="success">/jsp/addnewvendor.jsp</result>
+		</action>
+
+		<action name="savepurchaseVendor"
+			class="org.tesseract.action.TransactionAction"
+			method="savepurchaseVendor">
+			<result name="success" type="redirectAction">goToPurchase</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+
+		<action name="getVendorDetails"
+			class="org.tesseract.action.TransactionAction"
+			method="getVendorDetails">
+			<result type="json">
+				<param name="root">vendorList</param>
+			</result>
 		</action>
 	</package>
 
