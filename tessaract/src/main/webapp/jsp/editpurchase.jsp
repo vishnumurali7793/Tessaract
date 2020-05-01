@@ -41,6 +41,10 @@
 		$('#productModal').modal('show');
 		return false;
 	}
+
+	function calculateamount(index) {
+		var purity = document.getElementById('purity' + index).value
+	}
 </script>
 <body>
 	<div class="container-fluid">
@@ -55,7 +59,7 @@
 
 		<div class="row">
 			<form action="savepurchaseDetails">
-			<s:hidden name="purchaseBean.purchaseId" />
+				<s:hidden name="purchaseBean.purchaseId" />
 				<div class="col-xs-12">
 
 					<table class="table">
@@ -75,25 +79,33 @@
 						<tbody>
 							<s:if test="prodDetList!=null && prodDetList.size()>0">
 								<s:iterator value="prodDetList" status="row">
-								
 									<tr>
 										<td><s:property value="#row.count" /></td>
+										<s:hidden name="productId.productId"></s:hidden>
 										<td><input class="form-control" type="text"
-											name="prodDetList[<s:property value="#row.index"/>].hsnCode" value="" /></td>
+											name="prodDetList[<s:property value="#row.index"/>].hsnCode"
+											value="" /></td>
 										<td><s:property value="productId.category.categoryName" /></br>
 											<s:property value="productId.productName" /></td>
-										<td><input class="form-control" type="text" name="prodDetList[<s:property value="#row.index"/>].purity"
+										<td><input class="form-control" type="text"
+											name="prodDetList[<s:property value="#row.index"/>].purity"
+											id="purity<s:property value="#row.index" />" value=""
+											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
+										<td><input class="form-control" type="text"
+											name="prodDetList[<s:property value="#row.index"/>].gramweight"
 											value="" /></td>
 										<td><input class="form-control" type="text"
-											name="prodDetList[<s:property value="#row.index"/>].gramweight" value="" /></td>
-										<td><input class="form-control" type="text" name="prodDetList[<s:property value="#row.index"/>].touch"
+											name="prodDetList[<s:property value="#row.index"/>].touch"
 											value="" /></td>
 										<td><input class="form-control" type="text"
-											name="prodDetList[<s:property value="#row.index"/>].netweight" value="" /></td>
-										<td><input class="form-control" type="text" name="prodDetList[<s:property value="#row.index"/>].rate"
+											name="prodDetList[<s:property value="#row.index"/>].netweight"
 											value="" /></td>
 										<td><input class="form-control" type="text"
-											name="prodDetList[<s:property value="#row.index"/>].totalamount" value="" /></td>
+											name="prodDetList[<s:property value="#row.index"/>].rate"
+											value="" /></td>
+										<td><input class="form-control" type="text"
+											name="prodDetList[<s:property value="#row.index"/>].totalamount"
+											value="" /></td>
 
 									</tr>
 								</s:iterator>

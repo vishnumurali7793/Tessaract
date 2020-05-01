@@ -73,8 +73,10 @@ public class TransactionAction extends ActionSupport {
 	}
 	
 	public String savepurchaseDetails(){
-		if(prodDetList != null){
-			
+		if(prodDetList != null && purchaseBean.getPurchaseId() != null){
+			for(PurchaseScreenBean pd:prodDetList){
+				
+			}
 		}
 		return SUCCESS;
 	}
