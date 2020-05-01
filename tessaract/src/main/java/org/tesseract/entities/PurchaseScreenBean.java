@@ -49,6 +49,9 @@ public class PurchaseScreenBean {
 	
 	@Column(name = "totalamount")
 	private Double totalamount;
+	
+	@Column(name = "gramweight")
+	private Double gramweight;
 
 	public Integer getPurchaseScreenId() {
 		return purchaseScreenId;
@@ -128,6 +131,14 @@ public class PurchaseScreenBean {
 
 	public void setTotalamount(Double totalamount) {
 		this.totalamount = totalamount;
+	}
+
+	public Double getGramweight() {
+		return gramweight;
+	}
+
+	public void setGramweight(Double gramweight) {
+		this.gramweight = gramweight;
 	}
 	
 	

@@ -118,5 +118,5 @@ CREATE TABLE `tesseract`.`user_details` (
             ALTER TABLE `purchasedetails` ADD FOREIGN KEY (`productId`) REFERENCES 
             `tesseract`.`product`(`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
             
-            
+            ALTER TABLE `purchasedetails` ADD `gramweight` DOUBLE NULL AFTER `touch`;
             

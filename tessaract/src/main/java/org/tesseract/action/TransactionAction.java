@@ -23,6 +23,7 @@ public class TransactionAction extends ActionSupport {
 	private String[] checkbox;
 	private PurchaseScreenBean purchaseDetails;
 	private List<ProductBean> prodList;
+	private List<PurchaseScreenBean> prodDetList;
 
 	// vendor page action
 	public String savepurchaseVendor() {
@@ -51,6 +52,9 @@ public class TransactionAction extends ActionSupport {
 	}
 	
 	public String editPurchaseDetails() {
+		if(purchaseBean !=null && purchaseBean.getPurchaseId() != null){
+		prodDetList=transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
+		}
 		return SUCCESS;
 	}
 	
@@ -64,6 +68,13 @@ public class TransactionAction extends ActionSupport {
 					purchaseDetails.getPurchaseId().setPurchaseId(purchaseBean.getPurchaseId());
 					transHibernateDao.savepurchasedetails(purchaseDetails);
 			}
+		}
+		return SUCCESS;
+	}
+	
+	public String savepurchaseDetails(){
+		if(prodDetList != null){
+			
 		}
 		return SUCCESS;
 	}
@@ -114,6 +125,14 @@ public class TransactionAction extends ActionSupport {
 
 	public void setProdList(List<ProductBean> prodList) {
 		this.prodList = prodList;
+	}
+
+	public List<PurchaseScreenBean> getProdDetList() {
+		return prodDetList;
+	}
+
+	public void setProdDetList(List<PurchaseScreenBean> prodDetList) {
+		this.prodDetList = prodDetList;
 	}
 
 }

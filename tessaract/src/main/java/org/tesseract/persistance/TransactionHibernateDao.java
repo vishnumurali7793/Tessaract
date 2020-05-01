@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseScreenBean;
 import org.tesseract.entities.VendorBean;
@@ -77,5 +78,23 @@ public class TransactionHibernateDao {
 			}
 
 		}
+		
+		//get productdetails list
+				@SuppressWarnings("unchecked")
+				public List<PurchaseScreenBean> getProductDetailsList(Integer purchasedetid) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.createQuery("from PurchaseScreenBean where purchaseId.purchaseId=:purdetarg").setParameter("purdetarg",purchasedetid).list();
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
 	
 }

@@ -22,43 +22,107 @@
 <title>tessaract</title>
 </head>
 <script type="text/javascript">
-function getProductList() {
-	$('#productModal #modalTitle').html("Add items to purchase bill");
-	$.ajax({
-		type : "GET",
-		url : "getProductListForPurchase",
-		data : {
-			"purchaseBean.purchaseId" : '<s:property value="purchaseBean.purchaseId"/>'
-		},
-		beforeSend : function() {
-			$('#productModal .modal-body').html('Loading..');
-		},
-		success : function(msg) {
-			$('#productModal .modal-body').html(msg);
-		}
-	});
-	$('#productModal').modal('show');
-	return false;
-}
+	function getProductList() {
+		$('#productModal #modalTitle').html("Add items to purchase bill");
+		$
+				.ajax({
+					type : "GET",
+					url : "getProductListForPurchase",
+					data : {
+						"purchaseBean.purchaseId" : '<s:property value="purchaseBean.purchaseId"/>'
+					},
+					beforeSend : function() {
+						$('#productModal .modal-body').html('Loading..');
+					},
+					success : function(msg) {
+						$('#productModal .modal-body').html(msg);
+					}
+				});
+		$('#productModal').modal('show');
+		return false;
+	}
 </script>
 <body>
 	<div class="container-fluid">
 		<div class="row"></div>
 		<div class="row">
 			<div class="col-md-12">
-			<s:hidden name="purchaseBean.purchaseId" />
+				<s:hidden name="purchaseBean.purchaseId" />
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					onclick="getProductList()">Add products</button>
 			</div>
 		</div>
+
+		<div class="row">
+			<form action="savepurchaseDetails">
+			<s:hidden name="purchaseBean.purchaseId" />
+				<div class="col-xs-12">
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>HSNCODE</th>
+								<th>PRODUCT</th>
+								<th>PURITY</th>
+								<th>GM.WT</th>
+								<th>TOUCH</th>
+								<th>NET WT</th>
+								<th>RATE</th>
+								<th>TOTAL AMOUNT</th>
+							</tr>
+						</thead>
+						<tbody>
+							<s:if test="prodDetList!=null && prodDetList.size()>0">
+								<s:iterator value="prodDetList" status="row">
+								
+									<tr>
+										<td><s:property value="#row.count" /></td>
+										<td><input class="form-control" type="text"
+											name="prodDetList[<s:property value="#row.index"/>].hsnCode" value="" /></td>
+										<td><s:property value="productId.category.categoryName" /></br>
+											<s:property value="productId.productName" /></td>
+										<td><input class="form-control" type="text" name="prodDetList[<s:property value="#row.index"/>].purity"
+											value="" /></td>
+										<td><input class="form-control" type="text"
+											name="prodDetList[<s:property value="#row.index"/>].gramweight" value="" /></td>
+										<td><input class="form-control" type="text" name="prodDetList[<s:property value="#row.index"/>].touch"
+											value="" /></td>
+										<td><input class="form-control" type="text"
+											name="prodDetList[<s:property value="#row.index"/>].netweight" value="" /></td>
+										<td><input class="form-control" type="text" name="prodDetList[<s:property value="#row.index"/>].rate"
+											value="" /></td>
+										<td><input class="form-control" type="text"
+											name="prodDetList[<s:property value="#row.index"/>].totalamount" value="" /></td>
+
+									</tr>
+								</s:iterator>
+							</s:if>
+							<s:else>no product added</s:else>
+						</tbody>
+
+
+					</table>
+
+					<div class="row">
+						<div align="center">
+							<s:if test="prodDetList != null">
+								<s:submit class="btn btn-primary" value="save"></s:submit>
+							</s:if>
+							<s:else>-- no products added</s:else>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
-	
-	
-	
+
+
+
 	<div class="modal fade" id="productModal" role="dialog">
 		<div class="modal-dialog modal-lg modal-xl">
 			<div class="modal-content">
-				<div class="modal-header" style="background-color:  #581845;">
+				<div class="modal-header" style="background-color: #581845;">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>

@@ -251,9 +251,17 @@
 			method="savepurchaseform">
 			<result name="success" type="redirectAction">
 				<param name="actionName">editPurchaseDetails</param>
-				<param name="redirectParams">${purchaseBean.purchaseId}</param>
+				<param name="purchaseBean.purchaseId">${purchaseBean.purchaseId}</param>
 			</result>
-			<!-- <result name="input" type="redirectAction">redir</result> -->
+		</action>
+		
+		<action name="savepurchaseDetails"
+			class="org.tesseract.action.TransactionAction"
+			method="savepurchaseDetails">
+			<result name="success" type="redirectAction">
+				<param name="actionName">editPurchaseDetails</param>
+				<param name="purchaseBean.purchaseId">${purchaseBean.purchaseId}</param>
+			</result>
 		</action>
 	</package>
 
