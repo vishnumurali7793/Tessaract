@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.tesseract.entities.ProductBean;
+import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseScreenBean;
 import org.tesseract.entities.VendorBean;
@@ -24,6 +25,7 @@ public class TransactionAction extends ActionSupport {
 	private PurchaseScreenBean purchaseDetails;
 	private List<ProductBean> prodList;
 	private List<PurchaseScreenBean> prodDetList;
+	private PurchaseAmountBean purchaseamtBean;
 
 	// vendor page action
 	public String savepurchaseVendor() {
@@ -54,6 +56,7 @@ public class TransactionAction extends ActionSupport {
 	public String editPurchaseDetails() {
 		if(purchaseBean !=null && purchaseBean.getPurchaseId() != null){
 		prodDetList=transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
+		purchaseamtBean=transHibernateDao.getProducttotamt(purchaseBean.getPurchaseId());
 		}
 		return SUCCESS;
 	}
@@ -86,6 +89,9 @@ public class TransactionAction extends ActionSupport {
 				
 				i++;
 			}
+			purchaseamtBean.setPurchaseId(new PurchaseBean());
+			purchaseamtBean.getPurchaseId().setPurchaseId(purchaseBean.getPurchaseId());
+			transHibernateDao.savepurchasenetamt(purchaseamtBean);
 		}
 		return SUCCESS;
 	}
@@ -144,6 +150,14 @@ public class TransactionAction extends ActionSupport {
 
 	public void setProdDetList(List<PurchaseScreenBean> prodDetList) {
 		this.prodDetList = prodDetList;
+	}
+
+	public PurchaseAmountBean getPurchaseamtBean() {
+		return purchaseamtBean;
+	}
+
+	public void setPurchaseamtBean(PurchaseAmountBean purchaseamtBean) {
+		this.purchaseamtBean = purchaseamtBean;
 	}
 
 }

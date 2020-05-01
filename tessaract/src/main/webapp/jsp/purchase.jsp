@@ -86,21 +86,7 @@ td, th {
 	function deleteVendor(venid) {
 		location.href = "deleteVendor?vendorBean.vendorId=" + venid;
 	}
-	function getProductList() {
-		$('#productModal #modalTitle').html("Add items to purchase bill");
-		$.ajax({
-			type : "GET",
-			url : "getProductListForPurchase",
-			beforeSend : function() {
-				$('#productModal .modal-body').html('Loading..');
-			},
-			success : function(msg) {
-				$('#productModal .modal-body').html(msg);
-			}
-		});
-		$('#productModal').modal('show');
-		return false;
-	}
+	
 
 	function addvendor() {
 		$('#productModal #modalTitle').html("Add items to purchase bill");
@@ -178,69 +164,10 @@ td, th {
 												data-toggle="modal" onclick="addvendor()">Add new bill</button>
 										</div>
 									</div>
-									<%-- <div class="row">
-										<div class="form-group">
-
-											<div class="col-xs-2">
-												<label>GST</label> <input
-													name="purchaseBean.vendor.vendorCode" type="text" id="gst"
-													value="<s:property value="purchaseBean.vendor.vendorCode"/>"
-													class="form-control-plaintext" placeholder="vendorCode">
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-xs-2">
-												<label>Vendor Code</label> <input
-													name="purchaseBean.vendor.vendorCode" type="text"
-													value="<s:property value="purchaseBean.vendor.vendorCode"/>"
-													class="form-control-plaintext" placeholder="vendorCode">
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-xs-2">
-												<label>Gold Rate</label> <input name="purchaseBean.goldRate"
-													type="text"
-													value="<s:property value="purchaseBean.goldRate"/>"
-													class="form-control-plaintext" placeholder="goldRate"><br>
-												<label>8Gram </label>:<label></label>
-											</div>
-											<div class="form-group">
-												<div class="col-xs-2">
-													<label>Silver Rate</label> <input
-														name="purchaseBean.silverRate" type="text"
-														value="<s:property value="purchaseBean.silverRate"/>"
-														class="form-control-plaintext" placeholder="silverRate"><br>
-													<label>10Gram </label>:<label></label>
-												</div>
-											</div>
-											<div class="form-group">
-												<div class="col-xs-2">
-													<label>PlatinumRate</label> <input
-														name="purchaseBean.platinumRate" type="text"
-														value="<s:property value="purchaseBean.platinumRate"/>"
-														class="validate" placeholder="platinumRate"><br>
-													<label>10Gram </label>:<label></label>
-												</div>
-											</div>
-											<div class="form-group">
-												<div class="col-xs-2">
-													<label>Date</label> <input name="purchaseBean.purchaseDate"
-														type="date" class="form-control-plaintext"
-														value="<s:property value="purchaseBean.purchaseDate"/>"
-														required="required"> <i class="fa fa-calendar"
-														style="font-size: 22px; float: right; margin: -46px auto;"></i>
-												</div>
-											</div>
-										</div>
-									</div> --%>
+									
 							</div>
 							
-							<div class="row">
-								<div class="col-md-12">
-									<button type="button" class="btn btn-primary"
-										data-toggle="modal" onclick="getProductList()">A</button>
-								</div>
-							</div>
+							
 							<div class="row">
 								<table class="table">
 									<thead>

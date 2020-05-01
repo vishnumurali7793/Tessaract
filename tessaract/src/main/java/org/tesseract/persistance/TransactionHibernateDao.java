@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.tesseract.entities.ProductBean;
+import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseScreenBean;
 import org.tesseract.entities.VendorBean;
@@ -56,45 +57,86 @@ public class TransactionHibernateDao {
 		Session session = sessionFactory.openSession();
 
 		try {
-			return session.createQuery("SELECT vendorId, vendorName, vendorCode FROM VendorBean WHERE vendorCode LIKE '%"+ vendorCode +"%'").list();
+			return session
+					.createQuery("SELECT vendorId, vendorName, vendorCode FROM VendorBean WHERE vendorCode LIKE '%"
+							+ vendorCode + "%'")
+					.list();
 		} catch (Exception e) {
 			return null;
 		}
 	}
-		
+
 	// save purchasedetails data
-		public void savepurchasedetails(PurchaseScreenBean purdetailBean) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction transaction = session.beginTransaction();
+	public void savepurchasedetails(PurchaseScreenBean purdetailBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
 
-			try {
-				session.saveOrUpdate(purdetailBean);
-				transaction.commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				session.close();
-			}
-
+		try {
+			session.saveOrUpdate(purdetailBean);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
 		}
-		
-		//get productdetails list
-				@SuppressWarnings("unchecked")
-				public List<PurchaseScreenBean> getProductDetailsList(Integer purchasedetid) {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					session.beginTransaction();
 
-					try {
-						return session.createQuery("from PurchaseScreenBean where purchaseId.purchaseId=:purdetarg").setParameter("purdetarg",purchasedetid).list();
-					} catch (Exception e) {
-						e.printStackTrace();
-						return null;
-					} finally {
-						session.close();
-					}
+	}
 
-				}
-	
+	// get productdetails list
+	@SuppressWarnings("unchecked")
+	public List<PurchaseScreenBean> getProductDetailsList(Integer purchasedetid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		try {
+			return session.createQuery("from PurchaseScreenBean where purchaseId.purchaseId=:purdetarg")
+					.setParameter("purdetarg", purchasedetid).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
+
+	}
+
+	// save purchasetotnetamt data
+	public void savepurchasenetamt(PurchaseAmountBean purtotnetamtBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.saveOrUpdate(purtotnetamtBean);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+	}
+
+	// get productamttot
+	@SuppressWarnings("unchecked")
+	public PurchaseAmountBean getProducttotamt(Integer purchasedetid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		try {
+			return (PurchaseAmountBean) session
+					.createQuery("from PurchaseAmountBean where purchaseId.purchaseId=:purdetarg")
+					.setParameter("purdetarg", purchasedetid).uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
+
+	}
+
 }
