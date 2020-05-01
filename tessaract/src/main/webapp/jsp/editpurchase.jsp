@@ -43,7 +43,15 @@
 	}
 
 	function calculateamount(index) {
-		var purity = document.getElementById('purity' + index).value
+		var purity = document.getElementById('purity' + index).value;
+		var gwt = document.getElementById('gramweight' + index).value;
+		var touch = document.getElementById('touch' + index).value;
+		var netwt=parseFloat((gwt*touch)/purity);
+		document.getElementById('netweight' + index).value=netwt.toFixed(3);
+		var rate = document.getElementById('rate' + index).value;
+		var amount=parseFloat(rate*netwt);
+		document.getElementById('totalamount' + index).value=Math.round(amount);
+		
 	}
 </script>
 <body>
@@ -81,41 +89,60 @@
 								<s:iterator value="prodDetList" status="row">
 									<tr>
 										<td><s:property value="#row.count" /></td>
-										<s:hidden name="productId.productId"></s:hidden>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].hsnCode"
-											value="" /></td>
+											value='<s:property value="hsnCode"/>' /></td>
 										<td><s:property value="productId.category.categoryName" /></br>
 											<s:property value="productId.productName" /></td>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].purity"
-											id="purity<s:property value="#row.index" />" value=""
+											id="purity<s:property value="#row.index" />" value="<s:property value="purity"/>"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].gramweight"
-											value="" /></td>
+											value="<s:property value="gramweight"/>" id="gramweight<s:property value="#row.index" />"
+											 onchange="calculateamount('<s:property value="#row.index" />')"/></td>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].touch"
-											value="" /></td>
+											value="<s:property value="touch"/>" id="touch<s:property value="#row.index" />"
+											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].netweight"
-											value="" /></td>
+											value="<s:property value="netweight"/>" id="netweight<s:property value="#row.index" />"
+											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].rate"
-											value="" /></td>
+											value="<s:property value="rate"/>" id="rate<s:property value="#row.index" />"
+											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].totalamount"
-											value="" /></td>
+											value="<s:property value="totalamount"/>" id="totalamount<s:property value="#row.index" />"
+											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 
 									</tr>
 								</s:iterator>
 							</s:if>
 							<s:else>no product added</s:else>
+							<tr>
+							<td colspan="8" align="right"><label>Net amount</label></td>
+							<td colspan="1"><input class="form-control"
+									type="text" name="purchaseamtBean.grossamount" value="" /></td>
+							</tr>
+							<tr>
+							<td colspan="8" align="right"><label>Round off</label></td>
+							<td colspan="1"><input class="form-control"
+									type="text" name="purchaseamtBean.roundoff" value="" /></td>
+							</tr>
+							<tr>
+							<td colspan="8" align="right"><label>Total Net amount</label></td>
+							<td colspan="1"><input class="form-control"
+									type="text" name="purchaseamtBean.netamount" value="" /></td>
+							</tr>
 						</tbody>
 
 
 					</table>
-
+					
 					<div class="row">
 						<div align="center">
 							<s:if test="prodDetList != null">

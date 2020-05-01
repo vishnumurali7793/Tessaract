@@ -74,8 +74,17 @@ public class TransactionAction extends ActionSupport {
 	
 	public String savepurchaseDetails(){
 		if(prodDetList != null && purchaseBean.getPurchaseId() != null){
+			List<PurchaseScreenBean>  newprodlist= new ArrayList<PurchaseScreenBean>();
+	         newprodlist=transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
+			int i=0;
 			for(PurchaseScreenBean pd:prodDetList){
+				pd.setProductId(newprodlist.get(i).getProductId());
+				pd.setPurchaseId(new PurchaseBean());
+				pd.getPurchaseId().setPurchaseId(newprodlist.get(i).getPurchaseId().getPurchaseId());
+				pd.setPurchaseScreenId(newprodlist.get(i).getPurchaseScreenId());
+				transHibernateDao.savepurchasedetails(pd);
 				
+				i++;
 			}
 		}
 		return SUCCESS;
