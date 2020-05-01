@@ -8,6 +8,7 @@ import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseScreenBean;
 import org.tesseract.entities.VendorBean;
+import org.tesseract.persistance.MasterHibernateDao;
 import org.tesseract.persistance.TransactionHibernateDao;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -15,11 +16,13 @@ import com.opensymphony.xwork2.ActionSupport;
 public class TransactionAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private TransactionHibernateDao transHibernateDao = new TransactionHibernateDao();
+	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 	private PurchaseBean purchaseBean;
 	private List<PurchaseBean> purbeanList;
 	private Collection<Object> vendorList;
 	private String[] checkbox;
 	private PurchaseScreenBean purchaseDetails;
+	private List<ProductBean> prodList;
 
 	// vendor page action
 	public String savepurchaseVendor() {
@@ -39,6 +42,15 @@ public class TransactionAction extends ActionSupport {
 			vendorList = new ArrayList<Object>();
 			vendorList = transHibernateDao.getVendorListByVendorCode(purchaseBean.getVendor().getVendorCode());
 		}
+		return SUCCESS;
+	}
+	
+	public String getProductListForPurchase() {
+		prodList = masterHibernateDao.getProductList();
+		return SUCCESS;
+	}
+	
+	public String editPurchaseDetails() {
 		return SUCCESS;
 	}
 	
@@ -94,6 +106,14 @@ public class TransactionAction extends ActionSupport {
 
 	public void setPurchaseDetails(PurchaseScreenBean purchaseDetails) {
 		this.purchaseDetails = purchaseDetails;
+	}
+
+	public List<ProductBean> getProdList() {
+		return prodList;
+	}
+
+	public void setProdList(List<ProductBean> prodList) {
+		this.prodList = prodList;
 	}
 
 }

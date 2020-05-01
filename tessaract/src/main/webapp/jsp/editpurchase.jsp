@@ -27,6 +27,9 @@ function getProductList() {
 	$.ajax({
 		type : "GET",
 		url : "getProductListForPurchase",
+		data : {
+			"purchaseBean.purchaseId" : '<s:property value="purchaseBean.purchaseId"/>'
+		},
 		beforeSend : function() {
 			$('#productModal .modal-body').html('Loading..');
 		},
@@ -39,11 +42,11 @@ function getProductList() {
 }
 </script>
 <body>
-<s:hidden name="purchaseBean.purchaseId" />
 	<div class="container-fluid">
 		<div class="row"></div>
 		<div class="row">
 			<div class="col-md-12">
+			<s:hidden name="purchaseBean.purchaseId" />
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					onclick="getProductList()">Add products</button>
 			</div>

@@ -214,7 +214,7 @@
 		</action>
 
 		<action name="getProductListForPurchase"
-			class="org.tesseract.action.MasterAction"
+			class="org.tesseract.action.TransactionAction"
 			method="getProductListForPurchase">
 			<result name="success">/jsp/productListForPurchase.jsp</result>
 		</action>
@@ -239,16 +239,20 @@
 				<param name="root">vendorList</param>
 			</result>
 		</action>
-		
+
 		<action name="editPurchaseDetails"
-			class="org.tesseract.action.RedirAction" method="editPurchaseDetails">
+			class="org.tesseract.action.TransactionAction"
+			method="editPurchaseDetails">
 			<result name="success">/jsp/editpurchase.jsp</result>
 		</action>
-		
+
 		<action name="savepurchaseform"
 			class="org.tesseract.action.TransactionAction"
 			method="savepurchaseform">
-			<result name="success" type="redirectAction">editPurchaseDetails</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">editPurchaseDetails</param>
+				<param name="redirectParams">${purchaseBean.purchaseId}</param>
+			</result>
 			<!-- <result name="input" type="redirectAction">redir</result> -->
 		</action>
 	</package>

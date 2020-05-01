@@ -22,7 +22,7 @@ function selectallfromcheckbox(arg){
 </script>
 <body>
 <form action="savepurchaseform" id="purchseform" name="purchseform">
-<s:hidden name="purchaseBean.purchaseId" value="%{purchaseBean.purchaseId}" />
+<s:hidden name="purchaseBean.purchaseId" />
 	<table
 		class="table table-striped table-bordered table-hover table-condensed">
 		<thead>

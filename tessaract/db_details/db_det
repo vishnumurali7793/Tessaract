@@ -117,3 +117,6 @@ CREATE TABLE `tesseract`.`user_details` (
             ALTER TABLE `purchasedetails` CHANGE `categoryId` `productId` INT(11) NULL DEFAULT NULL;
             ALTER TABLE `purchasedetails` ADD FOREIGN KEY (`productId`) REFERENCES 
             `tesseract`.`product`(`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+            
+            
+            
