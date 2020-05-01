@@ -175,10 +175,10 @@ td, th {
 									<div class="row">
 										<div class="col-md-12">
 											<button type="button" class="btn btn-primary"
-												data-toggle="modal" onclick="addvendor()">+++</button>
+												data-toggle="modal" onclick="addvendor()">Add new bill</button>
 										</div>
 									</div>
-									<div class="row">
+									<%-- <div class="row">
 										<div class="form-group">
 
 											<div class="col-xs-2">
@@ -232,7 +232,7 @@ td, th {
 												</div>
 											</div>
 										</div>
-									</div>
+									</div> --%>
 							</div>
 							
 							<div class="row">
@@ -246,14 +246,11 @@ td, th {
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>HSN CODE</th>
-											<th>ITEM NAME</th>
-											<th>PURITY</th>
-											<th>GRAM WT</th>
-											<th>TOUCH</th>
-											<th>NET WT</th>
+											<th>INVOICE NO & DATE</th>
+											<th>BILL NO & DATE</th>
+											<th>VENDOR DETAILS</th>
+											<th>GST CODE</th>
 											<th>RATE</th>
-											<th>TOTAL AMT</th>
 											<th>ACTIONS</th>
 										</tr>
 									</thead>
@@ -263,17 +260,26 @@ td, th {
 											<s:iterator value="purchaseList" status="row">
 												<tr>
 													<td><s:property value="#row.count" /></td>
-													<td><s:property value="vendor.vendorCode" /></td>
-													<td><s:property value="vendor.vendorName" /></td>
-													<td><s:property value="gstCode" /></td>
-													<td><s:property value="goldRate" /></td>
-													<td>
-													<s:property value="silverRate" /></br>
-													<s:property value="platinumRate" /></br>
-													<s:property value="pin" />
+													<td><s:property value="invoice" />&</br>
+													    <s:property value="invoiceDate" />
 													</td>
-													<td><s:property value="invoice" /></td>
-													<td><s:property value="purBillNo" /></td>
+													<td><s:property value="purBillNo" />&</br>
+													    <s:property value="purchaseDate" /></td>
+													<td><s:property value="vendor.vendorCode" /></br>
+													    <s:property value="vendor.vendorName" />,
+													    <s:property value="vendor.address1" />,
+													    <s:property value="vendor.contact" />,
+													    <s:property value="vendor.pin" />
+													</td>
+													<td><s:property value="gstCode" /></td>
+													<td>GOLD :<s:property value="goldRate" /></br>
+												    	SILVER :<s:property value="silverRate" /></br>
+													    PLATINUM :<s:property value="platinumRate" />
+													</td>
+													<td>
+													<a href="editPurchaseDetails?purchaseBean.purchaseId" src="tessaract/src/main/webapp/images/edit.png">EDIT</a>
+													</td>
+													
 
 												</tr>
 											</s:iterator>

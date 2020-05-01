@@ -79,6 +79,9 @@ public class RedirAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String editPurchaseDetails() {
+		return SUCCESS;
+	}
 	public String goToHome() {
 		return SUCCESS;
 	}

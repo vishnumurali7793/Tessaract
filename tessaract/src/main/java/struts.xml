@@ -239,6 +239,11 @@
 				<param name="root">vendorList</param>
 			</result>
 		</action>
+		
+		<action name="editPurchaseDetails"
+			class="org.tesseract.action.RedirAction" method="editPurchaseDetails">
+			<result name="success">/jsp/editpurchase.jsp</result>
+		</action>
 	</package>
 
 </struts>
