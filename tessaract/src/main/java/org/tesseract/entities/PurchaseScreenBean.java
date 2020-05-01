@@ -29,8 +29,8 @@ public class PurchaseScreenBean {
 	private Double hsnCode;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="categoryId")
-	private CategoryBean categoryId;
+	@JoinColumn(name="productId")
+	private ProductBean productId;
 	
 	@Column(name = "purity")
 	private Double purity;
@@ -74,12 +74,12 @@ public class PurchaseScreenBean {
 		this.hsnCode = hsnCode;
 	}
 
-	public CategoryBean getCategoryId() {
-		return categoryId;
+	public ProductBean getProductId() {
+		return productId;
 	}
 
-	public void setCategoryId(CategoryBean categoryId) {
-		this.categoryId = categoryId;
+	public void setProductId(ProductBean productId) {
+		this.productId = productId;
 	}
 
 	public Double getPurity() {

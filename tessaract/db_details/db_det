@@ -113,3 +113,7 @@ CREATE TABLE `tesseract`.`user_details` (
             CREATE TABLE `tesseract`.`purchaseamount` ( `purchase_amount_id` INT NOT NULL AUTO_INCREMENT , 
             `purchaseId` INT NULL , `grossamount` DOUBLE NULL , `roundoff` DOUBLE NULL , 
             `netamount` DOUBLE NULL , PRIMARY KEY (`purchase_amount_id`)) ENGINE = InnoDB;
+            
+            ALTER TABLE `purchasedetails` CHANGE `categoryId` `productId` INT(11) NULL DEFAULT NULL;
+            ALTER TABLE `purchasedetails` ADD FOREIGN KEY (`productId`) REFERENCES 
+            `tesseract`.`product`(`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;

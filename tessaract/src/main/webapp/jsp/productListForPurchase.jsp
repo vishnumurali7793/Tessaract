@@ -14,18 +14,25 @@ function selectallfromcheckbox(arg){
 		$('input[name="checkbox"]:enabled').prop("checked",false);
 	}
 }
+
+/* function submitform(){
+	document.purchseform.action="savepurchaseform";
+	document.purchseform.submit();
+} */
 </script>
 <body>
+<form action="savepurchaseform" id="purchseform" name="purchseform">
+<s:hidden name="purchaseBean.purchaseId" value="%{purchaseBean.purchaseId}" />
 	<table
 		class="table table-striped table-bordered table-hover table-condensed">
 		<thead>
 			<tr>
 			<th><input type="checkbox" onclick="selectallfromcheckbox(this)"/></th>
 				<th>#</th>
-				<th>Item code</th>
-				<th>Item name</th>
 				<th>Category</th>
-				<th>Select All</th>
+				<th>Product code</th>
+				<th>Product name</th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -34,11 +41,9 @@ function selectallfromcheckbox(arg){
 					<tr>
 					    <td><input type="checkbox" name="checkbox" value="<s:property value="productId" />"/></td>
 						<td><s:property value="#p.index+1" /></td>
+						<td><s:property value="category.categoryCode" /></td>
 						<td><s:property value="productCode" /></td>
 						<td><s:property value="productName" /></td>
-						<td><s:property value="category.categoryCode" /></td>
-						<td><input type="checkbox" class="form-check-input"
-							id="exampleCheck1"></td>
 					</tr>
 				</s:iterator>
 			</s:if>
@@ -50,5 +55,6 @@ function selectallfromcheckbox(arg){
 			<button type="submit" class="btn btn-primary btn-sm">Submit</button>
 		</div>
 	</div>
+	</form>
 </body>
 </html>

@@ -244,6 +244,13 @@
 			class="org.tesseract.action.RedirAction" method="editPurchaseDetails">
 			<result name="success">/jsp/editpurchase.jsp</result>
 		</action>
+		
+		<action name="savepurchaseform"
+			class="org.tesseract.action.TransactionAction"
+			method="savepurchaseform">
+			<result name="success" type="redirectAction">editPurchaseDetails</result>
+			<!-- <result name="input" type="redirectAction">redir</result> -->
+		</action>
 	</package>
 
 </struts>

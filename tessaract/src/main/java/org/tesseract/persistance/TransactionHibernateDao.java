@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.tesseract.entities.PurchaseBean;
+import org.tesseract.entities.PurchaseScreenBean;
 import org.tesseract.entities.VendorBean;
 
 public class TransactionHibernateDao {
@@ -60,5 +61,21 @@ public class TransactionHibernateDao {
 		}
 	}
 		
+	// save purchasedetails data
+		public void savepurchasedetails(PurchaseScreenBean purdetailBean) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+
+			try {
+				session.saveOrUpdate(purdetailBean);
+				transaction.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}
+
+		}
 	
 }

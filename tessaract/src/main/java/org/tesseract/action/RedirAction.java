@@ -28,6 +28,7 @@ public class RedirAction extends ActionSupport {
 	private List<CustomerBean> customerList;
 	private List<VendorBean> vendorList;
 	private List<PurchaseBean> purchaseList;
+	private PurchaseBean purchaseBean;
 	
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -156,6 +157,14 @@ public class RedirAction extends ActionSupport {
 
 	public void setPurchaseList(List<PurchaseBean> purchaseList) {
 		this.purchaseList = purchaseList;
+	}
+
+	public PurchaseBean getPurchaseBean() {
+		return purchaseBean;
+	}
+
+	public void setPurchaseBean(PurchaseBean purchaseBean) {
+		this.purchaseBean = purchaseBean;
 	}
 	
 	

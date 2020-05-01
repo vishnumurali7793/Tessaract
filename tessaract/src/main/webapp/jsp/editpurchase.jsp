@@ -39,6 +39,7 @@ function getProductList() {
 }
 </script>
 <body>
+<s:hidden name="purchaseBean.purchaseId" />
 	<div class="container-fluid">
 		<div class="row"></div>
 		<div class="row">
