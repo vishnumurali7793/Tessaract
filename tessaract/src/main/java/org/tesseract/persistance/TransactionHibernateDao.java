@@ -91,7 +91,7 @@ public class TransactionHibernateDao {
 		session.beginTransaction();
 
 		try {
-			return session.createQuery("from PurchaseScreenBean where purchaseId.purchaseId=:purdetarg")
+			return session.createQuery("from PurchaseScreenBean as a where a.purchaseId.purchaseId=:purdetarg and a.deleteStatus='N'")
 					.setParameter("purdetarg", purchasedetid).list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,5 +138,22 @@ public class TransactionHibernateDao {
 		}
 
 	}
+	
+	//delete purchasedetails
+		public void deletePurchaseById(PurchaseScreenBean purchaseBean) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+
+			try {
+				session.createQuery("update PurchaseScreenBean as p set p.deleteStatus='Y' where p.purchaseScreenId=:purchaseScreenId")
+						.setParameter("purchaseScreenId", purchaseBean.getPurchaseScreenId()).executeUpdate();
+				transaction.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				session.close();
+			}
+		}
 
 }

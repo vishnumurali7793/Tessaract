@@ -263,6 +263,11 @@
 				<param name="purchaseBean.purchaseId">${purchaseBean.purchaseId}</param>
 			</result>
 		</action>
+		
+		<action name="deletePurchase"
+			class="org.tesseract.action.TransactionAction" method="deletePurchase">
+			<result name="success" type="redirectAction">editPurchaseDetails</result>
+		</action>
 	</package>
 
 </struts>

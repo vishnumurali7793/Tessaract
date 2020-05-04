@@ -52,6 +52,9 @@ public class PurchaseScreenBean {
 	
 	@Column(name = "gramweight")
 	private Double gramweight;
+	
+	@Column(name = "deletestatus")
+	private String deleteStatus="N";
 
 	public Integer getPurchaseScreenId() {
 		return purchaseScreenId;
@@ -139,6 +142,14 @@ public class PurchaseScreenBean {
 
 	public void setGramweight(Double gramweight) {
 		this.gramweight = gramweight;
+	}
+
+	public String getDeleteStatus() {
+		return deleteStatus;
+	}
+
+	public void setDeleteStatus(String deleteStatus) {
+		this.deleteStatus = deleteStatus;
 	}
 	
 	

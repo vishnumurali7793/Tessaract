@@ -119,4 +119,5 @@ CREATE TABLE `tesseract`.`user_details` (
             `tesseract`.`product`(`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
             
             ALTER TABLE `purchasedetails` ADD `gramweight` DOUBLE NULL AFTER `touch`;
+            ALTER TABLE `purchasedetails` ADD `deletestatus` VARCHAR(255) NULL AFTER `totalamount`;
             

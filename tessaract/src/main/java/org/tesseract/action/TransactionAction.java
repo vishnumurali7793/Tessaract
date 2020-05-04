@@ -95,6 +95,14 @@ public class TransactionAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+	
+	//delete purchasedata
+	public String deletePurchase() {
+		if(purchaseDetails.getPurchaseScreenId() != null) {
+			transHibernateDao.deletePurchaseById(purchaseDetails);
+		}
+		return SUCCESS;
+	}
 
 	public PurchaseBean getPurchaseBean() {
 		return purchaseBean;

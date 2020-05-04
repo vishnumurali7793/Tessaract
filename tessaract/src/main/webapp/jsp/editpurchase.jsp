@@ -41,30 +41,33 @@
 		$('#productModal').modal('show');
 		return false;
 	}
-	var totamt=0;
+	var totamt = 0;
 	function calculateamount(index) {
 		var purity = document.getElementById('purity' + index).value;
 		var gwt = document.getElementById('gramweight' + index).value;
 		var touch = document.getElementById('touch' + index).value;
-		var netwt=parseFloat((gwt*touch)/purity);
-		document.getElementById('netweight' + index).value=netwt.toFixed(3);
+		var netwt = parseFloat((gwt * touch) / purity);
+		document.getElementById('netweight' + index).value = netwt.toFixed(3);
 		var rate = document.getElementById('rate' + index).value;
-		var amount=parseFloat(rate*netwt);
-		document.getElementById('totalamount' + index).value=Math.round(amount);
-		 totamt +=Math.round(amount);
-		 netamttot();
+		var amount = parseFloat(rate * netwt);
+		document.getElementById('totalamount' + index).value = Math
+				.round(amount);
+		totamt += Math.round(amount);
+		netamttot();
 	}
-	
-	function netamttot(){
-		document.getElementById('totamt').value=totamt;
+
+	function netamttot() {
+		document.getElementById('totamt').value = totamt;
 	}
-	var roundofff=0;
-	function nettotalamt(){
+	var roundofff = 0;
+	function nettotalamt() {
 		roundofff = document.getElementById('roundoff').value;
-		var netamt=totamt-roundofff;
-		document.getElementById('totnetamt').value=netamt;
+		var netamt = totamt - roundofff;
+		document.getElementById('totnetamt').value = netamt;
 	}
-	
+	function deletepurchase(purid) {
+		location.href = "deletePurchase?purchaseDetails.purchaseScreenId=" + purid;
+	}
 </script>
 <style type="text/css">
 body {
@@ -83,8 +86,9 @@ td {
 	text-align: right;
 	padding: 8px;
 }
-th{
-text-align: center;
+
+th {
+	text-align: center;
 }
 
 .bd-navbar {
@@ -104,33 +108,33 @@ text-align: center;
 }
 </style>
 <body>
-<nav class="navbar navbar-inverse bar">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="goToHome">Tesseract</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="goToHome">Home</a></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="goToTaxMaster">Tax</a></li>
-						<li><a href="goToCategory">Category</a></li>
-						<li class="active"><a href="goToProduct">Product</a></li>
-						<li><a href="goToModel">Model</a></li>
-						<li><a href="goToCarat">Carat</a></li>
-						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
-					</ul></li>
-				<li><a href="#">Page 2</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						Sign Up</a></li> --%>
-				<li><a href="logout"><span
-						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-			</ul>
+	<nav class="navbar navbar-inverse bar">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="goToHome">Tesseract</a>
 		</div>
+		<ul class="nav navbar-nav">
+			<li><a href="goToHome">Home</a></li>
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="goToTaxMaster">Tax</a></li>
+					<li><a href="goToCategory">Category</a></li>
+					<li class="active"><a href="goToProduct">Product</a></li>
+					<li><a href="goToModel">Model</a></li>
+					<li><a href="goToCarat">Carat</a></li>
+					<li><a href="#">Page 1-2</a></li>
+					<li><a href="#">Page 1-3</a></li>
+				</ul></li>
+			<li><a href="#">Page 2</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
+						Sign Up</a></li> --%>
+			<li><a href="logout"><span
+					class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+		</ul>
+	</div>
 	</nav>
 	<div class="container-fluid">
 		<div class="row"></div>
@@ -145,6 +149,7 @@ text-align: center;
 		<div class="row">
 			<form action="savepurchaseDetails">
 				<s:hidden name="purchaseBean.purchaseId" />
+				<s:hidden name="purchaseamtBean.purchaseAmountId" />
 				<div class="col-xs-12">
 
 					<table class="table">
@@ -159,6 +164,7 @@ text-align: center;
 								<th>NET WT</th>
 								<th>RATE</th>
 								<th>TOTAL AMOUNT</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -173,53 +179,66 @@ text-align: center;
 											<s:property value="productId.productName" /></td>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].purity"
-											id="purity<s:property value="#row.index" />" value="<s:property value="purity"/>"
+											id="purity<s:property value="#row.index" />"
+											value="<s:property value="purity"/>"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].gramweight"
-											value="<s:property value="gramweight"/>" id="gramweight<s:property value="#row.index" />"
-											 onchange="calculateamount('<s:property value="#row.index" />')"/></td>
+											value="<s:property value="gramweight"/>"
+											id="gramweight<s:property value="#row.index" />"
+											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].touch"
-											value="<s:property value="touch"/>" id="touch<s:property value="#row.index" />"
+											value="<s:property value="touch"/>"
+											id="touch<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].netweight"
-											value="<s:property value="netweight"/>" id="netweight<s:property value="#row.index" />"
+											value="<s:property value="netweight"/>"
+											id="netweight<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 										<td><input class="form-control" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].rate"
-											value="<s:property value="rate"/>" id="rate<s:property value="#row.index" />"
+											value="<s:property value="rate"/>"
+											id="rate<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 										<td><input class="form-control totamont" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].totalamount"
-											value="<s:property value="totalamount"/>" id="totalamount<s:property value="#row.index" />"
+											value="<s:property value="totalamount"/>"
+											id="totalamount<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 
+										<td><button class="btn-xs btn-link"
+															onclick="deletepurchase('<s:property value="purchaseScreenId"/>')">[DELETE]</button></td>
 									</tr>
 								</s:iterator>
 							</s:if>
 							<s:else>no product added</s:else>
 							<tr>
-							<td colspan="8" align="right"><label>Net amount</label></td>
-							<td colspan="1"><input class="form-control" id="totamt"
-									type="text" name="purchaseamtBean.grossamount" value="<s:property value="purchaseamtBean.grossamount"/>" /></td>
+								<td colspan="8" align="right"><label>Net amount</label></td>
+								<td colspan="1"><input class="form-control" id="totamt"
+									type="text" name="purchaseamtBean.grossamount"
+									value="<s:property value="purchaseamtBean.grossamount"/>" /></td>
 							</tr>
 							<tr>
-							<td colspan="8" align="right"><label>Round off</label></td>
-							<td colspan="1"><input class="form-control" id ="roundoff"
-									type="text" name="purchaseamtBean.roundoff" value="<s:property value="purchaseamtBean.roundoff"/>" onchange="nettotalamt()"/></td>
+								<td colspan="8" align="right"><label>Round off</label></td>
+								<td colspan="1"><input class="form-control" id="roundoff"
+									type="text" name="purchaseamtBean.roundoff"
+									value="<s:property value="purchaseamtBean.roundoff"/>"
+									onchange="nettotalamt()" /></td>
 							</tr>
 							<tr>
-							<td colspan="8" align="right"><label>Total Net amount</label></td>
-							<td colspan="1"><input class="form-control" id= "totnetamt"
-									type="text" name="purchaseamtBean.netamount" value="<s:property value="purchaseamtBean.netamount"/>" /></td>
+								<td colspan="8" align="right"><label>Total Net
+										amount</label></td>
+								<td colspan="1"><input class="form-control" id="totnetamt"
+									type="text" name="purchaseamtBean.netamount"
+									value="<s:property value="purchaseamtBean.netamount"/>" /></td>
 							</tr>
 						</tbody>
 
 
 					</table>
-					
+
 					<div class="row">
 						<div align="center">
 							<s:if test="prodDetList != null">
