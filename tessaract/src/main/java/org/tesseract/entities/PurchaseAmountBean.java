@@ -34,12 +34,14 @@ public class PurchaseAmountBean {
 	@Column(name = "netamount")
 	private Double netamount;
 
-	public Integer getPurchaseScreenId() {
+	
+
+	public Integer getPurchaseAmountId() {
 		return purchaseAmountId;
 	}
 
-	public void setPurchaseScreenId(Integer purchaseScreenId) {
-		this.purchaseAmountId = purchaseScreenId;
+	public void setPurchaseAmountId(Integer purchaseAmountId) {
+		this.purchaseAmountId = purchaseAmountId;
 	}
 
 	public PurchaseBean getPurchaseId() {
