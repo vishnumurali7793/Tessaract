@@ -1,7 +1,10 @@
 package org.tesseract.action;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.tesseract.entities.ProductBean;
@@ -44,6 +47,30 @@ public class TransactionAction extends ActionSupport {
 		if (purchaseBean != null && purchaseBean.getVendor() != null) {
 			vendorList = new ArrayList<Object>();
 			vendorList = transHibernateDao.getVendorListByVendorCode(purchaseBean.getVendor().getVendorCode());
+		}
+		return SUCCESS;
+	}
+	
+	public String getmodalForPurchase() {
+		String invoiceNo = "";
+		String newInvc = null;
+		int year=0;
+		Integer invoival=transHibernateDao.invoicePurchase();
+		int abc=0;
+		if(invoival != null){
+			abc=invoival+1;
+			Date dt = new Date();
+			year = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(dt)).getYear();
+			newInvc = "SS/" + abc + "/" + year;
+		}else{
+			newInvc = "SS/" + "1" + "/" + year;
+		}
+		try {
+			purchaseBean=new PurchaseBean();
+			purchaseBean.setInvoice(newInvc);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return SUCCESS;
 	}

@@ -155,5 +155,23 @@ public class TransactionHibernateDao {
 				session.close();
 			}
 		}
+		
+		//invoiceno for purchase
+				public Integer invoicePurchase() {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+					try {
+						String qr = "SELECT COUNT(*)  FROM PurchaseBean";
+						Long count=(Long) session.createQuery(qr).uniqueResult();
+						return count.intValue();
+					} catch (Exception e) {
+						e.printStackTrace();
+						return 0;
+					}finally {
+						session.close();
+					}
+				}
+		
 
 }

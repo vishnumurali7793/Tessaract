@@ -220,7 +220,7 @@
 		</action>
 
 		<action name="getmodalForPurchase"
-			class="org.tesseract.action.MasterAction"
+			class="org.tesseract.action.TransactionAction"
 			method="getmodalForPurchase">
 			<result name="success">/jsp/addnewvendor.jsp</result>
 		</action>

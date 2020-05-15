@@ -34,8 +34,6 @@ public class PurchaseAmountBean {
 	@Column(name = "netamount")
 	private Double netamount;
 
-	
-
 	public Integer getPurchaseAmountId() {
 		return purchaseAmountId;
 	}

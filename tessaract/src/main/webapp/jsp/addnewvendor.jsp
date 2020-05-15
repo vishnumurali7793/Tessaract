@@ -16,6 +16,18 @@
 
 		<form action="savepurchaseVendor" id="addVendor">
 			<div class="row">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-3">
+					<label class="form-group" for="invoice-no"
+						value="purchaseBean.invoice">invoice no</label>
+					<s:textfield name="purchaseBean.invoice" type="text"
+						value="%{purchaseBean.invoice}" id="invoice-no" class="form-control"
+						placeholder="" readonly="true" />
+				</div>
+				<div class="col-xs-3"></div>
+				<div class="col-xs-3"></div>
+			</div>
+			<div class="row">
 				<div class="col-xs-3">
 					<label class="form-group" for="vendor-code">Vendor Code</label>
 					<s:textfield name="purchaseBean.vendor.vendorCode" type="text"
@@ -70,9 +82,11 @@
 			<hr>
 			<div class="row">
 				<div class="col-xs-6">
-					<label class="form-group" for="invoice-no">invoice no</label>
-					<s:textfield name="purchaseBean.invoice" type="text" value=""
-						id="invoice-no" class="form-control" placeholder="invoiceno" />
+					<%-- <label class="form-group" for="invoice-no"
+						value="purchaseBean.invoice">invoice no</label>
+					<s:textfield name="purchaseBean.invoice" type="text"
+						value="purchaseBean.invoice" id="invoice-no" class="form-control"
+						placeholder="" readonly="true" /> --%>
 				</div>
 				<div class="col-xs-6">
 					<button class="btn btn-sm btn-success" type="submit"
