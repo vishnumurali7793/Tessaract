@@ -55,6 +55,9 @@ public class PurchaseScreenBean {
 	
 	@Column(name = "deletestatus")
 	private String deleteStatus="N";
+	
+	@Column(name = "quantity")
+	private Double quantity;
 
 	public Integer getPurchaseScreenId() {
 		return purchaseScreenId;
@@ -150,6 +153,14 @@ public class PurchaseScreenBean {
 
 	public void setDeleteStatus(String deleteStatus) {
 		this.deleteStatus = deleteStatus;
+	}
+
+	public Double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
 	}
 	
 	

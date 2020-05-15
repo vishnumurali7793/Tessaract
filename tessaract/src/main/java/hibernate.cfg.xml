@@ -49,6 +49,7 @@
         <mapping class="org.tesseract.entities.PurchaseBean"/>
         <mapping class="org.tesseract.entities.PurchaseScreenBean"/>
         <mapping class="org.tesseract.entities.PurchaseAmountBean"/>
+        <mapping class="org.tesseract.entities.StockBean"/>
 <!--         <mapping class="com.happy.entities.AccountHeadBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesProductMappingBean"/> -->

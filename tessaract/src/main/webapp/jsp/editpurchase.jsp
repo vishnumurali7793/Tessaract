@@ -49,7 +49,8 @@
 		var netwt = parseFloat((gwt * touch) / purity);
 		document.getElementById('netweight' + index).value = netwt.toFixed(3);
 		var rate = document.getElementById('rate' + index).value;
-		var amount = parseFloat(rate * netwt);
+		var quan = document.getElementById('quantity' + index).value;
+		var amount = parseFloat(rate * netwt * quan);
 		document.getElementById('totalamount' + index).value = Math
 				.round(amount);
 		totamt += Math.round(amount);
@@ -163,6 +164,7 @@ th {
 								<th>TOUCH</th>
 								<th>NET WT</th>
 								<th>RATE</th>
+								<th>QUANTITY</th>
 								<th>TOTAL AMOUNT</th>
 								<th>Action</th>
 							</tr>
@@ -202,6 +204,11 @@ th {
 											value="<s:property value="rate"/>"
 											id="rate<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
+										<td><input class="form-control" type="text"
+											name="prodDetList[<s:property value="#row.index"/>].quantity"
+											value="<s:property value="quantity"/>"
+											id="quantity<s:property value="#row.index" />"
+											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 										<td><input class="form-control totamont" type="text"
 											name="prodDetList[<s:property value="#row.index"/>].totalamount"
 											value="<s:property value="totalamount"/>"
@@ -215,20 +222,20 @@ th {
 							</s:if>
 							<s:else>no product added</s:else>
 							<tr>
-								<td colspan="8" align="right"><label>Net amount</label></td>
+								<td colspan="9" align="right"><label>Net amount</label></td>
 								<td colspan="1"><input class="form-control" id="totamt"
 									type="text" name="purchaseamtBean.grossamount"
 									value="<s:property value="purchaseamtBean.grossamount"/>" /></td>
 							</tr>
 							<tr>
-								<td colspan="8" align="right"><label>Round off</label></td>
+								<td colspan="9" align="right"><label>Round off</label></td>
 								<td colspan="1"><input class="form-control" id="roundoff"
 									type="text" name="purchaseamtBean.roundoff"
 									value="<s:property value="purchaseamtBean.roundoff"/>"
 									onchange="nettotalamt()" /></td>
 							</tr>
 							<tr>
-								<td colspan="8" align="right"><label>Total Net
+								<td colspan="9" align="right"><label>Total Net
 										amount</label></td>
 								<td colspan="1"><input class="form-control" id="totnetamt"
 									type="text" name="purchaseamtBean.netamount"

@@ -13,6 +13,7 @@ import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseScreenBean;
+import org.tesseract.entities.StockBean;
 import org.tesseract.entities.VendorBean;
 
 public class TransactionHibernateDao {
@@ -172,6 +173,21 @@ public class TransactionHibernateDao {
 						session.close();
 					}
 				}
-		
+				// save stock
+				public void savestockDetails(StockBean stockBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.saveOrUpdate(stockBean);
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						session.close();
+					}
+
+				}
 
 }

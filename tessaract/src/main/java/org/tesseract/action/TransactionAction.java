@@ -11,6 +11,7 @@ import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseScreenBean;
+import org.tesseract.entities.StockBean;
 import org.tesseract.entities.VendorBean;
 import org.tesseract.persistance.MasterHibernateDao;
 import org.tesseract.persistance.TransactionHibernateDao;
@@ -29,7 +30,7 @@ public class TransactionAction extends ActionSupport {
 	private List<ProductBean> prodList;
 	private List<PurchaseScreenBean> prodDetList;
 	private PurchaseAmountBean purchaseamtBean;
-
+    private StockBean stockBean;
 	// vendor page action
 	public String savepurchaseVendor() {
 		if (purchaseBean != null) {
@@ -114,6 +115,15 @@ public class TransactionAction extends ActionSupport {
 				pd.setPurchaseScreenId(newprodlist.get(i).getPurchaseScreenId());
 				transHibernateDao.savepurchasedetails(pd);
 				
+				stockBean=new StockBean();
+				stockBean.setProductId(new ProductBean());
+				stockBean.getProductId().setProductId(newprodlist.get(i).getProductId().getProductId());
+				stockBean.setPurchaseId(new PurchaseBean());
+				stockBean.getPurchaseId().setPurchaseId(newprodlist.get(i).getPurchaseId().getPurchaseId());
+				stockBean.setDate(new Date());
+				stockBean.setNetWt(pd.getNetweight());
+				stockBean.setQuantity(pd.getQuantity());
+				transHibernateDao.savestockDetails(stockBean);
 				i++;
 			}
 			purchaseamtBean.setPurchaseId(new PurchaseBean());
@@ -193,6 +203,14 @@ public class TransactionAction extends ActionSupport {
 
 	public void setPurchaseamtBean(PurchaseAmountBean purchaseamtBean) {
 		this.purchaseamtBean = purchaseamtBean;
+	}
+
+	public StockBean getStockBean() {
+		return stockBean;
+	}
+
+	public void setStockBean(StockBean stockBean) {
+		this.stockBean = stockBean;
 	}
 
 }
