@@ -7,10 +7,12 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseScreenBean;
+import org.tesseract.entities.SalesBase;
 import org.tesseract.entities.StockBean;
 import org.tesseract.entities.VendorBean;
 import org.tesseract.persistance.MasterHibernateDao;
@@ -31,6 +33,10 @@ public class TransactionAction extends ActionSupport {
 	private List<PurchaseScreenBean> prodDetList;
 	private PurchaseAmountBean purchaseamtBean;
     private StockBean stockBean;
+    private SalesBase salesBase;
+	private List<SalesBase> salesBaseList;
+	private Collection<Object> customerList;
+	
 	// vendor page action
 	public String savepurchaseVendor() {
 		if (purchaseBean != null) {
@@ -141,6 +147,51 @@ public class TransactionAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String getmodalForSales() {
+		String invoiceNo = "";
+		String newInvc = null;
+		int year=0;
+		Integer invoival=transHibernateDao.invoiceSales();
+		int abc=0;
+		if(invoival != null){
+			abc=invoival+1;
+			Date dt = new Date();
+			year = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(dt)).getYear();
+			newInvc = "SS/" + abc + "/" + year;
+		}else{
+			newInvc = "SS/" + "1" + "/" + year;
+		}
+		try {
+			salesBase=new SalesBase();
+			salesBase.setInvoice(newInvc);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
+	
+	public String getCustomerDetails() throws Exception {
+		if (salesBase != null && salesBase.getCustomerId() != null) {
+			customerList = new ArrayList<Object>();
+			customerList = transHibernateDao.getCustomerListByCustCode(salesBase.getCustomerId().getCustomerCode());
+		}
+		return SUCCESS;
+	}
+	
+	// sales page action
+		public String savesalescustomer() {
+			if (salesBase != null) {
+				Integer cusid = transHibernateDao.getcustomerDetails(salesBase.getCustomerId().getCustomerCode());
+				salesBase.setCustomerId(new CustomerBean());
+				salesBase.getCustomerId().setCustomerId(cusid);
+				transHibernateDao.addSalesdata(salesBase);
+				return SUCCESS;
+			}
+
+			return INPUT;
+		}
+	
 	public PurchaseBean getPurchaseBean() {
 		return purchaseBean;
 	}
@@ -213,4 +264,29 @@ public class TransactionAction extends ActionSupport {
 		this.stockBean = stockBean;
 	}
 
+	public SalesBase getSalesBase() {
+		return salesBase;
+	}
+
+	public void setSalesBase(SalesBase salesBase) {
+		this.salesBase = salesBase;
+	}
+
+	public List<SalesBase> getSalesBaseList() {
+		return salesBaseList;
+	}
+
+	public void setSalesBaseList(List<SalesBase> salesBaseList) {
+		this.salesBaseList = salesBaseList;
+	}
+
+	public Collection<Object> getCustomerList() {
+		return customerList;
+	}
+
+	public void setCustomerList(Collection<Object> customerList) {
+		this.customerList = customerList;
+	}
+
+	
 }

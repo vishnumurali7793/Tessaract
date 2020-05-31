@@ -15,6 +15,7 @@ import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.RateBean;
+import org.tesseract.entities.SalesBase;
 import org.tesseract.entities.TaxBean;
 import org.tesseract.entities.VendorBean;
 import org.tesseract.entities.modelBean;
@@ -613,4 +614,23 @@ public class MasterHibernateDao {
 
 
 				}
+				
+				//get sales list
+				@SuppressWarnings("unchecked")
+				public List<SalesBase> getSalesList() {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.createQuery("from SalesBase").list();
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
 }

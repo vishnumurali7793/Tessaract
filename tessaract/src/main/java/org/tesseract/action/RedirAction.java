@@ -8,6 +8,7 @@ import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.RateBean;
+import org.tesseract.entities.SalesBase;
 import org.tesseract.entities.TaxBean;
 import org.tesseract.entities.VendorBean;
 import org.tesseract.entities.modelBean;
@@ -29,6 +30,8 @@ public class RedirAction extends ActionSupport {
 	private List<VendorBean> vendorList;
 	private List<PurchaseBean> purchaseList;
 	private PurchaseBean purchaseBean;
+	private SalesBase salesBase;
+	private List<SalesBase> salesBaseList;
 	
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
@@ -77,6 +80,11 @@ public class RedirAction extends ActionSupport {
 	
 	public String goToPurchase() {
 		purchaseList = masterHibernateDao.getPurchaseList();
+		return SUCCESS;
+	}
+	
+	public String goToSales() {
+		salesBaseList = masterHibernateDao.getSalesList();
 		return SUCCESS;
 	}
 	
@@ -162,6 +170,22 @@ public class RedirAction extends ActionSupport {
 
 	public void setPurchaseBean(PurchaseBean purchaseBean) {
 		this.purchaseBean = purchaseBean;
+	}
+
+	public SalesBase getSalesBase() {
+		return salesBase;
+	}
+
+	public void setSalesBase(SalesBase salesBase) {
+		this.salesBase = salesBase;
+	}
+
+	public List<SalesBase> getSalesBaseList() {
+		return salesBaseList;
+	}
+
+	public void setSalesBaseList(List<SalesBase> salesBaseList) {
+		this.salesBaseList = salesBaseList;
 	}
 	
 	

@@ -88,11 +88,11 @@ td, th {
 	}
 	
 
-	function addvendor() {
-		$('#productModal #modalTitle').html("Add items to purchase bill");
+	function addcustomer() {
+		$('#productModal #modalTitle').html("Add items to sales bill");
 		$.ajax({
 			type : "GET",
-			url : "getmodalForPurchase",
+			url : "getmodalForSales",
 			beforeSend : function() {
 				$('#productModal .modal-body').html('Loading..');
 			},
@@ -130,8 +130,8 @@ td, th {
 						<li><a href="goToRate">Rate</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
 						<li><a href="goToVendor">Vendor</a></li>
-						<li class="active"><a href="goToPurchase">Purchase</a></li>
-						<li><a href="goToSales">Sales</a></li>
+						<li><a href="goToPurchase">Purchase</a></li>
+						<li class="active"><a href="goToSales">Sales</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li><a href="#">Page 2</a></li>
@@ -147,13 +147,13 @@ td, th {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel">
-				<h2>PURCHASE</h2>
+				<h2>SALES</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapse1">Add Vendor</a>
+									href="#collapse1">Add Customer</a>
 							</h4>
 						</div>
 						<div id="collapse1" class="panel-collapse collapse in">
@@ -162,7 +162,7 @@ td, th {
 									<div class="row">
 										<div class="col-md-12">
 											<button type="button" class="btn btn-primary"
-												data-toggle="modal" onclick="addvendor()">Add new bill</button>
+												data-toggle="modal" onclick="addcustomer()">Add new bill</button>
 										</div>
 									</div>
 									
@@ -175,29 +175,26 @@ td, th {
 										<tr>
 											<th>#</th>
 											<th>INVOICE NO & DATE</th>
-											<th>BILL NO & DATE</th>
-											<th>VENDOR DETAILS</th>
+											<th>CUSTOMER DETAILS</th>
 											<th>GST CODE</th>
 											<th>RATE</th>
 											<th>ACTIONS</th>
 										</tr>
 									</thead>
 									<!-- ***list name from redirectaction*** -->
-										<s:if test="purchaseList!=null && purchaseList.size()>0">
+										<s:if test="salesBaseList!=null && salesBaseList.size()>0">
 
-											<s:iterator value="purchaseList" status="row">
+											<s:iterator value="salesBaseList" status="row">
 												<tr>
 													<td><s:property value="#row.count" /></td>
 													<td><s:property value="invoice" />&</br>
 													    <s:property value="invoiceDate" />
 													</td>
-													<td><s:property value="purBillNo" />&</br>
-													    <s:property value="purchaseDate" /></td>
-													<td><s:property value="vendor.vendorCode" /></br>
-													    <s:property value="vendor.vendorName" />,
-													    <s:property value="vendor.address1" />,
-													    <s:property value="vendor.contact" />,
-													    <s:property value="vendor.pin" />
+													<td><s:property value="customerId.customerName" /></br>
+													    <s:property value="customerId.address1" />,
+													    <s:property value="customerId.address2" />,
+													    <s:property value="customerId.contact" />,
+													    <s:property value="customerId.pin" />
 													</td>
 													<td><s:property value="gstCode" /></td>
 													<td>GOLD :<s:property value="goldRate" /></br>
@@ -214,6 +211,9 @@ td, th {
 
 
 										</s:if>
+										<s:else>
+									<p>	----------no sales added-------------------</p>
+										</s:else>
 								</table>
 							</div>
 							</s:form>
@@ -221,57 +221,7 @@ td, th {
 					</div>
 				</div>
 			</div>
-			<%-- <div class="panel panel-primary">
-					<div class="panel-heading" role="tab" id="collapse-two">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion"
-								class="collapsed" role="button" aria-expanded="true"
-								aria-controls="collapse2" href="#collapse2">Vendor Details</a>
-						</h4>
-					</div>
-					<div id="collapse2" class="panel-collapse collapse in"
-						role="tabpanel" aria-labelledby="collapse-two">
-						<div class="panel-body">
-							<div class="container">
-								<h2>Vendor Table</h2>
-								<table class="table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>VENDOR CODE</th>
-											<th>VENDOR NAME</th>
-											<th>VENDOR ADDRESS</th>
-											<th>VENDOR CONTACT</th>
-											<th>DATE</th>
-											<th>Active Status</th>
-											<th>Actions</th>
-										</tr>
-									</thead>
-									<tbody>
-										<!-- ***list name from redirectaction*** -->
-										<s:if test="vendorList!=null && vendorList.size()>0">
-											<s:iterator value="vendorList" status="row">
-												<tr>
-													<td><s:property value="#row.count" /></td>
-													<td><s:property value="vendorCode" /></td>
-													<td><s:property value="vendorName" /></td>
-													<td><s:property value="address1" /><br> <s:property
-															value="address2" /><br> <s:property value="pin" /></td>
-													<td><s:property value="contact" /></td>
-													<td><s:property value="addedOn" /></td>
-													<td><s:property value="activeStatus" /></td>
-													<td><button class="btn-xs btn-link"
-															onclick="editVendor('<s:property value="vendorId"/>')">[EDIT]</button>
-														<button class="btn-xs btn-link"
-															onclick="deleteVendor('<s:property value="vendorId"/>')">[DELETE]</button></td>
-												</tr>
-											</s:iterator>
-										</s:if>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div> --%>
+			
 		</div>
 	</div>
 	</div>

@@ -268,6 +268,32 @@
 			class="org.tesseract.action.TransactionAction" method="deletePurchase">
 			<result name="success" type="redirectAction">editPurchaseDetails</result>
 		</action>
+		<!-- purchase page finished -->
+		
+		<action name="goToSales"
+			class="org.tesseract.action.RedirAction" method="goToSales">
+			<result name="success">/jsp/salesBase.jsp</result>
+		</action>
+		<action name="getmodalForSales"
+			class="org.tesseract.action.TransactionAction"
+			method="getmodalForSales">
+			<result name="success">/jsp/addnewsales.jsp</result>
+		</action>
+		
+		<action name="getCustomerDetails"
+			class="org.tesseract.action.TransactionAction"
+			method="getCustomerDetails">
+			<result type="json">
+				<param name="root">customerList</param>
+			</result>
+		</action>
+		
+		<action name="savesalescustomer"
+			class="org.tesseract.action.TransactionAction"
+			method="savesalescustomer">
+			<result name="success" type="redirectAction">goToSales</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
 	</package>
 
 </struts>
