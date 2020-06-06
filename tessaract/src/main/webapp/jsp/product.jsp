@@ -126,6 +126,7 @@ td, th {
 										<div class=" col s12">
 											<s:hidden name="categoryBean.categoryId" />
 											<s:hidden name="productBean.productId" />
+											<s:hidden name="modelBean.modelId" />
 											<label>CategoryName</label> <select
 												class="custom-select custom-select-sm" id="select"
 												value="<s:property value="productBean.category.categoryName" />"
@@ -141,7 +142,18 @@ td, th {
 											<input name="productBean.productName" type="text"
 												class="validate"
 												value="<s:property value="productBean.productName"/>"
-												placeholder="ProductName"> <label>Date</label> <input
+												placeholder="ProductName"> 
+												
+												<label>Modal Name</label> <select
+												class="custom-select custom-select-sm" id="select"
+												value="<s:property value="productBean.modelId.modelId" />"
+												name="productBean.modelId.modelId">
+												<s:iterator value="modelList" status="row">
+													<option value="<s:property value='modelId'/>"><s:property
+															value='modelName' /></option>
+												</s:iterator>
+												
+												<label>Date</label> <input
 												name="productBean.addedOn" type="date" class="validate"
 												value="<s:property value="productBean.addedOn"/>"
 												required="required"> <i class="fa fa-calendar"
@@ -170,11 +182,11 @@ td, th {
 								aria-controls="collapse2" href="#collapse2">Product Details</a>
 						</h4>
 					</div>
-					<div id="collapse2" class="panel-collapse collapse" role="tabpanel"
+					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
 						aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
-								<h2>Category Table</h2>
+								<h2>Product Table</h2>
 								<table class="table">
 									<thead>
 										<tr>
@@ -182,6 +194,7 @@ td, th {
 											<th>CATEGORY NAME</th>
 											<th>PRODUCT CODE</th>
 											<th>PRODUCT NAME</th>
+											<th>MODEL NAME</th>
 											<th>DATE</th>
 											<th>ACTIVE STATUS</th>
 											<th>ACTIONS</th>
@@ -197,6 +210,7 @@ td, th {
 													<td><s:property value="category.categoryName" /></td>
 													<td><s:property value="productCode" /></td>
 													<td><s:property value="productName" /></td>
+													<td><s:property value="modelId.modelName" /></td>
 													<td><s:property value="addedOn" /></td>
 													<td><s:property value="activeStatus" /></td>
 													<td><button class="btn-xs btn-link"

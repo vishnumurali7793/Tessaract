@@ -13,7 +13,9 @@ import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseScreenBean;
+import org.tesseract.entities.SalesAmountBean;
 import org.tesseract.entities.SalesBase;
+import org.tesseract.entities.SalesDetailsBean;
 import org.tesseract.entities.StockBean;
 import org.tesseract.entities.VendorBean;
 
@@ -258,4 +260,113 @@ public class TransactionHibernateDao {
 					}
 
 				}
+				
+				// get salesdetails list
+				@SuppressWarnings("unchecked")
+				public List<SalesDetailsBean> getSalesDetailsList(Integer salesdetid) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.createQuery("from SalesDetailsBean as a where a.salesid.salesId=:sales and a.deleteStatus='N'")
+								.setParameter("sales", salesdetid).list();
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				// get productamttot
+				@SuppressWarnings("unchecked")
+				public SalesAmountBean getsalestotamt(Integer salesdetid) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return (SalesAmountBean) session
+								.createQuery("from SalesAmountBean where salesid.salesId=:sales")
+								.setParameter("sales", salesdetid).uniqueResult();
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				// save purchasedetails data
+				public void saveSalesdetails(SalesDetailsBean salesdetailBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.saveOrUpdate(salesdetailBean);
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				// save salestotnetamt data
+				public void savesalesnetamt(SalesAmountBean salnetamtBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.saveOrUpdate(salnetamtBean);
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						session.close();
+					}
+
+				}
+				
+				//delete salesdetails
+				public void deleteSalesById(SalesDetailsBean salesBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					Transaction transaction = session.beginTransaction();
+
+					try {
+						session.createQuery("update SalesDetailsBean as p set p.deleteStatus='Y' where p.salesDetailsId=:salesdetId")
+								.setParameter("salesdetId", salesBean.getSalesDetailsId()).executeUpdate();
+						transaction.commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						session.close();
+					}
+				}
+				
+				// delete updte in salesdetails
+				public SalesDetailsBean delsalesById(SalesDetailsBean prodBean) {
+					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+					Session session = sessionFactory.openSession();
+					session.beginTransaction();
+
+					try {
+						return session.get(SalesDetailsBean.class, prodBean.getSalesDetailsId());
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					} finally {
+						session.close();
+					}
+
+				}
+				
 }

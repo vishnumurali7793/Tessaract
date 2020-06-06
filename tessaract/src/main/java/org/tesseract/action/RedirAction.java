@@ -48,6 +48,7 @@ public class RedirAction extends ActionSupport {
 	public String goToProduct() {
 		prodList = masterHibernateDao.getProductList();
 		catList = masterHibernateDao.getCategryList();
+		modelList = masterHibernateDao.getModelList();
 		return SUCCESS;
 	}
 	

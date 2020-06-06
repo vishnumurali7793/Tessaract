@@ -202,7 +202,7 @@ td, th {
 													    PLATINUM :<s:property value="platinumRate" />
 													</td>
 													<td>
-													<a href="editPurchaseDetails?purchaseBean.purchaseId=<s:property value="purchaseId" />" src="tessaract/src/main/webapp/images/edit.png">EDIT</a>
+													<a href="editsalesDetails?salesBase.salesId=<s:property value="salesId" />" src="tessaract/src/main/webapp/images/edit.png">EDIT</a>
 													</td>
 													
 

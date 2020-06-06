@@ -30,6 +30,10 @@ public class ProductBean {
 	@JoinColumn(name="category")
 	private CategoryBean category;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="modelId")
+	private modelBean modelId;
+	
 	@Column(name = "added_on")
 	private String addedOn;
 	
@@ -94,4 +98,13 @@ public class ProductBean {
 	public void setDeleteStatus(String deleteStatus) {
 		this.deleteStatus = deleteStatus;
 	}
+
+	public modelBean getModelId() {
+		return modelId;
+	}
+
+	public void setModelId(modelBean modelId) {
+		this.modelId = modelId;
+	}
+	
 }

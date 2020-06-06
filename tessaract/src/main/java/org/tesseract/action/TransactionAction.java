@@ -12,9 +12,12 @@ import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseScreenBean;
+import org.tesseract.entities.SalesAmountBean;
 import org.tesseract.entities.SalesBase;
+import org.tesseract.entities.SalesDetailsBean;
 import org.tesseract.entities.StockBean;
 import org.tesseract.entities.VendorBean;
+import org.tesseract.entities.modelBean;
 import org.tesseract.persistance.MasterHibernateDao;
 import org.tesseract.persistance.TransactionHibernateDao;
 
@@ -32,11 +35,14 @@ public class TransactionAction extends ActionSupport {
 	private List<ProductBean> prodList;
 	private List<PurchaseScreenBean> prodDetList;
 	private PurchaseAmountBean purchaseamtBean;
-    private StockBean stockBean;
-    private SalesBase salesBase;
+	private StockBean stockBean;
+	private SalesBase salesBase;
 	private List<SalesBase> salesBaseList;
 	private Collection<Object> customerList;
-	
+	private SalesDetailsBean salesdetils;
+	private List<SalesDetailsBean> salDetList;
+	private SalesAmountBean salesamtbean;
+
 	// vendor page action
 	public String savepurchaseVendor() {
 		if (purchaseBean != null) {
@@ -57,23 +63,23 @@ public class TransactionAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	public String getmodalForPurchase() {
 		String invoiceNo = "";
 		String newInvc = null;
-		int year=0;
-		Integer invoival=transHibernateDao.invoicePurchase();
-		int abc=0;
-		if(invoival != null){
-			abc=invoival+1;
+		int year = 0;
+		Integer invoival = transHibernateDao.invoicePurchase();
+		int abc = 0;
+		if (invoival != null) {
+			abc = invoival + 1;
 			Date dt = new Date();
 			year = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(dt)).getYear();
 			newInvc = "SS/" + abc + "/" + year;
-		}else{
+		} else {
 			newInvc = "SS/" + "1" + "/" + year;
 		}
 		try {
-			purchaseBean=new PurchaseBean();
+			purchaseBean = new PurchaseBean();
 			purchaseBean.setInvoice(newInvc);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -81,47 +87,47 @@ public class TransactionAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	public String getProductListForPurchase() {
 		prodList = masterHibernateDao.getProductList();
 		return SUCCESS;
 	}
-	
+
 	public String editPurchaseDetails() {
-		if(purchaseBean !=null && purchaseBean.getPurchaseId() != null){
-		prodDetList=transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
-		purchaseamtBean=transHibernateDao.getProducttotamt(purchaseBean.getPurchaseId());
+		if (purchaseBean != null && purchaseBean.getPurchaseId() != null) {
+			prodDetList = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
+			purchaseamtBean = transHibernateDao.getProducttotamt(purchaseBean.getPurchaseId());
 		}
 		return SUCCESS;
 	}
-	
-	public String savepurchaseform (){
-		if(checkbox != null && checkbox.length > 0 && purchaseBean.getPurchaseId() != null){
-			for(String chboxdata : checkbox){
-					purchaseDetails= new PurchaseScreenBean();
-					purchaseDetails.setProductId(new ProductBean());
-					purchaseDetails.getProductId().setProductId(Integer.parseInt(chboxdata));
-					purchaseDetails.setPurchaseId(new PurchaseBean());
-					purchaseDetails.getPurchaseId().setPurchaseId(purchaseBean.getPurchaseId());
-					transHibernateDao.savepurchasedetails(purchaseDetails);
+
+	public String savepurchaseform() {
+		if (checkbox != null && checkbox.length > 0 && purchaseBean.getPurchaseId() != null) {
+			for (String chboxdata : checkbox) {
+				purchaseDetails = new PurchaseScreenBean();
+				purchaseDetails.setProductId(new ProductBean());
+				purchaseDetails.getProductId().setProductId(Integer.parseInt(chboxdata));
+				purchaseDetails.setPurchaseId(new PurchaseBean());
+				purchaseDetails.getPurchaseId().setPurchaseId(purchaseBean.getPurchaseId());
+				transHibernateDao.savepurchasedetails(purchaseDetails);
 			}
 		}
 		return SUCCESS;
 	}
-	
-	public String savepurchaseDetails(){
-		if(prodDetList != null && purchaseBean.getPurchaseId() != null){
-			List<PurchaseScreenBean>  newprodlist= new ArrayList<PurchaseScreenBean>();
-	         newprodlist=transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
-			int i=0;
-			for(PurchaseScreenBean pd:prodDetList){
+
+	public String savepurchaseDetails() {
+		if (prodDetList != null && purchaseBean.getPurchaseId() != null) {
+			List<PurchaseScreenBean> newprodlist = new ArrayList<PurchaseScreenBean>();
+			newprodlist = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
+			int i = 0;
+			for (PurchaseScreenBean pd : prodDetList) {
 				pd.setProductId(newprodlist.get(i).getProductId());
 				pd.setPurchaseId(new PurchaseBean());
 				pd.getPurchaseId().setPurchaseId(newprodlist.get(i).getPurchaseId().getPurchaseId());
 				pd.setPurchaseScreenId(newprodlist.get(i).getPurchaseScreenId());
 				transHibernateDao.savepurchasedetails(pd);
-				
-				stockBean=new StockBean();
+
+				stockBean = new StockBean();
 				stockBean.setProductId(new ProductBean());
 				stockBean.getProductId().setProductId(newprodlist.get(i).getProductId().getProductId());
 				stockBean.setPurchaseId(new PurchaseBean());
@@ -138,10 +144,10 @@ public class TransactionAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
-	//delete purchasedata
+
+	// delete purchasedata
 	public String deletePurchase() {
-		if(purchaseDetails.getPurchaseScreenId() != null) {
+		if (purchaseDetails.getPurchaseScreenId() != null) {
 			transHibernateDao.deletePurchaseById(purchaseDetails);
 		}
 		return SUCCESS;
@@ -150,19 +156,19 @@ public class TransactionAction extends ActionSupport {
 	public String getmodalForSales() {
 		String invoiceNo = "";
 		String newInvc = null;
-		int year=0;
-		Integer invoival=transHibernateDao.invoiceSales();
-		int abc=0;
-		if(invoival != null){
-			abc=invoival+1;
+		int year = 0;
+		Integer invoival = transHibernateDao.invoiceSales();
+		int abc = 0;
+		if (invoival != null) {
+			abc = invoival + 1;
 			Date dt = new Date();
 			year = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(dt)).getYear();
 			newInvc = "SS/" + abc + "/" + year;
-		}else{
+		} else {
 			newInvc = "SS/" + "1" + "/" + year;
 		}
 		try {
-			salesBase=new SalesBase();
+			salesBase = new SalesBase();
 			salesBase.setInvoice(newInvc);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -170,7 +176,7 @@ public class TransactionAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	public String getCustomerDetails() throws Exception {
 		if (salesBase != null && salesBase.getCustomerId() != null) {
 			customerList = new ArrayList<Object>();
@@ -178,20 +184,76 @@ public class TransactionAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
-	// sales page action
-		public String savesalescustomer() {
-			if (salesBase != null) {
-				Integer cusid = transHibernateDao.getcustomerDetails(salesBase.getCustomerId().getCustomerCode());
-				salesBase.setCustomerId(new CustomerBean());
-				salesBase.getCustomerId().setCustomerId(cusid);
-				transHibernateDao.addSalesdata(salesBase);
-				return SUCCESS;
-			}
 
-			return INPUT;
+	// sales page action
+	public String savesalescustomer() {
+		if (salesBase != null) {
+			Integer cusid = transHibernateDao.getcustomerDetails(salesBase.getCustomerId().getCustomerCode());
+			salesBase.setCustomerId(new CustomerBean());
+			salesBase.getCustomerId().setCustomerId(cusid);
+			transHibernateDao.addSalesdata(salesBase);
+			return SUCCESS;
 		}
-	
+
+		return INPUT;
+	}
+
+	public String editsalesDetails() {
+		if (salesBase != null && salesBase.getSalesId() != null) {
+			salDetList = transHibernateDao.getSalesDetailsList(salesBase.getSalesId());
+			salesamtbean = transHibernateDao.getsalestotamt(salesBase.getSalesId());
+		}
+		return SUCCESS;
+	}
+
+	public String getProductListForSales() {
+		prodList = masterHibernateDao.getProductList();
+		return SUCCESS;
+	}
+
+	public String saveSalesform() {
+		if (checkbox != null && checkbox.length > 0 && salesBase.getSalesId() != null) {
+			for (String chboxdata : checkbox) {
+				salesdetils = new SalesDetailsBean();
+				salesdetils.setProductId(new ProductBean());
+				salesdetils.getProductId().setProductId(Integer.parseInt(chboxdata));
+				salesdetils.setSalesid(new SalesBase());
+				salesdetils.getSalesid().setSalesId(salesBase.getSalesId());
+				transHibernateDao.saveSalesdetails(salesdetils);
+			}
+		}
+		return SUCCESS;
+	}
+
+	public String saveSAlesDetails() {
+		if (salDetList != null && salesBase.getSalesId() != null) {
+			List<SalesDetailsBean> newsalelist = new ArrayList<SalesDetailsBean>();
+			newsalelist = transHibernateDao.getSalesDetailsList(salesBase.getSalesId());
+			int i = 0;
+			for (SalesDetailsBean pd : salDetList) {
+				pd.setProductId(newsalelist.get(i).getProductId());
+				pd.setSalesid(new SalesBase());
+				pd.getSalesid().setSalesId(newsalelist.get(i).getSalesid().getSalesId());
+				pd.setSalesDetailsId(newsalelist.get(i).getSalesDetailsId());
+				transHibernateDao.saveSalesdetails(pd);
+				i++;
+			}
+			salesamtbean.setSalesid(new SalesBase());
+			salesamtbean.getSalesid().setSalesId(salesBase.getSalesId());
+			transHibernateDao.savesalesnetamt(salesamtbean);
+		}
+		return SUCCESS;
+	}
+
+	// delete salesdata
+	public String deletesalesdet() {
+		if (salesdetils.getSalesDetailsId() != null) {
+			salesdetils.setDeleteStatus("Y");
+			transHibernateDao.delsalesById(salesdetils);
+		}
+		return SUCCESS;
+	}
+
 	public PurchaseBean getPurchaseBean() {
 		return purchaseBean;
 	}
@@ -288,5 +350,28 @@ public class TransactionAction extends ActionSupport {
 		this.customerList = customerList;
 	}
 
-	
+	public SalesDetailsBean getSalesdetils() {
+		return salesdetils;
+	}
+
+	public void setSalesdetils(SalesDetailsBean salesdetils) {
+		this.salesdetils = salesdetils;
+	}
+
+	public List<SalesDetailsBean> getSalDetList() {
+		return salDetList;
+	}
+
+	public void setSalDetList(List<SalesDetailsBean> salDetList) {
+		this.salDetList = salDetList;
+	}
+
+	public SalesAmountBean getSalesamtbean() {
+		return salesamtbean;
+	}
+
+	public void setSalesamtbean(SalesAmountBean salesamtbean) {
+		this.salesamtbean = salesamtbean;
+	}
+
 }

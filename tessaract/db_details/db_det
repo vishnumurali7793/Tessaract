@@ -127,5 +127,10 @@ CREATE TABLE `tesseract`.`user_details` (
              `quantity` DOUBLE NULL , `netWt` DOUBLE NULL , PRIMARY KEY (`stock_id`)) ENGINE = InnoDB;
              
              ALTER TABLE `customer` ADD `customer_code` VARCHAR(255) NULL AFTER `customer_id`;
+             ALTER TABLE `product` ADD `modelId` INT NULL AFTER `category`;
              
-             
+             CREATE TABLE `tesseract`.`sales_details` ( `salesdetailsid` INT NOT NULL AUTO_INCREMENT , 
+             `salesid` INT NOT NULL , `hsn_code` VARCHAR(255) NULL , `productId` INT NOT NULL , `quantity` DOUBLE NULL , 
+             `goldweight` DOUBLE NULL , `stoneweight` DOUBLE NULL , `netweight` DOUBLE NOT NULL , `rate` DOUBLE NOT NULL , 
+             `vaamount` DOUBLE NOT NULL , `afterdis` DOUBLE NOT NULL , `stonecash` DOUBLE NOT NULL , `totamt` DOUBLE NOT NULL , 
+             `deletestatus` VARCHAR(255) NOT NULL , PRIMARY KEY (`salesdetailsid`)) ENGINE = InnoDB;

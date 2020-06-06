@@ -294,6 +294,41 @@
 			<result name="success" type="redirectAction">goToSales</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
+		
+		<action name="editsalesDetails"
+			class="org.tesseract.action.TransactionAction"
+			method="editsalesDetails">
+			<result name="success">/jsp/editsales.jsp</result>
+		</action>
+		
+		<action name="deletesalesdet"
+			class="org.tesseract.action.TransactionAction" method="deletesalesdet">
+			<result name="success" type="redirectAction">editsalesDetails</result>
+		</action>
+		
+		<action name="getProductListForSales"
+			class="org.tesseract.action.TransactionAction"
+			method="getProductListForSales">
+			<result name="success">/jsp/productListForSales.jsp</result>
+		</action>
+		
+		<action name="saveSalesform"
+			class="org.tesseract.action.TransactionAction"
+			method="saveSalesform">
+			<result name="success" type="redirectAction">
+				<param name="actionName">editsalesDetails</param>
+				<param name="salesBase.salesId">${salesBase.salesId}</param>
+			</result>
+		</action>
+		
+		<action name="saveSAlesDetails"
+			class="org.tesseract.action.TransactionAction"
+			method="saveSAlesDetails">
+			<result name="success" type="redirectAction">
+				<param name="actionName">editsalesDetails</param>
+				<param name="salesBase.salesId">${salesBase.salesId}</param>
+			</result>
+		</action>
 	</package>
 
 </struts>
