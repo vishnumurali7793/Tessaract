@@ -248,7 +248,6 @@ public class TransactionAction extends ActionSupport {
 	// delete salesdata
 	public String deletesalesdet() {
 		if (salesdetils.getSalesDetailsId() != null) {
-			salesdetils.setDeleteStatus("Y");
 			transHibernateDao.delsalesById(salesdetils);
 		}
 		return SUCCESS;

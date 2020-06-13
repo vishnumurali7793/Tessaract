@@ -254,7 +254,7 @@
 				<param name="purchaseBean.purchaseId">${purchaseBean.purchaseId}</param>
 			</result>
 		</action>
-		
+
 		<action name="savepurchaseDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="savepurchaseDetails">
@@ -263,13 +263,14 @@
 				<param name="purchaseBean.purchaseId">${purchaseBean.purchaseId}</param>
 			</result>
 		</action>
-		
+
 		<action name="deletePurchase"
-			class="org.tesseract.action.TransactionAction" method="deletePurchase">
+			class="org.tesseract.action.TransactionAction"
+			method="deletePurchase">
 			<result name="success" type="redirectAction">editPurchaseDetails</result>
 		</action>
 		<!-- purchase page finished -->
-		
+
 		<action name="goToSales"
 			class="org.tesseract.action.RedirAction" method="goToSales">
 			<result name="success">/jsp/salesBase.jsp</result>
@@ -279,7 +280,7 @@
 			method="getmodalForSales">
 			<result name="success">/jsp/addnewsales.jsp</result>
 		</action>
-		
+
 		<action name="getCustomerDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="getCustomerDetails">
@@ -287,40 +288,42 @@
 				<param name="root">customerList</param>
 			</result>
 		</action>
-		
+
 		<action name="savesalescustomer"
 			class="org.tesseract.action.TransactionAction"
 			method="savesalescustomer">
 			<result name="success" type="redirectAction">goToSales</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-		
+
 		<action name="editsalesDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="editsalesDetails">
 			<result name="success">/jsp/editsales.jsp</result>
 		</action>
-		
+
 		<action name="deletesalesdet"
-			class="org.tesseract.action.TransactionAction" method="deletesalesdet">
-			<result name="success" type="redirectAction">editsalesDetails</result>
+			class="org.tesseract.action.TransactionAction"
+			method="deletesalesdet">
+			<result name="success" type="redirectAction">
+				editsalesDetails
+			</result>
 		</action>
-		
+
 		<action name="getProductListForSales"
 			class="org.tesseract.action.TransactionAction"
 			method="getProductListForSales">
 			<result name="success">/jsp/productListForSales.jsp</result>
 		</action>
-		
+
 		<action name="saveSalesform"
-			class="org.tesseract.action.TransactionAction"
-			method="saveSalesform">
+			class="org.tesseract.action.TransactionAction" method="saveSalesform">
 			<result name="success" type="redirectAction">
 				<param name="actionName">editsalesDetails</param>
 				<param name="salesBase.salesId">${salesBase.salesId}</param>
 			</result>
 		</action>
-		
+
 		<action name="saveSAlesDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="saveSAlesDetails">

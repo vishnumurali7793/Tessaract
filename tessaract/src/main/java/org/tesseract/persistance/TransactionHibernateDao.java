@@ -96,7 +96,8 @@ public class TransactionHibernateDao {
 		session.beginTransaction();
 
 		try {
-			return session.createQuery("from PurchaseScreenBean as a where a.purchaseId.purchaseId=:purdetarg and a.deleteStatus='N'")
+			return session.createQuery(
+					"from PurchaseScreenBean as a where a.purchaseId.purchaseId=:purdetarg and a.deleteStatus='N'")
 					.setParameter("purdetarg", purchasedetid).list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -143,230 +144,234 @@ public class TransactionHibernateDao {
 		}
 
 	}
-	
-	//delete purchasedetails
-		public void deletePurchaseById(PurchaseScreenBean purchaseBean) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction transaction = session.beginTransaction();
 
-			try {
-				session.createQuery("update PurchaseScreenBean as p set p.deleteStatus='Y' where p.purchaseScreenId=:purchaseScreenId")
-						.setParameter("purchaseScreenId", purchaseBean.getPurchaseScreenId()).executeUpdate();
-				transaction.commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}finally {
-				session.close();
-			}
+	// delete purchasedetails
+	public void deletePurchaseById(PurchaseScreenBean purchaseBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.createQuery(
+					"update PurchaseScreenBean as p set p.deleteStatus='Y' where p.purchaseScreenId=:purchaseScreenId")
+					.setParameter("purchaseScreenId", purchaseBean.getPurchaseScreenId()).executeUpdate();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
 		}
-		
-		//invoiceno for purchase
-				public Integer invoicePurchase() {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					Transaction transaction = session.beginTransaction();
-					try {
-						String qr = "SELECT COUNT(*)  FROM PurchaseBean";
-						Long count=(Long) session.createQuery(qr).uniqueResult();
-						return count.intValue();
-					} catch (Exception e) {
-						e.printStackTrace();
-						return 0;
-					}finally {
-						session.close();
-					}
-				}
-				// save stock
-				public void savestockDetails(StockBean stockBean) {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					Transaction transaction = session.beginTransaction();
+	}
 
-					try {
-						session.saveOrUpdate(stockBean);
-						transaction.commit();
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						session.close();
-					}
+	// invoiceno for purchase
+	public Integer invoicePurchase() {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			String qr = "SELECT COUNT(*)  FROM PurchaseBean";
+			Long count = (Long) session.createQuery(qr).uniqueResult();
+			return count.intValue();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			session.close();
+		}
+	}
 
-				}
-				
-				//invoiceno for sales
-				public Integer invoiceSales() {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					Transaction transaction = session.beginTransaction();
-					try {
-						String qr = "SELECT COUNT(*)  FROM SalesBase";
-						Long count=(Long) session.createQuery(qr).uniqueResult();
-						return count.intValue();
-					} catch (Exception e) {
-						e.printStackTrace();
-						return 0;
-					}finally {
-						session.close();
-					}
-				}
+	// save stock
+	public void savestockDetails(StockBean stockBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
 
-				@SuppressWarnings("unchecked")
-				public Collection<Object> getCustomerListByCustCode(String custCode) throws Exception {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
+		try {
+			session.saveOrUpdate(stockBean);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 
-					try {
-						return session
-								.createQuery("SELECT customerCode, customerName, contact FROM CustomerBean WHERE customerCode LIKE '%"
-										+ custCode + "%'")
-								.list();
-					} catch (Exception e) {
-						return null;
-					}
-				}
-				
-				public Integer getcustomerDetails(String ss) {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					Transaction transaction = session.beginTransaction();
+	}
 
-					try {
-						String qr = "SELECT customerId FROM CustomerBean where customerCode=:custcode";
-						Query q = session.createQuery(qr).setParameter("custcode", ss);
-						return (Integer) q.uniqueResult();
-					} catch (Exception e) {
-						e.printStackTrace();
-						return 0;
-					} finally {
-						session.close();
-					}
+	// invoiceno for sales
+	public Integer invoiceSales() {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			String qr = "SELECT COUNT(*)  FROM SalesBase";
+			Long count = (Long) session.createQuery(qr).uniqueResult();
+			return count.intValue();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			session.close();
+		}
+	}
 
-				}
-				
-				// save sales data
-				public void addSalesdata(SalesBase salesbase) {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					Transaction transaction = session.beginTransaction();
+	@SuppressWarnings("unchecked")
+	public Collection<Object> getCustomerListByCustCode(String custCode) throws Exception {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
 
-					try {
-						session.saveOrUpdate(salesbase);
-						transaction.commit();
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						session.close();
-					}
+		try {
+			return session.createQuery(
+					"SELECT customerCode, customerName, contact FROM CustomerBean WHERE customerCode LIKE '%" + custCode
+							+ "%'")
+					.list();
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
-				}
-				
-				// get salesdetails list
-				@SuppressWarnings("unchecked")
-				public List<SalesDetailsBean> getSalesDetailsList(Integer salesdetid) {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					session.beginTransaction();
+	public Integer getcustomerDetails(String ss) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
 
-					try {
-						return session.createQuery("from SalesDetailsBean as a where a.salesid.salesId=:sales and a.deleteStatus='N'")
-								.setParameter("sales", salesdetid).list();
-					} catch (Exception e) {
-						e.printStackTrace();
-						return null;
-					} finally {
-						session.close();
-					}
+		try {
+			String qr = "SELECT customerId FROM CustomerBean where customerCode=:custcode";
+			Query q = session.createQuery(qr).setParameter("custcode", ss);
+			return (Integer) q.uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			session.close();
+		}
 
-				}
-				
-				// get productamttot
-				@SuppressWarnings("unchecked")
-				public SalesAmountBean getsalestotamt(Integer salesdetid) {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					session.beginTransaction();
+	}
 
-					try {
-						return (SalesAmountBean) session
-								.createQuery("from SalesAmountBean where salesid.salesId=:sales")
-								.setParameter("sales", salesdetid).uniqueResult();
-					} catch (Exception e) {
-						e.printStackTrace();
-						return null;
-					} finally {
-						session.close();
-					}
+	// save sales data
+	public void addSalesdata(SalesBase salesbase) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
 
-				}
-				
-				// save purchasedetails data
-				public void saveSalesdetails(SalesDetailsBean salesdetailBean) {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					Transaction transaction = session.beginTransaction();
+		try {
+			session.saveOrUpdate(salesbase);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 
-					try {
-						session.saveOrUpdate(salesdetailBean);
-						transaction.commit();
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						session.close();
-					}
+	}
 
-				}
-				
-				// save salestotnetamt data
-				public void savesalesnetamt(SalesAmountBean salnetamtBean) {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					Transaction transaction = session.beginTransaction();
+	// get salesdetails list
+	@SuppressWarnings("unchecked")
+	public List<SalesDetailsBean> getSalesDetailsList(Integer salesdetid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 
-					try {
-						session.saveOrUpdate(salnetamtBean);
-						transaction.commit();
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						session.close();
-					}
+		try {
+			return session
+					.createQuery("from SalesDetailsBean as a where a.salesid.salesId=:sales and a.deleteStatus='N'")
+					.setParameter("sales", salesdetid).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
 
-				}
-				
-				//delete salesdetails
-				public void deleteSalesById(SalesDetailsBean salesBean) {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					Transaction transaction = session.beginTransaction();
+	}
 
-					try {
-						session.createQuery("update SalesDetailsBean as p set p.deleteStatus='Y' where p.salesDetailsId=:salesdetId")
-								.setParameter("salesdetId", salesBean.getSalesDetailsId()).executeUpdate();
-						transaction.commit();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}finally {
-						session.close();
-					}
-				}
-				
-				// delete updte in salesdetails
-				public SalesDetailsBean delsalesById(SalesDetailsBean prodBean) {
-					SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-					Session session = sessionFactory.openSession();
-					session.beginTransaction();
+	// get productamttot
+	@SuppressWarnings("unchecked")
+	public SalesAmountBean getsalestotamt(Integer salesdetid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 
-					try {
-						return session.get(SalesDetailsBean.class, prodBean.getSalesDetailsId());
+		try {
+			return (SalesAmountBean) session.createQuery("from SalesAmountBean where salesid.salesId=:sales")
+					.setParameter("sales", salesdetid).uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
 
-					} catch (Exception e) {
-						e.printStackTrace();
-						return null;
-					} finally {
-						session.close();
-					}
+	}
 
-				}
-				
+	// save purchasedetails data
+	public void saveSalesdetails(SalesDetailsBean salesdetailBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.saveOrUpdate(salesdetailBean);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+	}
+
+	// save salestotnetamt data
+	public void savesalesnetamt(SalesAmountBean salnetamtBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.saveOrUpdate(salnetamtBean);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+	}
+
+	// delete salesdetails
+	public void deleteSalesById(SalesDetailsBean salesBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.createQuery(
+					"update SalesDetailsBean as p set p.deleteStatus='Y' where p.salesDetailsId=:salesdetId")
+					.setParameter("salesdetId", salesBean.getSalesDetailsId()).executeUpdate();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	// delete updte in salesdetails
+	public void delsalesById(SalesDetailsBean prodBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		try {
+			session.createQuery("UPDATE SalesDetailsBean SET deleteStatus = 'Y' WHERE salesDetailsId=:detailsId")
+					.setParameter("detailsId", prodBean.getSalesDetailsId()).executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+
+	}
+
 }

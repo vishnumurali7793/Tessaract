@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="UTF-8">
@@ -24,20 +21,19 @@
 <script type="text/javascript">
 	function getProductList() {
 		$('#productModal #modalTitle').html("Add items to SALES bill");
-		$
-				.ajax({
-					type : "GET",
-					url : "getProductListForSales",
-					data : {
-						"salesBase.salesId" : '<s:property value="salesBase.salesId"/>'
-					},
-					beforeSend : function() {
-						$('#productModal .modal-body').html('Loading..');
-					},
-					success : function(msg) {
-						$('#productModal .modal-body').html(msg);
-					}
-				});
+		$.ajax({
+			type : "GET",
+			url : "getProductListForSales",
+			data : {
+				"salesBase.salesId" : '<s:property value="salesBase.salesId"/>'
+			},
+			beforeSend : function() {
+				$('#productModal .modal-body').html('Loading..');
+			},
+			success : function(msg) {
+				$('#productModal .modal-body').html(msg);
+			}
+		});
 		$('#productModal').modal('show');
 		return false;
 	}
@@ -67,7 +63,33 @@
 		document.getElementById('totnetamt').value = netamt;
 	}
 	function deletesalesdet(salid) {
-		location.href = "deletesalesdet?salesdetils.salesDetailsId=" + salid;
+		var isConfirm = confirm('Do you want to remove the item from bill?');
+
+		if (isConfirm) {
+			$
+					.ajax({
+						type : 'POST',
+						url : 'deletesalesdet',
+						data : {
+							'salesdetils.salesDetailsId' : salid,
+							'salesBase.salesId' : '<s:property value="salesBase.salesId" />',
+						},
+						beforeSend : function() {
+							$('#btnDelete' + salid).hide();
+							$('#content-span' + salid)
+									.html(
+											'<font style="color: red; text-align : center; font-size : 15px;">Removing...</font>');
+						},
+						success : function() {
+							location.reload();
+						}
+					});
+		}
+	}
+
+	function submitForm() {
+		document.salesDetails.action = "saveSAlesDetails";
+		document.salesDetails.submit();
 	}
 </script>
 <style type="text/css">
@@ -110,45 +132,44 @@ th {
 </style>
 <body>
 	<nav class="navbar navbar-inverse bar">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="goToHome">Tesseract</a>
-		</div>
-		<ul class="nav navbar-nav">
-			<li><a href="goToHome">Home</a></li>
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="goToTaxMaster">Tax</a></li>
-					<li><a href="goToCategory">Category</a></li>
-					<li class="active"><a href="goToProduct">Product</a></li>
-					<li><a href="goToModel">Model</a></li>
-					<li><a href="goToCarat">Carat</a></li>
-					<li><a href="#">Page 1-2</a></li>
-					<li><a href="#">Page 1-3</a></li>
-				</ul></li>
-			<li><a href="#">Page 2</a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="goToHome">Tesseract</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="goToHome">Home</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="goToTaxMaster">Tax</a></li>
+						<li><a href="goToCategory">Category</a></li>
+						<li class="active"><a href="goToProduct">Product</a></li>
+						<li><a href="goToModel">Model</a></li>
+						<li><a href="goToCarat">Carat</a></li>
+						<li><a href="#">Page 1-2</a></li>
+						<li><a href="#">Page 1-3</a></li>
+					</ul></li>
+				<li><a href="#">Page 2</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
 						Sign Up</a></li> --%>
-			<li><a href="logout"><span
-					class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-		</ul>
-	</div>
+				<li><a href="logout"><span
+						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			</ul>
+		</div>
 	</nav>
 	<div class="container-fluid">
 		<div class="row"></div>
 		<div class="row">
 			<div class="col-md-12">
-				<s:hidden name="salesBase.salesId" />
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					onclick="getProductList()">Add products</button>
 			</div>
 		</div>
 
 		<div class="row">
-			<form action="saveSAlesDetails">
+			<s:form name="salesDetails">
 				<s:hidden name="salesBase.salesId" />
 				<s:hidden name="salesamtbean.salesAmountId" />
 				<div class="col-xs-12">
@@ -182,8 +203,8 @@ th {
 											name="salDetList[<s:property value="#row.index"/>].hsnCode"
 											value='<s:property value="hsnCode"/>' /></td>
 										<td><s:property value="productId.category.categoryName" /></td>
-											<td><s:property value="productId.productName" /></td>
-											<td><s:property value="productId.modelId.modelName" /></td>
+										<td><s:property value="productId.productName" /></td>
+										<td><s:property value="productId.modelId.modelName" /></td>
 										<td><input class="form-control" type="text"
 											name="salDetList[<s:property value="#row.index"/>].quantity"
 											value="<s:property value="quantity"/>"
@@ -219,20 +240,23 @@ th {
 											value="<s:property value="afterdis"/>"
 											id="afterdis<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
-										
+
 										<td><input class="form-control" type="text"
 											name="salDetList[<s:property value="#row.index"/>].stonecash"
 											value="<s:property value="stonecash"/>"
 											id="stonecash<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
-											
+
 										<td><input class="form-control totamont" type="text"
 											name="salDetList[<s:property value="#row.index"/>].totalAmt"
 											value="<s:property value="totalAmt"/>"
 											id="totalAmt<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 
-										<td><button class="btn-xs btn-link"
+										<td id="action-col" align="center"><span
+											id="content-span<s:property value="salesDetailsId"/>"></span>
+											<button class="btn-xs btn-link"
+												id="btnDelete<s:property value="salesDetailsId"/>"
 												onclick="deletesalesdet('<s:property value="salesDetailsId"/>')">[DELETE]</button></td>
 									</tr>
 								</s:iterator>
@@ -257,7 +281,7 @@ th {
 									type="text" name="salesamtbean.cgst"
 									value="<s:property value="salesamtbean.cgst"/>"
 									onchange="nettotalamt()" /></td>
-									
+
 							</tr>
 							<tr>
 								<td colspan="13" align="right"><label>SGST</label></td>
@@ -265,7 +289,7 @@ th {
 									type="text" name="salesamtbean.sgst"
 									value="<s:property value="salesamtbean.sgst"/>"
 									onchange="nettotalamt()" /></td>
-									
+
 							</tr>
 							<tr>
 								<td colspan="13" align="right"><label>IGST</label></td>
@@ -273,7 +297,7 @@ th {
 									type="text" name="salesamtbean.igst"
 									value="<s:property value="salesamtbean.igst"/>"
 									onchange="nettotalamt()" /></td>
-									
+
 							</tr>
 							<tr>
 								<td colspan="14" align="right"><label>Total Net
@@ -290,13 +314,15 @@ th {
 					<div class="row">
 						<div align="center">
 							<s:if test="salDetList != null">
-								<s:submit class="btn btn-primary" value="save"></s:submit>
+								<%-- 								<s:submit class="btn btn-primary" value="save" ></s:submit> --%>
+								<button class="btn btn-sm btn-success" onclick="submitForm()">Save
+									Details</button>
 							</s:if>
 							<s:else>-- no products added</s:else>
 						</div>
 					</div>
 				</div>
-			</form>
+			</s:form>
 		</div>
 	</div>
 
