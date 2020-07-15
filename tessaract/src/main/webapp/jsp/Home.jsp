@@ -51,7 +51,7 @@ body {
 					<ul class="dropdown-menu">
 						<li><a href="goToPurchase">Purchase</a></li>
 						<li><a href="goToSales">Sales</a></li>
-
+                        <li><a href="goToSalesReturn">SalesReturn</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

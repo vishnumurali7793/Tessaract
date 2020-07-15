@@ -42,7 +42,7 @@ public class TransactionAction extends ActionSupport {
 	private SalesDetailsBean salesdetils;
 	private List<SalesDetailsBean> salDetList;
 	private SalesAmountBean salesamtbean;
-
+    private String billno;
 	// vendor page action
 	public String savepurchaseVendor() {
 		if (purchaseBean != null) {
@@ -252,6 +252,15 @@ public class TransactionAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+	
+	public String goToSalesReturn() {
+		try {
+			salesBaseList = transHibernateDao.searchByBillno(billno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
 
 	public PurchaseBean getPurchaseBean() {
 		return purchaseBean;
@@ -371,6 +380,14 @@ public class TransactionAction extends ActionSupport {
 
 	public void setSalesamtbean(SalesAmountBean salesamtbean) {
 		this.salesamtbean = salesamtbean;
+	}
+
+	public String getBillno() {
+		return billno;
+	}
+
+	public void setBillno(String billno) {
+		this.billno = billno;
 	}
 
 }

@@ -373,5 +373,23 @@ public class TransactionHibernateDao {
 		}
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<SalesBase> searchByBillno(String billno) throws Exception {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		try {
+			String query="";
+			if(billno == null){
+				query="FROM SalesBase";
+			}else{
+				query="FROM SalesBase WHERE invoice LIKE '%" + billno + "%'";
+			}
+			return (ArrayList<SalesBase>) session.createQuery(query).list();
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
 }
