@@ -187,10 +187,10 @@ td, th {
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion"
 								class="collapsed" role="button" aria-expanded="true"
-								aria-controls="collapse2" href="#collapse2">Tax Details</a>
+								aria-controls="collapse2" href="#collapse2">Category Details</a>
 						</h4>
 					</div>
-					<div id="collapse2" class="panel-collapse collapse" role="tabpanel"
+					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
 						aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
