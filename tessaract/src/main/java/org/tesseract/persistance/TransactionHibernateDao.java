@@ -16,6 +16,7 @@ import org.tesseract.entities.PurchaseScreenBean;
 import org.tesseract.entities.SalesAmountBean;
 import org.tesseract.entities.SalesBase;
 import org.tesseract.entities.SalesDetailsBean;
+import org.tesseract.entities.SalesReturnAmountBean;
 import org.tesseract.entities.SalesReturnDetailsBean;
 import org.tesseract.entities.StockBean;
 import org.tesseract.entities.VendorBean;
@@ -408,6 +409,40 @@ public class TransactionHibernateDao {
 			} finally {
 				session.close();
 				sessionFactory.close();
+			}
+
+		}
+		
+		// save salesreturndetails data
+		public void saveReturnSalesdetails(SalesReturnDetailsBean salesretdetailBean) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+
+			try {
+				session.saveOrUpdate(salesretdetailBean);
+				transaction.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}
+
+		}
+		
+		// save salesreturntotnetamt data
+		public void saveSalesReturnNetAmt(SalesReturnAmountBean salretnetamtBean) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+
+			try {
+				session.saveOrUpdate(salretnetamtBean);
+				transaction.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
 			}
 
 		}

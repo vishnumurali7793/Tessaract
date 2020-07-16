@@ -278,6 +278,7 @@ public class TransactionAction extends ActionSupport {
 			salretDetList=new ArrayList<SalesReturnDetailsBean>();
 			for(SalesDetailsBean saldetils:salDetList){
 				try {
+					saldetils.setSalesDetailsId(null);
 					salesreturndetils=new SalesReturnDetailsBean();
 					BeanUtils.copyProperties(salesreturndetils, saldetils);
 				} catch (Exception e) {
@@ -293,8 +294,19 @@ public class TransactionAction extends ActionSupport {
 	
 	public String saveSalesReturnDetails() {
 		if (salesBase != null && salesBase.getSalesId() != null) {
-			salDetList = transHibernateDao.getSalesDetailsList(salesBase.getSalesId());
-			
+			List<SalesDetailsBean> newsalelist = new ArrayList<SalesDetailsBean>();
+			newsalelist = transHibernateDao.getSalesDetailsList(salesBase.getSalesId());
+			int i = 0;
+			for(SalesReturnDetailsBean salretdetils:salretDetList){
+				salretdetils.setProductId(newsalelist.get(i).getProductId());
+				salretdetils.setSalesid(new SalesBase());
+				salretdetils.getSalesid().setSalesId(newsalelist.get(i).getSalesid().getSalesId());
+				transHibernateDao.saveReturnSalesdetails(salretdetils);
+				i++;
+			}
+			salesretamtbean.setSalesid(new SalesBase());
+			salesretamtbean.getSalesid().setSalesId(salesBase.getSalesId());
+			transHibernateDao.saveSalesReturnNetAmt(salesretamtbean);
 			
 		}
 		return SUCCESS;
