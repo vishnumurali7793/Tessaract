@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.tessaract</groupId>
@@ -113,7 +112,36 @@
 			<artifactId>jquery-ui</artifactId>
 			<version>1.12.1</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils-core -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils-core</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils-bean-collections -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils-bean-collections</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.sun.commons/beanutils -->
+		<dependency>
+			<groupId>com.sun.commons</groupId>
+			<artifactId>beanutils</artifactId>
+			<version>1.6.1-20070314</version>
+		</dependency>
 	</dependencies>
+
+
+
+
 	<build>
 		<finalName>tessaract</finalName>
 		<plugins>

@@ -1,5 +1,7 @@
 package org.tesseract.action;
 
+import java.beans.Beans;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
@@ -15,6 +18,8 @@ import org.tesseract.entities.PurchaseScreenBean;
 import org.tesseract.entities.SalesAmountBean;
 import org.tesseract.entities.SalesBase;
 import org.tesseract.entities.SalesDetailsBean;
+import org.tesseract.entities.SalesReturnAmountBean;
+import org.tesseract.entities.SalesReturnDetailsBean;
 import org.tesseract.entities.StockBean;
 import org.tesseract.entities.VendorBean;
 import org.tesseract.entities.modelBean;
@@ -43,6 +48,10 @@ public class TransactionAction extends ActionSupport {
 	private List<SalesDetailsBean> salDetList;
 	private SalesAmountBean salesamtbean;
     private String billno;
+    private SalesReturnDetailsBean salesreturndetils;
+	private List<SalesReturnDetailsBean> salretDetList;
+	private SalesReturnAmountBean salesretamtbean;
+    
 	// vendor page action
 	public String savepurchaseVendor() {
 		if (purchaseBean != null) {
@@ -261,6 +270,43 @@ public class TransactionAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+	
+	public String editsalesReturnDetails() throws IllegalAccessException, InvocationTargetException {
+		if (salesBase != null && salesBase.getSalesId() != null) {
+			salDetList = transHibernateDao.getSalesDetailsList(salesBase.getSalesId());
+			salesamtbean = transHibernateDao.getsalestotamt(salesBase.getSalesId());
+			salretDetList=new ArrayList<SalesReturnDetailsBean>();
+			for(SalesDetailsBean saldetils:salDetList){
+				try {
+					salesreturndetils=new SalesReturnDetailsBean();
+					BeanUtils.copyProperties(salesreturndetils, saldetils);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
+				salretDetList.add(salesreturndetils);
+			}
+			salesretamtbean=new SalesReturnAmountBean();
+			BeanUtils.copyProperties(salesretamtbean,salesamtbean);
+		}
+		return SUCCESS;
+	}
+	
+	public String saveSalesReturnDetails() {
+		if (salesBase != null && salesBase.getSalesId() != null) {
+			salDetList = transHibernateDao.getSalesDetailsList(salesBase.getSalesId());
+			
+			
+		}
+		return SUCCESS;
+	}
+	
+	// delete salesdata
+		public String deletesalesretdet() {
+			if (salesreturndetils.getSalesDetailsId() != null) {
+				transHibernateDao.delsalesretById(salesreturndetils);
+			}
+			return SUCCESS;
+		}
 
 	public PurchaseBean getPurchaseBean() {
 		return purchaseBean;
@@ -388,6 +434,30 @@ public class TransactionAction extends ActionSupport {
 
 	public void setBillno(String billno) {
 		this.billno = billno;
+	}
+
+	public SalesReturnDetailsBean getSalesreturndetils() {
+		return salesreturndetils;
+	}
+
+	public void setSalesreturndetils(SalesReturnDetailsBean salesreturndetils) {
+		this.salesreturndetils = salesreturndetils;
+	}
+
+	public List<SalesReturnDetailsBean> getSalretDetList() {
+		return salretDetList;
+	}
+
+	public void setSalretDetList(List<SalesReturnDetailsBean> salretDetList) {
+		this.salretDetList = salretDetList;
+	}
+
+	public SalesReturnAmountBean getSalesretamtbean() {
+		return salesretamtbean;
+	}
+
+	public void setSalesretamtbean(SalesReturnAmountBean salesretamtbean) {
+		this.salesretamtbean = salesretamtbean;
 	}
 
 }

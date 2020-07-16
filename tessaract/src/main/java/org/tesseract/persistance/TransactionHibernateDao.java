@@ -16,6 +16,7 @@ import org.tesseract.entities.PurchaseScreenBean;
 import org.tesseract.entities.SalesAmountBean;
 import org.tesseract.entities.SalesBase;
 import org.tesseract.entities.SalesDetailsBean;
+import org.tesseract.entities.SalesReturnDetailsBean;
 import org.tesseract.entities.StockBean;
 import org.tesseract.entities.VendorBean;
 
@@ -391,5 +392,24 @@ public class TransactionHibernateDao {
 			return null;
 		}
 	}
+	
+	// delete updte in salesdetails
+		public void delsalesretById(SalesReturnDetailsBean retBean) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+
+			try {
+				session.createQuery("UPDATE SalesReturnDetailsBean SET deleteStatus = 'Y' WHERE salesDetailsReturnId=:detailsId")
+						.setParameter("detailsId", retBean.getSalesDetailsId()).executeUpdate();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
+				sessionFactory.close();
+			}
+
+		}
 
 }

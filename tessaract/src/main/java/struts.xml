@@ -339,6 +339,28 @@
 			class="org.tesseract.action.TransactionAction" method="goToSalesReturn">
 			<result name="success">/jsp/salesReturn.jsp</result>
 		</action>
+		
+		<action name="editsalesReturnDetails"
+			class="org.tesseract.action.TransactionAction"
+			method="editsalesReturnDetails">
+			<result name="success">/jsp/editSalesReturn.jsp</result>
+		</action>
+		
+		<action name="saveSalesReturnDetails"
+			class="org.tesseract.action.TransactionAction"
+			method="saveSalesReturnDetails">
+			<result name="success" type="redirectAction">
+				<param name="actionName">editsalesReturnDetails</param>
+				<param name="salesBase.salesId">${salesBase.salesId}</param>
+			</result>
+		</action>
+		<action name="deletesalesretdet"
+			class="org.tesseract.action.TransactionAction"
+			method="deletesalesretdet">
+			<result name="success" type="redirectAction">
+				editsalesReturnDetails
+			</result>
+		</action>
 	</package>
 
 </struts>
