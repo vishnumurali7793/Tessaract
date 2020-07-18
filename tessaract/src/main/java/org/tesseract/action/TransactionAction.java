@@ -33,7 +33,7 @@ public class TransactionAction extends ActionSupport {
 	private TransactionHibernateDao transHibernateDao = new TransactionHibernateDao();
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 	private PurchaseBean purchaseBean;
-	private List<PurchaseBean> purbeanList;
+	private List<PurchaseBean> purchaseList1;
 	private Collection<Object> vendorList;
 	private String[] checkbox;
 	private PurchaseScreenBean purchaseDetails;
@@ -312,10 +312,20 @@ public class TransactionAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	// delete salesdata
+	// delete salesreturndata
 		public String deletesalesretdet() {
 			if (salesreturndetils.getSalesDetailsId() != null) {
 				transHibernateDao.delsalesretById(salesreturndetils);
+			}
+			return SUCCESS;
+		}
+		
+		//purchase return
+		public String goToPurchaseReturn() {
+			try {
+				purchaseList1=transHibernateDao.searchByPurchaseBillno(billno);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			return SUCCESS;
 		}
@@ -329,11 +339,11 @@ public class TransactionAction extends ActionSupport {
 	}
 
 	public List<PurchaseBean> getPurbeanList() {
-		return purbeanList;
+		return purchaseList1;
 	}
 
-	public void setPurbeanList(List<PurchaseBean> purbeanList) {
-		this.purbeanList = purbeanList;
+	public void setPurbeanList(List<PurchaseBean> purchaseList) {
+		this.purchaseList1 = purchaseList;
 	}
 
 	public Collection<Object> getVendorList() {

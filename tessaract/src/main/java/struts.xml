@@ -361,6 +361,18 @@
 				editsalesReturnDetails
 			</result>
 		</action>
+		
+		<!-- salesreturn page finished -->
+<!-- 		<action name="goToPurchaseReturn" -->
+<!-- 			class="org.tesseract.action.RedirAction" method="goToPurchase"> -->
+<!-- 			<result name="success">/jsp/purchaseReturn.jsp</result> -->
+<!-- 		</action> -->
+		
+		<action name="goToPurchaseReturn"
+			class="org.tesseract.action.TransactionAction" method="goToPurchaseReturn">
+			<result name="success">/jsp/purchaseReturn.jsp</result>
+		</action>
+		
 	</package>
 
 </struts>

@@ -446,5 +446,24 @@ public class TransactionHibernateDao {
 			}
 
 		}
+		
+		//purchase return bill for search by billno
+		@SuppressWarnings("unchecked")
+		public ArrayList<PurchaseBean> searchByPurchaseBillno(String billno) throws Exception {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+
+			try {
+				String query="";
+				if(billno == null){
+					query="FROM PurchaseBean";
+				}else{
+					query="FROM PurchaseBean WHERE invoice LIKE '%" + billno + "%'";
+				}
+				return (ArrayList<PurchaseBean>) session.createQuery(query).list();
+			} catch (Exception e) {
+				return null;
+			}
+		}
 
 }

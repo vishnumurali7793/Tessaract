@@ -50,6 +50,7 @@ body {
 						class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="goToPurchase">Purchase</a></li>
+						<li><a href="goToPurchaseReturn">PurchaseReturn</a></li>
 						<li><a href="goToSales">Sales</a></li>
                         <li><a href="goToSalesReturn">SalesReturn</a></li>
 					</ul></li>
