@@ -322,7 +322,12 @@ public class TransactionAction extends ActionSupport {
 
 	// purchase return
 	public String getPurchaseListForPurchaseReturn() {
+		System.out.println(getBillno());
 		purchases = transHibernateDao.searchByPurchaseBillno(getBillno());
+		return SUCCESS;
+	}
+	
+	public String getPurchaseditemByBill() {
 		return SUCCESS;
 	}
 

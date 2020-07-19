@@ -19,7 +19,7 @@
 	href="resources/jquery-ui/jquery-ui.structure.css">
 <link rel="stylesheet" type="text/css"
 	href="resources/jquery-ui/jquery-ui.theme.css">
-<title></title>
+<title>Insert title here</title>
 </head>
 <style type="text/css">
 body {
@@ -132,85 +132,14 @@ h3 {
 			</ul>
 		</div>
 	</nav>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3>Purchase Return</h3>
-					</div>
-					<div class="panel-body content-body">
-						<div class="row">
-							<div class="col-xs-2" align="center">
-								<form action="goToPurchaseReturn">
-									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search"
-											value='<s:property value = "billno" />' name="billno"
-											id="txtSearch" />
-										<div class="input-group-btn">
-											<button class="btn btn-primary" type="submit">
-												<span class="glyphicon glyphicon-search"></span>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-xs-12">
-								<table class="table table-bordered">
-									<thead class="table-bg">
-										<tr>
-											<th>#</th>
-											<th>INVOICE NO & DATE</th>
-											<th>BILL NO & DATE</th>
-											<th>VENDOR DETAILS</th>
-											<th>GST CODE</th>
-											<th>RATE</th>
-											<th>ACTIONS</th>
-										</tr>
-									</thead>
-									<tbody class="table-body">
-										<s:if test="purchases!=null && purchases.size()>0">
-											<s:iterator value="purchases" status="row">
-												<tr>
-													<td><s:property value="#row.count" /></td>
-													<td><s:property value="invoice" />&</br> <s:property
-															value="invoiceDate" /></td>
-													<td><s:property value="purBillNo" />&</br> <s:property
-															value="purchaseDate" /></td>
-													<td><s:property value="vendor.vendorCode" /></br> <s:property
-															value="vendor.vendorName" />, <s:property
-															value="vendor.address1" />, <s:property
-															value="vendor.contact" />, <s:property
-															value="vendor.pin" /></td>
-													<td><s:property value="gstCode" /></td>
-													<td>GOLD :<s:property value="goldRate" /></br> SILVER :<s:property
-															value="silverRate" /></br> PLATINUM :<s:property
-															value="platinumRate" />
-													</td>
-													<td><div align="center">
-															<a class="glyphicon glyphicon-share-alt"
-																style="font-size: 20px; margin-top: 12px; color: #4CAF50;"
-																href="getPurchaseditemByBill?purchaseBean.purchaseId=<s:property value="purchaseId" />"></a>
-														</div></td>
-												</tr>
-											</s:iterator>
-										</s:if>
-										<s:else>
-											<tr>
-												<td colspan="7"><div align="center">-- No Data Found --</div></td>
-											</tr>
-										</s:else>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	<div class="container">
+		<center>
+			<h3 style="color: green; margin-top: 300px;">
+				Successfully redirected to purchase return item list view for
+				billId:
+				<s:property value="purchaseBean.purchaseId" />
+			</h3>
+		</center>
 	</div>
 </body>
 </html>

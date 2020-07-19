@@ -123,18 +123,15 @@
 			class="org.tesseract.action.RedirAction" method="goToCarat">
 			<result name="success">/jsp/carat.jsp</result>
 		</action>
-
 		<action name="saveCarat"
 			class="org.tesseract.action.MasterAction" method="saveCarat">
 			<result name="success" type="redirectAction">goToCarat</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-
 		<action name="deleteCarat"
 			class="org.tesseract.action.MasterAction" method="deleteCarat">
 			<result name="success" type="redirectAction">goToCarat</result>
 		</action>
-
 		<action name="editCarat"
 			class="org.tesseract.action.MasterAction" method="editCarat">
 			<result name="success">/jsp/carat.jsp</result>
@@ -145,18 +142,15 @@
 			class="org.tesseract.action.RedirAction" method="goToRate">
 			<result name="success">/jsp/rate.jsp</result>
 		</action>
-
 		<action name="saveRate"
 			class="org.tesseract.action.MasterAction" method="saveRate">
 			<result name="success" type="redirectAction">goToRate</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-
 		<action name="deleteRate"
 			class="org.tesseract.action.MasterAction" method="deleteRate">
 			<result name="success" type="redirectAction">goToRate</result>
 		</action>
-
 		<action name="editRate"
 			class="org.tesseract.action.MasterAction" method="editRate">
 			<result name="success">/jsp/rate.jsp</result>
@@ -167,18 +161,15 @@
 			class="org.tesseract.action.RedirAction" method="goToCustomer">
 			<result name="success">/jsp/customer.jsp</result>
 		</action>
-
 		<action name="saveCustomer"
 			class="org.tesseract.action.MasterAction" method="saveCustomer">
 			<result name="success" type="redirectAction">goToCustomer</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-
 		<action name="deleteCustomer"
 			class="org.tesseract.action.MasterAction" method="deleteCustomer">
 			<result name="success" type="redirectAction">goToCustomer</result>
 		</action>
-
 		<action name="editCustomer"
 			class="org.tesseract.action.MasterAction" method="editCustomer">
 			<result name="success">/jsp/customer.jsp</result>
@@ -190,48 +181,40 @@
 			class="org.tesseract.action.RedirAction" method="goToVendor">
 			<result name="success">/jsp/vendor.jsp</result>
 		</action>
-
 		<action name="saveVendor"
 			class="org.tesseract.action.MasterAction" method="saveVendor">
 			<result name="success" type="redirectAction">goToVendor</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-
 		<action name="deleteVendor"
 			class="org.tesseract.action.MasterAction" method="deleteVendor">
 			<result name="success" type="redirectAction">goToVendor</result>
 		</action>
-
 		<action name="editVendor"
 			class="org.tesseract.action.MasterAction" method="editVendor">
 			<result name="success">/jsp/vendor.jsp</result>
 		</action>
 		<!-- vendor page finished -->
-
 		<action name="goToPurchase"
 			class="org.tesseract.action.RedirAction" method="goToPurchase">
 			<result name="success">/jsp/purchase.jsp</result>
 		</action>
-
 		<action name="getProductListForPurchase"
 			class="org.tesseract.action.TransactionAction"
 			method="getProductListForPurchase">
 			<result name="success">/jsp/productListForPurchase.jsp</result>
 		</action>
-
 		<action name="getmodalForPurchase"
 			class="org.tesseract.action.TransactionAction"
 			method="getmodalForPurchase">
 			<result name="success">/jsp/addnewvendor.jsp</result>
 		</action>
-
 		<action name="savepurchaseVendor"
 			class="org.tesseract.action.TransactionAction"
 			method="savepurchaseVendor">
 			<result name="success" type="redirectAction">goToPurchase</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-
 		<action name="getVendorDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="getVendorDetails">
@@ -239,13 +222,11 @@
 				<param name="root">vendorList</param>
 			</result>
 		</action>
-
 		<action name="editPurchaseDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="editPurchaseDetails">
 			<result name="success">/jsp/editpurchase.jsp</result>
 		</action>
-
 		<action name="savepurchaseform"
 			class="org.tesseract.action.TransactionAction"
 			method="savepurchaseform">
@@ -254,7 +235,6 @@
 				<param name="purchaseBean.purchaseId">${purchaseBean.purchaseId}</param>
 			</result>
 		</action>
-
 		<action name="savepurchaseDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="savepurchaseDetails">
@@ -263,14 +243,12 @@
 				<param name="purchaseBean.purchaseId">${purchaseBean.purchaseId}</param>
 			</result>
 		</action>
-
 		<action name="deletePurchase"
 			class="org.tesseract.action.TransactionAction"
 			method="deletePurchase">
 			<result name="success" type="redirectAction">editPurchaseDetails</result>
 		</action>
 		<!-- purchase page finished -->
-
 		<action name="goToSales"
 			class="org.tesseract.action.RedirAction" method="goToSales">
 			<result name="success">/jsp/salesBase.jsp</result>
@@ -280,7 +258,6 @@
 			method="getmodalForSales">
 			<result name="success">/jsp/addnewsales.jsp</result>
 		</action>
-
 		<action name="getCustomerDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="getCustomerDetails">
@@ -288,20 +265,17 @@
 				<param name="root">customerList</param>
 			</result>
 		</action>
-
 		<action name="savesalescustomer"
 			class="org.tesseract.action.TransactionAction"
 			method="savesalescustomer">
 			<result name="success" type="redirectAction">goToSales</result>
 			<result name="input" type="redirectAction">redir</result>
 		</action>
-
 		<action name="editsalesDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="editsalesDetails">
 			<result name="success">/jsp/editsales.jsp</result>
 		</action>
-
 		<action name="deletesalesdet"
 			class="org.tesseract.action.TransactionAction"
 			method="deletesalesdet">
@@ -309,13 +283,11 @@
 				editsalesDetails
 			</result>
 		</action>
-
 		<action name="getProductListForSales"
 			class="org.tesseract.action.TransactionAction"
 			method="getProductListForSales">
 			<result name="success">/jsp/productListForSales.jsp</result>
 		</action>
-
 		<action name="saveSalesform"
 			class="org.tesseract.action.TransactionAction" method="saveSalesform">
 			<result name="success" type="redirectAction">
@@ -323,7 +295,6 @@
 				<param name="salesBase.salesId">${salesBase.salesId}</param>
 			</result>
 		</action>
-
 		<action name="saveSAlesDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="saveSAlesDetails">
@@ -333,19 +304,18 @@
 			</result>
 		</action>
 		<!-- sales page finished -->
-		
-		<!-- sales return page  -->
+
+		<!-- sales return page -->
 		<action name="goToSalesReturn"
-			class="org.tesseract.action.TransactionAction" method="goToSalesReturn">
+			class="org.tesseract.action.TransactionAction"
+			method="goToSalesReturn">
 			<result name="success">/jsp/salesReturn.jsp</result>
 		</action>
-		
 		<action name="editsalesReturnDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="editsalesReturnDetails">
 			<result name="success">/jsp/editSalesReturn.jsp</result>
 		</action>
-		
 		<action name="saveSalesReturnDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="saveSalesReturnDetails">
@@ -361,17 +331,16 @@
 				editsalesReturnDetails
 			</result>
 		</action>
-		
 		<action name="goToPurchaseReturn"
-			class="org.tesseract.action.RedirAction" method="goToPurchase">
+			class="org.tesseract.action.TransactionAction"
+			method="getPurchaseListForPurchaseReturn">
 			<result name="success">/jsp/PurchaseReturn.jsp</result>
 		</action>
-		
-		<action name="getPurchaseBillById"
-			class="org.tesseract.action.TransactionAction" method="getPurchaseListForPurchaseReturn">
-			<result name="success">/jsp/PurchaseReturn.jsp</result>
+		<action name="getPurchaseditemByBill"
+			class="org.tesseract.action.TransactionAction"
+			method="getPurchaseditemByBill">
+			<result name="success">/jsp/ItemListForPurchaseReturn.jsp</result>
 		</action>
-		
 	</package>
 
 </struts>

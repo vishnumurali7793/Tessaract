@@ -136,8 +136,8 @@ td, th {
 						<li><a href="goToCustomer">Customer</a></li>
 						<li><a href="goToVendor">Vendor</a></li>
 						<li><a href="goToPurchase">Purchase</a></li>
-						<li<a href="goToPurchaseReturn">PurchaseReturn</a></li>
-						<li<a href="goToSales">Sales</a></li>
+						<li><a href="goToPurchaseReturn">PurchaseReturn</a></li>
+						<li><a href="goToSales">Sales</a></li>
 						<li class="active"><a href="goToSalesReturn">SalesReturn</a></li>
 						
 						<li><a href="#">Page 1-3</a></li>
