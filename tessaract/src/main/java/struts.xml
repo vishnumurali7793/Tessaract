@@ -6,7 +6,7 @@
 <struts>
 	<constant name="struts.enable.DynamicMethodInvocation"
 		value="false" />
-	<constant name="struts.devMode" value="false" />
+	<constant name="struts.devMode" value="true" />
 	<constant name="struts.custom.i18n.resources"
 		value="ApplicationResources" />
 
@@ -362,15 +362,14 @@
 			</result>
 		</action>
 		
-		<!-- salesreturn page finished -->
-<!-- 		<action name="goToPurchaseReturn" -->
-<!-- 			class="org.tesseract.action.RedirAction" method="goToPurchase"> -->
-<!-- 			<result name="success">/jsp/purchaseReturn.jsp</result> -->
-<!-- 		</action> -->
-		
 		<action name="goToPurchaseReturn"
-			class="org.tesseract.action.TransactionAction" method="goToPurchaseReturn">
-			<result name="success">/jsp/purchaseReturn.jsp</result>
+			class="org.tesseract.action.RedirAction" method="goToPurchase">
+			<result name="success">/jsp/PurchaseReturn.jsp</result>
+		</action>
+		
+		<action name="getPurchaseBillById"
+			class="org.tesseract.action.TransactionAction" method="getPurchaseListForPurchaseReturn">
+			<result name="success">/jsp/PurchaseReturn.jsp</result>
 		</action>
 		
 	</package>

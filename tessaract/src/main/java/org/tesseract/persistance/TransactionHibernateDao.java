@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseScreenBean;
@@ -19,15 +18,13 @@ import org.tesseract.entities.SalesDetailsBean;
 import org.tesseract.entities.SalesReturnAmountBean;
 import org.tesseract.entities.SalesReturnDetailsBean;
 import org.tesseract.entities.StockBean;
-import org.tesseract.entities.VendorBean;
 
 public class TransactionHibernateDao {
 
+	@SuppressWarnings("rawtypes")
 	public Integer getvendorDetails(String ss) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-
 		try {
 			String qr = "SELECT vendorId FROM VendorBean where vendorCode=:vencode";
 			Query q = session.createQuery(qr).setParameter("vencode", ss);
@@ -37,6 +34,7 @@ public class TransactionHibernateDao {
 			return 0;
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -54,6 +52,7 @@ public class TransactionHibernateDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -70,6 +69,9 @@ public class TransactionHibernateDao {
 					.list();
 		} catch (Exception e) {
 			return null;
+		}finally {
+			session.close();
+			sessionFactory.close();
 		}
 	}
 
@@ -86,6 +88,7 @@ public class TransactionHibernateDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -106,6 +109,7 @@ public class TransactionHibernateDao {
 			return null;
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -123,12 +127,12 @@ public class TransactionHibernateDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
 
 	// get productamttot
-	@SuppressWarnings("unchecked")
 	public PurchaseAmountBean getProducttotamt(Integer purchasedetid) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -143,6 +147,7 @@ public class TransactionHibernateDao {
 			return null;
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -162,6 +167,7 @@ public class TransactionHibernateDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 	}
 
@@ -169,7 +175,6 @@ public class TransactionHibernateDao {
 	public Integer invoicePurchase() {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
 		try {
 			String qr = "SELECT COUNT(*)  FROM PurchaseBean";
 			Long count = (Long) session.createQuery(qr).uniqueResult();
@@ -179,6 +184,7 @@ public class TransactionHibernateDao {
 			return 0;
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 	}
 
@@ -195,6 +201,7 @@ public class TransactionHibernateDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -203,7 +210,6 @@ public class TransactionHibernateDao {
 	public Integer invoiceSales() {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
 		try {
 			String qr = "SELECT COUNT(*)  FROM SalesBase";
 			Long count = (Long) session.createQuery(qr).uniqueResult();
@@ -213,6 +219,7 @@ public class TransactionHibernateDao {
 			return 0;
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 	}
 
@@ -228,14 +235,16 @@ public class TransactionHibernateDao {
 					.list();
 		} catch (Exception e) {
 			return null;
+		}finally {
+			session.close();
+			sessionFactory.close();
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Integer getcustomerDetails(String ss) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-
 		try {
 			String qr = "SELECT customerId FROM CustomerBean where customerCode=:custcode";
 			Query q = session.createQuery(qr).setParameter("custcode", ss);
@@ -245,6 +254,7 @@ public class TransactionHibernateDao {
 			return 0;
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -262,6 +272,7 @@ public class TransactionHibernateDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -282,6 +293,7 @@ public class TransactionHibernateDao {
 			return null;
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -301,6 +313,7 @@ public class TransactionHibernateDao {
 			return null;
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -318,6 +331,7 @@ public class TransactionHibernateDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -335,6 +349,7 @@ public class TransactionHibernateDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 
 	}
@@ -354,6 +369,7 @@ public class TransactionHibernateDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			sessionFactory.close();
 		}
 	}
 
@@ -391,6 +407,9 @@ public class TransactionHibernateDao {
 			return (ArrayList<SalesBase>) session.createQuery(query).list();
 		} catch (Exception e) {
 			return null;
+		}finally {
+			session.close();
+			sessionFactory.close();
 		}
 	}
 	
@@ -426,6 +445,7 @@ public class TransactionHibernateDao {
 				e.printStackTrace();
 			} finally {
 				session.close();
+				sessionFactory.close();
 			}
 
 		}
@@ -443,13 +463,14 @@ public class TransactionHibernateDao {
 				e.printStackTrace();
 			} finally {
 				session.close();
+				sessionFactory.close();
 			}
 
 		}
 		
 		//purchase return bill for search by billno
 		@SuppressWarnings("unchecked")
-		public ArrayList<PurchaseBean> searchByPurchaseBillno(String billno) throws Exception {
+		public ArrayList<PurchaseBean> searchByPurchaseBillno(String billno) {
 			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 			Session session = sessionFactory.openSession();
 
@@ -463,6 +484,9 @@ public class TransactionHibernateDao {
 				return (ArrayList<PurchaseBean>) session.createQuery(query).list();
 			} catch (Exception e) {
 				return null;
+			}finally {
+				session.close();
+				sessionFactory.close();
 			}
 		}
 

@@ -33,7 +33,6 @@ public class TransactionAction extends ActionSupport {
 	private TransactionHibernateDao transHibernateDao = new TransactionHibernateDao();
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 	private PurchaseBean purchaseBean;
-	private List<PurchaseBean> purchaseList1;
 	private Collection<Object> vendorList;
 	private String[] checkbox;
 	private PurchaseScreenBean purchaseDetails;
@@ -47,11 +46,12 @@ public class TransactionAction extends ActionSupport {
 	private SalesDetailsBean salesdetils;
 	private List<SalesDetailsBean> salDetList;
 	private SalesAmountBean salesamtbean;
-    private String billno;
-    private SalesReturnDetailsBean salesreturndetils;
+	private String billno;
+	private SalesReturnDetailsBean salesreturndetils;
 	private List<SalesReturnDetailsBean> salretDetList;
 	private SalesReturnAmountBean salesretamtbean;
-    
+	private List<PurchaseBean> purchases;
+
 	// vendor page action
 	public String savepurchaseVendor() {
 		if (purchaseBean != null) {
@@ -261,7 +261,7 @@ public class TransactionAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	public String goToSalesReturn() {
 		try {
 			salesBaseList = transHibernateDao.searchByBillno(billno);
@@ -270,34 +270,34 @@ public class TransactionAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	public String editsalesReturnDetails() throws IllegalAccessException, InvocationTargetException {
 		if (salesBase != null && salesBase.getSalesId() != null) {
 			salDetList = transHibernateDao.getSalesDetailsList(salesBase.getSalesId());
 			salesamtbean = transHibernateDao.getsalestotamt(salesBase.getSalesId());
-			salretDetList=new ArrayList<SalesReturnDetailsBean>();
-			for(SalesDetailsBean saldetils:salDetList){
+			salretDetList = new ArrayList<SalesReturnDetailsBean>();
+			for (SalesDetailsBean saldetils : salDetList) {
 				try {
 					saldetils.setSalesDetailsId(null);
-					salesreturndetils=new SalesReturnDetailsBean();
+					salesreturndetils = new SalesReturnDetailsBean();
 					BeanUtils.copyProperties(salesreturndetils, saldetils);
 				} catch (Exception e) {
 					e.printStackTrace();
-				} 
+				}
 				salretDetList.add(salesreturndetils);
 			}
-			salesretamtbean=new SalesReturnAmountBean();
-			BeanUtils.copyProperties(salesretamtbean,salesamtbean);
+			salesretamtbean = new SalesReturnAmountBean();
+			BeanUtils.copyProperties(salesretamtbean, salesamtbean);
 		}
 		return SUCCESS;
 	}
-	
+
 	public String saveSalesReturnDetails() {
 		if (salesBase != null && salesBase.getSalesId() != null) {
 			List<SalesDetailsBean> newsalelist = new ArrayList<SalesDetailsBean>();
 			newsalelist = transHibernateDao.getSalesDetailsList(salesBase.getSalesId());
 			int i = 0;
-			for(SalesReturnDetailsBean salretdetils:salretDetList){
+			for (SalesReturnDetailsBean salretdetils : salretDetList) {
 				salretdetils.setProductId(newsalelist.get(i).getProductId());
 				salretdetils.setSalesid(new SalesBase());
 				salretdetils.getSalesid().setSalesId(newsalelist.get(i).getSalesid().getSalesId());
@@ -307,28 +307,24 @@ public class TransactionAction extends ActionSupport {
 			salesretamtbean.setSalesid(new SalesBase());
 			salesretamtbean.getSalesid().setSalesId(salesBase.getSalesId());
 			transHibernateDao.saveSalesReturnNetAmt(salesretamtbean);
-			
+
 		}
 		return SUCCESS;
 	}
-	
+
 	// delete salesreturndata
-		public String deletesalesretdet() {
-			if (salesreturndetils.getSalesDetailsId() != null) {
-				transHibernateDao.delsalesretById(salesreturndetils);
-			}
-			return SUCCESS;
+	public String deletesalesretdet() {
+		if (salesreturndetils.getSalesDetailsId() != null) {
+			transHibernateDao.delsalesretById(salesreturndetils);
 		}
-		
-		//purchase return
-		public String goToPurchaseReturn() {
-			try {
-				purchaseList1=transHibernateDao.searchByPurchaseBillno(billno);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return SUCCESS;
-		}
+		return SUCCESS;
+	}
+
+	// purchase return
+	public String getPurchaseListForPurchaseReturn() {
+		purchases = transHibernateDao.searchByPurchaseBillno(getBillno());
+		return SUCCESS;
+	}
 
 	public PurchaseBean getPurchaseBean() {
 		return purchaseBean;
@@ -336,14 +332,6 @@ public class TransactionAction extends ActionSupport {
 
 	public void setPurchaseBean(PurchaseBean purchaseBean) {
 		this.purchaseBean = purchaseBean;
-	}
-
-	public List<PurchaseBean> getPurbeanList() {
-		return purchaseList1;
-	}
-
-	public void setPurbeanList(List<PurchaseBean> purchaseList) {
-		this.purchaseList1 = purchaseList;
 	}
 
 	public Collection<Object> getVendorList() {
@@ -480,6 +468,14 @@ public class TransactionAction extends ActionSupport {
 
 	public void setSalesretamtbean(SalesReturnAmountBean salesretamtbean) {
 		this.salesretamtbean = salesretamtbean;
+	}
+
+	public List<PurchaseBean> getPurchases() {
+		return purchases;
+	}
+
+	public void setPurchases(List<PurchaseBean> purchases) {
+		this.purchases = purchases;
 	}
 
 }
