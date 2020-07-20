@@ -221,7 +221,6 @@ th {
 									</tr>
 								</s:iterator>
 							</s:if> --%>
-							<s:if name=""></s:i18n>
 							<s:else>no product added</s:else>
 							<tr>
 								<td colspan="9" align="right"><label>Net amount</label></td>
