@@ -529,5 +529,27 @@ public class TransactionHibernateDao {
 		}
 
 	}
+	
+	//get list of purchasereturn
+	@SuppressWarnings("unchecked")
+	public List<PurchaseReturnScreenBean> getPurchaseretDetailsList(Integer purchasedetid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		try {
+			return session
+					.createQuery(
+							"from PurchaseReturnScreenBean as a where a.purchaseId.purchaseId=:purdetarg and a.deleteStatus='N'")
+					.setParameter("purdetarg", purchasedetid).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+
+	}
 
 }

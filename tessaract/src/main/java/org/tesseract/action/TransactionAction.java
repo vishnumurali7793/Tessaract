@@ -342,9 +342,10 @@ public class TransactionAction extends ActionSupport {
 			PurchaseRetlist = new ArrayList<PurchaseReturnScreenBean>();
 			for (PurchaseScreenBean purdetils : prodDetList) {
 				try {
-					purdetils.setProductId(null);
+					purdetils.setPurchaseScreenId(null);
 					purchaseReturnScreenBean = new PurchaseReturnScreenBean();
 					BeanUtils.copyProperties(purchaseReturnScreenBean, purdetils);
+					transHibernateDao.savePurchaseReturndetails(purchaseReturnScreenBean);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -357,17 +358,25 @@ public class TransactionAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public String savePurchReturnDetails() {
+	public String savePurchReturnDetails() throws IllegalAccessException, InvocationTargetException {
 		if (purchaseBean != null && purchaseBean.getPurchaseId() != null) {
-			List<PurchaseScreenBean> newprodlist = new ArrayList<PurchaseScreenBean>();
-			newprodlist = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
-			int i = 0;
-			for (PurchaseReturnScreenBean prodretdetils : PurchaseRetlist) {
-				prodretdetils.setProductId(newprodlist.get(i).getProductId());
-				prodretdetils.setProductId(new ProductBean());
-				prodretdetils.getProductId().setProductId(newprodlist.get(i).getProductId().getProductId());
-				transHibernateDao.savePurchaseReturndetails(prodretdetils);
-				i++;
+			/*List<PurchaseScreenBean> newprodlist = new ArrayList<PurchaseScreenBean>();
+			newprodlist = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());*/
+			//int i = 0;
+		//	PurchaseRetlist=transHibernateDao.getPurchaseretDetailsList(purchaseBean.getPurchaseId());
+			PurchaseReturnScreenBean prodretlist=new PurchaseReturnScreenBean();
+			try {
+				for (PurchaseReturnScreenBean prodretdetils : PurchaseRetlist) {
+					/*prodretdetils.setProductId(newprodlist.get(i).getProductId());
+					prodretdetils.setProductId(new ProductBean());
+					prodretdetils.getProductId().setProductId(newprodlist.get(i).getProductId().getProductId());*/
+					BeanUtils.copyProperties(prodretlist,prodretdetils);
+					transHibernateDao.savePurchaseReturndetails(prodretlist);
+				//	i++;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			purchaseRetAmtBean.setPurchaseId(new PurchaseBean());
 			purchaseRetAmtBean.getPurchaseId().setPurchaseId(purchaseBean.getPurchaseId());

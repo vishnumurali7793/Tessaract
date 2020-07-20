@@ -353,7 +353,7 @@
 			class="org.tesseract.action.TransactionAction"
 			method="savePurchReturnDetails">
 			<result name="success" type="redirectAction">
-				<param name="actionName">savePurchReturnDetails</param>
+				<param name="actionName">editpurchaseReturnDetails</param>
 				<param name="purchaseBean.purchaseId">${purchaseBean.purchaseId}</param>
 			</result>
 		</action>

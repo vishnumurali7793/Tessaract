@@ -142,8 +142,8 @@ th {
 		<div class="row">
 			<div class="col-md-12">
 				<s:hidden name="purchaseBean.purchaseId" />
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					onclick="getProductList()">Add products</button>
+				<!-- <button type="button" class="btn btn-primary" data-toggle="modal"
+					onclick="getProductList()">Add products</button> -->
 			</div>
 		</div>
 
@@ -248,7 +248,7 @@ th {
 
 					<div class="row">
 						<div align="center">
-							<s:if test="prodDetList != null">
+							<s:if test="PurchaseRetlist != null">
 								<s:submit class="btn btn-primary" value="save"></s:submit>
 							</s:if>
 							<s:else>-- no products added</s:else>
