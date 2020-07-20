@@ -11,6 +11,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
+import org.tesseract.entities.PurchaseReturnAmountBean;
+import org.tesseract.entities.PurchaseReturnScreenBean;
 import org.tesseract.entities.PurchaseScreenBean;
 import org.tesseract.entities.SalesAmountBean;
 import org.tesseract.entities.SalesBase;
@@ -69,7 +71,7 @@ public class TransactionHibernateDao {
 					.list();
 		} catch (Exception e) {
 			return null;
-		}finally {
+		} finally {
 			session.close();
 			sessionFactory.close();
 		}
@@ -101,8 +103,9 @@ public class TransactionHibernateDao {
 		session.beginTransaction();
 
 		try {
-			return session.createQuery(
-					"from PurchaseScreenBean as a where a.purchaseId.purchaseId=:purdetarg and a.deleteStatus='N'")
+			return session
+					.createQuery(
+							"from PurchaseScreenBean as a where a.purchaseId.purchaseId=:purdetarg and a.deleteStatus='N'")
 					.setParameter("purdetarg", purchasedetid).list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -235,7 +238,7 @@ public class TransactionHibernateDao {
 					.list();
 		} catch (Exception e) {
 			return null;
-		}finally {
+		} finally {
 			session.close();
 			sessionFactory.close();
 		}
@@ -391,103 +394,140 @@ public class TransactionHibernateDao {
 		}
 
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public ArrayList<SalesBase> searchByBillno(String billno) throws Exception {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
 
 		try {
-			String query="";
-			if(billno == null){
-				query="FROM SalesBase";
-			}else{
-				query="FROM SalesBase WHERE invoice LIKE '%" + billno + "%'";
+			String query = "";
+			if (billno == null) {
+				query = "FROM SalesBase";
+			} else {
+				query = "FROM SalesBase WHERE invoice LIKE '%" + billno + "%'";
 			}
 			return (ArrayList<SalesBase>) session.createQuery(query).list();
 		} catch (Exception e) {
 			return null;
-		}finally {
+		} finally {
 			session.close();
 			sessionFactory.close();
 		}
 	}
-	
+
 	// delete updte in salesdetails
-		public void delsalesretById(SalesReturnDetailsBean retBean) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
+	public void delsalesretById(SalesReturnDetailsBean retBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 
-			try {
-				session.createQuery("UPDATE SalesReturnDetailsBean SET deleteStatus = 'Y' WHERE salesDetailsReturnId=:detailsId")
-						.setParameter("detailsId", retBean.getSalesDetailsId()).executeUpdate();
+		try {
+			session.createQuery(
+					"UPDATE SalesReturnDetailsBean SET deleteStatus = 'Y' WHERE salesDetailsReturnId=:detailsId")
+					.setParameter("detailsId", retBean.getSalesDetailsId()).executeUpdate();
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				session.close();
-				sessionFactory.close();
-			}
-
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+			sessionFactory.close();
 		}
-		
-		// save salesreturndetails data
-		public void saveReturnSalesdetails(SalesReturnDetailsBean salesretdetailBean) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction transaction = session.beginTransaction();
 
-			try {
-				session.saveOrUpdate(salesretdetailBean);
-				transaction.commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				session.close();
-				sessionFactory.close();
-			}
+	}
 
+	// save salesreturndetails data
+	public void saveReturnSalesdetails(SalesReturnDetailsBean salesretdetailBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.saveOrUpdate(salesretdetailBean);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+			sessionFactory.close();
 		}
-		
-		// save salesreturntotnetamt data
-		public void saveSalesReturnNetAmt(SalesReturnAmountBean salretnetamtBean) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction transaction = session.beginTransaction();
 
-			try {
-				session.saveOrUpdate(salretnetamtBean);
-				transaction.commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				session.close();
-				sessionFactory.close();
-			}
+	}
 
+	// save salesreturntotnetamt data
+	public void saveSalesReturnNetAmt(SalesReturnAmountBean salretnetamtBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.saveOrUpdate(salretnetamtBean);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+			sessionFactory.close();
 		}
-		
-		//purchase return bill for search by billno
-		@SuppressWarnings("unchecked")
-		public ArrayList<PurchaseBean> searchByPurchaseBillno(String billno) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
 
-			try {
-				String query="";
-				if(billno == null){
-					query="FROM PurchaseBean";
-				}else{
-					query="FROM PurchaseBean WHERE invoice LIKE '%" + billno + "%'";
-				}
-				return (ArrayList<PurchaseBean>) session.createQuery(query).list();
-			} catch (Exception e) {
-				return null;
-			}finally {
-				session.close();
-				sessionFactory.close();
+	}
+
+	// purchase return bill for search by billno
+	@SuppressWarnings("unchecked")
+	public ArrayList<PurchaseBean> searchByPurchaseBillno(String billno) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		try {
+			String query = "";
+			if (billno == null) {
+				query = "FROM PurchaseBean";
+			} else {
+				query = "FROM PurchaseBean WHERE invoice LIKE '%" + billno + "%'";
 			}
+			return (ArrayList<PurchaseBean>) session.createQuery(query).list();
+		} catch (Exception e) {
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
 		}
+	}
+
+	// save prodreturndetails data
+	public void savePurchaseReturndetails(PurchaseReturnScreenBean purretdetailBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.saveOrUpdate(purretdetailBean);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+
+	}
+
+	// save purchasereturntotnetamt data
+	public void savePurReturnNetAmt(PurchaseReturnAmountBean purretnetamtBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.saveOrUpdate(purretnetamtBean);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+
+	}
 
 }

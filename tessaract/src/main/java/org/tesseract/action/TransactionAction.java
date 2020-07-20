@@ -14,6 +14,8 @@ import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
+import org.tesseract.entities.PurchaseReturnAmountBean;
+import org.tesseract.entities.PurchaseReturnScreenBean;
 import org.tesseract.entities.PurchaseScreenBean;
 import org.tesseract.entities.SalesAmountBean;
 import org.tesseract.entities.SalesBase;
@@ -51,6 +53,9 @@ public class TransactionAction extends ActionSupport {
 	private List<SalesReturnDetailsBean> salretDetList;
 	private SalesReturnAmountBean salesretamtbean;
 	private List<PurchaseBean> purchases;
+	private PurchaseReturnScreenBean purchaseReturnScreenBean;
+	private List<PurchaseReturnScreenBean> PurchaseRetlist;
+	private PurchaseReturnAmountBean purchaseRetAmtBean;
 
 	// vendor page action
 	public String savepurchaseVendor() {
@@ -322,11 +327,55 @@ public class TransactionAction extends ActionSupport {
 
 	// purchase return
 	public String getPurchaseListForPurchaseReturn() {
-		System.out.println(getBillno());
-		purchases = transHibernateDao.searchByPurchaseBillno(getBillno());
+		try {
+			purchases = transHibernateDao.searchByPurchaseBillno(billno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return SUCCESS;
 	}
-	
+
+	public String editpurchaseReturnDetails() throws IllegalAccessException, InvocationTargetException {
+		if (purchaseBean != null && purchaseBean.getPurchaseId() != null) {
+			prodDetList = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
+			purchaseamtBean = transHibernateDao.getProducttotamt(purchaseBean.getPurchaseId());
+			PurchaseRetlist = new ArrayList<PurchaseReturnScreenBean>();
+			for (PurchaseScreenBean purdetils : prodDetList) {
+				try {
+					purdetils.setProductId(null);
+					purchaseReturnScreenBean = new PurchaseReturnScreenBean();
+					BeanUtils.copyProperties(purchaseReturnScreenBean, purdetils);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				PurchaseRetlist.add(purchaseReturnScreenBean);
+			}
+			purchaseRetAmtBean = new PurchaseReturnAmountBean();
+			BeanUtils.copyProperties(purchaseRetAmtBean, purchaseamtBean);
+
+		}
+		return SUCCESS;
+	}
+
+	public String savePurchReturnDetails() {
+		if (purchaseBean != null && purchaseBean.getPurchaseId() != null) {
+			List<PurchaseScreenBean> newprodlist = new ArrayList<PurchaseScreenBean>();
+			newprodlist = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
+			int i = 0;
+			for (PurchaseReturnScreenBean prodretdetils : PurchaseRetlist) {
+				prodretdetils.setProductId(newprodlist.get(i).getProductId());
+				prodretdetils.setProductId(new ProductBean());
+				prodretdetils.getProductId().setProductId(newprodlist.get(i).getProductId().getProductId());
+				transHibernateDao.savePurchaseReturndetails(prodretdetils);
+				i++;
+			}
+			purchaseRetAmtBean.setPurchaseId(new PurchaseBean());
+			purchaseRetAmtBean.getPurchaseId().setPurchaseId(purchaseBean.getPurchaseId());
+			transHibernateDao.savePurReturnNetAmt(purchaseRetAmtBean);
+
+		}
+		return SUCCESS;
+	}
 	public String getPurchaseditemByBill() {
 		return SUCCESS;
 	}
@@ -481,6 +530,30 @@ public class TransactionAction extends ActionSupport {
 
 	public void setPurchases(List<PurchaseBean> purchases) {
 		this.purchases = purchases;
+	}
+
+	public PurchaseReturnScreenBean getPurchaseReturnScreenBean() {
+		return purchaseReturnScreenBean;
+	}
+
+	public void setPurchaseReturnScreenBean(PurchaseReturnScreenBean purchaseReturnScreenBean) {
+		this.purchaseReturnScreenBean = purchaseReturnScreenBean;
+	}
+
+	public PurchaseReturnAmountBean getPurchaseRetAmtBean() {
+		return purchaseRetAmtBean;
+	}
+
+	public void setPurchaseRetAmtBean(PurchaseReturnAmountBean purchaseRetAmtBean) {
+		this.purchaseRetAmtBean = purchaseRetAmtBean;
+	}
+
+	public List<PurchaseReturnScreenBean> getPurchaseRetlist() {
+		return PurchaseRetlist;
+	}
+
+	public void setPurchaseRetlist(List<PurchaseReturnScreenBean> purchaseRetlist) {
+		PurchaseRetlist = purchaseRetlist;
 	}
 
 }

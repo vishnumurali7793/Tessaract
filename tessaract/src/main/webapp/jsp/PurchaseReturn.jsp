@@ -193,7 +193,7 @@ h3 {
 													<td><div align="center">
 															<a class="glyphicon glyphicon-share-alt"
 																style="font-size: 20px; margin-top: 12px; color: #4CAF50;"
-																href="getPurchaseditemByBill?purchaseBean.purchaseId=<s:property value="purchaseId" />"></a>
+																href="editpurchaseReturnDetails?purchaseBean.purchaseId=<s:property value="purchaseId" />"></a>
 														</div></td>
 												</tr>
 											</s:iterator>
