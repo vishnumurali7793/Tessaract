@@ -1,6 +1,5 @@
 package org.tesseract.action;
 
-import java.beans.Beans;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -24,7 +23,6 @@ import org.tesseract.entities.SalesReturnAmountBean;
 import org.tesseract.entities.SalesReturnDetailsBean;
 import org.tesseract.entities.StockBean;
 import org.tesseract.entities.VendorBean;
-import org.tesseract.entities.modelBean;
 import org.tesseract.persistance.MasterHibernateDao;
 import org.tesseract.persistance.TransactionHibernateDao;
 
@@ -56,6 +54,10 @@ public class TransactionAction extends ActionSupport {
 	private PurchaseReturnScreenBean purchaseReturnScreenBean;
 	private List<PurchaseReturnScreenBean> PurchaseRetlist;
 	private PurchaseReturnAmountBean purchaseRetAmtBean;
+
+	private PurchaseReturnScreenBean purchaseReturnItem;
+	private PurchaseReturnAmountBean purchaseReturnAmount;
+	private List<PurchaseReturnScreenBean> purchaseReturnItems;
 
 	// vendor page action
 	public String savepurchaseVendor() {
@@ -342,10 +344,10 @@ public class TransactionAction extends ActionSupport {
 			PurchaseRetlist = new ArrayList<PurchaseReturnScreenBean>();
 			for (PurchaseScreenBean purdetils : prodDetList) {
 				try {
-					purdetils.setPurchaseScreenId(null);
 					purchaseReturnScreenBean = new PurchaseReturnScreenBean();
 					BeanUtils.copyProperties(purchaseReturnScreenBean, purdetils);
-					transHibernateDao.savePurchaseReturndetails(purchaseReturnScreenBean);
+//					purchaseReturnScreenBean.setPurchaseScreenId(null);
+//					transHibernateDao.savePurchaseReturndetails(purchaseReturnScreenBean);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -359,33 +361,41 @@ public class TransactionAction extends ActionSupport {
 	}
 
 	public String savePurchReturnDetails() throws IllegalAccessException, InvocationTargetException {
-		if (purchaseBean != null && purchaseBean.getPurchaseId() != null) {
-			/*List<PurchaseScreenBean> newprodlist = new ArrayList<PurchaseScreenBean>();
-			newprodlist = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());*/
-			//int i = 0;
-		//	PurchaseRetlist=transHibernateDao.getPurchaseretDetailsList(purchaseBean.getPurchaseId());
-			PurchaseReturnScreenBean prodretlist=new PurchaseReturnScreenBean();
-			try {
-				for (PurchaseReturnScreenBean prodretdetils : PurchaseRetlist) {
-					/*prodretdetils.setProductId(newprodlist.get(i).getProductId());
-					prodretdetils.setProductId(new ProductBean());
-					prodretdetils.getProductId().setProductId(newprodlist.get(i).getProductId().getProductId());*/
-					BeanUtils.copyProperties(prodretlist,prodretdetils);
-					transHibernateDao.savePurchaseReturndetails(prodretlist);
-				//	i++;
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		PurchaseReturnScreenBean prodretlist = new PurchaseReturnScreenBean();
+		try {
+			for (PurchaseReturnScreenBean prodretdetils : purchaseReturnItems) {
+				BeanUtils.copyProperties(prodretlist, prodretdetils);
+				transHibernateDao.savePurchaseReturndetails(prodretlist);
 			}
-			purchaseRetAmtBean.setPurchaseId(new PurchaseBean());
-			purchaseRetAmtBean.getPurchaseId().setPurchaseId(purchaseBean.getPurchaseId());
-			transHibernateDao.savePurReturnNetAmt(purchaseRetAmtBean);
-
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		purchaseRetAmtBean.setPurchaseId(new PurchaseBean());
+		purchaseRetAmtBean.getPurchaseId().setPurchaseId(purchaseBean.getPurchaseId());
+		transHibernateDao.savePurReturnNetAmt(purchaseRetAmtBean);
 		return SUCCESS;
 	}
+
 	public String getPurchaseditemByBill() {
+		if (purchaseBean.getPurchaseId() != null) {
+			purchaseReturnItems = transHibernateDao.getItemListForReturn(purchaseBean.getPurchaseId());
+			if (purchaseReturnItems == null || purchaseReturnItems.size() <= 0) {
+				prodDetList = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
+				purchaseReturnItems = new ArrayList<>();
+				for (PurchaseScreenBean itemsBean : prodDetList) {
+					PurchaseReturnScreenBean returnedItemBean = new PurchaseReturnScreenBean();
+					try {
+						BeanUtils.copyProperties(returnedItemBean, itemsBean);
+						returnedItemBean.setPurchaseScreenId(null);
+						transHibernateDao.saveItemListForPurchaseReturn(returnedItemBean);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				purchaseReturnItems = transHibernateDao.getItemListForReturn(purchaseBean.getPurchaseId());
+			}
+
+		}
 		return SUCCESS;
 	}
 
@@ -563,6 +573,30 @@ public class TransactionAction extends ActionSupport {
 
 	public void setPurchaseRetlist(List<PurchaseReturnScreenBean> purchaseRetlist) {
 		PurchaseRetlist = purchaseRetlist;
+	}
+
+	public PurchaseReturnScreenBean getPurchaseReturnItem() {
+		return purchaseReturnItem;
+	}
+
+	public void setPurchaseReturnItem(PurchaseReturnScreenBean purchaseReturnItem) {
+		this.purchaseReturnItem = purchaseReturnItem;
+	}
+
+	public PurchaseReturnAmountBean getPurchaseReturnAmount() {
+		return purchaseReturnAmount;
+	}
+
+	public void setPurchaseReturnAmount(PurchaseReturnAmountBean purchaseReturnAmount) {
+		this.purchaseReturnAmount = purchaseReturnAmount;
+	}
+
+	public List<PurchaseReturnScreenBean> getPurchaseReturnItems() {
+		return purchaseReturnItems;
+	}
+
+	public void setPurchaseReturnItems(List<PurchaseReturnScreenBean> purchaseReturnItems) {
+		this.purchaseReturnItems = purchaseReturnItems;
 	}
 
 }

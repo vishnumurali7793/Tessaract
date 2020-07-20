@@ -99,6 +99,13 @@ h3 {
 	color: #337ab7;
 }
 </style>
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						alert('<s:property value = "purchaseReturnItems[0].purchaseReturnScreenId"/>');
+					});
+</script>
 <body>
 	<nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
@@ -132,14 +139,86 @@ h3 {
 			</ul>
 		</div>
 	</nav>
-	<div class="container">
-		<center>
-			<h3 style="color: green; margin-top: 300px;">
-				Successfully redirected to purchase return item list view for
-				billId:
-				<s:property value="purchaseBean.purchaseId" />
-			</h3>
-		</center>
+	<div class="container-fluid">
+		<form action="savePurchReturnDetails">
+			<div class="row">
+				<div class="col-xs-12">
+					<table class="ttable table-bordered">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>HSNCODE</th>
+								<th>PRODUCT</th>
+								<th>PURITY</th>
+								<th>GM.WT</th>
+								<th>TOUCH</th>
+								<th>NET WT</th>
+								<th>RATE</th>
+								<th>QUANTITY</th>
+								<th>TOTAL AMOUNT</th>
+							</tr>
+						</thead>
+						<tbody>
+							<s:if
+								test="purchaseReturnItems!=null && purchaseReturnItems.size()>0">
+								<s:iterator value="purchaseReturnItems" status="row"
+									var="prItems">
+									<input type="hidden"
+										name="purchaseReturnItems[<s:property value = "#row.index"/>].purchaseId.purchaseId"
+										value='<s:property value="purchaseId.purchaseId" />' />
+									<input type="hidden"
+										name="purchaseReturnItem.purchaseReturnScreenId"
+										value="<s:property value="purchaseReturnScreenId" />" />
+									<tr>
+										<td><s:property value="#row.count" /></td>
+										<td><input type="text" class="form-control"
+											name="purchaseReturnItems[<s:property value = "#row.index"/>].hsnCode"
+											value="<s:property value = "hsnCode"/>" /></td>
+										<td><s:property value="productId.productName" /></td>
+										<td><input type="text" class="form-control"
+											name="purchaseReturnItems[<s:property value = "#row.index"/>].purity"
+											value="<s:property value = "purity"/>" /></td>
+										<td><input type="text" class="form-control"
+											name="purchaseReturnItems[<s:property value = "#row.index"/>].gramweight"
+											value="<s:property value = "goldweight"/>" /></td>
+										<td><input type="text" class="form-control"
+											name="purchaseReturnItems[<s:property value = "#row.index"/>].touch"
+											value="<s:property value = "touch"/>" /></td>
+										<td><input type="text" class="form-control"
+											name="purchaseReturnItems[<s:property value = "#row.index"/>].netweight"
+											value="<s:property value = "netweight"/>" /></td>
+										<td><input type="text" class="form-control"
+											name="purchaseReturnItems[<s:property value = "#row.index"/>].rate"
+											value="<s:property value = "rate"/>" /></td>
+										<td><input type="text" class="form-control"
+											name="purchaseReturnItems[<s:property value = "#row.index"/>].quantity"
+											value="<s:property value = "quantity"/>" /></td>
+										<td><input type="text" class="form-control"
+											name="purchaseReturnItems[<s:property value = "#row.index"/>].totalamount"
+											value="<s:property value = "totalamount"/>" /></td>
+									</tr>
+								</s:iterator>
+							</s:if>
+							<s:else>
+								<tr>
+									<td colspan="10">
+										<div align="center">--No Data Found--</div>
+									</td>
+								</tr>
+							</s:else>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-xs-12">
+					<div align="center">
+						<s:submit value="Update Details" class="btn btn-sm btn-success"></s:submit>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </body>
 </html>

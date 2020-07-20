@@ -339,21 +339,21 @@
 			method="getPurchaseListForPurchaseReturn">
 			<result name="success">/jsp/PurchaseReturn.jsp</result>
 		</action>
-		<!-- <action name="getPurchaseditemByBill"
+		<action name="getPurchaseditemByBill"
 			class="org.tesseract.action.TransactionAction"
 			method="getPurchaseditemByBill">
 			<result name="success">/jsp/ItemListForPurchaseReturn.jsp</result>
-		</action> -->
-		<action name="editpurchaseReturnDetails"
+		</action>
+		<!-- <action name="editpurchaseReturnDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="editpurchaseReturnDetails">
 			<result name="success">/jsp/editPurchaseReturn.jsp</result>
-		</action>
+		</action> -->
 		<action name="savePurchReturnDetails"
 			class="org.tesseract.action.TransactionAction"
 			method="savePurchReturnDetails">
 			<result name="success" type="redirectAction">
-				<param name="actionName">editpurchaseReturnDetails</param>
+				<param name="actionName">getPurchaseditemByBill</param>
 				<param name="purchaseBean.purchaseId">${purchaseBean.purchaseId}</param>
 			</result>
 		</action>

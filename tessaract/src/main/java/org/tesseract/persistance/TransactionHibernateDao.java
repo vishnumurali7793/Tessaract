@@ -105,8 +105,8 @@ public class TransactionHibernateDao {
 		try {
 			return session
 					.createQuery(
-							"from PurchaseScreenBean as a where a.purchaseId.purchaseId=:purdetarg and a.deleteStatus='N'")
-					.setParameter("purdetarg", purchasedetid).list();
+							"from PurchaseScreenBean as a where a.purchaseId.purchaseId=:purdetarg and a.deleteStatus=:status")
+					.setParameter("purdetarg", purchasedetid).setParameter("status", "N").list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -550,6 +550,34 @@ public class TransactionHibernateDao {
 			sessionFactory.close();
 		}
 
+	}
+
+	public void saveItemListForPurchaseReturn(PurchaseReturnScreenBean returnedItemBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		try {
+			session.saveOrUpdate(returnedItemBean);
+		} catch (Exception e) {
+			throw e;
+		}finally {
+			session.close();
+			sessionFactory.close();
+		}
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PurchaseReturnScreenBean> getItemListForReturn(Integer purchaseId) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		try {
+			return session.createQuery("FROM PurchaseReturnScreenBean WHERE purchaseId.purchaseId=:purchaseBaseId AND deleteStatus='N'")
+			.setParameter("purchaseBaseId", purchaseId).list();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

@@ -67,7 +67,8 @@
 		document.getElementById('totnetamt').value = netamt;
 	}
 	function deletepurchase(purid) {
-		location.href = "deletePurchase?purchaseDetails.purchaseScreenId=" + purid;
+		location.href = "deletePurchase?purchaseDetails.purchaseScreenId="
+				+ purid;
 	}
 </script>
 <style type="text/css">
@@ -170,7 +171,7 @@ th {
 							</tr>
 						</thead>
 						<tbody>
-							<s:if test="PurchaseRetlist!=null && PurchaseRetlist.size()>0">
+							<%-- <s:if test="PurchaseRetlist!=null && PurchaseRetlist.size()>0">
 								<s:iterator value="PurchaseRetlist" status="row">
 									<tr>
 										<td><s:property value="#row.count" /></td>
@@ -219,7 +220,8 @@ th {
 															onclick="deletepurchase('<s:property value="purchaseScreenId"/>')">[DELETE]</button></td>
 									</tr>
 								</s:iterator>
-							</s:if>
+							</s:if> --%>
+							<s:if name=""></s:i18n>
 							<s:else>no product added</s:else>
 							<tr>
 								<td colspan="9" align="right"><label>Net amount</label></td>
