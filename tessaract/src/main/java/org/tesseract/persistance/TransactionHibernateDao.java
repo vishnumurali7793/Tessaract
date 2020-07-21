@@ -559,7 +559,7 @@ public class TransactionHibernateDao {
 		try {
 			session.saveOrUpdate(returnedItemBean);
 		} catch (Exception e) {
-			throw e;
+			e.printStackTrace();
 		}finally {
 			session.close();
 			sessionFactory.close();

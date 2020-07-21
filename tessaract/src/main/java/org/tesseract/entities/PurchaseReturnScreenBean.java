@@ -56,14 +56,14 @@ public class PurchaseReturnScreenBean {
 	
 	@Column(name = "quantity")
 	private Double quantity;
+	
 
-	public Integer getPurchaseScreenId() {
-		return purchaseReturnScreenId;
-	}
-
-	public void setPurchaseScreenId(Integer purchaseScreenId) {
-		this.purchaseReturnScreenId = purchaseScreenId;
-	}
+	/*
+	 * public Integer getPurchaseScreenId() { return purchaseReturnScreenId; }
+	 * 
+	 * public void setPurchaseScreenId(Integer purchaseScreenId) {
+	 * this.purchaseReturnScreenId = purchaseScreenId; }
+	 */
 
 	public PurchaseBean getPurchaseId() {
 		return purchaseId;
@@ -160,7 +160,14 @@ public class PurchaseReturnScreenBean {
 	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
-	
+
+	public Integer getPurchaseReturnScreenId() {
+		return purchaseReturnScreenId;
+	}
+
+	public void setPurchaseReturnScreenId(Integer purchaseReturnScreenId) {
+		this.purchaseReturnScreenId = purchaseReturnScreenId;
+	}
 	
 }
 

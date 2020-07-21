@@ -140,7 +140,7 @@ h3 {
 		</div>
 	</nav>
 	<div class="container-fluid">
-		<form action="savePurchReturnDetails">
+		<s:form action="updatePurchaseReturn">
 			<div class="row">
 				<div class="col-xs-12">
 					<table class="ttable table-bordered">
@@ -167,33 +167,33 @@ h3 {
 										name="purchaseReturnItems[<s:property value = "#row.index"/>].purchaseId.purchaseId"
 										value='<s:property value="purchaseId.purchaseId" />' />
 									<input type="hidden"
-										name="purchaseReturnItem.purchaseReturnScreenId"
+										name="purchaseReturnItems[<s:property value = "#row.index"/>].purchaseReturnScreenId"
 										value="<s:property value="purchaseReturnScreenId" />" />
 									<tr>
 										<td><s:property value="#row.count" /></td>
-										<td><input type="text" class="form-control"
+										<td><input type="text" class="form-control input-sm"
 											name="purchaseReturnItems[<s:property value = "#row.index"/>].hsnCode"
 											value="<s:property value = "hsnCode"/>" /></td>
 										<td><s:property value="productId.productName" /></td>
-										<td><input type="text" class="form-control"
+										<td><input type="text" class="form-control input-sm"
 											name="purchaseReturnItems[<s:property value = "#row.index"/>].purity"
 											value="<s:property value = "purity"/>" /></td>
-										<td><input type="text" class="form-control"
+										<td><input type="text" class="form-control input-sm"
 											name="purchaseReturnItems[<s:property value = "#row.index"/>].gramweight"
-											value="<s:property value = "goldweight"/>" /></td>
-										<td><input type="text" class="form-control"
+											value="<s:property value = "gramweight"/>" /></td>
+										<td><input type="text" class="form-control input-sm"
 											name="purchaseReturnItems[<s:property value = "#row.index"/>].touch"
 											value="<s:property value = "touch"/>" /></td>
-										<td><input type="text" class="form-control"
+										<td><input type="text" class="form-control input-sm"
 											name="purchaseReturnItems[<s:property value = "#row.index"/>].netweight"
 											value="<s:property value = "netweight"/>" /></td>
-										<td><input type="text" class="form-control"
+										<td><input type="text" class="form-control input-sm"
 											name="purchaseReturnItems[<s:property value = "#row.index"/>].rate"
 											value="<s:property value = "rate"/>" /></td>
-										<td><input type="text" class="form-control"
+										<td><input type="text" class="form-control input-sm"
 											name="purchaseReturnItems[<s:property value = "#row.index"/>].quantity"
 											value="<s:property value = "quantity"/>" /></td>
-										<td><input type="text" class="form-control"
+										<td><input type="text" class="form-control input-sm"
 											name="purchaseReturnItems[<s:property value = "#row.index"/>].totalamount"
 											value="<s:property value = "totalamount"/>" /></td>
 									</tr>
@@ -214,11 +214,11 @@ h3 {
 			<div class="row">
 				<div class="col-xs-12">
 					<div align="center">
-						<s:submit value="Update Details" class="btn btn-sm btn-success"></s:submit>
+						<s:submit class="btn btn-sm btn-success" value="Update Details"></s:submit>
 					</div>
 				</div>
 			</div>
-		</form>
+		</s:form>
 	</div>
 </body>
 </html>

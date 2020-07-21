@@ -81,7 +81,6 @@ public class TransactionAction extends ActionSupport {
 	}
 
 	public String getmodalForPurchase() {
-		String invoiceNo = "";
 		String newInvc = null;
 		int year = 0;
 		Integer invoival = transHibernateDao.invoicePurchase();
@@ -98,7 +97,6 @@ public class TransactionAction extends ActionSupport {
 			purchaseBean = new PurchaseBean();
 			purchaseBean.setInvoice(newInvc);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return SUCCESS;
@@ -170,7 +168,6 @@ public class TransactionAction extends ActionSupport {
 	}
 
 	public String getmodalForSales() {
-		String invoiceNo = "";
 		String newInvc = null;
 		int year = 0;
 		Integer invoival = transHibernateDao.invoiceSales();
@@ -187,7 +184,6 @@ public class TransactionAction extends ActionSupport {
 			salesBase = new SalesBase();
 			salesBase.setInvoice(newInvc);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return SUCCESS;
@@ -360,33 +356,17 @@ public class TransactionAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public String savePurchReturnDetails() throws IllegalAccessException, InvocationTargetException {
-		PurchaseReturnScreenBean prodretlist = new PurchaseReturnScreenBean();
-		try {
-			for (PurchaseReturnScreenBean prodretdetils : purchaseReturnItems) {
-				BeanUtils.copyProperties(prodretlist, prodretdetils);
-				transHibernateDao.savePurchaseReturndetails(prodretlist);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		purchaseRetAmtBean.setPurchaseId(new PurchaseBean());
-		purchaseRetAmtBean.getPurchaseId().setPurchaseId(purchaseBean.getPurchaseId());
-		transHibernateDao.savePurReturnNetAmt(purchaseRetAmtBean);
-		return SUCCESS;
-	}
-
 	public String getPurchaseditemByBill() {
 		if (purchaseBean.getPurchaseId() != null) {
 			purchaseReturnItems = transHibernateDao.getItemListForReturn(purchaseBean.getPurchaseId());
 			if (purchaseReturnItems == null || purchaseReturnItems.size() <= 0) {
 				prodDetList = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
-				purchaseReturnItems = new ArrayList<>();
+				purchaseReturnItems = new ArrayList<PurchaseReturnScreenBean>();
 				for (PurchaseScreenBean itemsBean : prodDetList) {
 					PurchaseReturnScreenBean returnedItemBean = new PurchaseReturnScreenBean();
 					try {
 						BeanUtils.copyProperties(returnedItemBean, itemsBean);
-						returnedItemBean.setPurchaseScreenId(null);
+						returnedItemBean.setPurchaseReturnScreenId(null);
 						transHibernateDao.saveItemListForPurchaseReturn(returnedItemBean);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -398,7 +378,11 @@ public class TransactionAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-
+	
+	public String updatePurchaseReturn() {
+		return SUCCESS;
+	}
+	
 	public PurchaseBean getPurchaseBean() {
 		return purchaseBean;
 	}
