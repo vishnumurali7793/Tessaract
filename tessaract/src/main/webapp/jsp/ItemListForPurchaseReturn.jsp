@@ -103,7 +103,7 @@ h3 {
 	$(document)
 			.ready(
 					function() {
-						alert('<s:property value = "purchaseReturnItems[0].purchaseReturnScreenId"/>');
+						//alert('<s:property value = "purchaseReturnItems[0].purchaseReturnScreenId"/>');
 					});
 </script>
 <body>

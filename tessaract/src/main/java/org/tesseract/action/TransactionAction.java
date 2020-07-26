@@ -389,10 +389,16 @@ public class TransactionAction extends ActionSupport {
 	public String updatePurchaseReturn() throws IllegalAccessException, InvocationTargetException {
 		if (purchaseBean != null && purchaseBean.getPurchaseId() != null) {
 			purchaseReturnItem =new PurchaseReturnScreenBean();
+			List<PurchaseReturnScreenBean> newpurlist = new ArrayList<PurchaseReturnScreenBean>();
+			newpurlist = transHibernateDao.getItemListForReturn(purchaseBean.getPurchaseId());
+			int i = 0;
+			//purchaseReturnItems = transHibernateDao.getItemListForReturn(purchaseBean.getPurchaseId());
 			for (PurchaseReturnScreenBean purretdetils : purchaseReturnItems) {
+				purretdetils.setProductId(newpurlist.get(i).getProductId());
 				BeanUtils.copyProperties(purchaseReturnItem, purretdetils);
 				//purretdetils.setPurchaseReturnScreenId(null);
 				transHibernateDao.saveItemListForPurchaseReturn(purchaseReturnItem);
+				i++;
 			}
 			PurchaseReturnAmountBean purchaseRetamt = new PurchaseReturnAmountBean();
 			purchaseRetamt=transHibernateDao.getPurrettotamt(purchaseBean.getPurchaseId());
