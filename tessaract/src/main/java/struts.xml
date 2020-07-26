@@ -348,7 +348,8 @@
 			class="org.tesseract.action.TransactionAction"
 			method="updatePurchaseReturn">
 			<result name="success" type="redirectAction">
-				goToPurchaseReturn
+				<param name="actionName">getPurchaseditemByBill</param>
+				<param name="purchaseBean.purchaseId">${purchaseBean.purchaseId}</param>
 			</result>
 		</action>
 	</package>

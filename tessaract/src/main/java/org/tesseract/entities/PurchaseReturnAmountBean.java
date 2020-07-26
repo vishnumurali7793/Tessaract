@@ -32,12 +32,12 @@ public class PurchaseReturnAmountBean {
 	@Column(name = "netamount")
 	private Double netamount;
 
-	public Integer getPurchaseAmountId() {
+	public Integer getPurchaseReturnAmountId() {
 		return purchaseReturnAmountId;
 	}
 
-	public void setPurchaseAmountId(Integer purchaseAmountId) {
-		this.purchaseReturnAmountId = purchaseAmountId;
+	public void setPurchaseReturnAmountId(Integer purchaseReturnAmountId) {
+		this.purchaseReturnAmountId = purchaseReturnAmountId;
 	}
 
 	public PurchaseBean getPurchaseId() {
@@ -71,6 +71,7 @@ public class PurchaseReturnAmountBean {
 	public void setNetamount(Double netamount) {
 		this.netamount = netamount;
 	}
+
 	
 	
 }

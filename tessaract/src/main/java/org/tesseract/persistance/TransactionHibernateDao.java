@@ -579,5 +579,25 @@ public class TransactionHibernateDao {
 			return null;
 		}
 	}
+	
+	// get productamttot
+		public PurchaseReturnAmountBean getPurrettotamt(Integer purchaseretid) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+
+			try {
+				return (PurchaseReturnAmountBean) session
+						.createQuery("from PurchaseReturnAmountBean where purchaseId.purchaseId=:purdetarg")
+						.setParameter("purdetarg", purchaseretid).uniqueResult();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			} finally {
+				session.close();
+				sessionFactory.close();
+			}
+
+		}
 
 }

@@ -141,6 +141,9 @@ h3 {
 	</nav>
 	<div class="container-fluid">
 		<s:form action="updatePurchaseReturn">
+			<s:hidden name="purchaseBean.purchaseId" />
+			<input type="hidden"name="purchaseReturnAmount.purchaseReturnAmountId"
+										value='<s:property value="purchaseReturnAmount.purchaseReturnAmountId" />' />
 			<div class="row">
 				<div class="col-xs-12">
 					<table class="ttable table-bordered">
@@ -156,6 +159,7 @@ h3 {
 								<th>RATE</th>
 								<th>QUANTITY</th>
 								<th>TOTAL AMOUNT</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -196,6 +200,9 @@ h3 {
 										<td><input type="text" class="form-control input-sm"
 											name="purchaseReturnItems[<s:property value = "#row.index"/>].totalamount"
 											value="<s:property value = "totalamount"/>" /></td>
+											<td><button class="btn-xs btn-link"
+															onclick="deletepurchase('<s:property value="purchaseScreenId"/>')">[DELETE]</button></td>
+									
 									</tr>
 								</s:iterator>
 							</s:if>
@@ -206,6 +213,26 @@ h3 {
 									</td>
 								</tr>
 							</s:else>
+							<tr>
+								<td colspan="9" align="right"><label>Net amount</label></td>
+								<td colspan="1"><input class="form-control" id="totamt"
+									type="text" name="purchaseReturnAmount.grossamount"
+									value="<s:property value="purchaseReturnAmount.grossamount"/>" /></td>
+							</tr>
+							<tr>
+								<td colspan="9" align="right"><label>Round off</label></td>
+								<td colspan="1"><input class="form-control" id="roundoff"
+									type="text" name="purchaseRetAmtBean.roundoff"
+									value="<s:property value="purchaseReturnAmount.roundoff"/>"
+									onchange="nettotalamt()" /></td>
+							</tr>
+							<tr>
+								<td colspan="9" align="right"><label>Total Net
+										amount</label></td>
+								<td colspan="1"><input class="form-control" id="totnetamt"
+									type="text" name="purchaseReturnAmount.netamount"
+									value="<s:property value="purchaseReturnAmount.netamount"/>" /></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
