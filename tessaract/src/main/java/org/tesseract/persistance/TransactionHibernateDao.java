@@ -516,11 +516,13 @@ public class TransactionHibernateDao {
 	public void savePurReturnNetAmt(PurchaseReturnAmountBean purretnetamtBean) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-
+		session.beginTransaction();
+		//Transaction transaction = session.beginTransaction();
 		try {
 			session.saveOrUpdate(purretnetamtBean);
-			transaction.commit();
+			session.flush();
+			session.clear();
+			//transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -558,6 +560,8 @@ public class TransactionHibernateDao {
 		session.beginTransaction();
 		try {
 			session.saveOrUpdate(returnedItemBean);
+			session.flush();
+			session.clear();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

@@ -149,6 +149,7 @@ public class TransactionAction extends ActionSupport {
 				stockBean.setDate(new Date());
 				stockBean.setNetWt(pd.getNetweight());
 				stockBean.setQuantity(pd.getQuantity());
+				stockBean.setDetailStatus("P");
 				transHibernateDao.savestockDetails(stockBean);
 				i++;
 			}
@@ -398,13 +399,26 @@ public class TransactionAction extends ActionSupport {
 				BeanUtils.copyProperties(purchaseReturnItem, purretdetils);
 				//purretdetils.setPurchaseReturnScreenId(null);
 				transHibernateDao.saveItemListForPurchaseReturn(purchaseReturnItem);
+				
+				stockBean = new StockBean();
+				stockBean.setProductId(new ProductBean());
+				stockBean.getProductId().setProductId(newpurlist.get(i).getProductId().getProductId());
+				stockBean.setPurchaseId(new PurchaseBean());
+				stockBean.getPurchaseId().setPurchaseId(newpurlist.get(i).getPurchaseId().getPurchaseId());
+				stockBean.setDate(new Date());
+				stockBean.setNetWt(purretdetils.getNetweight());
+				stockBean.setQuantity(purretdetils.getQuantity());
+				stockBean.setDetailStatus("PR");
+				transHibernateDao.savestockDetails(stockBean);
 				i++;
 			}
 			PurchaseReturnAmountBean purchaseRetamt = new PurchaseReturnAmountBean();
-			purchaseRetamt=transHibernateDao.getPurrettotamt(purchaseBean.getPurchaseId());
-			BeanUtils.copyProperties(purchaseReturnAmount, purchaseRetamt);
+			//purchaseRetamt=transHibernateDao.getPurrettotamt(purchaseBean.getPurchaseId());
+			purchaseReturnAmount.setPurchaseId(new PurchaseBean());
+			purchaseReturnAmount.getPurchaseId().setPurchaseId(purchaseBean.getPurchaseId());
+			BeanUtils.copyProperties(purchaseRetamt, purchaseReturnAmount);
 			//purchaseRetamt.setPurchaseReturnAmountId(null);
-			transHibernateDao.savePurReturnNetAmt(purchaseReturnAmount);
+			transHibernateDao.savePurReturnNetAmt(purchaseRetamt);
 		}
 		return SUCCESS;
 	}

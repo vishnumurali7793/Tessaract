@@ -36,7 +36,10 @@ public class StockBean {
 	
 	@Column(name="netWt")
 	private Double NetWt;
-
+	
+	@Column(name="detailStatus")
+	private String detailStatus;
+	
 	public Integer getStockId() {
 		return stockId;
 	}
@@ -83,6 +86,14 @@ public class StockBean {
 
 	public void setNetWt(Double netWt) {
 		NetWt = netWt;
+	}
+
+	public String getDetailStatus() {
+		return detailStatus;
+	}
+
+	public void setDetailStatus(String detailStatus) {
+		this.detailStatus = detailStatus;
 	} 
 	
 	
