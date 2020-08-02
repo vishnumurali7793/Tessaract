@@ -334,29 +334,6 @@ public class TransactionAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	/*public String editpurchaseReturnDetails() throws IllegalAccessException, InvocationTargetException {
-		if (purchaseBean != null && purchaseBean.getPurchaseId() != null) {
-			prodDetList = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
-			purchaseamtBean = transHibernateDao.getProducttotamt(purchaseBean.getPurchaseId());
-			PurchaseRetlist = new ArrayList<PurchaseReturnScreenBean>();
-			for (PurchaseScreenBean purdetils : prodDetList) {
-				try {
-					purchaseReturnScreenBean = new PurchaseReturnScreenBean();
-					BeanUtils.copyProperties(purchaseReturnScreenBean, purdetils);
-//					purchaseReturnScreenBean.setPurchaseScreenId(null);
-//					transHibernateDao.savePurchaseReturndetails(purchaseReturnScreenBean);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				PurchaseRetlist.add(purchaseReturnScreenBean);
-			}
-			purchaseRetAmtBean = new PurchaseReturnAmountBean();
-			BeanUtils.copyProperties(purchaseRetAmtBean, purchaseamtBean);
-
-		}
-		return SUCCESS;
-	}*/
-
 	public String getPurchaseditemByBill() throws IllegalAccessException, InvocationTargetException {
 		if (purchaseBean.getPurchaseId() != null) {
 			purchaseReturnItems = transHibernateDao.getItemListForReturn(purchaseBean.getPurchaseId());

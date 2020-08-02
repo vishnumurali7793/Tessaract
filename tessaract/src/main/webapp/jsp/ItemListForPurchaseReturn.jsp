@@ -224,7 +224,7 @@ h3 {
 								<td colspan="1"><input class="form-control" id="roundoff"
 									type="text" name="purchaseReturnAmount.roundoff"
 									value="<s:property value="purchaseReturnAmount.roundoff"/>"
-									onchange="nettotalamt()" /></td>
+									onchange="nettotalamt()" /> </td>
 							</tr>
 							<tr>
 								<td colspan="9" align="right"><label>Total Net

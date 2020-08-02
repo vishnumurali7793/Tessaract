@@ -511,7 +511,6 @@ public class TransactionHibernateDao {
 		}
 
 	}
-
 	// save purchasereturntotnetamt data
 	public void savePurReturnNetAmt(PurchaseReturnAmountBean purretnetamtBean) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
