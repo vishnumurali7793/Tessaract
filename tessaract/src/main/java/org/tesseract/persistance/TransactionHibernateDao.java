@@ -20,6 +20,7 @@ import org.tesseract.entities.SalesDetailsBean;
 import org.tesseract.entities.SalesReturnAmountBean;
 import org.tesseract.entities.SalesReturnDetailsBean;
 import org.tesseract.entities.StockBean;
+import org.tesseract.entities.StockTransactionMapping;
 
 public class TransactionHibernateDao {
 
@@ -596,6 +597,23 @@ public class TransactionHibernateDao {
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
+			} finally {
+				session.close();
+				sessionFactory.close();
+			}
+
+		}
+		
+		// save stock
+		public void savestockprodmapingDetails(StockTransactionMapping stockmapBean) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+			try {
+				session.saveOrUpdate(stockmapBean);
+				transaction.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
 			} finally {
 				session.close();
 				sessionFactory.close();

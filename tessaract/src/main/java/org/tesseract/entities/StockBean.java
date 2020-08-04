@@ -20,9 +20,9 @@ public class StockBean {
 	@Column(name = "stock_id")
 	private Integer stockId;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	/*@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="purchaseId")
-	private PurchaseBean purchaseId;
+	private PurchaseBean purchaseId;*/
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="productId")
@@ -37,8 +37,8 @@ public class StockBean {
 	@Column(name="netWt")
 	private Double NetWt;
 	
-	@Column(name="detailStatus")
-	private String detailStatus;
+	/*@Column(name="detailStatus")
+	private String detailStatus;*/
 	
 	public Integer getStockId() {
 		return stockId;
@@ -48,13 +48,13 @@ public class StockBean {
 		this.stockId = stockId;
 	}
 
-	public PurchaseBean getPurchaseId() {
+	/*public PurchaseBean getPurchaseId() {
 		return purchaseId;
 	}
 
 	public void setPurchaseId(PurchaseBean purchaseId) {
 		this.purchaseId = purchaseId;
-	}
+	}*/
 
 	public ProductBean getProductId() {
 		return productId;
@@ -88,13 +88,13 @@ public class StockBean {
 		NetWt = netWt;
 	}
 
-	public String getDetailStatus() {
+	/*public String getDetailStatus() {
 		return detailStatus;
 	}
 
 	public void setDetailStatus(String detailStatus) {
 		this.detailStatus = detailStatus;
-	} 
+	} */
 	
 	
 }

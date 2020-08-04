@@ -22,6 +22,7 @@ import org.tesseract.entities.SalesDetailsBean;
 import org.tesseract.entities.SalesReturnAmountBean;
 import org.tesseract.entities.SalesReturnDetailsBean;
 import org.tesseract.entities.StockBean;
+import org.tesseract.entities.StockTransactionMapping;
 import org.tesseract.entities.VendorBean;
 import org.tesseract.persistance.MasterHibernateDao;
 import org.tesseract.persistance.TransactionHibernateDao;
@@ -40,6 +41,7 @@ public class TransactionAction extends ActionSupport {
 	private List<PurchaseScreenBean> prodDetList;
 	private PurchaseAmountBean purchaseamtBean;
 	private StockBean stockBean;
+	private StockTransactionMapping StockdetMapping;
 	private SalesBase salesBase;
 	private List<SalesBase> salesBaseList;
 	private Collection<Object> customerList;
@@ -144,12 +146,12 @@ public class TransactionAction extends ActionSupport {
 				stockBean = new StockBean();
 				stockBean.setProductId(new ProductBean());
 				stockBean.getProductId().setProductId(newprodlist.get(i).getProductId().getProductId());
-				stockBean.setPurchaseId(new PurchaseBean());
-				stockBean.getPurchaseId().setPurchaseId(newprodlist.get(i).getPurchaseId().getPurchaseId());
+				//stockBean.setPurchaseId(new PurchaseBean());
+				//stockBean.getPurchaseId().setPurchaseId(newprodlist.get(i).getPurchaseId().getPurchaseId());
 				stockBean.setDate(new Date());
 				stockBean.setNetWt(pd.getNetweight());
 				stockBean.setQuantity(pd.getQuantity());
-				stockBean.setDetailStatus("P");
+				//stockBean.setDetailStatus("P");
 				transHibernateDao.savestockDetails(stockBean);
 				i++;
 			}
@@ -380,13 +382,23 @@ public class TransactionAction extends ActionSupport {
 				stockBean = new StockBean();
 				stockBean.setProductId(new ProductBean());
 				stockBean.getProductId().setProductId(newpurlist.get(i).getProductId().getProductId());
-				stockBean.setPurchaseId(new PurchaseBean());
-				stockBean.getPurchaseId().setPurchaseId(newpurlist.get(i).getPurchaseId().getPurchaseId());
+			//	stockBean.setPurchaseId(new PurchaseBean());
+			//	stockBean.getPurchaseId().setPurchaseId(newpurlist.get(i).getPurchaseId().getPurchaseId());
 				stockBean.setDate(new Date());
 				stockBean.setNetWt(purretdetils.getNetweight());
 				stockBean.setQuantity(purretdetils.getQuantity());
-				stockBean.setDetailStatus("PR");
+			//	stockBean.setDetailStatus("PR");
 				transHibernateDao.savestockDetails(stockBean);
+				
+				StockdetMapping=new StockTransactionMapping();
+				StockdetMapping.setTransactionId(purretdetils.getPurchaseReturnScreenId());
+				StockdetMapping.setTransactionType("PR");
+				StockdetMapping.setQuantity(purretdetils.getQuantity());
+				StockdetMapping.setProduct(new ProductBean());
+				StockdetMapping.getProduct().setProductId(newpurlist.get(i).getProductId().getProductId());
+				StockdetMapping.setUpdatedOn(new Date());
+				
+				updateStockDetails(stockBean,StockdetMapping);
 				i++;
 			}
 			PurchaseReturnAmountBean purchaseRetamt = new PurchaseReturnAmountBean();
@@ -398,6 +410,14 @@ public class TransactionAction extends ActionSupport {
 			transHibernateDao.savePurReturnNetAmt(purchaseRetamt);
 		}
 		return SUCCESS;
+	}
+	
+	public String updateStockDetails(StockBean stockBase,StockTransactionMapping stockTransactionMapping){
+		
+		
+		transHibernateDao.savestockDetails(stockBase);
+		transHibernateDao.savestockprodmapingDetails(stockTransactionMapping);
+		return SUCCESS;	
 	}
 	
 	public PurchaseBean getPurchaseBean() {
@@ -598,6 +618,14 @@ public class TransactionAction extends ActionSupport {
 
 	public void setPurchaseReturnItems(List<PurchaseReturnScreenBean> purchaseReturnItems) {
 		this.purchaseReturnItems = purchaseReturnItems;
+	}
+
+	public StockTransactionMapping getStockdetMapping() {
+		return StockdetMapping;
+	}
+
+	public void setStockdetMapping(StockTransactionMapping stockdetMapping) {
+		StockdetMapping = stockdetMapping;
 	}
 
 }
