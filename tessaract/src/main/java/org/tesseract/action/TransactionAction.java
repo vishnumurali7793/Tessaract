@@ -113,6 +113,11 @@ public class TransactionAction extends ActionSupport {
 	public String editPurchaseDetails() {
 		if (purchaseBean != null && purchaseBean.getPurchaseId() != null) {
 			prodDetList = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
+			Double rate=0.00;
+			for(PurchaseScreenBean purcr:prodDetList){
+				rate=transHibernateDao.getrateByProductForPurchase(purcr.getProductId().getCategory().getCategoryId());
+				 purcr.setRate(rate);
+			}
 			purchaseamtBean = transHibernateDao.getProducttotamt(purchaseBean.getPurchaseId());
 		}
 		return SUCCESS;

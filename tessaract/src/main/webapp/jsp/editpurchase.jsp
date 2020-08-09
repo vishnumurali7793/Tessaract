@@ -22,6 +22,20 @@
 <title>tessaract</title>
 </head>
 <script type="text/javascript">
+/* $(document).ready(function() {
+	debugger
+	  $.ajax({
+	    url: 'getrateByProductForPurchase',
+	    data : {
+			"purchaseDetails.productId.categoryId" : '<s:property value="productId.category.categoryId"/>'
+		},
+	    success: function(response) {
+	      /* invoke your function*/
+	    	$('#rate' +index).html(response);
+	    }
+	  });
+	});
+ */
 	function getProductList() {
 		$('#productModal #modalTitle').html("Add items to purchase bill");
 		$

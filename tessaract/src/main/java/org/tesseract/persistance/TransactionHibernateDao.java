@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.omg.PortableInterceptor.SUCCESSFUL;
+import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseReturnAmountBean;
@@ -738,5 +740,22 @@ public class TransactionHibernateDao {
 			sessionFactory.close();
 		}
 		return false;
+	}
+	
+	public Double getrateByProductForPurchase(Integer rateid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		try {
+			return (Double) session.createQuery("SELECT amount from RateBean where categoryId.categoryId=:rateid")
+					.setParameter("rateid", rateid).uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
 	}
 }
