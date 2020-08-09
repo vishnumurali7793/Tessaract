@@ -301,27 +301,28 @@ public class TransactionHibernateDao {
 		}
 
 	}
-	
+
 	// get salesdetails list
-		@SuppressWarnings("unchecked")
-		public List<SalesReturnDetailsBean> getSalesretDetailsList(Integer salesdetid) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
+	@SuppressWarnings("unchecked")
+	public List<SalesReturnDetailsBean> getSalesretDetailsList(Integer salesdetid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 
-			try {
-				return session
-						.createQuery("from SalesReturnDetailsBean as a where a.salesid.salesId=:sales and a.deleteStatus='N'")
-						.setParameter("sales", salesdetid).list();
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			} finally {
-				session.close();
-				sessionFactory.close();
-			}
-
+		try {
+			return session
+					.createQuery(
+							"from SalesReturnDetailsBean as a where a.salesid.salesId=:sales and a.deleteStatus='N'")
+					.setParameter("sales", salesdetid).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
 		}
+
+	}
 
 	// get productamttot
 	@SuppressWarnings("unchecked")
@@ -533,17 +534,18 @@ public class TransactionHibernateDao {
 		}
 
 	}
+
 	// save purchasereturntotnetamt data
 	public void savePurReturnNetAmt(PurchaseReturnAmountBean purretnetamtBean) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		//Transaction transaction = session.beginTransaction();
+		// Transaction transaction = session.beginTransaction();
 		try {
 			session.saveOrUpdate(purretnetamtBean);
 			session.flush();
 			session.clear();
-			//transaction.commit();
+			// transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -552,8 +554,8 @@ public class TransactionHibernateDao {
 		}
 
 	}
-	
-	//get list of purchasereturn
+
+	// get list of purchasereturn
 	@SuppressWarnings("unchecked")
 	public List<PurchaseReturnScreenBean> getPurchaseretDetailsList(Integer purchasedetid) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -585,11 +587,11 @@ public class TransactionHibernateDao {
 			session.clear();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			session.close();
 			sessionFactory.close();
 		}
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -598,106 +600,143 @@ public class TransactionHibernateDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		try {
-			return session.createQuery("FROM PurchaseReturnScreenBean WHERE purchaseId.purchaseId=:purchaseBaseId AND deleteStatus='N'")
-			.setParameter("purchaseBaseId", purchaseId).list();
+			return session
+					.createQuery(
+							"FROM PurchaseReturnScreenBean WHERE purchaseId.purchaseId=:purchaseBaseId AND deleteStatus='N'")
+					.setParameter("purchaseBaseId", purchaseId).list();
 		} catch (Exception e) {
 			return null;
 		}
 	}
-	
+
 	// get productamttot
-		public PurchaseReturnAmountBean getPurrettotamt(Integer purchaseretid) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
+	public PurchaseReturnAmountBean getPurrettotamt(Integer purchaseretid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 
-			try {
-				return (PurchaseReturnAmountBean) session
-						.createQuery("from PurchaseReturnAmountBean where purchaseId.purchaseId=:purdetarg")
-						.setParameter("purdetarg", purchaseretid).uniqueResult();
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			} finally {
-				session.close();
-				sessionFactory.close();
-			}
-
-		}
-	
-		
-		public PurchaseBean getPurchaseBaseData(Integer purchaseid) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
-
-			try {
-				return (PurchaseBean) session
-						.createQuery("from PurchaseBean where purchaseId=:purdetarg")
-						.setParameter("purdetarg", purchaseid).uniqueResult();
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			} finally {
-				session.close();
-				sessionFactory.close();
-			}
-
-		}
-		
-		public SalesBase getsalesBaseData(Integer saleid) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
-
-			try {
-				return (SalesBase) session
-						.createQuery("from SalesBase where salesId=:saleid")
-						.setParameter("saleid", saleid).uniqueResult();
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			} finally {
-				session.close();
-				sessionFactory.close();
-			}
-
+		try {
+			return (PurchaseReturnAmountBean) session
+					.createQuery("from PurchaseReturnAmountBean where purchaseId.purchaseId=:purdetarg")
+					.setParameter("purdetarg", purchaseretid).uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
 		}
 
-		public StockBean getstockbasedata(Integer productId) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
+	}
 
-			try {
-				return (StockBean) session
-						.createQuery("from StockBean where productId.productId=:productId")
-						.setParameter("productId", productId).uniqueResult();
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			} finally {
-				session.close();
-				sessionFactory.close();
-			}
+	public PurchaseBean getPurchaseBaseData(Integer purchaseid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 
+		try {
+			return (PurchaseBean) session.createQuery("from PurchaseBean where purchaseId=:purdetarg")
+					.setParameter("purdetarg", purchaseid).uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
 		}
-		
-		
-		// save stock details
-		public void savestockprodmapingDetails(StockDetails stockmapBean) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction transaction = session.beginTransaction();
-			try {
-				session.saveOrUpdate(stockmapBean);
-				transaction.commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				session.close();
-				sessionFactory.close();
-			}
 
+	}
+
+	public SalesBase getsalesBaseData(Integer saleid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		try {
+			return (SalesBase) session.createQuery("from SalesBase where salesId=:saleid")
+					.setParameter("saleid", saleid).uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
 		}
+
+	}
+
+	public StockBean getstockbasedata(Integer productId) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		try {
+			return (StockBean) session.createQuery("from StockBean where productId.productId=:productId")
+					.setParameter("productId", productId).uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+
+	}
+
+	// save stock details
+	public void savestockprodmapingDetails(StockDetails stockmapBean) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			session.saveOrUpdate(stockmapBean);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+
+	}
+
+	// get productamttot
+	@SuppressWarnings("unchecked")
+	public SalesReturnAmountBean getsalesRettotamt(Integer salesretdetid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		try {
+			return (SalesReturnAmountBean) session
+					.createQuery("from SalesReturnAmountBean where salesid.salesId=:sales")
+					.setParameter("sales", salesretdetid).uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+
+	}
+
+	public boolean getSaletesReturnStatus(Integer salesId) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		try {
+			Long count = (Long) session
+					.createQuery("SELECT COUNT(*) FROM SalesReturnDetailsBean WHERE salesid.salesId=:salesId")
+					.setParameter("salesId", salesId).uniqueResult();
+			if (count > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+		return false;
+	}
 }

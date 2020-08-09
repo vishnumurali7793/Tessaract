@@ -13,9 +13,12 @@
 
 <link rel="stylesheet" type="text/css"
 	href="resources/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.structure.css">
-<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.theme.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/jquery-ui/jquery-ui.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/jquery-ui/jquery-ui.structure.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/jquery-ui/jquery-ui.theme.css">
 <title>tessaract</title>
 </head>
 <style type="text/css">
@@ -139,7 +142,7 @@ td, th {
 						<li><a href="goToPurchaseReturn">PurchaseReturn</a></li>
 						<li><a href="goToSales">Sales</a></li>
 						<li class="active"><a href="goToSalesReturn">SalesReturn</a></li>
-						
+
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li><a href="#">Page 2</a></li>
@@ -153,7 +156,7 @@ td, th {
 		</div>
 	</nav>
 	<div class="container-fluid">
-	
+
 		<div class="row">
 			<div class="panel">
 				<h2>SALES RETURN</h2>
@@ -166,86 +169,89 @@ td, th {
 							</h4>
 						</div>
 						<div id="collapse1" class="panel-collapse collapse in">
-						<form action="goToSalesReturn" name="salesreturnform">
-							<div class="panel-body ">
-								
+							<form action="goToSalesReturn" name="salesreturnform">
+								<div class="panel-body ">
+
 									<div class="row">
+										<div class="col-md-6"></div>
 										<div class="col-md-6">
-												
-										</div>
-										<div class="col-md-6">
-										<input type="text" name="billno" placeholder="enter the billno"/>
+											<input type="text" name="billno"
+												placeholder="enter the billno" />
 											<button type="button" class="btn btn-sm btn-primary"
-												data-toggle="modal" onclick="searchbillno()">Search</button> 
-												
+												data-toggle="modal" onclick="searchbillno()">Search</button>
+
 										</div>
 									</div>
-									
-							
-							
-							
-							<div class="row">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>INVOICE NO & DATE</th>
-											<th>CUSTOMER DETAILS</th>
-											<th>GST CODE</th>
-											<th>RATE</th>
-											<th>ACTIONS</th>
-										</tr>
-									</thead>
-									<!-- ***list name from redirectaction*** -->
-										<s:if test="salesBaseList!=null && salesBaseList.size()>0">
 
-											<s:iterator value="salesBaseList" status="row">
+
+
+
+									<div class="row">
+										<table class="table">
+											<thead>
 												<tr>
-													<td><s:property value="#row.count" /></td>
-													<td><s:property value="invoice" />&</br>
-													    <s:property value="invoiceDate" />
-													</td>
-													<td><s:property value="customerId.customerName" /></br>
-													    <s:property value="customerId.address1" />,
-													    <s:property value="customerId.address2" />,
-													    <s:property value="customerId.contact" />,
-													    <s:property value="customerId.pin" />
-													</td>
-													<td><s:property value="gstCode" /></td>
-													<td>GOLD :<s:property value="goldRate" /></br>
-												    	SILVER :<s:property value="silverRate" /></br>
-													    PLATINUM :<s:property value="platinumRate" />
-													</td>
-													<td>
-													<a href="editsalesReturnDetails?salesBase.salesId=<s:property value="salesId" />" src="tessaract/src/main/webapp/images/edit.png">EDIT</a>
-													</td>
-													
-
+													<th>#</th>
+													<th>INVOICE NO & DATE</th>
+													<th>CUSTOMER DETAILS</th>
+													<th>GST CODE</th>
+													<th>RATE</th>
+													<th>ACTIONS</th>
 												</tr>
-											</s:iterator>
+											</thead>
+											<!-- ***list name from redirectaction*** -->
+											<s:if test="salesBaseList!=null && salesBaseList.size()>0">
+
+												<s:iterator value="salesBaseList" status="row">
+													<tr>
+														<td><s:property value="#row.count" /></td>
+														<td><s:property value="invoice" />&</br> <s:property
+																value="invoiceDate" /></td>
+														<td><s:property value="customerId.customerName" /></br> <s:property
+																value="customerId.address1" />, <s:property
+																value="customerId.address2" />, <s:property
+																value="customerId.contact" />, <s:property
+																value="customerId.pin" /></td>
+														<td><s:property value="gstCode" /></td>
+														<td>GOLD :<s:property value="goldRate" /></br> SILVER :<s:property
+																value="silverRate" /></br> PLATINUM :<s:property
+																value="platinumRate" />
+														</td>
+														<td><s:if test="salesReturnStaus==false">
+																<a
+																	href="editsalesReturnDetails?salesBase.salesId=<s:property value="salesId" />"
+																	src="tessaract/src/main/webapp/images/edit.png">EDIT</a>
+															</s:if> <s:else>
+																<a
+																	href="viewsalesReturnDetails?salesBase.salesId=<s:property value="salesId" />"
+																	src="tessaract/src/main/webapp/images/edit.png">VIEW</a>
+															</s:else></td>
 
 
-										</s:if>
-										<s:else>
-									<p>	----------no sales added-------------------</p>
-										</s:else>
-								</table>
-							</div>
+													</tr>
+												</s:iterator>
+
+
+											</s:if>
+											<s:else>
+												<p>----------no sales added-------------------</p>
+											</s:else>
+										</table>
+									</div>
 							</form>
-							</div>
 						</div>
 					</div>
-					
 				</div>
+
 			</div>
-			
 		</div>
+
+	</div>
 	</div>
 	</div>
 	<div class="modal fade" id="productModal" role="dialog">
 		<div class="modal-dialog modal-lg modal-xl">
 			<div class="modal-content">
-				<div class="modal-header" style="background-color:  #581845;">
+				<div class="modal-header" style="background-color: #581845;">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>

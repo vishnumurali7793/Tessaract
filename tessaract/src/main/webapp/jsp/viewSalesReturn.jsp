@@ -19,78 +19,10 @@
 <title>tessaract</title>
 </head>
 <script type="text/javascript">
-	function getProductList() {
-		$('#productModal #modalTitle').html("Add items to SALES bill");
-		$.ajax({
-			type : "GET",
-			url : "getProductListForSales",
-			data : {
-				"salesBase.salesId" : '<s:property value="salesBase.salesId"/>'
-			},
-			beforeSend : function() {
-				$('#productModal .modal-body').html('Loading..');
-			},
-			success : function(msg) {
-				$('#productModal .modal-body').html(msg);
-			}
-		});
-		$('#productModal').modal('show');
-		return false;
-	}
-	var totamt = 0;
-	function calculateamount(index) {
-		var purity = document.getElementById('purity' + index).value;
-		var gwt = document.getElementById('gramweight' + index).value;
-		var touch = document.getElementById('touch' + index).value;
-		var netwt = parseFloat((gwt * touch) / purity);
-		document.getElementById('netweight' + index).value = netwt.toFixed(3);
-		var rate = document.getElementById('rate' + index).value;
-		var quan = document.getElementById('quantity' + index).value;
-		var amount = parseFloat(rate * netwt * quan);
-		document.getElementById('totalamount' + index).value = Math
-				.round(amount);
-		totamt += Math.round(amount);
-		netamttot();
-	}
-
-	function netamttot() {
-		document.getElementById('totamt').value = totamt;
-	}
-	var roundofff = 0;
-	function nettotalamt() {
-		roundofff = document.getElementById('roundoff').value;
-		var netamt = totamt - roundofff;
-		document.getElementById('totnetamt').value = netamt;
-	}
-	function deletesalesdet(salid) {
-		var isConfirm = confirm('Do you want to remove the item from bill?');
-
-		if (isConfirm) {
-			$
-					.ajax({
-						type : 'POST',
-						url : 'deletesalesretdet',
-						data : {
-							'salesreturndetils.salesDetailsReturnId' : salid,
-							'salesBase.salesId' : '<s:property value="salesBase.salesId" />',
-						},
-						beforeSend : function() {
-							$('#btnDelete' + salid).hide();
-							$('#content-span' + salid)
-									.html(
-											'<font style="color: red; text-align : center; font-size : 15px;">Removing...</font>');
-						},
-						success : function() {
-							location.reload();
-						}
-					});
-		}
-	}
-
-	function submitForm() {
-		document.salesReturnDetails.action = "saveSalesReturnDetails";
-		document.salesReturnDetails.submit();
-	}
+	$(document).ready(function ()
+			{
+		$('.form-control').attr('readonly',true);
+			});
 </script>
 <style type="text/css">
 body {
@@ -129,6 +61,7 @@ th {
 #tablecolor {
 	background-color: #563d7c;
 }
+
 </style>
 <body>
 	<nav class="navbar navbar-inverse bar">
@@ -169,7 +102,7 @@ th {
 		</div>
 
 		<div class="row">
-			<s:form name="salesReturnDetails">
+			<s:form name="">
 				<s:hidden name="salesBase.salesId" />
 				<s:hidden name="salesretamtbean.salesReturnAmountId" />
 				<div class="col-xs-12">
@@ -191,7 +124,7 @@ th {
 								<th>AF DIS</th>
 								<th>ST CASH</th>
 								<th>TOTAL AMOUNT</th>
-								<th>Action</th>
+								<!-- <th>Action</th> -->
 							</tr>
 						</thead>
 						<tbody>
@@ -253,30 +186,30 @@ th {
 											id="totalAmt<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
 
-										<td id="action-col" align="center"><span
+									<%-- 	<td id="action-col" align="center"><span
 											id="content-span<s:property value="salesDetailsReturnId"/>"></span>
 											<button class="btn-xs btn-link"
 												id="btnDelete<s:property value="salesDetailsReturnId"/>"
-												onclick="deletesalesdet('<s:property value="salesDetailsReturnId"/>')">[DELETE]</button></td>
+												onclick="deletesalesdet('<s:property value="salesDetailsReturnId"/>')">[DELETE]</button></td> --%>
 									</tr>
 								</s:iterator>
 							</s:if>
 							<s:else>no products added</s:else>
 							<tr>
-								<td colspan="14" align="right"><label>Net amount</label></td>
+								<td colspan="13" align="right"><label>Net amount</label></td>
 								<td colspan="1"><input class="form-control" id="totamt"
 									type="text" name="salesretamtbean.grossamount"
 									value="<s:property value="salesretamtbean.grossamount"/>" /></td>
 							</tr>
 							<tr>
-								<td colspan="14" align="right"><label>Taxable Amt</label></td>
+								<td colspan="13" align="right"><label>Taxable Amt</label></td>
 								<td colspan="1"><input class="form-control" id="taxamt"
 									type="text" name="salesretamtbean.taxamt"
 									value="<s:property value="salesretamtbean.taxamt"/>"
 									onchange="nettotalamt()" /></td>
 							</tr>
 							<tr>
-								<td colspan="13" align="right"><label>CGST</label></td>
+								<td colspan="12" align="right"><label>CGST</label></td>
 								<td colspan="1"><input class="form-control" id="cgst"
 									type="text" name="salesretamtbean.cgst"
 									value="<s:property value="salesretamtbean.cgst"/>"
@@ -284,7 +217,7 @@ th {
 
 							</tr>
 							<tr>
-								<td colspan="13" align="right"><label>SGST</label></td>
+								<td colspan="12" align="right"><label>SGST</label></td>
 								<td colspan="1"><input class="form-control" id="sgst"
 									type="text" name="salesretamtbean.sgst"
 									value="<s:property value="salesretamtbean.sgst"/>"
@@ -292,7 +225,7 @@ th {
 
 							</tr>
 							<tr>
-								<td colspan="13" align="right"><label>IGST</label></td>
+								<td colspan="12" align="right"><label>IGST</label></td>
 								<td colspan="1"><input class="form-control" id="igst"
 									type="text" name="salesretamtbean.igst"
 									value="<s:property value="salesretamtbean.igst"/>"
@@ -300,7 +233,7 @@ th {
 
 							</tr>
 							<tr>
-								<td colspan="14" align="right"><label>Total Net
+								<td colspan="13" align="right"><label>Total Net
 										amount</label></td>
 								<td colspan="1"><input class="form-control" id="totnetamt"
 									type="text" name="salesretamtbean.netamount"
@@ -311,16 +244,16 @@ th {
 
 					</table>
 
-					<div class="row">
+					<%-- <div class="row">
 						<div align="center">
 							<s:if test="salretDetList != null">
-								<%-- 								<s:submit class="btn btn-primary" value="save" ></s:submit> --%>
+																<s:submit class="btn btn-primary" value="save" ></s:submit>
 								<button class="btn btn-sm btn-success" onclick="submitForm()">Save
 									Details</button>
 							</s:if>
 							<s:else>-- no products added</s:else>
 						</div>
-					</div>
+					</div> --%>
 				</div>
 			</s:form>
 		</div>

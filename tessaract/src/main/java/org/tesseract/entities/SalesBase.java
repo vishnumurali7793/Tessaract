@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(schema = "tesseract", name = "salesBase")
@@ -44,6 +45,9 @@ public class SalesBase {
 	@Column(name = "gst_code")
 	private String gstCode;
 
+	@Transient
+	private boolean salesReturnStaus=false;
+	
 	public Integer getSalesId() {
 		return salesId;
 	}
@@ -106,6 +110,14 @@ public class SalesBase {
 
 	public void setGstCode(String gstCode) {
 		this.gstCode = gstCode;
+	}
+
+	public boolean isSalesReturnStaus() {
+		return salesReturnStaus;
+	}
+
+	public void setSalesReturnStaus(boolean salesReturnStaus) {
+		this.salesReturnStaus = salesReturnStaus;
 	}
 	
 	

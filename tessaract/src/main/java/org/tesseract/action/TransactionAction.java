@@ -311,6 +311,9 @@ public class TransactionAction extends ActionSupport {
 	public String goToSalesReturn() {
 		try {
 			salesBaseList = transHibernateDao.searchByBillno(billno);
+			for(SalesBase base:salesBaseList){
+				base.setSalesReturnStaus(transHibernateDao.getSaletesReturnStatus(base.getSalesId()));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -388,6 +391,7 @@ public class TransactionAction extends ActionSupport {
 			salesreturndetils = new SalesReturnDetailsBean();
 			salretDetList = new ArrayList<SalesReturnDetailsBean>();
 			salretDetList = transHibernateDao.getSalesretDetailsList(salesBase.getSalesId());
+			salesretamtbean = transHibernateDao.getsalesRettotamt(salesBase.getSalesId());
 		}
 		return SUCCESS;
 	}
