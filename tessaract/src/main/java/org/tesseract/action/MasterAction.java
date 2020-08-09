@@ -9,10 +9,12 @@ import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.RateBean;
+import org.tesseract.entities.StockBean;
 import org.tesseract.entities.TaxBean;
 import org.tesseract.entities.VendorBean;
 import org.tesseract.entities.modelBean;
 import org.tesseract.persistance.MasterHibernateDao;
+import org.tesseract.persistance.TransactionHibernateDao;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -29,6 +31,7 @@ public class MasterAction extends ActionSupport {
 	private CustomerBean customerBean;
 	private VendorBean vendorBean;
 	private PurchaseBean purchaseBean;
+	private StockBean stockBean;
 	private List<TaxBean> taxList;
 	private List<CategoryBean> catList;
 	private List<ProductBean> prodList;
@@ -40,6 +43,7 @@ public class MasterAction extends ActionSupport {
 	private List<PurchaseBean> purbeanList;
 
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
+	private TransactionHibernateDao transHibernateDao = new TransactionHibernateDao();
 
 	public String addTax() {
 		if (taxBean != null) {
@@ -89,6 +93,12 @@ public class MasterAction extends ActionSupport {
 		public String saveProduct(){
 			if (productBean != null) {
 				masterHibernateDao.addProductdata(productBean);
+				stockBean=new StockBean();
+				stockBean.setProductId(new ProductBean());
+				stockBean.getProductId().setProductId(productBean.getProductId());
+				stockBean.setNetWt(0.00);
+				stockBean.setQuantity(0.00);
+				transHibernateDao.savestockBaseData(stockBean);
 				return SUCCESS;
 			}
 			
@@ -412,6 +422,14 @@ public class MasterAction extends ActionSupport {
 
 	public void setPurbeanList(List<PurchaseBean> purbeanList) {
 		this.purbeanList = purbeanList;
+	}
+
+	public StockBean getStockBean() {
+		return stockBean;
+	}
+
+	public void setStockBean(StockBean stockBean) {
+		this.stockBean = stockBean;
 	}
 
 	

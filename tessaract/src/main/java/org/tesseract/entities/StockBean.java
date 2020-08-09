@@ -18,50 +18,24 @@ public class StockBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "stock_id")
-	private Integer stockId;
-	
-	@Column(name = "tranctionId")
-	private Integer tranctionId;//purchaeid or SaleSid
+	private Long stockId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="productId")
 	private ProductBean productId;
 	
-	@Column(name="billNO")
-	private String billNO;
-	
-	@Column(name="month")
-	private String month;
-	
-	@Column(name="year")
-	private String year;
-	
-	@Column(name="updatedOn")
-	private Date updatedOn;
-	
 	@Column(name="quantity")
-	private Double Quantity; 
+	private Double Quantity=0.00; 
 	
 	@Column(name="netWt")
-	private Double NetWt;
-	
-	@Column(name="transactionType")
-	private String transactionType; //S- sales, SR- sales return, P- purchase, PR- purchase return
+	private Double NetWt=0.00;
 
-	public Integer getStockId() {
+	public Long getStockId() {
 		return stockId;
 	}
 
-	public void setStockId(Integer stockId) {
+	public void setStockId(Long stockId) {
 		this.stockId = stockId;
-	}
-
-	public Integer getTranctionId() {
-		return tranctionId;
-	}
-
-	public void setTranctionId(Integer tranctionId) {
-		this.tranctionId = tranctionId;
 	}
 
 	public ProductBean getProductId() {
@@ -70,38 +44,6 @@ public class StockBean {
 
 	public void setProductId(ProductBean productId) {
 		this.productId = productId;
-	}
-
-	public String getBillNO() {
-		return billNO;
-	}
-
-	public void setBillNO(String billNO) {
-		this.billNO = billNO;
-	}
-
-	public String getMonth() {
-		return month;
-	}
-
-	public void setMonth(String month) {
-		this.month = month;
-	}
-
-	public String getYear() {
-		return year;
-	}
-
-	public void setYear(String year) {
-		this.year = year;
-	}
-
-	public Date getUpdatedOn() {
-		return updatedOn;
-	}
-
-	public void setUpdatedOn(Date updatedOn) {
-		this.updatedOn = updatedOn;
 	}
 
 	public Double getQuantity() {
@@ -118,14 +60,6 @@ public class StockBean {
 
 	public void setNetWt(Double netWt) {
 		NetWt = netWt;
-	}
-
-	public String getTransactionType() {
-		return transactionType;
-	}
-
-	public void setTransactionType(String transactionType) {
-		this.transactionType = transactionType;
 	}
 	
 	

@@ -20,7 +20,7 @@ import org.tesseract.entities.SalesDetailsBean;
 import org.tesseract.entities.SalesReturnAmountBean;
 import org.tesseract.entities.SalesReturnDetailsBean;
 import org.tesseract.entities.StockBean;
-import org.tesseract.entities.StockTransactionMapping;
+import org.tesseract.entities.StockDetails;
 
 public class TransactionHibernateDao {
 
@@ -193,7 +193,7 @@ public class TransactionHibernateDao {
 	}
 
 	// save stock
-	public void savestockDetails(StockBean stockBean) {
+	public void savestockBaseData(StockBean stockBean) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
@@ -301,6 +301,27 @@ public class TransactionHibernateDao {
 		}
 
 	}
+	
+	// get salesdetails list
+		@SuppressWarnings("unchecked")
+		public List<SalesReturnDetailsBean> getSalesretDetailsList(Integer salesdetid) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+
+			try {
+				return session
+						.createQuery("from SalesReturnDetailsBean as a where a.salesid.salesId=:sales and a.deleteStatus='N'")
+						.setParameter("sales", salesdetid).list();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			} finally {
+				session.close();
+				sessionFactory.close();
+			}
+
+		}
 
 	// get productamttot
 	@SuppressWarnings("unchecked")
@@ -603,23 +624,7 @@ public class TransactionHibernateDao {
 			}
 
 		}
-		
-		// save stock
-		public void savestockprodmapingDetails(StockTransactionMapping stockmapBean) {
-			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction transaction = session.beginTransaction();
-			try {
-				session.saveOrUpdate(stockmapBean);
-				transaction.commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				session.close();
-				sessionFactory.close();
-			}
-
-		}
+	
 		
 		public PurchaseBean getPurchaseBaseData(Integer purchaseid) {
 			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -659,4 +664,40 @@ public class TransactionHibernateDao {
 
 		}
 
+		public StockBean getstockbasedata(Integer productId) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+
+			try {
+				return (StockBean) session
+						.createQuery("from StockBean where productId.productId=:productId")
+						.setParameter("productId", productId).uniqueResult();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			} finally {
+				session.close();
+				sessionFactory.close();
+			}
+
+		}
+		
+		
+		// save stock details
+		public void savestockprodmapingDetails(StockDetails stockmapBean) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+			try {
+				session.saveOrUpdate(stockmapBean);
+				transaction.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
+				sessionFactory.close();
+			}
+
+		}
 }

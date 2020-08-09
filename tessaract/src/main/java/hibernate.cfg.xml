@@ -50,6 +50,7 @@
         <mapping class="org.tesseract.entities.PurchaseScreenBean"/>
         <mapping class="org.tesseract.entities.PurchaseAmountBean"/>
         <mapping class="org.tesseract.entities.StockBean"/>
+         <mapping class="org.tesseract.entities.StockDetails"/>
         <mapping class="org.tesseract.entities.SalesBase"/>
         <mapping class="org.tesseract.entities.SalesDetailsBean"/>
         <mapping class="org.tesseract.entities.SalesAmountBean"/>
