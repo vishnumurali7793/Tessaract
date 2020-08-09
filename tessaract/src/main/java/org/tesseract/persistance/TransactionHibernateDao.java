@@ -620,5 +620,43 @@ public class TransactionHibernateDao {
 			}
 
 		}
+		
+		public PurchaseBean getPurchaseBaseData(Integer purchaseid) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+
+			try {
+				return (PurchaseBean) session
+						.createQuery("from PurchaseBean where purchaseId=:purdetarg")
+						.setParameter("purdetarg", purchaseid).uniqueResult();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			} finally {
+				session.close();
+				sessionFactory.close();
+			}
+
+		}
+		
+		public SalesBase getsalesBaseData(Integer saleid) {
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+
+			try {
+				return (SalesBase) session
+						.createQuery("from SalesBase where salesId=:saleid")
+						.setParameter("saleid", saleid).uniqueResult();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			} finally {
+				session.close();
+				sessionFactory.close();
+			}
+
+		}
 
 }

@@ -19,17 +19,25 @@ public class StockBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "stock_id")
 	private Integer stockId;
-
-	/*@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="purchaseId")
-	private PurchaseBean purchaseId;*/
+	
+	@Column(name = "tranctionId")
+	private Integer tranctionId;//purchaeid or SaleSid
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="productId")
 	private ProductBean productId;
 	
-	@Column(name="date")
-	private Date date;
+	@Column(name="billNO")
+	private String billNO;
+	
+	@Column(name="month")
+	private String month;
+	
+	@Column(name="year")
+	private String year;
+	
+	@Column(name="updatedOn")
+	private Date updatedOn;
 	
 	@Column(name="quantity")
 	private Double Quantity; 
@@ -37,9 +45,9 @@ public class StockBean {
 	@Column(name="netWt")
 	private Double NetWt;
 	
-	/*@Column(name="detailStatus")
-	private String detailStatus;*/
-	
+	@Column(name="transactionType")
+	private String transactionType; //S- sales, SR- sales return, P- purchase, PR- purchase return
+
 	public Integer getStockId() {
 		return stockId;
 	}
@@ -48,13 +56,13 @@ public class StockBean {
 		this.stockId = stockId;
 	}
 
-	/*public PurchaseBean getPurchaseId() {
-		return purchaseId;
+	public Integer getTranctionId() {
+		return tranctionId;
 	}
 
-	public void setPurchaseId(PurchaseBean purchaseId) {
-		this.purchaseId = purchaseId;
-	}*/
+	public void setTranctionId(Integer tranctionId) {
+		this.tranctionId = tranctionId;
+	}
 
 	public ProductBean getProductId() {
 		return productId;
@@ -64,12 +72,36 @@ public class StockBean {
 		this.productId = productId;
 	}
 
-	public Date getDate() {
-		return date;
+	public String getBillNO() {
+		return billNO;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setBillNO(String billNO) {
+		this.billNO = billNO;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public Date getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
 	public Double getQuantity() {
@@ -88,13 +120,14 @@ public class StockBean {
 		NetWt = netWt;
 	}
 
-	/*public String getDetailStatus() {
-		return detailStatus;
+	public String getTransactionType() {
+		return transactionType;
 	}
 
-	public void setDetailStatus(String detailStatus) {
-		this.detailStatus = detailStatus;
-	} */
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
 	
 	
+
 }

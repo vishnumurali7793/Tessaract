@@ -3,6 +3,7 @@ package org.tesseract.action;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -91,9 +92,9 @@ public class TransactionAction extends ActionSupport {
 			abc = invoival + 1;
 			Date dt = new Date();
 			year = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(dt)).getYear();
-			newInvc = "SS/" + abc + "/" + year;
+			newInvc = "PR/" + abc + "/" + year;
 		} else {
-			newInvc = "SS/" + "1" + "/" + year;
+			newInvc = "PR/" + "1" + "/" + year;
 		}
 		try {
 			purchaseBean = new PurchaseBean();
@@ -135,6 +136,11 @@ public class TransactionAction extends ActionSupport {
 		if (prodDetList != null && purchaseBean.getPurchaseId() != null) {
 			List<PurchaseScreenBean> newprodlist = new ArrayList<PurchaseScreenBean>();
 			newprodlist = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
+			PurchaseBean prb=new PurchaseBean();
+			prb=transHibernateDao.getPurchaseBaseData(purchaseBean.getPurchaseId());
+			LocalDate currentdate = LocalDate.now();
+			int currentMonth = currentdate.getMonthValue();
+			int currentYear = currentdate.getYear();
 			int i = 0;
 			for (PurchaseScreenBean pd : prodDetList) {
 				pd.setProductId(newprodlist.get(i).getProductId());
@@ -144,14 +150,16 @@ public class TransactionAction extends ActionSupport {
 				transHibernateDao.savepurchasedetails(pd);
 
 				stockBean = new StockBean();
+				stockBean.setTranctionId(purchaseBean.getPurchaseId());
 				stockBean.setProductId(new ProductBean());
 				stockBean.getProductId().setProductId(newprodlist.get(i).getProductId().getProductId());
-				//stockBean.setPurchaseId(new PurchaseBean());
-				//stockBean.getPurchaseId().setPurchaseId(newprodlist.get(i).getPurchaseId().getPurchaseId());
-				stockBean.setDate(new Date());
+				stockBean.setBillNO(prb.getInvoice());
+				stockBean.setUpdatedOn(new Date());
 				stockBean.setNetWt(pd.getNetweight());
 				stockBean.setQuantity(pd.getQuantity());
-				//stockBean.setDetailStatus("P");
+				stockBean.setTransactionType("P");
+				stockBean.setMonth(currentMonth+"");
+				stockBean.setYear(Integer.toString(currentYear));
 				transHibernateDao.savestockDetails(stockBean);
 				i++;
 			}
@@ -244,6 +252,11 @@ public class TransactionAction extends ActionSupport {
 		if (salDetList != null && salesBase.getSalesId() != null) {
 			List<SalesDetailsBean> newsalelist = new ArrayList<SalesDetailsBean>();
 			newsalelist = transHibernateDao.getSalesDetailsList(salesBase.getSalesId());
+			SalesBase Saledet= new SalesBase();
+			Saledet=transHibernateDao.getsalesBaseData(salesBase.getSalesId());
+			LocalDate currentdate = LocalDate.now();
+			int currentMonth = currentdate.getMonthValue();
+			int currentYear = currentdate.getYear();
 			int i = 0;
 			for (SalesDetailsBean pd : salDetList) {
 				pd.setProductId(newsalelist.get(i).getProductId());
@@ -251,6 +264,19 @@ public class TransactionAction extends ActionSupport {
 				pd.getSalesid().setSalesId(newsalelist.get(i).getSalesid().getSalesId());
 				pd.setSalesDetailsId(newsalelist.get(i).getSalesDetailsId());
 				transHibernateDao.saveSalesdetails(pd);
+				
+				stockBean = new StockBean();
+				stockBean.setTranctionId(salesBase.getSalesId());
+				stockBean.setProductId(new ProductBean());
+				stockBean.getProductId().setProductId(newsalelist.get(i).getProductId().getProductId());
+				stockBean.setBillNO(Saledet.getInvoice());
+				stockBean.setUpdatedOn(new Date());
+				stockBean.setNetWt(pd.getNetweight());
+				stockBean.setQuantity(pd.getQuantity());
+				stockBean.setMonth(currentMonth+"");
+				stockBean.setYear(Integer.toString(currentYear));
+				stockBean.setTransactionType("S");
+				transHibernateDao.savestockDetails(stockBean);
 				i++;
 			}
 			salesamtbean.setSalesid(new SalesBase());
@@ -302,12 +328,30 @@ public class TransactionAction extends ActionSupport {
 		if (salesBase != null && salesBase.getSalesId() != null) {
 			List<SalesDetailsBean> newsalelist = new ArrayList<SalesDetailsBean>();
 			newsalelist = transHibernateDao.getSalesDetailsList(salesBase.getSalesId());
+			SalesBase Saleretdet= new SalesBase();
+			Saleretdet=transHibernateDao.getsalesBaseData(salesBase.getSalesId());
+			LocalDate currentdate = LocalDate.now();
+			int currentMonth = currentdate.getMonthValue();
+			int currentYear = currentdate.getYear();
 			int i = 0;
 			for (SalesReturnDetailsBean salretdetils : salretDetList) {
 				salretdetils.setProductId(newsalelist.get(i).getProductId());
 				salretdetils.setSalesid(new SalesBase());
 				salretdetils.getSalesid().setSalesId(newsalelist.get(i).getSalesid().getSalesId());
 				transHibernateDao.saveReturnSalesdetails(salretdetils);
+				
+				stockBean = new StockBean();
+				stockBean.setTranctionId(salesBase.getSalesId());
+				stockBean.setProductId(new ProductBean());
+				stockBean.getProductId().setProductId(newsalelist.get(i).getProductId().getProductId());
+				stockBean.setBillNO(Saleretdet.getInvoice());
+				stockBean.setUpdatedOn(new Date());
+				stockBean.setNetWt(salretdetils.getNetweight());
+				stockBean.setQuantity(salretdetils.getQuantity());
+				stockBean.setMonth(currentMonth+"");
+				stockBean.setYear(Integer.toString(currentYear));
+				stockBean.setTransactionType("SR");
+				transHibernateDao.savestockDetails(stockBean);
 				i++;
 			}
 			salesretamtbean.setSalesid(new SalesBase());
@@ -371,6 +415,11 @@ public class TransactionAction extends ActionSupport {
 			purchaseReturnItem =new PurchaseReturnScreenBean();
 			List<PurchaseReturnScreenBean> newpurlist = new ArrayList<PurchaseReturnScreenBean>();
 			newpurlist = transHibernateDao.getItemListForReturn(purchaseBean.getPurchaseId());
+			PurchaseBean pretdet=new PurchaseBean();
+			pretdet=transHibernateDao.getPurchaseBaseData(purchaseBean.getPurchaseId());
+			LocalDate currentdate = LocalDate.now();
+			int currentMonth = currentdate.getMonthValue();
+			int currentYear = currentdate.getYear();
 			int i = 0;
 			//purchaseReturnItems = transHibernateDao.getItemListForReturn(purchaseBean.getPurchaseId());
 			for (PurchaseReturnScreenBean purretdetils : purchaseReturnItems) {
@@ -380,25 +429,17 @@ public class TransactionAction extends ActionSupport {
 				transHibernateDao.saveItemListForPurchaseReturn(purchaseReturnItem);
 				
 				stockBean = new StockBean();
+				stockBean.setTranctionId(purchaseBean.getPurchaseId());
 				stockBean.setProductId(new ProductBean());
 				stockBean.getProductId().setProductId(newpurlist.get(i).getProductId().getProductId());
-			//	stockBean.setPurchaseId(new PurchaseBean());
-			//	stockBean.getPurchaseId().setPurchaseId(newpurlist.get(i).getPurchaseId().getPurchaseId());
-				stockBean.setDate(new Date());
+				stockBean.setBillNO(pretdet.getInvoice());
+				stockBean.setUpdatedOn(new Date());
 				stockBean.setNetWt(purretdetils.getNetweight());
 				stockBean.setQuantity(purretdetils.getQuantity());
-			//	stockBean.setDetailStatus("PR");
+				stockBean.setMonth(currentMonth+"");
+				stockBean.setYear(Integer.toString(currentYear));
+				stockBean.setTransactionType("PR");
 				transHibernateDao.savestockDetails(stockBean);
-				
-				StockdetMapping=new StockTransactionMapping();
-				StockdetMapping.setTransactionId(purretdetils.getPurchaseReturnScreenId());
-				StockdetMapping.setTransactionType("PR");
-				StockdetMapping.setQuantity(purretdetils.getQuantity());
-				StockdetMapping.setProduct(new ProductBean());
-				StockdetMapping.getProduct().setProductId(newpurlist.get(i).getProductId().getProductId());
-				StockdetMapping.setUpdatedOn(new Date());
-				
-				updateStockDetails(stockBean,StockdetMapping);
 				i++;
 			}
 			PurchaseReturnAmountBean purchaseRetamt = new PurchaseReturnAmountBean();

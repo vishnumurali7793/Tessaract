@@ -1,6 +1,8 @@
 package org.tesseract.entities;
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,7 +22,7 @@ public class SalesBase {
 	@Column(name = "salesid")
 	private Integer salesId;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name="customerId")
 	private CustomerBean customerId;
 	
