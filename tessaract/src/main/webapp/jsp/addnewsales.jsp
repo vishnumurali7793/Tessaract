@@ -42,7 +42,7 @@
 				<label class="form-group" for="customer-code">Customer Code</label>
 					<s:textfield name="salesBase.customerId.customerCode" type="text"
 						id="customer-code" value="" class="form-control"
-						onkeyup="getValue(this)" placeholder="vendorCode" />
+						onkeyup="getValue(this)" placeholder="customercode" />
 				</div>
 			</div>
 			<%-- <div class="row">
@@ -133,7 +133,7 @@
 								response($.map(data, function(i) {
 									return {
 										label : i[0] + "-" + i[1]+ "-" + i[2],
-										value : i[1]
+										value : i[0]
 									};
 								}));
 							}

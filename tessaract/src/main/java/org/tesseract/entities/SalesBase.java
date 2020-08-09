@@ -22,7 +22,7 @@ public class SalesBase {
 	@Column(name = "salesid")
 	private Integer salesId;
 	
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="customerId")
 	private CustomerBean customerId;
 	
