@@ -39,14 +39,20 @@
 	}
 	var totamt = 0;
 	function calculateamount(index) {
-		var purity = document.getElementById('purity' + index).value;
-		var gwt = document.getElementById('gramweight' + index).value;
-		var touch = document.getElementById('touch' + index).value;
-		var netwt = parseFloat((gwt * touch) / purity);
-		document.getElementById('netweight' + index).value = netwt.toFixed(3);
-		var rate = document.getElementById('rate' + index).value;
+		
 		var quan = document.getElementById('quantity' + index).value;
-		var amount = parseFloat(rate * netwt * quan);
+		var goldweight = document.getElementById('goldweight' + index).value;
+		var stoneweight = document.getElementById('stoneweight' + index).value;
+		var vaamount= document.getElementById('vaamount' + index).value;
+		var afterdis= document.getElementById('afterdis' + index).value;
+		var stonecash= document.getElementById('stonecash' + index).value;
+		
+		var netwt = parseFloat(goldweight-stoneweight);
+		document.getElementById('netweight' + index).value = netwt.toFixed(3);
+		
+		var rate = document.getElementById('rate' + index).value;
+		
+		var amount = parseFloat(rate * netwt);
 		document.getElementById('totalamount' + index).value = Math
 				.round(amount);
 		totamt += Math.round(amount);
