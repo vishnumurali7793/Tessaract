@@ -401,6 +401,11 @@ public class TransactionAction extends ActionSupport {
 			salesreturndetils = new SalesReturnDetailsBean();
 			salretDetList = new ArrayList<SalesReturnDetailsBean>();
 			salretDetList = transHibernateDao.getSalesretDetailsList(salesBase.getSalesId());
+			for(SalesReturnDetailsBean itemsBean :salretDetList){
+				Double rate=0.00;
+				rate=transHibernateDao.getrateByProductForPurchase(itemsBean.getProductId().getCategory().getCategoryId());
+				itemsBean.setRate(rate);
+			}
 			salesretamtbean = transHibernateDao.getsalesRettotamt(salesBase.getSalesId());
 		}
 		return SUCCESS;
@@ -436,6 +441,10 @@ public class TransactionAction extends ActionSupport {
 						BeanUtils.copyProperties(returnedItemBean, itemsBean);
 						returnedItemBean.setPurchaseReturnScreenId(null);
 						transHibernateDao.saveItemListForPurchaseReturn(returnedItemBean);
+						Double rate=0.00;
+							rate=transHibernateDao.getrateByProductForPurchase(itemsBean.getProductId().getCategory().getCategoryId());
+							itemsBean.setRate(rate);
+						
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
