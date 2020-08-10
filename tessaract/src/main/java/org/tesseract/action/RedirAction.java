@@ -42,6 +42,7 @@ public class RedirAction extends ActionSupport {
 	
 	public String goToCategory() {
 		catList = masterHibernateDao.getCategryList();
+		caratList = masterHibernateDao.getCaratList();
 		return SUCCESS;
 	}
 	

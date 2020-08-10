@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +20,10 @@ public class CategoryBean {
 	
 	@Column(name = "category_code")
 	private String categoryCode;
+	
+	@ManyToOne
+	@JoinColumn(name="caratId")
+	private CaratBean caratId;
 	
 	@Column(name = "category_name")
 	private String categoryName;
@@ -66,6 +72,14 @@ public class CategoryBean {
 
 	public void setDeleteStatus(String deleteStatus) {
 		this.deleteStatus = deleteStatus;
+	}
+
+	public CaratBean getCaratId() {
+		return caratId;
+	}
+
+	public void setCaratId(CaratBean caratId) {
+		this.caratId = caratId;
 	}
 
 
