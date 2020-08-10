@@ -1,11 +1,13 @@
 package org.tesseract.persistance;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.tesseract.entities.StockBean;
 
 public class DashBoardHibernateDao {
 	Session session;
@@ -31,6 +33,20 @@ public class DashBoardHibernateDao {
 		} finally {
 			closeInstance();
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<StockBean> getCurrentStockDetails() {
+		session = getInstance();
+		try {
+			return session.createQuery("FROM StockBean").list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			closeInstance();
+		}
+		
 	}
 	
 	

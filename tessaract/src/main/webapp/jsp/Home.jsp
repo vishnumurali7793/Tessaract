@@ -22,7 +22,6 @@ body {
 	background: linear-gradient(90deg, rgba(196, 85, 42, 1) 10%,
 		rgba(195, 12, 157, 1) 100%); */
 	background-color: #f7f7f7;
-	color: white;
 }
 
 .bar {
@@ -66,63 +65,23 @@ body {
 .mt-10 {
 	margin-top: 10px;
 }
+
+.stock-panel {
+	margin-top: 30px;
+}
+
+#stock-heading {
+	background-color: white;
+	color: #696969;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#stock-body {
+	background-color: #e8e8e8;
+}
 </style>
 </head>
-<script type="text/javascript">
-	window.onload = function() {
-		var chart = new CanvasJS.Chart("chartContainer", {
-
-			title : {
-				text : "Books Issued from Central Library"
-			},
-			data : [ {
-				type : "spline",
-
-				dataPoints : [ {
-					x : new Date(2012, 00, 1),
-					y : 1352
-				}, {
-					x : new Date(2012, 01, 1),
-					y : 1514
-				}, {
-					x : new Date(2012, 02, 1),
-					y : 1321
-				}, {
-					x : new Date(2012, 03, 1),
-					y : 1163
-				}, {
-					x : new Date(2012, 04, 1),
-					y : 950
-				}, {
-					x : new Date(2012, 05, 1),
-					y : 1201
-				}, {
-					x : new Date(2012, 06, 1),
-					y : 1186
-				}, {
-					x : new Date(2012, 07, 1),
-					y : 1281
-				}, {
-					x : new Date(2012, 08, 1),
-					y : 1438
-				}, {
-					x : new Date(2012, 09, 1),
-					y : 1305
-				}, {
-					x : new Date(2012, 10, 1),
-					y : 1480
-				}, {
-					x : new Date(2012, 11, 1),
-					y : 1291
-				} ]
-			}
-
-			]
-		});
-
-		chart.render();
-	}
-</script>
 <body>
 	<nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
@@ -184,38 +143,31 @@ body {
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="div_style" style="border: none;">
-						<div class="layer_1" style="background-color: #0071A9;">
-							<div class="col-lg-12">
-								<div style="font-size: 20px; font-weight: bold;">
-									Total Sales Count: <span id="todaysSalesCount"></span>
-								</div>
-							</div>
-							<div class="col-lg-12 pull-right">
-								<div
-									style="font-size: 20px; font-weight: bold; padding-top: 30px;">
-									&#8377;<span id="todaysSalesAmount"></span>
-								</div>
+						<div class="layer_1"
+							style="background-color: #0071A9; text-align: right;">
+							<div style="font-size: 40px; font-weight: bold; margin: 10px;">
+								<span id="todaysSalesCount"></span><font size="5px;">Nos.</font>
 							</div>
 						</div>
-						<div class="layer_2" style="background-color: #0071A9;"></div>
+						<div class="layer_2" style="background-color: #0071A9;">
+							<div style="font-weight: bold;">
+								&#8377;<span id="todaysSalesAmount"></span>
+							</div>
+						</div>
 						<div class="layer_3"
-							style="background-color: #0a5e87; font-size: 12px; padding: 15px;"
-							onclick='getSummaryDetails("R")'>Today's sales</div>
+							style="background-color: #0a5e87; font-size: 12px; padding: 15px;">Today's
+							sales</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="div_style" style="border: none;">
 						<div class="layer_1" style="background-color: #33aea7;">
-							<div style="padding-right: 6%; margin-top: 7px;">
-								<!-- <span class="glyphicon glyphicon-ok-circle"
-								title="Total Issued Administrative Approvals"></span> <b><s:property
-									value="financialSanction.systemGenIssued" /></b> -->
-							</div>
+							<div style="padding-right: 6%; margin-top: 7px;"></div>
 						</div>
 						<div class="layer_2" style="background-color: #33aea7;"></div>
 						<div class="layer_3"
 							style="background-color: #009d97; font-size: 12px; padding: 15px;"
-							onclick='getSummaryDetails("I")'>ISSUED</div>
+							onclick='getSummaryDetails("I")'>--</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-6">
@@ -230,7 +182,21 @@ body {
 						<div class="layer_2" style="background-color: #86cbb3;"></div>
 						<div class="layer_3"
 							style="background-color: #7ec2aa; font-size: 12px; padding: 15px;"
-							onclick='getSummaryDetails("P")'>PENDING IN FINANCE</div>
+							onclick='getSummaryDetails("P")'>--</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="panel panel-default stock-panel">
+						<div class="panel-heading" id="stock-heading">Stock</div>
+						<div class="panel-body" id="stock-body"></div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="panel panel-default stock-panel">
+						<div class="panel-heading" id="stock-heading">Sales Trend</div>
+						<div class="panel-body" id="stock-body">
+							<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -283,11 +249,11 @@ body {
 					</div>
 				</div>
 			</div>
-			<!-- <div class="container">
-			<div class="row">
-				<div id="chartContainer" style="height: 300px; width: 100%;"></div>
-			</div>
-		</div> -->
+			<!-- 			<div class="container"> -->
+			<!-- 			<div class="row"> -->
+			<!-- 				<div id="chartContainer" style="height: 300px; width: 100%;"></div> -->
+			<!-- 			</div> -->
+			<!-- 		</div> -->
 		</div>
 	</div>
 </body>

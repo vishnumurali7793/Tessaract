@@ -18,5 +18,16 @@
 				<param name="root">currentDaySalesList</param>
 			</result>
 		</action>
+		<action name="getStockDetails" class="org.tesseract.action.DashBoardAction" method="getStockDetails">
+			<result name="success">/jsp/dashboard/StockDetailsAJAX.jsp</result>
+		</action>
+		<action name="generateStockReport" class="org.tesseract.action.DashBoardAction" method="generateStockReport">
+			<result name="success" type="stream">
+				<param name="contentDisposition">inline;filename=${fileName}</param>
+				<param name="contentType">${documentContentType}</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
 	</package>
 </struts>
