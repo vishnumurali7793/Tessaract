@@ -12,54 +12,116 @@
 <script type="text/javascript"
 	src="resources/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/canvasjs/canvasjs.min.js"></script>
+<script type="text/javascript"
+	src="resources/js/dashboard/Home_Dashboard.js"></script>
 <style type="text/css">
 body {
 	margin: 0;
 	padding: 0;
-	background: rgb(196, 85, 42);
+	/* background: rgb(196, 85, 42);
 	background: linear-gradient(90deg, rgba(196, 85, 42, 1) 10%,
-		rgba(195, 12, 157, 1) 100%);
+		rgba(195, 12, 157, 1) 100%); */
+	background-color: #f7f7f7;
 	color: white;
 }
 
 .bar {
 	border-radius: 0px;
 }
+
+/* for dashboard */
+.layer_1 {
+	height: 50px;
+	font-size: 22px;
+	line-height: 1px;
+	padding-top: 25px;
+	color: #ffffff;
+	border-radius: 4px 4px 0px 0px;
+	text-align: center;
+	line-height: 1px;
+}
+
+.layer_2 {
+	height: 30px;
+	font-size: 14px;
+	line-height: 1px;
+	padding-top: 8px;
+	color: #ffffff;
+	background-color: rgba(0, 0, 0, 0.2);
+	text-align: center;
+	line-height: 1px;
+}
+
+.layer_3 {
+	height: 30px;
+	font-size: 15px;
+	line-height: 1px;
+	padding: 14px;
+	color: #ffffff;
+	border: none;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.mt-10 {
+	margin-top: 10px;
+}
 </style>
 </head>
 <script type="text/javascript">
-window.onload = function () {
-    var chart = new CanvasJS.Chart("chartContainer",
-    {
-    
-      title:{
-      text: "Books Issued from Central Library"
-      },
-       data: [
-      {        
-        type: "spline",
-        
-        dataPoints: [
-        { x: new Date(2012, 00, 1), y: 1352 },
-        { x: new Date(2012, 01, 1), y: 1514 },
-        { x: new Date(2012, 02, 1), y: 1321 },
-        { x: new Date(2012, 03, 1), y: 1163 },
-        { x: new Date(2012, 04, 1), y: 950 },
-        { x: new Date(2012, 05, 1), y: 1201 },
-        { x: new Date(2012, 06, 1), y: 1186 },
-        { x: new Date(2012, 07, 1), y: 1281 },
-        { x: new Date(2012, 08, 1), y: 1438 },
-        { x: new Date(2012, 09, 1), y: 1305 },
-        { x: new Date(2012, 10, 1), y: 1480 },
-        { x: new Date(2012, 11, 1), y: 1291 }        
-        ]
-      }       
-        
-      ]
-    });
+	window.onload = function() {
+		var chart = new CanvasJS.Chart("chartContainer", {
 
-    chart.render();
-  }
+			title : {
+				text : "Books Issued from Central Library"
+			},
+			data : [ {
+				type : "spline",
+
+				dataPoints : [ {
+					x : new Date(2012, 00, 1),
+					y : 1352
+				}, {
+					x : new Date(2012, 01, 1),
+					y : 1514
+				}, {
+					x : new Date(2012, 02, 1),
+					y : 1321
+				}, {
+					x : new Date(2012, 03, 1),
+					y : 1163
+				}, {
+					x : new Date(2012, 04, 1),
+					y : 950
+				}, {
+					x : new Date(2012, 05, 1),
+					y : 1201
+				}, {
+					x : new Date(2012, 06, 1),
+					y : 1186
+				}, {
+					x : new Date(2012, 07, 1),
+					y : 1281
+				}, {
+					x : new Date(2012, 08, 1),
+					y : 1438
+				}, {
+					x : new Date(2012, 09, 1),
+					y : 1305
+				}, {
+					x : new Date(2012, 10, 1),
+					y : 1480
+				}, {
+					x : new Date(2012, 11, 1),
+					y : 1291
+				} ]
+			}
+
+			]
+		});
+
+		chart.render();
+	}
 </script>
 <body>
 	<nav class="navbar navbar-inverse bar">
@@ -94,16 +156,138 @@ window.onload = function () {
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						Sign Up</a></li> --%>
 				<li><a href="logout"><span
 						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
 	</nav>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
-			<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+			<div class="col-md-9">
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<div class="div_style" style="border: none;">
+						<div class="layer_1"
+							style="background-color: #005075; text-align: right;">
+							<div style="font-size: 40px; font-weight: bold; margin: 10px;">
+								<span id="overallSalesCount"></span><font size="5px;">Nos.</font>
+							</div>
+						</div>
+						<div class="layer_2" style="background-color: #005075;">
+							<div style="font-weight: bold;">
+								&#8377;<span id="overallSalesAmount"></span>
+							</div>
+						</div>
+						<div class="layer_3"
+							style="background-color: #05435f; font-size: 12px; padding: 15px;">Overall
+							Sales</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<div class="div_style" style="border: none;">
+						<div class="layer_1" style="background-color: #0071A9;">
+							<div class="col-lg-12">
+								<div style="font-size: 20px; font-weight: bold;">
+									Total Sales Count: <span id="todaysSalesCount"></span>
+								</div>
+							</div>
+							<div class="col-lg-12 pull-right">
+								<div
+									style="font-size: 20px; font-weight: bold; padding-top: 30px;">
+									&#8377;<span id="todaysSalesAmount"></span>
+								</div>
+							</div>
+						</div>
+						<div class="layer_2" style="background-color: #0071A9;"></div>
+						<div class="layer_3"
+							style="background-color: #0a5e87; font-size: 12px; padding: 15px;"
+							onclick='getSummaryDetails("R")'>Today's sales</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<div class="div_style" style="border: none;">
+						<div class="layer_1" style="background-color: #33aea7;">
+							<div style="padding-right: 6%; margin-top: 7px;">
+								<!-- <span class="glyphicon glyphicon-ok-circle"
+								title="Total Issued Administrative Approvals"></span> <b><s:property
+									value="financialSanction.systemGenIssued" /></b> -->
+							</div>
+						</div>
+						<div class="layer_2" style="background-color: #33aea7;"></div>
+						<div class="layer_3"
+							style="background-color: #009d97; font-size: 12px; padding: 15px;"
+							onclick='getSummaryDetails("I")'>ISSUED</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<div class="div_style" style="border: none;">
+						<div class="layer_1" style="background-color: #86cbb3;">
+							<div style="padding-right: 6%; margin-top: 7px;">
+								<!-- <span class="glyphicon glyphicon-paste"
+								title="Pending Proposals In Finance"></span> <b><s:property
+									value="financialSanction.finForwarded" /></b> -->
+							</div>
+						</div>
+						<div class="layer_2" style="background-color: #86cbb3;"></div>
+						<div class="layer_3"
+							style="background-color: #7ec2aa; font-size: 12px; padding: 15px;"
+							onclick='getSummaryDetails("P")'>PENDING IN FINANCE</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-lg-3">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="div_style" style="border: none;">
+						<div class="layer_1" style="background-color: #c5cd5d;">
+							<div class="col-md-12">
+								<span>test</span>
+							</div>
+						</div>
+						<div class="layer_2" style="background-color: #c5cd5d;">
+							<div class="col-md-12">
+								<span>test</span>
+							</div>
+						</div>
+						<div class="layer_3"
+							style="background-color: #bcc747; font-size: 12px; padding: 15px;"
+							onclick='getSummaryDetails("RJ")'>Gold Rate</div>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 mt-10">
+					<div class="div_style" style="border: none;">
+						<div class="layer_1" style="background-color: #fa3568;">
+							<div style="padding-right: 6%; margin-top: 7px;">
+								<!-- <span class="glyphicon glyphicon-remove-circle"
+								title="Rejected Proposals"></span> <b><s:property
+									value="financialSanction.rejected" /></b> -->
+							</div>
+						</div>
+						<div class="layer_2" style="background-color: #fa3568;"></div>
+						<div class="layer_3"
+							style="background-color: #f2295d; font-size: 12px; padding: 15px;"
+							onclick='getSummaryDetails("RJ")'>Silver Rate</div>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 mt-10">
+					<div class="div_style" style="border: none;">
+						<div class="layer_1" style="background-color: #fe5ff0;">
+							<div style="padding-right: 6%; margin-top: 7px;">
+								<!-- <span class="glyphicon glyphicon-remove-circle"
+								title="Rejected Proposals"></span> <b><s:property
+									value="financialSanction.rejected" /></b> -->
+							</div>
+						</div>
+						<div class="layer_2" style="background-color: #fe5ff0;"></div>
+						<div class="layer_3"
+							style="background-color: #f854e9; font-size: 12px; padding: 15px;"
+							onclick='getSummaryDetails("RJ")'>Platinum Rate</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="container">
+			<div class="row">
+				<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+			</div>
+		</div> -->
 		</div>
 	</div>
 </body>
