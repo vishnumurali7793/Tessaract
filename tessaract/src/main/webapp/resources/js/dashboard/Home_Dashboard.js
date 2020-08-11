@@ -1,9 +1,11 @@
-$(document).ready(function(){
+
+$(document).ready(function() {
 	getStockDetails();
 	getOverallSalesDetails();
 	getTodaysSalesDetails();
 	loadChart();
-	
+	$('.dropdown-toggle').dropdown();
+
 });
 
 function getOverallSalesDetails(){
