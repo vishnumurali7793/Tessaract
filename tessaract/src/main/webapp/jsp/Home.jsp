@@ -204,30 +204,44 @@ body {
 				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="div_style" style="border: none;">
 						<div class="layer_1" style="background-color: #c5cd5d;">
-							<div class="col-md-12">
-								<span>test</span>
+							<div class="col-md-6">
+								<span id="GD_22"></span>
+							</div>
+							<div class="col-md-6">
+								<span id="GD_24"></span>
 							</div>
 						</div>
 						<div class="layer_2" style="background-color: #c5cd5d;">
-							<div class="col-md-12">
-								<span>test</span>
+							<div class="col-md-6">
+								<span id="GD_22_A"></span>
+							</div>
+							<div class="col-md-6">
+								<span id="GD_24_A"></span>
 							</div>
 						</div>
 						<div class="layer_3"
-							style="background-color: #bcc747; font-size: 12px; padding: 15px;"
-							onclick='getSummaryDetails("RJ")'>Gold Rate</div>
+							style="background-color: #bcc747; font-size: 12px; padding: 15px;">Gold
+							Rate</div>
 					</div>
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 mt-10">
 					<div class="div_style" style="border: none;">
 						<div class="layer_1" style="background-color: #fa3568;">
-							<div style="padding-right: 6%; margin-top: 7px;">
-								<!-- <span class="glyphicon glyphicon-remove-circle"
-								title="Rejected Proposals"></span> <b><s:property
-									value="financialSanction.rejected" /></b> -->
+							<div class="col-md-6">
+								<span id="SL_22">--</span>
+							</div>
+							<div class="col-md-6">
+								<span id="SL_24">--</span>
 							</div>
 						</div>
-						<div class="layer_2" style="background-color: #fa3568;"></div>
+						<div class="layer_2" style="background-color: #fa3568;">
+							<div class="col-md-6">
+								<span id="SL_22_A">--</span>
+							</div>
+							<div class="col-md-6">
+								<span id="SL_24_A">--</span>
+							</div>
+						</div>
 						<div class="layer_3"
 							style="background-color: #f2295d; font-size: 12px; padding: 15px;"
 							onclick='getSummaryDetails("RJ")'>Silver Rate</div>
@@ -236,13 +250,21 @@ body {
 				<div class="col-lg-12 col-md-12 col-sm-12 mt-10">
 					<div class="div_style" style="border: none;">
 						<div class="layer_1" style="background-color: #fe5ff0;">
-							<div style="padding-right: 6%; margin-top: 7px;">
-								<!-- <span class="glyphicon glyphicon-remove-circle"
-								title="Rejected Proposals"></span> <b><s:property
-									value="financialSanction.rejected" /></b> -->
+							<div class="col-md-6">
+								<span id="PT_22"></span>
+							</div>
+							<div class="col-md-6">
+								<span id="PT_24"></span>
 							</div>
 						</div>
-						<div class="layer_2" style="background-color: #fe5ff0;"></div>
+						<div class="layer_2" style="background-color: #fe5ff0;">
+							<div class="col-md-6">
+								<span id="PT_22_A"></span>
+							</div>
+							<div class="col-md-6">
+								<span id="PT_24_A"></span>
+							</div>
+						</div>
 						<div class="layer_3"
 							style="background-color: #f854e9; font-size: 12px; padding: 15px;"
 							onclick='getSummaryDetails("RJ")'>Platinum Rate</div>

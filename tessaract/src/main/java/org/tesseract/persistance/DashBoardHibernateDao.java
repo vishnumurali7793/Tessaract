@@ -49,6 +49,21 @@ public class DashBoardHibernateDao {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Collection<Object> getDailyRateList(){
+		session = getInstance();
+		try {
+			return session.createQuery("SELECT CONCAT(categoryId.categoryName, ' ', caratId.caratName), " +
+									   "amount, CONCAT(categoryId.categoryCode, '_', caratId.caratCode) FROM " +
+									   "RateBean WHERE addedOn = DATE(NOW())").list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			closeInstance();
+		}
+	}
+	
 	
 	
 	

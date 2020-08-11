@@ -22,20 +22,6 @@
 <title>tessaract</title>
 </head>
 <script type="text/javascript">
-/* $(document).ready(function() {
-	debugger
-	  $.ajax({
-	    url: 'getrateByProductForPurchase',
-	    data : {
-			"purchaseDetails.productId.categoryId" : '<s:property value="productId.category.categoryId"/>'
-		},
-	    success: function(response) {
-	      /* invoke your function*/
-	    	$('#rate' +index).html(response);
-	    }
-	  });
-	});
- */
 	function getProductList() {
 		$('#productModal #modalTitle').html("Add items to purchase bill");
 		$
@@ -81,7 +67,8 @@
 		document.getElementById('totnetamt').value = netamt;
 	}
 	function deletepurchase(purid) {
-		location.href = "deletePurchase?purchaseDetails.purchaseScreenId=" + purid;
+		location.href = "deletePurchase?purchaseDetails.purchaseScreenId="
+				+ purid;
 	}
 </script>
 <style type="text/css">
@@ -156,7 +143,7 @@ th {
 		<div class="row">
 			<div class="col-md-12">
 				<s:hidden name="purchaseBean.purchaseId" />
-				<button type="button" class="btn btn-primary" data-toggle="modal"
+				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
 					onclick="getProductList()">Add products</button>
 			</div>
 		</div>

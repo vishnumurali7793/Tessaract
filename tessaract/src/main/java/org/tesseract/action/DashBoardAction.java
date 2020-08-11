@@ -35,7 +35,9 @@ public class DashBoardAction extends ActionSupport{
 	
 	/* DECLARATIONS */
 	private Collection<Object> overallSalesList,
-							   currentDaySalesList;
+							   currentDaySalesList,
+							   rateList;
+	
 	private List<StockBean> stockList;
 	private FileInputStream fileInputStream;
 	private String destinationPath;
@@ -114,6 +116,12 @@ public class DashBoardAction extends ActionSupport{
 		
 		return SUCCESS;
 		
+	}
+	
+	public String getRateDetails() {
+		rateList = new ArrayList<Object>();
+		rateList = dashBoardHibernateDao.getDailyRateList();
+		return SUCCESS;
 	}
 	
 }

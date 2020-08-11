@@ -4,7 +4,9 @@ $(document).ready(function() {
 	getOverallSalesDetails();
 	getTodaysSalesDetails();
 	loadChart();
-	$('.dropdown-toggle').dropdown();
+	getRateDetails();
+	
+	$('.dropdown-toggle').dropdown(); //keep always on the bottom.
 
 });
 
@@ -25,13 +27,8 @@ function getTodaysSalesDetails(){
 		type: "GET",
 		url: "getTodaysSalesData",
 		success: function(data){
-			if(data.size > 0){
 				$('#todaysSalesCount').html(data[0][0]);
 				$('#todaysSalesAmount').html(parseFloat(data[0][1]).toFixed(2));
-			}else{
-				$('#todaysSalesCount').html("--");
-				$('#todaysSalesAmount').html("--");
-			}
 		},
 	});
 	
@@ -73,4 +70,35 @@ function loadChart() {
 	});
 
 	chart.render();
+}
+
+function getRateDetails(){
+	$.ajax({
+		type : "GET",
+		url : "getRateDetails",
+		success : function(data) {
+			$.map(data, function(v){
+				if (v[2] === 'GD_22CT') {
+					$('#GD_22').html(v[0]);
+					$('#GD_22_A').html('&#8377;' + v[1]);
+				} else if (v[2] === 'GD_24CT') {
+					$('#GD_24').html(v[0]);
+					$('#GD_24_A').html('&#8377;' + v[1]);
+				} else if (v[2] === 'SL_22CT') {
+					$('#SL_22').html(v[0]);
+					$('#SL_22_A').html('&#8377;' + v[1]);
+				} else if (v[2] === 'SL_24CT') {
+					$('#SL_24').html(v[0]);
+					$('#SL_24_A').html('&#8377;' + v[1]);
+				} else if (v[2] === 'PT_22CT') {
+					$('#PT_22').html(v[0]);
+					$('#PT_22_A').html('&#8377;' + v[1]);
+				} else if (v[2] === 'PT_24CT') {
+					$('#PT_24').html(v[0]);
+					$('#PT_24_A').html('&#8377;' + v[1]);
+				}
+			});
+		},
+	});
+	
 }

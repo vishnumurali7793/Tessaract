@@ -29,5 +29,10 @@
 				<param name="bufferSize">1024</param>
 			</result>
 		</action>
+		<action name="getRateDetails" class="org.tesseract.action.DashBoardAction" method="getRateDetails">
+			<result type="json">
+				<param name="root">rateList</param>
+			</result>
+		</action>
 	</package>
 </struts>
