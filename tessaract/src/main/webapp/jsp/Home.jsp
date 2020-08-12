@@ -66,6 +66,10 @@ body {
 	margin-top: 10px;
 }
 
+.mt-25 {
+	margin-top: 25px;
+}
+
 .stock-panel {
 	margin-top: 30px;
 }
@@ -161,28 +165,38 @@ body {
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="div_style" style="border: none;">
-						<div class="layer_1" style="background-color: #33aea7;">
-							<div style="padding-right: 6%; margin-top: 7px;"></div>
+						<div class="layer_1"
+							style="background-color: #33aea7; text-align: right;">
+							<div style="font-size: 40px; font-weight: bold; margin: 10px;">
+								<span id="GD_S_CT">--</span><font size="5px;">Nos.</font>
+							</div>
 						</div>
-						<div class="layer_2" style="background-color: #33aea7;"></div>
+						<div class="layer_2" style="background-color: #33aea7;">
+							<div style="font-weight: bold;">
+								&#8377;<span id="GD_S_AMT">--</span>
+							</div>
+						</div>
 						<div class="layer_3"
-							style="background-color: #009d97; font-size: 12px; padding: 15px;"
-							onclick='getSummaryDetails("I")'>--</div>
+							style="background-color: #009d97; font-size: 12px; padding: 15px;">Gold
+							sales - this month</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="div_style" style="border: none;">
-						<div class="layer_1" style="background-color: #86cbb3;">
-							<div style="padding-right: 6%; margin-top: 7px;">
-								<!-- <span class="glyphicon glyphicon-paste"
-								title="Pending Proposals In Finance"></span> <b><s:property
-									value="financialSanction.finForwarded" /></b> -->
+						<div class="layer_1"
+							style="background-color: #86cbb3; text-align: right;">
+							<div style="font-size: 40px; font-weight: bold; margin: 10px;">
+								<span id="SL_S_CT">--</span><font size="5px;">Nos.</font>
 							</div>
 						</div>
-						<div class="layer_2" style="background-color: #86cbb3;"></div>
+						<div class="layer_2" style="background-color: #86cbb3;">
+							<div style="font-weight: bold;">
+								&#8377;<span id="SL_S_AMT">--</span>
+							</div>
+						</div>
 						<div class="layer_3"
 							style="background-color: #7ec2aa; font-size: 12px; padding: 15px;"
-							onclick='getSummaryDetails("P")'>--</div>
+							onclick='getSummaryDetails("P")'>Silver sales - this month</div>
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -205,18 +219,18 @@ body {
 					<div class="div_style" style="border: none;">
 						<div class="layer_1" style="background-color: #c5cd5d;">
 							<div class="col-md-6">
-								<span id="GD_22"></span>
+								<span id="GD_22">--</span>
 							</div>
 							<div class="col-md-6">
-								<span id="GD_24"></span>
+								<span id="GD_24">--</span>
 							</div>
 						</div>
 						<div class="layer_2" style="background-color: #c5cd5d;">
 							<div class="col-md-6">
-								<span id="GD_22_A"></span>
+								<span id="GD_22_A">--</span>
 							</div>
 							<div class="col-md-6">
-								<span id="GD_24_A"></span>
+								<span id="GD_24_A">--</span>
 							</div>
 						</div>
 						<div class="layer_3"
@@ -224,7 +238,7 @@ body {
 							Rate</div>
 					</div>
 				</div>
-				<div class="col-lg-12 col-md-12 col-sm-12 mt-10">
+				<div class="col-lg-12 col-md-12 col-sm-12 mt-25">
 					<div class="div_style" style="border: none;">
 						<div class="layer_1" style="background-color: #fa3568;">
 							<div class="col-md-6">
@@ -243,39 +257,34 @@ body {
 							</div>
 						</div>
 						<div class="layer_3"
-							style="background-color: #f2295d; font-size: 12px; padding: 15px;"
-							onclick='getSummaryDetails("RJ")'>Silver Rate</div>
+							style="background-color: #f2295d; font-size: 12px; padding: 15px;">Silver
+							Rate</div>
 					</div>
 				</div>
-				<div class="col-lg-12 col-md-12 col-sm-12 mt-10">
+				<div class="col-lg-12 col-md-12 col-sm-12 mt-25">
 					<div class="div_style" style="border: none;">
 						<div class="layer_1" style="background-color: #fe5ff0;">
 							<div class="col-md-6">
-								<span id="PT_22"></span>
+								<span id="PT_22">--</span>
 							</div>
 							<div class="col-md-6">
-								<span id="PT_24"></span>
+								<span id="PT_24">--</span>
 							</div>
 						</div>
 						<div class="layer_2" style="background-color: #fe5ff0;">
 							<div class="col-md-6">
-								<span id="PT_22_A"></span>
+								<span id="PT_22_A">--</span>
 							</div>
 							<div class="col-md-6">
-								<span id="PT_24_A"></span>
+								<span id="PT_24_A">--</span>
 							</div>
 						</div>
 						<div class="layer_3"
-							style="background-color: #f854e9; font-size: 12px; padding: 15px;"
-							onclick='getSummaryDetails("RJ")'>Platinum Rate</div>
+							style="background-color: #f854e9; font-size: 12px; padding: 15px;">Platinum
+							Rate</div>
 					</div>
 				</div>
 			</div>
-			<!-- 			<div class="container"> -->
-			<!-- 			<div class="row"> -->
-			<!-- 				<div id="chartContainer" style="height: 300px; width: 100%;"></div> -->
-			<!-- 			</div> -->
-			<!-- 		</div> -->
 		</div>
 	</div>
 </body>
