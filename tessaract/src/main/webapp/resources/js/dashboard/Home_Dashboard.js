@@ -1,10 +1,13 @@
 
 $(document).ready(function() {
+	debugger;
 	getStockDetails();
 	getOverallSalesDetails();
 	getTodaysSalesDetails();
 	loadChart();
 	getRateDetails();
+	getCategoryWiseSaleAmount("GD");
+	getCategoryWiseSaleAmount("SL");
 	
 	$('.dropdown-toggle').dropdown(); //keep always on the bottom.
 
@@ -12,9 +15,10 @@ $(document).ready(function() {
 
 function getOverallSalesDetails(){
 	$.ajax({
-		type: "GET",
-		url: "getAllSalesData",
-		success: function(data){
+		type : "GET",
+		async : true,
+		url : "getAllSalesData",
+		success : function(data){
 			$('#overallSalesCount').html(data[0][0]);
 			$('#overallSalesAmount').html(parseFloat(data[0][1]).toFixed(2));
 		},
@@ -24,9 +28,10 @@ function getOverallSalesDetails(){
 
 function getTodaysSalesDetails(){
 	$.ajax({
-		type: "GET",
-		url: "getTodaysSalesData",
-		success: function(data){
+		type : "GET",
+		async : true,
+		url : "getTodaysSalesData",
+		success : function(data){
 				$('#todaysSalesCount').html(data[0][0]);
 				$('#todaysSalesAmount').html(parseFloat(data[0][1]).toFixed(2));
 		},
@@ -37,6 +42,7 @@ function getTodaysSalesDetails(){
 function getStockDetails() {
 	$.ajax({
 		type : "GET",
+		async : true,
 		url : "getStockDetails",
 		success : function(data) {
 			$('#stock-body').html(data);
@@ -75,6 +81,7 @@ function loadChart() {
 function getRateDetails(){
 	$.ajax({
 		type : "GET",
+		async : true,
 		url : "getRateDetails",
 		success : function(data) {
 			$.map(data, function(v){
@@ -100,5 +107,36 @@ function getRateDetails(){
 			});
 		},
 	});
-	
+}
+
+function getCategoryWiseSaleAmount(category) {
+	$.ajax({
+		type : "GET",
+		async : true,
+		url : "getCategoryWiseSaleAmount",
+		beforeSend : function() {
+			if (category === "GD") {
+				$('#GD_S_CT').html('loading...');
+				$('#GD_S_AMT').html('loading...');
+			} else if (category === "SL") {
+				$('#SL_S_CT').html('loading...');
+				$('#SL_S_AMT').html('loading...');
+			}
+		},
+		data : {
+			"category.categoryCode" : category,
+		},
+		success : function(data) {
+			if (data[0][2] === "GD") {
+				$('#GD_S_CT').html(data[0][0]);
+				$('#GD_S_AMT').html(data[0][1]);
+			} else if (data[0][2] === "SL") {
+				$('#SL_S_CT').html(data[0][0]);
+				$('#SL_S_AMT').html(data[0][1]);
+			}else{
+				
+			}
+		},
+	});
+
 }

@@ -17,6 +17,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.struts2.ServletActionContext;
+import org.tesseract.entities.CategoryBean;
 import org.tesseract.entities.StockBean;
 import org.tesseract.persistance.DashBoardHibernateDao;
 
@@ -36,13 +37,18 @@ public class DashBoardAction extends ActionSupport{
 	/* DECLARATIONS */
 	private Collection<Object> overallSalesList,
 							   currentDaySalesList,
-							   rateList;
+							   rateList,
+							   categoryWiseSalesDetails;
 	
 	private List<StockBean> stockList;
 	private FileInputStream fileInputStream;
 	private String destinationPath;
 	private String fileName;
-	private String documentContentType;
+	private final String documentContentType = "application/vnd.ms-excel";
+	
+	private CategoryBean category;
+	
+	private SimpleDateFormat dateFormat;
 	
 	
 	/*
@@ -71,10 +77,9 @@ public class DashBoardAction extends ActionSupport{
 	
 	public String generateStockReport() throws Exception {
 		ServletContext servletContext = ServletActionContext.getServletContext();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		FileOutputStream fileOutputStream;
 		String fileLocation = "/reports";
-		documentContentType = "application/vnd.ms-excel";
 		
 		File destination = new File(servletContext.getRealPath(fileLocation));
 		
@@ -121,6 +126,13 @@ public class DashBoardAction extends ActionSupport{
 	public String getRateDetails() {
 		rateList = new ArrayList<Object>();
 		rateList = dashBoardHibernateDao.getDailyRateList();
+		return SUCCESS;
+	}
+	
+	public String getCategoryWiseSaleAmount() {
+		categoryWiseSalesDetails = new ArrayList<Object>();
+		categoryWiseSalesDetails = dashBoardHibernateDao.getCategoryWiseSalesCountAndAmount(category.getCategoryCode(), 
+									 (new SimpleDateFormat("dd-MM-yyyy").format(new Date())).toString().split("-")[1]);
 		return SUCCESS;
 	}
 	

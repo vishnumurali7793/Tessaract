@@ -34,5 +34,10 @@
 				<param name="root">rateList</param>
 			</result>
 		</action>
+		<action name="getCategoryWiseSaleAmount" class="org.tesseract.action.DashBoardAction" method="getCategoryWiseSaleAmount">
+			<result type="json">
+				<param name="root">categoryWiseSalesDetails</param>
+			</result>
+		</action>
 	</package>
 </struts>

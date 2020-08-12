@@ -64,6 +64,26 @@ public class DashBoardHibernateDao {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Collection<Object> getCategoryWiseSalesCountAndAmount(String categoryCode, String month) {
+		session = getInstance();
+		String queryString = "SELECT COUNT(sb.salesid), SUM(sm.netamount), c.category_code FROM tesseract.salesBase sb "
+							+ "JOIN tesseract.sales_details sd ON sb.salesid = sd.salesid "
+							+ "JOIN tesseract.product p ON sd.productId = p.product_id JOIN "
+							+ "tesseract.category c ON p.category = c.category_id "
+							+ "JOIN tesseract.salesamount sm ON sb.salesid = sm.salesid WHERE "
+							+ "MONTH(sb.invoice_date)=:month AND c.category_code=:categoryCode";
+		try {
+			return session.createSQLQuery(queryString).setParameter("month", month)
+					.setParameter("categoryCode", categoryCode).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			closeInstance();
+		}
+	}
+	
 	
 	
 	
