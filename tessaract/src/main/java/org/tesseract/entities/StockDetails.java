@@ -41,6 +41,9 @@ public class StockDetails {
 	
 	@Column(name="transactionType")
 	private String transactionType; //S- sales, SR- sales return, P- purchase, PR- purchase return
+	
+	@Column(name="stockQuantity")
+	private Double stockQuantity;
 
 	public Long getId() {
 		return id;
@@ -104,6 +107,14 @@ public class StockDetails {
 
 	public void setStockBaseId(StockBean stockBaseId) {
 		StockBaseId = stockBaseId;
+	}
+
+	public Double getStockQuantity() {
+		return stockQuantity;
+	}
+
+	public void setStockQuantity(Double stockQuantity) {
+		this.stockQuantity = stockQuantity;
 	}
 
 }

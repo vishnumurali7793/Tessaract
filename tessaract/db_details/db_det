@@ -136,5 +136,8 @@ CREATE TABLE `tesseract`.`user_details` (
              `deletestatus` VARCHAR(255) NOT NULL , PRIMARY KEY (`salesdetailsid`)) ENGINE = InnoDB;
              
              ALTER TABLE `stock` ADD `detailStatus` VARCHAR(255) NULL AFTER `purchaseId`;
+             
+            ALTER TABLE `stockdetails` ADD `stockQuantity` DOUBLE NULL AFTER `stockId`;
+
 
              

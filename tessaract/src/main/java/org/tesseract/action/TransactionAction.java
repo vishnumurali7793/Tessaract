@@ -172,6 +172,7 @@ public class TransactionAction extends ActionSupport {
 				Stockdetails.setTransactionType("P");
 				Stockdetails.setStockBaseId(sdet);
 				Stockdetails.setUpdatedOn(new Date());
+				Stockdetails.setStockQuantity(pd.getQuantity());
 				transHibernateDao.savestockprodmapingDetails(Stockdetails);
 				i++;
 			}
@@ -300,6 +301,7 @@ public class TransactionAction extends ActionSupport {
 				Stockdetails.setTransactionType("S");
 				Stockdetails.setStockBaseId(sdet);
 				Stockdetails.setUpdatedOn(new Date());
+				Stockdetails.setStockQuantity(pd.getQuantity());
 				transHibernateDao.savestockprodmapingDetails(Stockdetails);
 				i++;
 			}
@@ -385,6 +387,7 @@ public class TransactionAction extends ActionSupport {
 				Stockdetails.setTransactionType("SR");
 				Stockdetails.setStockBaseId(sdet);
 				Stockdetails.setUpdatedOn(new Date());
+				Stockdetails.setStockQuantity(salretdetils.getQuantity());
 				transHibernateDao.savestockprodmapingDetails(Stockdetails);
 				i++;
 			}
@@ -500,6 +503,7 @@ public class TransactionAction extends ActionSupport {
 				Stockdetails.setTransactionType("PR");
 				Stockdetails.setStockBaseId(sdet);
 				Stockdetails.setUpdatedOn(new Date());
+				Stockdetails.setStockQuantity(purretdetils.getQuantity());
 				transHibernateDao.savestockprodmapingDetails(Stockdetails);
 				i++;
 			}
