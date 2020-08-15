@@ -38,12 +38,14 @@ public class DashBoardAction extends ActionSupport{
 	private Collection<Object> overallSalesList,
 							   currentDaySalesList,
 							   rateList,
-							   categoryWiseSalesDetails;
-	
+							   categoryWiseSalesDetails,
+							   salesDataDateWiseList,
+							   purchaseDataDateWiseList;
 	private List<StockBean> stockList;
 	private FileInputStream fileInputStream;
 	private String destinationPath;
 	private String fileName;
+	private String fetchType;
 	private final String documentContentType = "application/vnd.ms-excel";
 	
 	private CategoryBean category;
@@ -133,6 +135,18 @@ public class DashBoardAction extends ActionSupport{
 		categoryWiseSalesDetails = new ArrayList<Object>();
 		categoryWiseSalesDetails = dashBoardHibernateDao.getCategoryWiseSalesCountAndAmount(category.getCategoryCode(), 
 									 (new SimpleDateFormat("dd-MM-yyyy").format(new Date())).toString().split("-")[1]);
+		return SUCCESS;
+	}
+	
+	public String getAllSalesDataDateWise() {
+		salesDataDateWiseList = new ArrayList<Object>();
+		salesDataDateWiseList = dashBoardHibernateDao.getAllSalesDataDateWise(fetchType);
+		return SUCCESS;
+	}
+	
+	public String getAllPurchaseDataDateWise() {
+		purchaseDataDateWiseList = new ArrayList<Object>();
+		purchaseDataDateWiseList = dashBoardHibernateDao.getAllPurchaseDataDateWise();
 		return SUCCESS;
 	}
 	

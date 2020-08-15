@@ -39,5 +39,15 @@
 				<param name="root">categoryWiseSalesDetails</param>
 			</result>
 		</action>
+		<action name="getAllSalesDataDateWise" class="org.tesseract.action.DashBoardAction" method="getAllSalesDataDateWise">
+			<result type="json">
+				<param name="root">salesDataDateWiseList</param>
+			</result>
+		</action>
+		<action name="getAllPurchaseDataDateWise" class="org.tesseract.action.DashBoardAction" method="getAllPurchaseDataDateWise">
+			<result type="json">
+				<param name="root">purchaseDataDateWiseList</param>
+			</result>
+		</action>
 	</package>
 </struts>

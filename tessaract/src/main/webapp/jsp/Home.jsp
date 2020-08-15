@@ -202,20 +202,44 @@ body {
 				<div class="col-lg-6">
 					<div class="panel panel-default stock-panel">
 						<div class="panel-heading" id="stock-heading">Stock</div>
-						<div class="panel-body" id="stock-body"></div>
+						<div class="panel-body" id="stock-body"
+							style="height: 330px; max-height: 330px; overflow: scroll;"></div>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="panel panel-default stock-panel">
 						<div class="panel-heading" id="stock-heading">Sales Trend</div>
 						<div class="panel-body" id="stock-body">
-							<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+							<div id="salesChartContainer" style="height: 300px; width: 100%;"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-3 col-lg-3">
 				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="div_style" style="border: none;">
+						<div class="layer_1" style="background-color: #c5cd5d;">
+<!-- 							<div class="col-md-6"> -->
+<!-- 								<span id="GD_22">--</span> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-md-6"> -->
+<!-- 								<span id="GD_24">--</span> -->
+<!-- 							</div> -->
+						</div>
+						<div class="layer_2" style="background-color: #c5cd5d;">
+<!-- 							<div class="col-md-6"> -->
+<!-- 								<span id="GD_22_A">--</span> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-md-6"> -->
+<!-- 								<span id="GD_24_A">--</span> -->
+<!-- 							</div> -->
+						</div>
+						<div class="layer_3"
+							style="background-color: #bcc747; font-size: 12px; padding: 15px;">Silver
+							sales - this month</div>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 mt-25">
 					<div class="div_style" style="border: none;">
 						<div class="layer_1" style="background-color: #c5cd5d;">
 							<div class="col-md-6">
@@ -282,6 +306,17 @@ body {
 						<div class="layer_3"
 							style="background-color: #f854e9; font-size: 12px; padding: 15px;">Platinum
 							Rate</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default stock-panel">
+					<div class="panel-heading" id="stock-heading">Purchase vs
+						Sales comparison</div>
+					<div class="panel-body" id="stock-body">
+						<div id="purchaseVsSalesChartContainer" style="height: 500px; width: 100%;"></div>
 					</div>
 				</div>
 			</div>

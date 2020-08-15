@@ -1,10 +1,9 @@
-
 $(document).ready(function() {
-	debugger;
 	getStockDetails();
 	getOverallSalesDetails();
 	getTodaysSalesDetails();
-	loadChart();
+	getDataPoints("ST"); //fetching x, y co-ordinates for the sales trend(ST) chart
+	getDataPoints("PSD"); //fetching x, y co-ordinates for the sales Vs purchase chart
 	getRateDetails();
 	getCategoryWiseSaleAmount("GD");
 	getCategoryWiseSaleAmount("SL");
@@ -51,30 +50,84 @@ function getStockDetails() {
 
 }
 
-function loadChart() {
-	var chart = new CanvasJS.Chart("chartContainer", {
-			title : {
-				text : "Books Issued from Central Library"
-			},
-			data : [ {
-				type : "spline",
-				dataPoints : [
-					{x : new Date(2012, 00, 1),y : 1352}, 
-					{x : new Date(2012, 01, 1),y : 1514}, 
-					{x : new Date(2012, 02, 1),y : 1321}, 
-					{x : new Date(2012, 03, 1),y : 1163}, 
-					{x : new Date(2012, 04, 1),y : 950}, 
-					{x : new Date(2012, 05, 1),y : 1201}, 
-					{x : new Date(2012, 06, 1),y : 1186}, 
-					{x : new Date(2012, 07, 1),y : 1281}, 
-					{x : new Date(2012, 08, 1),y : 1438}, 
-					{x : new Date(2012, 09, 1),y : 1305}, 
-					{x : new Date(2012, 10, 1),y : 1480}, 
-					{x : new Date(2012, 11, 1),y : 1291} ]
-			}
-			]
+function loadChart(salesDataPoints, purchaseDataPoints, fetchType) {
+	if (fetchType === "ST") {
+		plotSalesTrend(salesDataPoints);
+	} else if (fetchType === "PSD") {
+		 plotPurchaseVsSalesData(salesDataPoints, purchaseDataPoints);
+	}
+}
+
+//plotting sales trend graph
+function plotSalesTrend(salesTrendDataPoints){
+	var chart = new CanvasJS.Chart("salesChartContainer", {
+		animationEnabled: true,
+		theme: "light2",
+		title : {
+			text : "Sales Details",
+			fontSize: 15,
+		},
+		axisX: {
+			title: "Date",
+			titleFontSize: 10,
+			includeZero: false,
+			valueFormatString: "DD MM YY"
+		},
+		axisY: {
+			title: "Count",
+			titleFontSize: 10,
+			includeZero: true,
+			suffix: " Nos."
+		},
+		data : [ {
+			type : "spline",
+			dataPoints : salesTrendDataPoints
+		} ]
 	});
 
+	chart.render();
+}
+
+//plotting sales vs purchase graph
+function plotPurchaseVsSalesData(salesDataPoints, purchaseDataPoints){
+	var chart = new CanvasJS.Chart("purchaseVsSalesChartContainer", {
+		animationEnabled: true,
+		theme: "light2",
+		title : {
+			text : "Sales vs Purchase Details",
+			fontSize: 15,
+		},
+		axisX: {
+			title: "Date",
+			titleFontSize: 10,
+			includeZero: false,
+			valueFormatString: "DD MMM YY"
+		},
+		axisY: {
+			title: "Amount",
+			titleFontSize: 10,
+			includeZero: true,
+			prefix: "\u20B9 "
+		},
+		toolTip:{
+			shared:true
+		},
+		data : [ {
+			type : "line",
+			showInLegend: true,
+			name: "Sales",
+			yValueFormatString: "#,##0\u20B9",
+			dataPoints : salesDataPoints
+		}, {
+			type : "line",
+			showInLegend: true,
+			name: "Purchase",
+			lineDashType: "dash",
+			yValueFormatString: "#,##0\u20B9",
+			dataPoints : purchaseDataPoints
+		} ]
+	});
+	
 	chart.render();
 }
 
@@ -114,15 +167,6 @@ function getCategoryWiseSaleAmount(category) {
 		type : "GET",
 		async : true,
 		url : "getCategoryWiseSaleAmount",
-		beforeSend : function() {
-			if (category === "GD") {
-				$('#GD_S_CT').html('loading...');
-				$('#GD_S_AMT').html('loading...');
-			} else if (category === "SL") {
-				$('#SL_S_CT').html('loading...');
-				$('#SL_S_AMT').html('loading...');
-			}
-		},
 		data : {
 			"category.categoryCode" : category,
 		},
@@ -139,4 +183,51 @@ function getCategoryWiseSaleAmount(category) {
 		},
 	});
 
+}
+
+function getDataPoints(fetchType) {
+	var salesDataPointsForSalesTrend = [];
+	var salesDataPointsForPvsS = [];
+	var purchaseDataPoints = [];
+	$.ajax({
+		type : "GET",
+		async : true,
+		url : "getAllSalesDataDateWise",
+		data : {
+			'fetchType' : fetchType,
+		},
+		success : function(data) {
+			$.map(data, function(v) {
+				if (fetchType === "ST") {
+					salesDataPointsForSalesTrend.push({
+						'x' : new Date(v[0]),
+						'y' : v[1]
+					});
+				} else if (fetchType === "PSD") {
+					salesDataPointsForPvsS.push({
+						'x' : new Date(v[0]),
+						'y' : v[1]
+					});
+				}
+			});
+			if (fetchType === "ST") {
+				loadChart(salesDataPointsForSalesTrend, purchaseDataPoints, fetchType);
+			} else if (fetchType === "PSD") {
+				$.ajax({
+					type : "GET",
+					async : true,
+					url : "getAllPurchaseDataDateWise",
+					success : function(data) {
+						$.map(data, function(v) {
+							purchaseDataPoints.push({
+								'x' : new Date(v[0]),
+								'y' : v[1]
+							});
+						});
+						loadChart(salesDataPointsForPvsS, purchaseDataPoints, fetchType);
+					}
+				});
+			}
+		},
+	});
 }

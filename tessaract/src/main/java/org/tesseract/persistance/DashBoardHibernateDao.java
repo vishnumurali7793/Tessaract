@@ -84,6 +84,41 @@ public class DashBoardHibernateDao {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Collection<Object> getAllSalesDataDateWise(String fetchType) {
+		session = getInstance();
+		String queryString = null;
+		if (fetchType.equals("ST")) {
+			queryString = "SELECT DATE(invoice_date), COUNT(salesid) FROM tesseract.salesBase GROUP BY invoice_date ORDER BY DATE(invoice_date)";
+		} else if (fetchType.equals("PSD")) {
+			queryString = "SELECT DATE(sb.invoice_date), SUM(sam.netamount) FROM tesseract.salesBase sb JOIN " +
+						  "tesseract.salesamount sam ON sb.salesid = sam.salesid GROUP BY sb.invoice_date ORDER BY DATE(sb.invoice_date)";
+		}
+		try {
+			return session.createSQLQuery(queryString).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			closeInstance();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Collection<Object> getAllPurchaseDataDateWise() {
+		session = getInstance();
+		String queryString = "SELECT DATE(pb.invoice_date), SUM(pam.netamount) FROM tesseract.purchaseBase pb JOIN " +
+							 "tesseract.purchaseamount pam ON pb.purchase_id = pam.purchase_amount_id " +
+							 "GROUP BY pb.invoice_date ORDER BY DATE(pb.invoice_date)";
+		try {
+			return session.createSQLQuery(queryString).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+	
 	
 	
 	
