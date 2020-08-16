@@ -16,6 +16,9 @@ public class CustomerBean {
 	@Column(name = "customer_id")
 	private Integer customerId;
 	
+	@Column(name = "customer_code")
+	private String customerCode;
+	
 	@Column(name = "customer_name")
 	private String customerName;
 	
@@ -143,6 +146,14 @@ public class CustomerBean {
 
 	public void setEventDate(String eventDate) {
 		this.eventDate = eventDate;
+	}
+
+	public String getCustomerCode() {
+		return customerCode;
+	}
+
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
 	}
 	
 	

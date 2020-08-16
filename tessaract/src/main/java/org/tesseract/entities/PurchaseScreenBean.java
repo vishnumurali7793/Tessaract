@@ -29,8 +29,8 @@ public class PurchaseScreenBean {
 	private Double hsnCode;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="categoryId")
-	private CategoryBean categoryId;
+	@JoinColumn(name="productId")
+	private ProductBean productId;
 	
 	@Column(name = "purity")
 	private Double purity;
@@ -49,6 +49,15 @@ public class PurchaseScreenBean {
 	
 	@Column(name = "totalamount")
 	private Double totalamount;
+	
+	@Column(name = "gramweight")
+	private Double gramweight;
+	
+	@Column(name = "deletestatus")
+	private String deleteStatus="N";
+	
+	@Column(name = "quantity")
+	private Double quantity;
 
 	public Integer getPurchaseScreenId() {
 		return purchaseScreenId;
@@ -74,12 +83,12 @@ public class PurchaseScreenBean {
 		this.hsnCode = hsnCode;
 	}
 
-	public CategoryBean getCategoryId() {
-		return categoryId;
+	public ProductBean getProductId() {
+		return productId;
 	}
 
-	public void setCategoryId(CategoryBean categoryId) {
-		this.categoryId = categoryId;
+	public void setProductId(ProductBean productId) {
+		this.productId = productId;
 	}
 
 	public Double getPurity() {
@@ -128,6 +137,30 @@ public class PurchaseScreenBean {
 
 	public void setTotalamount(Double totalamount) {
 		this.totalamount = totalamount;
+	}
+
+	public Double getGramweight() {
+		return gramweight;
+	}
+
+	public void setGramweight(Double gramweight) {
+		this.gramweight = gramweight;
+	}
+
+	public String getDeleteStatus() {
+		return deleteStatus;
+	}
+
+	public void setDeleteStatus(String deleteStatus) {
+		this.deleteStatus = deleteStatus;
+	}
+
+	public Double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
 	}
 	
 	

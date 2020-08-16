@@ -5,16 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/jQuery.js" /></script>
-<link rel='stylesheet'
-	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
 <title>tessaract</title>
-<link href="css/style.css" rel="stylesheet" type="text/css">
-
 </head>
 <style type="text/css">
 body {
@@ -135,10 +129,23 @@ td, th {
 									<div class="row">
 										<div class=" col s12">
 											<s:hidden name="categoryBean.categoryId" />
+											<s:hidden name="caratBean.caratId" />
+											 
 											<label>Category Code</label> <input
 												name="categoryBean.categoryCode" type="text"
 												value="<s:property value="categoryBean.categoryCode"/>"
-												class="validate" placeholder="CategoryCode"> <label>Category
+												class="validate" placeholder="CategoryCode">
+												
+												<label>Carat</label> <select
+												class="custom-select custom-select-sm" id="select"
+												value="<s:property value="categoryBean.caratId.caratName" />"
+												name="categoryBean.caratId.caratId">
+												<s:iterator value="caratList" status="row">
+													<option value="<s:property value='caratId'/>"><s:property
+															value='caratName' /></option>
+												</s:iterator>
+											</select>
+												 <label>Category
 												Name</label> <input name="categoryBean.categoryName" type="text"
 												class="validate"
 												value="<s:property value="categoryBean.categoryName"/>"
@@ -177,6 +184,7 @@ td, th {
 										<tr>
 											<th>#</th>
 											<th>CATEGORY CODE</th>
+											<th>CARAT</th>
 											<th>CATEGORY NAME</th>
 											<th>Active Status</th>
 											<th>Actions</th>
@@ -190,6 +198,7 @@ td, th {
 												<tr>
 													<td><s:property value="#row.count" /></td>
 													<td><s:property value="categoryCode" /></td>
+													<td><s:property value="caratId.caratName" /></td>
 													<td><s:property value="categoryName" /></td>
 													<td><s:property value="activeStatus" /></td>
 													<td><button class="btn-xs btn-link"

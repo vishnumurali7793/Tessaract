@@ -113,3 +113,31 @@ CREATE TABLE `tesseract`.`user_details` (
             CREATE TABLE `tesseract`.`purchaseamount` ( `purchase_amount_id` INT NOT NULL AUTO_INCREMENT , 
             `purchaseId` INT NULL , `grossamount` DOUBLE NULL , `roundoff` DOUBLE NULL , 
             `netamount` DOUBLE NULL , PRIMARY KEY (`purchase_amount_id`)) ENGINE = InnoDB;
+            
+            ALTER TABLE `purchasedetails` CHANGE `categoryId` `productId` INT(11) NULL DEFAULT NULL;
+            ALTER TABLE `purchasedetails` ADD FOREIGN KEY (`productId`) REFERENCES 
+            `tesseract`.`product`(`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+            
+            ALTER TABLE `purchasedetails` ADD `gramweight` DOUBLE NULL AFTER `touch`;
+            ALTER TABLE `purchasedetails` ADD `deletestatus` VARCHAR(255) NULL AFTER `totalamount`;
+            ALTER TABLE `purchasedetails` ADD `quantity` DOUBLE NULL AFTER `deletestatus`;
+            
+            CREATE TABLE `tesseract`.`stock` ( `stock_id` INT NOT NULL AUTO_INCREMENT , 
+            `purchaseId` INT NULL , `productId` INT NULL , `date` DATE NULL ,
+             `quantity` DOUBLE NULL , `netWt` DOUBLE NULL , PRIMARY KEY (`stock_id`)) ENGINE = InnoDB;
+             
+             ALTER TABLE `customer` ADD `customer_code` VARCHAR(255) NULL AFTER `customer_id`;
+             ALTER TABLE `product` ADD `modelId` INT NULL AFTER `category`;
+             
+             CREATE TABLE `tesseract`.`sales_details` ( `salesdetailsid` INT NOT NULL AUTO_INCREMENT , 
+             `salesid` INT NOT NULL , `hsn_code` VARCHAR(255) NULL , `productId` INT NOT NULL , `quantity` DOUBLE NULL , 
+             `goldweight` DOUBLE NULL , `stoneweight` DOUBLE NULL , `netweight` DOUBLE NOT NULL , `rate` DOUBLE NOT NULL , 
+             `vaamount` DOUBLE NOT NULL , `afterdis` DOUBLE NOT NULL , `stonecash` DOUBLE NOT NULL , `totamt` DOUBLE NOT NULL , 
+             `deletestatus` VARCHAR(255) NOT NULL , PRIMARY KEY (`salesdetailsid`)) ENGINE = InnoDB;
+             
+             ALTER TABLE `stock` ADD `detailStatus` VARCHAR(255) NULL AFTER `purchaseId`;
+             
+            ALTER TABLE `stockdetails` ADD `stockQuantity` DOUBLE NULL AFTER `stockId`;
+
+
+             

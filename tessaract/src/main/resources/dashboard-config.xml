@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+	<package name="dashboard" extends="json-default">
+		<action name="getAllSalesData" class="org.tesseract.action.DashBoardAction" method="getAllSalesData">
+			<result type="json">
+				<param name="root">overallSalesList</param>
+			</result>
+		</action>
+		<action name="getTodaysSalesData" class="org.tesseract.action.DashBoardAction" method="getTodaysSalesData">
+			<result type="json">
+				<param name="root">currentDaySalesList</param>
+			</result>
+		</action>
+		<action name="getStockDetails" class="org.tesseract.action.DashBoardAction" method="getStockDetails">
+			<result name="success">/jsp/dashboard/StockDetailsAJAX.jsp</result>
+		</action>
+		<action name="generateStockReport" class="org.tesseract.action.DashBoardAction" method="generateStockReport">
+			<result name="success" type="stream">
+				<param name="contentDisposition">inline;filename=${fileName}</param>
+				<param name="contentType">${documentContentType}</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="getRateDetails" class="org.tesseract.action.DashBoardAction" method="getRateDetails">
+			<result type="json">
+				<param name="root">rateList</param>
+			</result>
+		</action>
+		<action name="getCategoryWiseSaleAmount" class="org.tesseract.action.DashBoardAction" method="getCategoryWiseSaleAmount">
+			<result type="json">
+				<param name="root">categoryWiseSalesDetails</param>
+			</result>
+		</action>
+		<action name="getAllSalesDataDateWise" class="org.tesseract.action.DashBoardAction" method="getAllSalesDataDateWise">
+			<result type="json">
+				<param name="root">salesDataDateWiseList</param>
+			</result>
+		</action>
+		<action name="getAllPurchaseDataDateWise" class="org.tesseract.action.DashBoardAction" method="getAllPurchaseDataDateWise">
+			<result type="json">
+				<param name="root">purchaseDataDateWiseList</param>
+			</result>
+		</action>
+	</package>
+</struts>

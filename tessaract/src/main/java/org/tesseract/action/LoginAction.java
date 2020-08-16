@@ -2,7 +2,6 @@ package org.tesseract.action;
 
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
@@ -14,6 +13,7 @@ import org.tesseract.persistance.LoginHibernateDao;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport implements SessionAware {
+	
 
 	private static final long serialVersionUID = 1L;
 
