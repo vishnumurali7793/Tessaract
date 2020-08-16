@@ -87,7 +87,7 @@ body {
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-inverse bar">
+	<!-- <nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="goToHome">Tesseract</a>
@@ -105,8 +105,6 @@ body {
 						<li><a href="goToRate">Rate</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
 						<li><a href="goToVendor">Vendor</a></li>
-						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Transanctions <span
@@ -123,7 +121,7 @@ body {
 						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
-	</nav>
+	</nav> -->
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-9">

@@ -1,0 +1,96 @@
+body {
+	padding: 0;
+	margin: 0;
+	background-color: #f7f7f7;
+}
+
+/* UTILITIES */
+.m-all-15 {
+	margin: 15px;
+}
+
+.mt-15 {
+	margin-top: 15px;
+}
+
+.mr-10 {
+	margin-right: 10px;
+}
+
+.mr-15 {
+	margin-right: 15px;
+}
+
+/* COLORS */
+.primary {
+	background-color: #0169f3;
+	color: #eff1f2;
+}
+
+.info {
+	background-color: #2d87ff;
+	color: #0169f3;
+}
+
+.default {
+	background-color: #fcfcfc;
+	color: #5c5c5c;
+}
+
+/* FOR PANELS */
+.form-panel-primary .panel-heading {
+	background-color: #0169f3;
+	color: #eff1f2;
+	font-weight: bold;
+}
+
+.form-panel-secondary .panel-heading {
+	background-color: #2ecd4f;
+	color: #eff1f2;
+	font-weight: bold;
+}
+
+.form-panel-primary .panel-body {
+	background-color: #f0f6fe;
+}
+
+.form-panel-secondary .panel-body {
+	background-color: #eefff2;
+}
+
+/* FOR BUTTONS */
+.form-btn-success, .form-btn-success:focus, .form-btn-success:active {
+	background-color: #32cb52;
+	border: 0.5px solid #15a934;
+	color: #fbfbfb;
+}
+
+.form-btn-success:hover {
+	background-color: #1cb03b;
+	border: 0.5px solid #7516b0;
+	color: #fbfbfb;
+}
+
+.form-btn-danger, .form-btn-danger:focus, .form-btn-danger:active {
+	background-color: #f11c1c;
+	border: 0.5px solid #c62929;
+	color: #fbfbfb;
+}
+
+.form-btn-danger:hover {
+	background-color: #c10b0b;
+	border: 0.5px solid #c62929;
+	color: #fbfbfb;
+}
+
+.form-btn-purple, .form-btn-purple:focus, .form-btn-purple:active {
+	background-color: #ac24ff;
+	border: 0.5px solid #7516b0;
+	color: #fbfbfb;
+}
+
+.form-btn-purple:hover {
+	background-color: #6c00ae;
+	border: 0.5px solid #7516b0;
+	color: #fbfbfb;
+}
