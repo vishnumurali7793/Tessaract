@@ -9,8 +9,20 @@ body {
 	margin: 15px;
 }
 
+.m-all-25 {
+	margin: 25px;
+}
+
 .mt-15 {
 	margin-top: 15px;
+}
+
+.mt-40 {
+	margin-top: 40px;
+}
+
+.mt-25 {
+	margin-top: 25px;
 }
 
 .mr-10 {
@@ -19,6 +31,14 @@ body {
 
 .mr-15 {
 	margin-right: 15px;
+}
+
+.ml-10{
+	margin-left: 10px;
+}
+
+.ml-25{
+	margin-left: 25px;
 }
 
 /* COLORS */

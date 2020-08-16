@@ -79,7 +79,9 @@
 
 		<action name="editCategory"
 			class="org.tesseract.action.MasterAction" method="editCategory">
-			<result name="success">/jsp/category.jsp</result>
+			<!-- <result name="success">/jsp/category.jsp</result> -->
+			<result name="success" type="tiles">goToCategory</result>
+
 		</action>
 		<!-- category page finished -->
 		<!-- ********product page************* -->
