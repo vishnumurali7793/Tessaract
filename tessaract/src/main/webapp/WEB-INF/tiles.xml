@@ -24,12 +24,12 @@
 	</definition>
 
 	<definition name="goToCategory" extends="baseLayout">
-		<put-attribute name="title" value="Taxes" />
+		<put-attribute name="title" value="Category" />
 		<put-attribute name="body" value="/jsp/category.jsp" />
 	</definition>
 
 	<definition name="goToHome" extends="dashBoardLayout">
-		<put-attribute name="title" value="Taxes" />
+		<put-attribute name="title" value="Home" />
 		<put-attribute name="body" value="/jsp/Home.jsp" />
 	</definition>
 

@@ -212,9 +212,9 @@ td, th {
 							<thead>
 								<tr class="info">
 									<th>#</th>
-									<th>CATEGORY CODE</th>
-									<th>CARAT</th>
-									<th>CATEGORY NAME</th>
+									<th>Category Code</th>
+									<th>Carat</th>
+									<th>Category Name</th>
 									<th>Active Status</th>
 									<th>Actions</th>
 								</tr>
