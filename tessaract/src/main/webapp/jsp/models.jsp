@@ -5,82 +5,64 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>tessaract</title>
 </head>
-<script type="text/javascript">
-	function editCategory(catid) {
-		location.href = "editCategory?categoryBean.categoryId=" + catid;
-	}
-
-	function deleteCategory(catid) {
-		location.href = "deleteCategory?categoryBean.categoryId=" + catid;
-	}
-	function toggleTableContainer() {
-		$('#tableContainer').toggle();
-	}
-</script>
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 mt-15">
-				<h3 align="center">Category Master</h3>
+			<div class="col-md-12 col-sm-12 mt-15">
+				<h3 align="center">Model Master</h3>
 			</div>
 		</div>
 		<div class="row">
 			<div class="panel-group m-all-15">
 				<div class="panel panel-default form-panel-primary">
-					<div class="panel-heading">Add Category</div>
+					<div class="panel-heading">Add Model</div>
 					<div class="panel-body">
-						<s:form action="saveCategory">
+						<s:form action="saveModel">
 							<div class="row">
-								<s:hidden name="categoryBean.categoryId" />
-								<s:hidden name="caratBean.caratId" />
-								<div class="col-md-4">
+								<s:hidden name="modelBean.modelId" />
+								<div class="col-md-4 col-sm-12">
 									<div class="form-group m-all-15">
-										<label for="categoryCode">Category code</label> <input
-											name="categoryBean.categoryCode" type="text"
-											value="<s:property value="categoryBean.categoryCode"/>"
+										<label for="modelCode">Model Code</label> <input
+											name="modelBean.modelCode" id="modelCode" type="text"
+											value="<s:property value="modelBean.modelCode"/>"
 											class="validate input-sm form-control"
-											placeholder="CategoryCode" id="categoryCode">
+											placeholder="modelCode">
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-4 col-sm-12">
 									<div class="form-group m-all-15">
-										<label for="categoryName">Category Name</label> <input
-											id="categoryName" name="categoryBean.categoryName"
-											type="text" class="validate input-sm form-control"
-											value="<s:property value="categoryBean.categoryName"/>"
-											placeholder="CategoryName">
+										<label for="modelName">Model Name</label> <input
+											name="modelBean.modelName" type="text"
+											class="validate input-sm form-control" id="modelName"
+											value="<s:property value="modelBean.modelName"/>"
+											placeholder="modelName">
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-4 col-sm-12">
 									<div class="form-group m-all-15">
-										<label for="select">Carat</label> <select
-											class="custom-select custom-select-sm input-sm form-control"
-											id="select"
-											value="<s:property value="categoryBean.caratId.caratName" />"
-											name="categoryBean.caratId.caratId">
-											<s:iterator value="caratList" status="row">
-												<option value="<s:property value='caratId'/>"><s:property
-														value='caratName' /></option>
-											</s:iterator>
-										</select>
+										<label for="date">Date</label> <input name="modelBean.addedOn"
+											id="date" type="date" class="validate input-sm form-control"
+											value="<s:property value="modelBean.addedOn"/>"
+											required="required"> <i class="fa fa-calendar"
+											style="font-size: 22px; float: right; margin: -46px auto;"></i>
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-6 col-sm-12">
 									<div class="form-group m-all-15 ml-25">
 										<label for="activeStatus">Active Status</label> <select
-											class="custom-select custom-select-sm input-sm form-control"
-											id="activeStatus" name="categoryBean.activeStatus">
+											class="custom-select  input-sm form-control"
+											value='<s:property value="modelBean.activeStatus"/>'
+											id="activeStatus" name="modelBean.activeStatus">
 											<option selected>--Select from the list--</option>
 											<option value="Active">Active</option>
 											<option value="Inactive">Inactive</option>
 										</select>
 									</div>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-3 col-sm-12">
 									<div class="form-group mt-40 pull-right">
 										<button
 											class="btn btn-sm btn-success form-control form-btn-success"
@@ -90,7 +72,7 @@
 										</button>
 									</div>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-3 col-sm-12">
 									<div class="form-group mt-40 pull-left">
 										<button onclick="toggleTableContainer();"
 											class="btn btn-sm  form-control form-btn-purple"
@@ -111,35 +93,35 @@
 		<div class="row">
 			<div class="panel-group m-all-15">
 				<div class="panel panel-default form-panel-primary">
-					<div class="panel-heading">View Category Details</div>
+					<div class="panel-heading">View Model Details</div>
 					<div class="panel-body">
 						<table class="table table-bordered">
 							<thead>
 								<tr class="info">
 									<th>#</th>
-									<th>Category Code</th>
-									<th>Carat</th>
-									<th>Category Name</th>
-									<th>Active Status</th>
-									<th>Actions</th>
+									<th>MODEL CODE</th>
+									<th>MODEL NAME</th>
+									<th>DATE</th>
+									<th>ACTIVE STATUS</th>
+									<th>ACTIONS</th>
 								</tr>
 							</thead>
 							<tbody>
-								<s:if test="catList!=null && catList.size()>0">
-									<s:iterator value="catList" status="row">
+								<s:if test="modelList!=null && modelList.size()>0">
+									<s:iterator value="modelList" status="row">
 										<tr class="default">
 											<td><s:property value="#row.count" /></td>
-											<td><s:property value="categoryCode" /></td>
-											<td><s:property value="caratId.caratName" /></td>
-											<td><s:property value="categoryName" /></td>
+											<td><s:property value="modelCode" /></td>
+											<td><s:property value="modelName" /></td>
+											<td><s:property value="addedOn" /></td>
 											<td><s:property value="activeStatus" /></td>
 											<td><button class="btn-xs btn-link"
-													onclick="editCategory('<s:property value="categoryId"/>')">
+													onclick="editModel('<s:property value="modelId"/>')">
 													<span class="glyphicon glyphicon-edit"
 														style="font-size: 15px; text-align: center;"></span>
 												</button>
 												<button class="btn-xs btn-link"
-													onclick="deleteCategory('<s:property value="categoryId"/>')">
+													onclick="deleteModel('<s:property value="modelId"/>')">
 													<span class="glyphicon glyphicon-trash"
 														style="color: #f11c1c; font-size: 15px; text-align: center;"></span>
 												</button></td>
@@ -160,4 +142,17 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	function toggleTableContainer() {
+		$('#tableContainer').toggle();
+	}
+
+	function editModel(modelId) {
+		location.href = "editModel?modelBean.modelId=" + modelId;
+	}
+
+	function deleteModel(modelId) {
+		location.href = "deleteModel?modelBean.modelId=" + modelId;
+	}
+</script>
 </html>

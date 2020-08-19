@@ -50,7 +50,7 @@
 	</nav>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-12 col-sm-12">
 					<ul class="nav nav-tabs" style="font-size: 12px;">
 						<li class="nav-item"><a class="nav-link active primary"
 							href="goToTaxMaster">Taxes</a></li>

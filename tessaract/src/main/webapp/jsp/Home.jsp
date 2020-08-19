@@ -15,19 +15,6 @@
 <script type="text/javascript"
 	src="resources/js/dashboard/Home_Dashboard.js"></script>
 <style type="text/css">
-body {
-	margin: 0;
-	padding: 0;
-	/* background: rgb(196, 85, 42);
-	background: linear-gradient(90deg, rgba(196, 85, 42, 1) 10%,
-		rgba(195, 12, 157, 1) 100%); */
-	background-color: #f7f7f7;
-}
-
-.bar {
-	border-radius: 0px;
-}
-
 /* for dashboard */
 .layer_1 {
 	height: 50px;

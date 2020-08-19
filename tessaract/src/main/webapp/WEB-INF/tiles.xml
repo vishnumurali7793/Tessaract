@@ -32,5 +32,15 @@
 		<put-attribute name="title" value="Home" />
 		<put-attribute name="body" value="/jsp/Home.jsp" />
 	</definition>
+	
+	<definition name="goToProduct" extends="baseLayout">
+		<put-attribute name="title" value="Product" />
+		<put-attribute name="body" value="/jsp/items.jsp" />
+	</definition>
+	
+	<definition name="goToModel" extends="baseLayout">
+		<put-attribute name="title" value="Product" />
+		<put-attribute name="body" value="/jsp/models.jsp" />
+	</definition>
 
 </tiles-definitions>
