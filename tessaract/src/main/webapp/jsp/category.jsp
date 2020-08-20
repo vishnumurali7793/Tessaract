@@ -5,20 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>tessaract</title>
 </head>
-<script type="text/javascript">
-	function editCategory(catid) {
-		location.href = "editCategory?categoryBean.categoryId=" + catid;
-	}
-
-	function deleteCategory(catid) {
-		location.href = "deleteCategory?categoryBean.categoryId=" + catid;
-	}
-	function toggleTableContainer() {
-		$('#tableContainer').toggle();
-	}
-</script>
 <body>
 	<div class="container">
 		<div class="row">
@@ -160,4 +147,16 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	function editCategory(catid) {
+		location.href = "editCategory?categoryBean.categoryId=" + catid;
+	}
+
+	function deleteCategory(catid) {
+		location.href = "deleteCategory?categoryBean.categoryId=" + catid;
+	}
+	function toggleTableContainer() {
+		$('#tableContainer').toggle();
+	}
+</script>
 </html>

@@ -27,7 +27,7 @@
 						<li><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
 						<li><a href="goToModel">Model</a></li>
-						<li><a href="goToCarat">Carat</a></li>
+						<li><a href="goToCarat">Karat</a></li>
 						<li><a href="goToRate">Rate</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
 						<li><a href="goToVendor">Vendor</a></li>
@@ -57,7 +57,7 @@
 						<li class="nav-item"><a class="nav-link" href="goToCategory">Categories</a></li>
 						<li class="nav-item"><a class="nav-link" href="goToProduct">Products</a></li>
 						<li class="nav-item"><a class="nav-link" href="goToModel">Models</a>
-						<li class="nav-item"><a class="nav-link" href="goToCarat">Carats</a>
+						<li class="nav-item"><a class="nav-link" href="goToCarat">Karats</a>
 						<li class="nav-item"><a class="nav-link" href="goToRate">Rates</a>
 						<li class="nav-item"><a class="nav-link" href="goToCustomer">Customers</a>
 						<li class="nav-item"><a class="nav-link" href="goToVendor">Vendors</a>

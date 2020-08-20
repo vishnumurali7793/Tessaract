@@ -5,113 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- <script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/css/form-styles.css"> --%>
-<title>Tesseract</title>
 </head>
-<style type="text/css">
-body {
-	margin: 0;
-	padding: 0;
-}
-
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-td, th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
-}
-
-.bd-navbar {
-	min-height: 4rem;
-	background-color: #563d7c;
-	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0
-		rgba(0, 0, 0, .1);
-}
-
-#allign {
-	text-align: center;
-	font-weight: bold;
-}
-
-#tablecolor {
-	background-color: #563d7c;
-}
-
-.bar {
-	border-radius: 0px;
-}
-
-#accordion {
-	max-height: 100%;
-}
-
-.panel, .tax {
-	margin: 10px;
-}
-
-.tax {
-	justify-content: center;
-	align-items: center;
-}
-</style>
-<script type="text/javascript">
-	function deleteTax(taxid) {
-		location.href = "deleteTax?taxBean.taxId=" + taxid;
-	}
-
-	function toggleTableContainer() {
-		$('#tableContainer').toggle();
-	}
-</script>
 <body>
-	<%-- <nav class="navbar navbar-inverse bar">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="goToHome">Tesseract</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="goToHome">Home</a></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li class="active"><a href="goToTaxMaster">Tax Master</a></li>
-						<li><a href="goToCategory">Category</a></li>
-						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
-					</ul></li>
-				<li><a href="#">Page 2</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="logout"><span
-						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-			</ul>
-		</div>
-	</nav>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				<ul class="nav nav-tabs" style="font-size: 12px;">
-					<li class="nav-item"><a class="nav-link active primary" href="goToTaxMaster">Taxes</a></li>
-					<li class="nav-item"><a class="nav-link" href="goToCategory">Categories</a></li>
-					<li class="nav-item"><a class="nav-link" href="goToProduct">Products</a></li>
-					<li class="nav-item"><a class="nav-link" href="goToModel">Models</a>
-					<li class="nav-item"><a class="nav-link" href="goToCarat">Carats</a>
-					<li class="nav-item"><a class="nav-link" href="goToRate">Rates</a>
-					<li class="nav-item"><a class="nav-link" href="goToCustomer">Customers</a>
-					<li class="nav-item"><a class="nav-link" href="goToVendor">Vendors</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div> --%>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 mt-15">
@@ -149,9 +44,10 @@ td, th {
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group m-all-15">
-										<label for="datePicker">Date </label> <input name="taxBean.addedOn"
-											type="date" class="input-sm form-control"
-											required="required" id="datePicker">
+										<label for="datePicker">Date </label> <input
+											name="taxBean.addedOn" type="date"
+											class="input-sm form-control" required="required"
+											id="datePicker">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -230,6 +126,11 @@ td, th {
 										</tr>
 									</s:iterator>
 								</s:if>
+								<s:else>
+									<tr>
+										<td colspan="8">-- No Data Found --</td>
+									</tr>
+								</s:else>
 							</tbody>
 						</table>
 					</div>
@@ -238,4 +139,13 @@ td, th {
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	function deleteTax(taxid) {
+		location.href = "deleteTax?taxBean.taxId=" + taxid;
+	}
+
+	function toggleTableContainer() {
+		$('#tableContainer').toggle();
+	}
+</script>
 </html>
