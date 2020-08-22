@@ -149,7 +149,7 @@
 		</action>
 		
 		<action name="goToVendor" class="org.tesseract.action.RedirAction" method="goToVendor">
-			<result name="success">/jsp/vendor.jsp</result>
+			<result name="success" type="tiles">goToVendor</result>
 		</action>
 		
 		<action name="saveVendor" class="org.tesseract.action.MasterAction" method="saveVendor">
@@ -162,7 +162,7 @@
 		</action>
 		
 		<action name="editVendor" class="org.tesseract.action.MasterAction" method="editVendor">
-			<result name="success">/jsp/vendor.jsp</result>
+			<result name="success" type="tiles">goToVendor</result>
 		</action>
 		
 		<action name="goToPurchase" class="org.tesseract.action.RedirAction" method="goToPurchase">

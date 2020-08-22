@@ -92,7 +92,7 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group m-all-15 ml-20 mr-20">
-										<label for="event">Event</label></br> <input
+										<label for="event">Event</label><input
 											name="customerBean.event" type="text"
 											class="validate input-sm form-control" id="event"
 											value="<s:property value="customerBean.event"/>"
@@ -101,7 +101,7 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group m-all-15 ml-10 mr-30">
-										<label for="eventDate">Event Date</label></br> <input
+										<label for="eventDate">Event Date</label><input
 											id="eventDate" name="customerBean.eventDate" type="date"
 											class="validate input-sm form-control"
 											value="<s:property value="customerBean.eventDate"/>"
@@ -113,7 +113,7 @@
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-group m-all-15 ml-30 mr-10">
-										<label for="customerAddedOn">Added On</label></br> <input
+										<label for="customerAddedOn">Added On</label><input
 											name="customerBean.addedOn" type="date"
 											class="validate input-sm form-control" id="customerAddedOn"
 											value="<s:property value="customerBean.addedOn"/>"

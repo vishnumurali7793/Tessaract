@@ -57,5 +57,10 @@
 		<put-attribute name="title" value="Customer" />
 		<put-attribute name="body" value="/jsp/customer.jsp" />
 	</definition>
+	
+	<definition name="goToVendor" extends="baseLayout">
+		<put-attribute name="title" value="Vendor" />
+		<put-attribute name="body" value="/jsp/vendors.jsp" />
+	</definition>
 
 </tiles-definitions>

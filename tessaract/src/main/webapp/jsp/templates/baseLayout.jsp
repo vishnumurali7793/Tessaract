@@ -52,15 +52,14 @@
 			<div class="row">
 				<div class="col-md-12 col-sm-12">
 					<ul class="nav nav-tabs" style="font-size: 12px;">
-						<li class="nav-item"><a class="nav-link active primary"
-							href="goToTaxMaster">Taxes</a></li>
-						<li class="nav-item"><a class="nav-link" href="goToCategory">Categories</a></li>
-						<li class="nav-item"><a class="nav-link" href="goToProduct">Products</a></li>
-						<li class="nav-item"><a class="nav-link" href="goToModel">Models</a>
-						<li class="nav-item"><a class="nav-link" href="goToCarat">Karats</a>
-						<li class="nav-item"><a class="nav-link" href="goToRate">Rates</a>
-						<li class="nav-item"><a class="nav-link" href="goToCustomer">Customers</a>
-						<li class="nav-item"><a class="nav-link" href="goToVendor">Vendors</a>
+						<li class="nav-item"><a class="nav-link" href="goToTaxMaster" id="tax">Taxes</a></li>
+						<li class="nav-item"><a class="nav-link" href="goToCategory" id="category">Categories</a></li>
+						<li class="nav-item"><a class="nav-link" href="goToProduct" id="product">Products</a></li>
+						<li class="nav-item"><a class="nav-link" href="goToModel" id="model">Models</a>
+						<li class="nav-item"><a class="nav-link" href="goToCarat" id="karat">Karats</a>
+						<li class="nav-item"><a class="nav-link" href="goToRate" id="rate">Rates</a>
+						<li class="nav-item"><a class="nav-link" href="goToCustomer" id="customer">Customers</a>
+						<li class="nav-item"><a class="nav-link" href="goToVendor" id="vendor">Vendors</a>
 						</li>
 					</ul>
 				</div>
@@ -74,4 +73,10 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var subtab = '<s:property value = "#session.subtab"/>';
+		$('#' + subtab).addClass('active primary');
+	});
+</script>
 </html>
