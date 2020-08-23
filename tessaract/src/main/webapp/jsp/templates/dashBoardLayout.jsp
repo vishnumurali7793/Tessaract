@@ -27,13 +27,13 @@
 						<li><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
 						<li><a href="goToModel">Model</a></li>
-						<li><a href="goToCarat">Carat</a></li>
+						<li><a href="goToCarat">Karat</a></li>
 						<li><a href="goToRate">Rate</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
 						<li><a href="goToVendor">Vendor</a></li>
 					</ul></li>
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Transanctions <span
+					data-toggle="dropdown" href="#">Transactions <span
 						class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="goToPurchase">Purchase</a></li>

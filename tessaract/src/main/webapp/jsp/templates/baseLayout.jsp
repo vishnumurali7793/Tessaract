@@ -33,7 +33,7 @@
 						<li><a href="goToVendor">Vendor</a></li>
 					</ul></li>
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Transanctions <span
+					data-toggle="dropdown" href="#">Transactions <span
 						class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="goToPurchase">Purchase</a></li>
