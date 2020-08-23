@@ -13,7 +13,7 @@
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 <body>
-	<nav class="navbar navbar-inverse bar">
+	<nav class="navbar navbar-inverse bar" style="border-radius: 0px;">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="goToHome">Tesseract</a>
