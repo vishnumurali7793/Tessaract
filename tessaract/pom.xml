@@ -8,6 +8,9 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>tessaract Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<properties>
+		<java-version>11</java-version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -173,6 +176,20 @@
 					<server>TomcatServer</server>
 					<path>/tessaract</path>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.0</version>
 			</plugin>
 		</plugins>
 	</build>
