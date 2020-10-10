@@ -4,71 +4,91 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="resources/jquery/jquery-3.5.0.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="resources/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/spinkit.css">
+<script type="text/javascript"
+	src="resources/bootstrap/js/bootstrap.min.js"></script>
 <title>Home Page</title>
 <style type="text/css">
-body {
-	background-color: #ebebeb;
-	margin: 0px;
-	padding: 0px;
+.spinner {
+  margin: 100px auto;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px;
 }
 
-#myProgress {
-	width: 100%;
-	background-color: grey;azimuth: 
+.spinner > div {
+  background-color: #333;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
 }
 
-#myBar {
-	width: 1%;
-	height: 30px;
-	background-color: #3da5ff;
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
 }
 
-h3 {
-	font-family: serif;
-	font-size: 40px;
-	color: #707070;
-	margin-left: 10px;
-	margin-top: 15px;
- 	padding-top: 15px;
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
 }
 
-#header {
-	height: 70px;
-	background-color: #fcfcfc;
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
 }
-#contentpane{
-height: 10cm;
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
 }
+
+.spinner .rec{
+	background-color: white;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% { 
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+
 </style>
 </head>
-<body>
-	<div id="header">
-		<h3>Tesseract</h3>
-	</div>
-	<div id="contentpane"></div>
-	<div class="container">
-		<div id="myProgress">
-			<div id="myBar"></div>
+<body style="background-color: #1abc9c;">
+	<div class="row">
+		<div class="spinner">
+			<div class="rect1 rec"></div>
+			<div class="rect2 rec"></div>
+			<div class="rect3 rec"></div>
+			<div class="rect4 rec"></div>
+			<div class="rect5 rec"></div>
 		</div>
 	</div>
 </body>
 <script type="text/javascript">
 	$(document).ready(function move() {
-		var elem = document.getElementById("myBar");
-		var width = 1;
-		var id = setInterval(frame, 10);
-		function frame() {
-			if (width >= 100) {
-				clearInterval(id);
-				location.href = "redir";
-			} else {
-				width++;
-				elem.style.width = width + '%';
-			}
-		}
-	})
+		setTimeout(function() {
+			location.href = 'redir';
+		}, 2000);
+	});
 </script>
 </html>
