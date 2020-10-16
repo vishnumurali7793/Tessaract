@@ -62,5 +62,25 @@
 		<put-attribute name="title" value="Vendor" />
 		<put-attribute name="body" value="/jsp/vendors.jsp" />
 	</definition>
+	
+	<definition name="goToPurchase" extends="baseLayout">
+		<put-attribute name="title" value="Purchase" />
+		<put-attribute name="body" value="/jsp/purchase.jsp" />
+	</definition>
+	
+	<definition name="goToPurchaseReturn" extends="baseLayout">
+		<put-attribute name="title" value="Purchase Return" />
+		<put-attribute name="body" value="/jsp/PurchaseReturn.jsp" />
+	</definition>
+	
+	<definition name="goToSales" extends="baseLayout">
+		<put-attribute name="title" value="Sales" />
+		<put-attribute name="body" value="/jsp/salesBase.jsp" />
+	</definition>
+	
+	<definition name="goToSalesReturn" extends="baseLayout">
+		<put-attribute name="title" value="Sales Return" />
+		<put-attribute name="body" value="/jsp/salesReturn.jsp" />
+	</definition>
 
 </tiles-definitions>

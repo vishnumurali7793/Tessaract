@@ -166,7 +166,7 @@
 		</action>
 		
 		<action name="goToPurchase" class="org.tesseract.action.RedirAction" method="goToPurchase">
-			<result name="success">/jsp/purchase.jsp</result>
+			<result name="success" type="tiles">goToPurchase</result>
 		</action>
 		
 		<action name="getProductListForPurchase" class="org.tesseract.action.TransactionAction" method="getProductListForPurchase">
@@ -214,7 +214,7 @@
 		<!-- purchase page finished -->
 		<action name="goToSales"
 			class="org.tesseract.action.RedirAction" method="goToSales">
-			<result name="success">/jsp/salesBase.jsp</result>
+			<result name="success" type="tiles">goToSales</result>
 		</action>
 		<action name="getmodalForSales"
 			class="org.tesseract.action.TransactionAction"
@@ -269,10 +269,9 @@
 		<!-- sales page finished -->
 
 		<!-- sales return page -->
-		<action name="goToSalesReturn"
-			class="org.tesseract.action.TransactionAction"
-			method="goToSalesReturn">
-			<result name="success">/jsp/salesReturn.jsp</result>
+		<action name="goToSalesReturn" class="org.tesseract.action.TransactionAction"
+				method="goToSalesReturn">
+			<result name="success" type="tiles">goToSalesReturn</result>
 		</action>
 		<action name="editsalesReturnDetails"
 			class="org.tesseract.action.TransactionAction"
@@ -303,10 +302,9 @@
 		<!-- sales return page completed -->
 
 		<!-- purchase return page -->
-		<action name="goToPurchaseReturn"
-			class="org.tesseract.action.TransactionAction"
-			method="getPurchaseListForPurchaseReturn">
-			<result name="success">/jsp/PurchaseReturn.jsp</result>
+		<action name="goToPurchaseReturn" class="org.tesseract.action.TransactionAction"
+				method="getPurchaseListForPurchaseReturn">
+			<result name="success" type="tiles">goToPurchaseReturn</result>
 		</action>
 		<action name="getPurchaseditemByBill"
 			class="org.tesseract.action.TransactionAction"

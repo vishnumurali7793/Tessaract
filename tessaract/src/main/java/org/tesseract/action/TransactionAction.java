@@ -8,8 +8,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
+import org.apache.struts2.interceptor.SessionAware;
 import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
@@ -30,8 +37,11 @@ import org.tesseract.persistance.TransactionHibernateDao;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class TransactionAction extends ActionSupport {
+public class TransactionAction extends ActionSupport implements ServletRequestAware, ServletResponseAware, SessionAware {
 	private static final long serialVersionUID = 1L;
+	private Map<String, Object> session;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
 	private TransactionHibernateDao transHibernateDao = new TransactionHibernateDao();
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 	private PurchaseBean purchaseBean;
@@ -321,6 +331,8 @@ public class TransactionAction extends ActionSupport {
 	}
 
 	public String goToSalesReturn() {
+		session.put("tab", "transactions");
+		session.put("subtab", "salesReturn");
 		try {
 			salesBaseList = transHibernateDao.searchByBillno(billno);
 			for(SalesBase base:salesBaseList){
@@ -423,6 +435,8 @@ public class TransactionAction extends ActionSupport {
 
 	// purchase return
 	public String getPurchaseListForPurchaseReturn() {
+		session.put("tab", "transactions");
+		session.put("subtab", "purchaseReturn");
 		try {
 			purchases = transHibernateDao.searchByPurchaseBillno(billno);
 		} catch (Exception e) {
@@ -717,6 +731,18 @@ public class TransactionAction extends ActionSupport {
 
 	public void setPurchaseReturnItems(List<PurchaseReturnScreenBean> purchaseReturnItems) {
 		this.purchaseReturnItems = purchaseReturnItems;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
 	}
 
 }

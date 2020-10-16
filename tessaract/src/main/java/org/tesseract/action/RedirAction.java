@@ -50,12 +50,14 @@ public class RedirAction extends ActionSupport implements ServletRequestAware, S
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 
 	public String goToTaxMaster() {
+		session.put("tab", "master");
 		session.put("subtab", "tax");
 		taxList = masterHibernateDao.getTaxList();
 		return SUCCESS;
 	}
 	
 	public String goToCategory() {
+		session.put("tab", "master");
 		session.put("subtab", "category");
 		catList = masterHibernateDao.getCategryList();
 		caratList = masterHibernateDao.getCaratList();
@@ -63,6 +65,7 @@ public class RedirAction extends ActionSupport implements ServletRequestAware, S
 	}
 	
 	public String goToProduct() {
+		session.put("tab", "master");
 		session.put("subtab", "product");
 		prodList = masterHibernateDao.getProductList();
 		catList = masterHibernateDao.getCategryList();
@@ -71,18 +74,21 @@ public class RedirAction extends ActionSupport implements ServletRequestAware, S
 	}
 	
 	public String goToModel() {
+		session.put("tab", "master");
 		session.put("subtab", "model");
 		modelList = masterHibernateDao.getModelList();
 		return SUCCESS;
 	}
 	
 	public String goToCarat() {
+		session.put("tab", "master");
 		session.put("subtab", "karat");
 		caratList = masterHibernateDao.getCaratList();
 		return SUCCESS;
 	}
 	
 	public String goToRate() {
+		session.put("tab", "master");
 		session.put("subtab", "rate");
 		rateList = masterHibernateDao.getRateList();
 		catList = masterHibernateDao.getCategryList();
@@ -91,23 +97,29 @@ public class RedirAction extends ActionSupport implements ServletRequestAware, S
 	}
 	
 	public String goToCustomer() {
+		session.put("tab", "master");
 		session.put("subtab", "customer");
 		customerList = masterHibernateDao.getCustomerList();
 		return SUCCESS;
 	}
 	
 	public String goToVendor() {
+		session.put("tab", "master");
 		session.put("subtab", "vendor");
 		vendorList = masterHibernateDao.getVendorList();
 		return SUCCESS;
 	}
 	
 	public String goToPurchase() {
+		session.put("tab", "transactions");
+		session.put("subtab", "purchase");
 		purchaseList = masterHibernateDao.getPurchaseList();
 		return SUCCESS;
 	}
 	
 	public String goToSales() {
+		session.put("tab", "transactions");
+		session.put("subtab", "sales");
 		salesBaseList = masterHibernateDao.getSalesList();
 		return SUCCESS;
 	}
@@ -214,23 +226,15 @@ public class RedirAction extends ActionSupport implements ServletRequestAware, S
 	}
 
 	public void setSession(Map<String, Object> session) {
-		// TODO Auto-generated method stub
 		this.session = session;
-		
 	}
 
 	public void setServletResponse(HttpServletResponse response) {
-		// TODO Auto-generated method stub
 		this.response = response;
-		
 	}
 
 	public void setServletRequest(HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		this.request = request;
-		
 	}
-	
-	
 
 }

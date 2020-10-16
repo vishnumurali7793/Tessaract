@@ -52,15 +52,22 @@
 			<div class="row">
 				<div class="col-md-12 col-sm-12">
 					<ul class="nav nav-tabs" style="font-size: 12px;">
-						<li class="nav-item"><a class="nav-link" href="goToTaxMaster" id="tax">Taxes</a></li>
-						<li class="nav-item"><a class="nav-link" href="goToCategory" id="category">Categories</a></li>
-						<li class="nav-item"><a class="nav-link" href="goToProduct" id="product">Products</a></li>
-						<li class="nav-item"><a class="nav-link" href="goToModel" id="model">Models</a>
-						<li class="nav-item"><a class="nav-link" href="goToCarat" id="karat">Karats</a>
-						<li class="nav-item"><a class="nav-link" href="goToRate" id="rate">Rates</a>
-						<li class="nav-item"><a class="nav-link" href="goToCustomer" id="customer">Customers</a>
-						<li class="nav-item"><a class="nav-link" href="goToVendor" id="vendor">Vendors</a>
-						</li>
+						<s:if test='#session.tab == "master"'>
+							<li class="nav-item"><a class="nav-link" href="goToTaxMaster" id="tax">Taxes</a></li>
+							<li class="nav-item"><a class="nav-link" href="goToCategory" id="category">Categories</a></li>
+							<li class="nav-item"><a class="nav-link" href="goToProduct" id="product">Products</a></li>
+							<li class="nav-item"><a class="nav-link" href="goToModel" id="model">Models</a>
+							<li class="nav-item"><a class="nav-link" href="goToCarat" id="karat">Karats</a>
+							<li class="nav-item"><a class="nav-link" href="goToRate" id="rate">Rates</a>
+							<li class="nav-item"><a class="nav-link" href="goToCustomer" id="customer">Customers</a>
+							<li class="nav-item"><a class="nav-link" href="goToVendor" id="vendor">Vendors</a></li>
+						</s:if>
+						<s:elseif test='#session.tab == "transactions"'>
+							<li class="nav-item"><a class="nav-link" href="goToPurchase" id="purchase">Purchase</a></li>
+							<li class="nav-item"><a class="nav-link" href="goToPurchaseReturn" id="purchaseReturn">Purchase Return</a></li>
+							<li class="nav-item"><a class="nav-link" href="goToSales" id="sales">Sales</a></li>
+							<li class="nav-item"><a class="nav-link" href="goToSalesReturn" id="salesReturn">Sales Return</a></li>
+						</s:elseif>
 					</ul>
 				</div>
 			</div>
@@ -77,6 +84,7 @@
 	$(document).ready(function() {
 		var subtab = '<s:property value = "#session.subtab"/>';
 		$('#' + subtab).addClass('active primary');
+		$('.dropdown-toggle').dropdown();
 	});
 </script>
 </html>
