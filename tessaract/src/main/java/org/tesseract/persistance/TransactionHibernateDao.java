@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
 import org.tesseract.entities.PurchaseBean;
 import org.tesseract.entities.PurchaseReturnAmountBean;
@@ -325,7 +326,6 @@ public class TransactionHibernateDao {
 	}
 
 	// get productamttot
-	@SuppressWarnings("unchecked")
 	public SalesAmountBean getsalestotamt(Integer salesdetid) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -701,7 +701,6 @@ public class TransactionHibernateDao {
 	}
 
 	// get productamttot
-	@SuppressWarnings("unchecked")
 	public SalesReturnAmountBean getsalesRettotamt(Integer salesretdetid) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -750,6 +749,43 @@ public class TransactionHibernateDao {
 					.setParameter("rateid", rateid).uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Collection<Object> getStateSetupAutoComplete(String stateCodeSTR) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		String queryString = "SELECT stateName, stateCodeAlpha FROM StateSetup WHERE "
+						   + "stateCodeAlpha LIKE '%" + stateCodeSTR + "%' OR stateCodeNumeric LIKE '%" + stateCodeSTR + "%' "
+						   + "OR stateName LIKE '%" + stateCodeSTR + "%'";
+		try {
+			return session.createQuery(queryString).list();
+		} catch (Exception e) {
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Collection<ProductBean> getItemAutoCompleteForSales(String itemNameSTR) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		String queryString = "SELECT CONCAT(productCode, '-', productName, '-', category.categoryName), productId FROM ProductBean WHERE "
+						   + "productCode LIKE '%" + itemNameSTR + "%' OR productName LIKE '%" + itemNameSTR + "%' ";
+		try {
+			return session.createQuery(queryString).list();
+		} catch (Exception e) {
 			return null;
 		} finally {
 			session.close();

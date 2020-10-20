@@ -3,7 +3,6 @@ package org.tesseract.action;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -37,6 +36,11 @@ import org.tesseract.persistance.TransactionHibernateDao;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class TransactionAction extends ActionSupport implements ServletRequestAware, ServletResponseAware, SessionAware {
 	private static final long serialVersionUID = 1L;
 	private Map<String, Object> session;
@@ -64,6 +68,10 @@ public class TransactionAction extends ActionSupport implements ServletRequestAw
 	private List<SalesReturnDetailsBean> salretDetList;
 	private SalesReturnAmountBean salesretamtbean;
 	private List<PurchaseBean> purchases;
+	
+	private String autoCompleteSTR;
+	private Collection<Object> stateList;
+	private Collection<ProductBean> itemList;
 	/*private PurchaseReturnScreenBean purchaseReturnScreenBean;
 	private List<PurchaseReturnScreenBean> PurchaseRetlist;
 	private PurchaseReturnAmountBean purchaseRetAmtBean;*/
@@ -121,6 +129,8 @@ public class TransactionAction extends ActionSupport implements ServletRequestAw
 	}
 
 	public String editPurchaseDetails() {
+		session.put("tab", "transactions");
+		session.put("subtab", "purchase");
 		if (purchaseBean != null && purchaseBean.getPurchaseId() != null) {
 			prodDetList = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
 			Double rate=0.00;
@@ -528,6 +538,22 @@ public class TransactionAction extends ActionSupport implements ServletRequestAw
 			BeanUtils.copyProperties(purchaseRetamt, purchaseReturnAmount);
 			//purchaseRetamt.setPurchaseReturnAmountId(null);
 			transHibernateDao.savePurReturnNetAmt(purchaseRetamt);
+		}
+		return SUCCESS;
+	}
+	
+	public String getStateSetupList() {
+		if(!autoCompleteSTR.isEmpty() && null != autoCompleteSTR) {
+			stateList = new ArrayList<>();
+			stateList = transHibernateDao.getStateSetupAutoComplete(autoCompleteSTR);
+		}
+		return SUCCESS;
+	}
+	
+	public String getItemAutoCompleteForSales() {
+		if(!autoCompleteSTR.isEmpty() && null != autoCompleteSTR) {
+			itemList = new ArrayList<>();
+			itemList = transHibernateDao.getItemAutoCompleteForSales(autoCompleteSTR);
 		}
 		return SUCCESS;
 	}

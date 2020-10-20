@@ -162,3 +162,96 @@ body {
 	border: 0.5px solid #7516b0;
 	color: #fbfbfb;
 }
+
+.text-10 {
+	font-size: 10px;
+}
+
+.text-20 {
+	font-size: 20px;
+}
+
+.text-30 {
+	font-size: 30px;
+}
+
+/*********************************************************/
+
+.form-btn-large{
+	width: 10%;
+}
+
+.scrollable{
+	height: 20em;
+	overflow-y: auto;
+	overflow-x: hidden; 
+}
+
+
+
+table.borderless td, table.borderless th {
+    border: none !important;
+}
+
+.items_table {
+	outline: 0;
+	border-width: 0 0 1px;
+	border-color: #0169f3;
+	background-color: #f0f6fe;
+}
+
+.items_table:focus {
+	border-color: #ff3075;
+}
+
+.capsule{
+	border-radius: 15px;
+	background-color: #0a7fff;
+	color: #f5faff;
+	font-size: 12px;
+	width: 10%;
+}
+
+.capsule:hover {
+	background-color: #005cc0;
+}
+
+.mandatory {
+	color: red;
+}
+
+.icon-small {
+	font-size: 10px;
+}
+
+.font-30{
+	font-size: 30px;
+}
+
+.font-25{
+	font-size: 25px;
+}
+
+.font-20{
+	font-size: 20px;
+}
+
+.font-10{
+	font-size: 10px;
+}
+
+.font-8{
+	font-size: 8px;
+}
+
+.font-bold{
+	font-weight: bold;
+}
+
+.font-italic{
+	font-style: italic;
+}
+
+.font-blue {
+	color: #0169f3;
+}

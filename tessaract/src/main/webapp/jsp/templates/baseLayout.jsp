@@ -6,10 +6,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="${pageContext.request.contextPath}/resources/icons/favicon.ico" rel="icon" type="image/x-icon">
 <script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/css/form-styles.css">
+<link href="resources/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="resources/js/datetimepicker/bootstrap-datetimepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="resources/css/datetimepicker/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.min.css">
+<script type="text/javascript" src="resources/jquery-ui/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.structure.css">
+<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.theme.css">
+<script type="text/javascript" src="resources/js/transactions-common-js/transactions-common.js"></script>
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 <body>

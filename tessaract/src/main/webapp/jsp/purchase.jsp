@@ -6,17 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="resources/jquery/jquery-3.5.0.js"></script>
-<script type="text/javascript" src="resources/jquery-ui/jquery-ui.js"></script>
-<script type="text/javascript"
-	src="resources/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/js/purchase/Purchase.js"></script>
+<%-- <script type="text/javascript" src="resources/jquery/jquery-3.5.0.js"></script> --%>
+<%-- <script type="text/javascript" src="resources/jquery-ui/jquery-ui.js"></script> --%>
+<%-- <script type="text/javascript" --%>
+<%-- 	src="resources/bootstrap/js/bootstrap.min.js"></script> --%>
 
-<link rel="stylesheet" type="text/css"
-	href="resources/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.structure.css">
-<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.theme.css">
-<title>tessaract</title>
+<!-- <link rel="stylesheet" type="text/css" -->
+<!-- 	href="resources/bootstrap/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.structure.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.theme.css"> -->
+<!-- <title>tessaract</title> -->
 </head>
 <style type="text/css">
 body {
@@ -145,8 +146,8 @@ td, th {
 		</div>
 	</nav> --%>
 	<div class="container-fluid">
-		<div class="row">
-			<div class="panel">
+		<%--<div class="row">
+			 <div class="panel">
 				<h2>PURCHASE</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
@@ -221,7 +222,7 @@ td, th {
 					</div>
 				</div>
 			</div>
-			<%-- <div class="panel panel-primary">
+			<div class="panel panel-primary">
 					<div class="panel-heading" role="tab" id="collapse-two">
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion"
@@ -271,12 +272,72 @@ td, th {
 								</table>
 							</div>
 						</div>
-					</div> --%>
+					</div>
+		</div> --%>
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-15 ml-15">
+				<button class="btn btn-sm form-btn-purple pull-right mr-30" onclick="addNewPurchaseBill();">Add New Purchase&nbsp;
+					<i class="fa fa-plus text-20" aria-hidden="true"></i>
+				</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 ml-15">
+				<div class="panel-group m-all-15">
+					<div class="panel panel-default form-panel-primary">
+						<div class="panel-heading">Purchase Details</div>
+						<div class="panel-body">
+							<table class="table mt-15">
+								<thead>
+									<tr class="info">
+										<th>#</th>
+										<th>INVOICE NO & DATE</th>
+										<th>BILL NO & DATE</th>
+										<th>VENDOR DETAILS</th>
+										<th>GST CODE</th>
+										<th>RATE</th>
+										<th>ACTIONS</th>
+									</tr>
+								</thead>
+								<!-- ***list name from redirectaction*** -->
+								<s:if test="purchaseList!=null && purchaseList.size()>0">
+	
+									<s:iterator value="purchaseList" status="row">
+										<tr class="default">
+											<td><s:property value="#row.count" /></td>
+											<td><s:property value="invoice" />&</br> <s:property
+													value="invoiceDate" /></td>
+											<td><s:property value="purBillNo" />&</br> <s:property
+													value="purchaseDate" /></td>
+											<td><s:property value="vendor.vendorCode" /></br> <s:property
+													value="vendor.vendorName" />, <s:property
+													value="vendor.address1" />, <s:property
+													value="vendor.contact" />, <s:property value="vendor.pin" />
+											</td>
+											<td><s:property value="gstCode" /></td>
+											<td>GOLD :<s:property value="goldRate" /></br> SILVER :<s:property
+													value="silverRate" /></br> PLATINUM :<s:property
+													value="platinumRate" />
+											</td>
+											<td><a
+												href="editPurchaseDetails?purchaseBean.purchaseId=<s:property value="purchaseId" />"
+												src="tessaract/src/main/webapp/images/edit.png">EDIT</a></td>
+	
+	
+										</tr>
+									</s:iterator>
+	
+	
+								</s:if>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	</div>
 	<div class="modal fade" id="productModal" role="dialog">
-		<div class="modal-dialog modal-lg modal-xl">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
 				<div class="modal-header" style="background-color:  #581845;">
 					<button type="button" class="close" data-dismiss="modal"

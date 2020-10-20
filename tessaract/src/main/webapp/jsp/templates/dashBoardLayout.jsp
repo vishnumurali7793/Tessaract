@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="${pageContext.request.contextPath}/resources/icons/favicon.ico" rel="icon" type="image/x-icon">
 <script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
