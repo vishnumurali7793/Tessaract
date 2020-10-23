@@ -15,19 +15,6 @@
 <script type="text/javascript"
 	src="resources/js/dashboard/Home_Dashboard.js"></script>
 <style type="text/css">
-body {
-	margin: 0;
-	padding: 0;
-	/* background: rgb(196, 85, 42);
-	background: linear-gradient(90deg, rgba(196, 85, 42, 1) 10%,
-		rgba(195, 12, 157, 1) 100%); */
-	background-color: #f7f7f7;
-}
-
-.bar {
-	border-radius: 0px;
-}
-
 /* for dashboard */
 .layer_1 {
 	height: 50px;
@@ -87,7 +74,7 @@ body {
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-inverse bar">
+	<!-- <nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="goToHome">Tesseract</a>
@@ -105,8 +92,6 @@ body {
 						<li><a href="goToRate">Rate</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
 						<li><a href="goToVendor">Vendor</a></li>
-						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Transanctions <span
@@ -123,7 +108,7 @@ body {
 						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
-	</nav>
+	</nav> -->
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-9">

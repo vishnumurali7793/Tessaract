@@ -18,13 +18,13 @@
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost/tesseract</property>
         <property name="connection.username">root</property>
-        <property name="connection.password"></property>
+        <property name="connection.password">pass</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">3</property>
 
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
         <!-- Disable the second-level cache  -->
         <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
@@ -33,8 +33,8 @@
         <property name="show_sql">true</property>
 
         <!-- Drop and re-create the database schema on startup -->
-<!--         <property name="hbm2ddl.auto">update</property> -->
-        <property name="javax.persistence.schema-generation.database.action">update</property>
+        <property name="hbm2ddl.auto">update</property>
+<!--         <property name="javax.persistence.schema-generation.database.action">update</property> -->
 
         <!-- Names the annotated entity class -->
         <mapping class="org.tesseract.entities.LoginBean"/>
@@ -50,7 +50,7 @@
         <mapping class="org.tesseract.entities.PurchaseScreenBean"/>
         <mapping class="org.tesseract.entities.PurchaseAmountBean"/>
         <mapping class="org.tesseract.entities.StockBean"/>
-         <mapping class="org.tesseract.entities.StockDetails"/>
+        <mapping class="org.tesseract.entities.StockDetails"/>
         <mapping class="org.tesseract.entities.SalesBase"/>
         <mapping class="org.tesseract.entities.SalesDetailsBean"/>
         <mapping class="org.tesseract.entities.SalesAmountBean"/>
@@ -58,6 +58,7 @@
         <mapping class="org.tesseract.entities.SalesReturnAmountBean"/>
         <mapping class="org.tesseract.entities.PurchaseReturnScreenBean"/>
         <mapping class="org.tesseract.entities.PurchaseReturnAmountBean"/>
+        <mapping class="org.tesseract.entities.StateSetup"/>
 <!--         <mapping class="com.happy.entities.AccountHeadBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesProductMappingBean"/> -->

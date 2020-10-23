@@ -3,13 +3,19 @@ package org.tesseract.action;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
+import org.apache.struts2.interceptor.SessionAware;
 import org.tesseract.entities.CustomerBean;
 import org.tesseract.entities.ProductBean;
 import org.tesseract.entities.PurchaseAmountBean;
@@ -30,8 +36,16 @@ import org.tesseract.persistance.TransactionHibernateDao;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class TransactionAction extends ActionSupport {
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class TransactionAction extends ActionSupport implements ServletRequestAware, ServletResponseAware, SessionAware {
 	private static final long serialVersionUID = 1L;
+	private Map<String, Object> session;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
 	private TransactionHibernateDao transHibernateDao = new TransactionHibernateDao();
 	private MasterHibernateDao masterHibernateDao = new MasterHibernateDao();
 	private PurchaseBean purchaseBean;
@@ -54,6 +68,10 @@ public class TransactionAction extends ActionSupport {
 	private List<SalesReturnDetailsBean> salretDetList;
 	private SalesReturnAmountBean salesretamtbean;
 	private List<PurchaseBean> purchases;
+	
+	private String autoCompleteSTR;
+	private Collection<Object> stateList;
+	private Collection<ProductBean> itemList;
 	/*private PurchaseReturnScreenBean purchaseReturnScreenBean;
 	private List<PurchaseReturnScreenBean> PurchaseRetlist;
 	private PurchaseReturnAmountBean purchaseRetAmtBean;*/
@@ -111,6 +129,8 @@ public class TransactionAction extends ActionSupport {
 	}
 
 	public String editPurchaseDetails() {
+		session.put("tab", "transactions");
+		session.put("subtab", "purchase");
 		if (purchaseBean != null && purchaseBean.getPurchaseId() != null) {
 			prodDetList = transHibernateDao.getProductDetailsList(purchaseBean.getPurchaseId());
 			Double rate=0.00;
@@ -321,6 +341,8 @@ public class TransactionAction extends ActionSupport {
 	}
 
 	public String goToSalesReturn() {
+		session.put("tab", "transactions");
+		session.put("subtab", "salesReturn");
 		try {
 			salesBaseList = transHibernateDao.searchByBillno(billno);
 			for(SalesBase base:salesBaseList){
@@ -423,6 +445,8 @@ public class TransactionAction extends ActionSupport {
 
 	// purchase return
 	public String getPurchaseListForPurchaseReturn() {
+		session.put("tab", "transactions");
+		session.put("subtab", "purchaseReturn");
 		try {
 			purchases = transHibernateDao.searchByPurchaseBillno(billno);
 		} catch (Exception e) {
@@ -514,6 +538,22 @@ public class TransactionAction extends ActionSupport {
 			BeanUtils.copyProperties(purchaseRetamt, purchaseReturnAmount);
 			//purchaseRetamt.setPurchaseReturnAmountId(null);
 			transHibernateDao.savePurReturnNetAmt(purchaseRetamt);
+		}
+		return SUCCESS;
+	}
+	
+	public String getStateSetupList() {
+		if(!autoCompleteSTR.isEmpty() && null != autoCompleteSTR) {
+			stateList = new ArrayList<>();
+			stateList = transHibernateDao.getStateSetupAutoComplete(autoCompleteSTR);
+		}
+		return SUCCESS;
+	}
+	
+	public String getItemAutoCompleteForSales() {
+		if(!autoCompleteSTR.isEmpty() && null != autoCompleteSTR) {
+			itemList = new ArrayList<>();
+			itemList = transHibernateDao.getItemAutoCompleteForSales(autoCompleteSTR);
 		}
 		return SUCCESS;
 	}
@@ -717,6 +757,18 @@ public class TransactionAction extends ActionSupport {
 
 	public void setPurchaseReturnItems(List<PurchaseReturnScreenBean> purchaseReturnItems) {
 		this.purchaseReturnItems = purchaseReturnItems;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
 	}
 
 }

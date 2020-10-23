@@ -1,215 +1,140 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
-<title>tessaract</title>
 </head>
-<style type="text/css">
-body {
-	margin: 0;
-	padding: 0;
-}
-
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-td, th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
-}
-
-.bd-navbar {
-	min-height: 4rem;
-	background-color: #563d7c;
-	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0
-		rgba(0, 0, 0, .1);
-}
-
-#allign {
-	text-align: center;
-	font-weight: bold;
-}
-
-#tablecolor {
-	background-color: #563d7c;
-}
-
-.bar {
-	border-radius: 0px;
-}
-
-#accordion {
-	max-height: 100%;
-}
-
-.panel, .tax {
-	margin: 10px;
-}
-
-/* #submitButton {
-	float: right;
-} */
-
-/* #statusDropdown {
-	float: right;
-	align-items: left;
-} */
-.tax {
-	justify-content: center;
-	align-items: center;
-}
-</style>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 mt-15">
+				<h3 align="center">Karat Master</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="panel-group m-all-15">
+				<div class="panel panel-default form-panel-primary">
+					<div class="panel-heading">Add Karat</div>
+					<div class="panel-body">
+						<s:form action="saveCarat">
+							<s:hidden name="caratBean.caratId" />
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group m-all-15">
+										<label for="karatCode">Karat Code</label> <input
+											name="caratBean.caratCode" type="text" id="karatCode"
+											value="<s:property value="caratBean.caratCode"/>"
+											class="validate input-sm form-control"
+											placeholder="CaratCode">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group m-all-15">
+										<label for="karatName">Karat Name</label> <input
+											name="caratBean.caratName" type="text"
+											class="validate input-sm form-control" id="karatName"
+											value="<s:property value="caratBean.caratName"/>"
+											placeholder="CaratName">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group m-all-15">
+										<label for="activeStatus">Active Status</label> <select
+											class="custom-select form-control input-sm" id="activeStatus"
+											name="caratBean.activeStatus"
+											value='<s:property value="caratBean.activeStatus"/>'>
+											<option selected>--Select from the list--</option>
+											<option value="Active">Active</option>
+											<option value="Inactive">Inactive</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group m-all-15 pull-right">
+										<button onclick="toggleTableContainer();"
+											class="btn btn-sm  form-control form-btn-purple"
+											type="button">
+											View Saved &nbsp;<span class="glyphicon glyphicon-list-alt"
+												style="font-size: 12px;"> </span>
+										</button>
+									</div>
+									<div class="form-group mt-15 pull-right">
+										<button
+											class="btn btn-sm btn-success form-control form-btn-success"
+											type="submit">
+											Submit &nbsp;<span class="glyphicon glyphicon-save"
+												style="font-size: 12px;"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+						</s:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container" hidden="true" id="tableContainer">
+		<div class="row">
+			<div class="panel-group m-all-15">
+				<div class="panel panel-default form-panel-primary">
+					<div class="panel-heading">View Karat Details</div>
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<thead>
+								<tr class="info">
+									<th>#</th>
+									<th>Karat CODE</th>
+									<th>Karat NAME</th>
+									<th>Active Status</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<s:if test="caratList!=null && caratList.size()>0">
+									<s:iterator value="caratList" status="row">
+										<tr class="default">
+											<td><s:property value="#row.count" /></td>
+											<td><s:property value="caratCode" /></td>
+											<td><s:property value="caratName" /></td>
+											<td><s:property value="activeStatus" /></td>
+											<td>
+												<button class="btn-xs btn-link"
+													onclick="editKarat('<s:property value="caratId"/>')">
+													<span class="glyphicon glyphicon-edit"
+														style="font-size: 15px; text-align: center;"></span>
+												</button>
+												<button class="btn-xs btn-link"
+													onclick="deleteKarat('<s:property value="caratId"/>')">
+													<span class="glyphicon glyphicon-trash"
+														style="color: #f11c1c; font-size: 15px; text-align: center;"></span>
+												</button>
+											</td>
+										</tr>
+									</s:iterator>
+								</s:if>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 <script type="text/javascript">
-	function editCarat(carid) {
+	function editKarat(carid) {
 		location.href = "editCarat?caratBean.caratId=" + carid;
 	}
 
-	function deleteCarat(carid) {
+	function deleteKarat(carid) {
 		location.href = "deleteCarat?caratBean.caratId=" + carid;
 	}
+
+	function toggleTableContainer() {
+		$('#tableContainer').toggle();
+	}
 </script>
-
-<%-- <header
-	class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar"
-	id="allign">
-	TAX -
-	<s:property value="loginBean.userName" />
-</header> --%>
-<body>
-	<nav class="navbar navbar-inverse bar">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="goToHome">Tesseract</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="goToHome">Home</a></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="goToTaxMaster">Tax</a></li>
-						<li><a href="goToCategory">Category</a></li>
-						<li><a href="goToProduct">Product</a></li>
-						<li class="active"><a href="goToCarat">Carat</a></li>
-						<li><a href="goToRate">Rate</a></li>
-						<li><a href="#">Page 1-3</a></li>
-					</ul></li>
-				<li><a href="#">Page 2</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						Sign Up</a></li> --%>
-				<li><a href="logout"><span
-						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-			</ul>
-		</div>
-	</nav>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="panel">
-				<h2>CARAT</h2>
-				<div class="panel-group" id="accordion">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapse1">Add Carat</a>
-							</h4>
-						</div>
-						<div id="collapse1" class="panel-collapse collapse in">
-							<div class="panel-body ">
-								<s:form action="saveCarat">
-									<div class="row">
-										<div class=" col s12">
-											<s:hidden name="caratBean.caratId" />
-											<label>Carat Code</label> <input
-												name="caratBean.caratCode" type="text"
-												value="<s:property value="caratBean.caratCode"/>"
-												class="validate" placeholder="CaratCode"> <label>Carat
-												Name</label> <input name="caratBean.caratName" type="text"
-												class="validate"
-												value="<s:property value="caratBean.caratName"/>"
-												placeholder="CaratName"> <label>Status</label> <select
-												name="caratBean.activeStatus"
-												value="<s:property value="caratBean.activeStatus"/>"
-												required="required" class="">
-												<option value="Active">Active</option>
-												<option value="Inactive">Inactive</option>
-											</select>&nbsp &nbsp
-												<button class="waves-effect waves-light btn" type="submit">Submit</button>
-											
-										</div>
-									</div>
-
-								</s:form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="panel panel-primary">
-					<div class="panel-heading" role="tab" id="collapse-two">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion"
-								class="collapsed" role="button" aria-expanded="true"
-								aria-controls="collapse2" href="#collapse2">Carat Details</a>
-						</h4>
-					</div>
-					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
-						aria-labelledby="collapse-two">
-						<div class="panel-body">
-							<div class="container">
-								<h2>Carat Table</h2>
-								<table class="table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>CARAT CODE</th>
-											<th>CARAT NAME</th>
-											<th>Active Status</th>
-											<th>Actions</th>
-										</tr>
-									</thead>
-									<tbody>
-										<!-- ***list name from redirectaction*** -->
-										<s:if test="caratList!=null && caratList.size()>0">
-
-											<s:iterator value="caratList" status="row">
-												<tr>
-													<td><s:property value="#row.count" /></td>
-													<td><s:property value="caratCode" /></td>
-													<td><s:property value="caratName" /></td>
-													<td><s:property value="activeStatus" /></td>
-													<td><button class="btn-xs btn-link"
-															onclick="editCarat('<s:property value="caratId"/>')">[EDIT]</button>
-														<button class="btn-xs btn-link"
-															onclick="deleteCarat('<s:property value="caratId"/>')">[DELETE]</button></td>
-												</tr>
-											</s:iterator>
-
-
-										</s:if>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
-
-
-
-
-</body>
 </html>

@@ -89,7 +89,6 @@ td, th {
 	function deleteVendor(venid) {
 		location.href = "deleteVendor?vendorBean.vendorId=" + venid;
 	}
-	
 
 	function addcustomer() {
 		$('#productModal #modalTitle').html("Add items to sales bill");
@@ -106,57 +105,14 @@ td, th {
 		$('#productModal').modal('show');
 		return false;
 	}
-	
-	function searchbillno(){
-		document.salesreturnform.action='goToSalesReturn';
+
+	function searchbillno() {
+		document.salesreturnform.action = 'goToSalesReturn';
 		document.salesreturnform.submit();
 	}
 </script>
-
-<%-- <header
-	class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar"
-	id="allign">
-	TAX -
-	<s:property value="loginBean.userName" />
-</header> --%>
 <body>
-	<nav class="navbar navbar-inverse bar">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="goToHome">Tesseract</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="goToHome">Home</a></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="goToTaxMaster">Tax</a></li>
-						<li><a href="goToCategory">Category</a></li>
-						<li><a href="goToProduct">Product</a></li>
-						<li><a href="goToModel">Model</a></li>
-						<li><a href="goToCarat">Carat</a></li>
-						<li><a href="goToRate">Rate</a></li>
-						<li><a href="goToCustomer">Customer</a></li>
-						<li><a href="goToVendor">Vendor</a></li>
-						<li><a href="goToPurchase">Purchase</a></li>
-						<li><a href="goToPurchaseReturn">PurchaseReturn</a></li>
-						<li><a href="goToSales">Sales</a></li>
-						<li class="active"><a href="goToSalesReturn">SalesReturn</a></li>
-
-						<li><a href="#">Page 1-3</a></li>
-					</ul></li>
-				<li><a href="#">Page 2</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						Sign Up</a></li>
-				<li><a href="logout"><span
-						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-			</ul>
-		</div>
-	</nav>
 	<div class="container-fluid">
-
 		<div class="row">
 			<div class="panel">
 				<h2>SALES RETURN</h2>
@@ -171,7 +127,6 @@ td, th {
 						<div id="collapse1" class="panel-collapse collapse in">
 							<form action="goToSalesReturn" name="salesreturnform">
 								<div class="panel-body ">
-
 									<div class="row">
 										<div class="col-md-6"></div>
 										<div class="col-md-6">
@@ -182,16 +137,12 @@ td, th {
 
 										</div>
 									</div>
-
-
-
-
 									<div class="row">
 										<table class="table">
 											<thead>
 												<tr>
 													<th>#</th>
-													<th>INVOICE NO & DATE</th>
+													<th>INVOICE NO &amp; DATE</th>
 													<th>CUSTOMER DETAILS</th>
 													<th>GST CODE</th>
 													<th>RATE</th>
@@ -204,17 +155,17 @@ td, th {
 												<s:iterator value="salesBaseList" status="row">
 													<tr>
 														<td><s:property value="#row.count" /></td>
-														<td><s:property value="invoice" />&</br> <s:property
+														<td><s:property value="invoice" />&amp;<br> <s:property
 																value="invoiceDate" /></td>
-														<td><s:property value="customerId.customerName" /></br> <s:property
-																value="customerId.address1" />, <s:property
+														<td><s:property value="customerId.customerName" /><br>
+															<s:property value="customerId.address1" />, <s:property
 																value="customerId.address2" />, <s:property
 																value="customerId.contact" />, <s:property
 																value="customerId.pin" /></td>
 														<td><s:property value="gstCode" /></td>
-														<td>GOLD :<s:property value="goldRate" /></br> SILVER :<s:property
-																value="silverRate" /></br> PLATINUM :<s:property
-																value="platinumRate" />
+														<td>GOLD :<s:property value="goldRate" /><br>
+															SILVER :<s:property value="silverRate" /><br>
+															PLATINUM :<s:property value="platinumRate" />
 														</td>
 														<td><s:if test="salesReturnStaus==false">
 																<a
@@ -237,16 +188,13 @@ td, th {
 											</s:else>
 										</table>
 									</div>
+								</div>
 							</form>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
-
-	</div>
-	</div>
 	</div>
 	<div class="modal fade" id="productModal" role="dialog">
 		<div class="modal-dialog modal-lg modal-xl">

@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(schema = "tesseract", catalog = "tesseract", name = "stockDetails")
+@Table(schema = "tesseract",  name = "stock_details")
 public class StockDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +21,13 @@ public class StockDetails {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="stockId")
+	@JoinColumn(name="stock_id")
 	private StockBean StockBaseId;
 	
-	@Column(name = "tranctionId")
-	private Integer tranctionId;//purchaeid or SaleSid
+	@Column(name = "tranction_id")
+	private Integer tranctionId;//purchaseid or SaleSid
 	
-	@Column(name="billNO")
+	@Column(name="bill_no")
 	private String billNO;
 	
 	@Column(name="month")
@@ -36,13 +36,13 @@ public class StockDetails {
 	@Column(name="year")
 	private String year;
 	
-	@Column(name="updatedOn")
+	@Column(name="updated_on")
 	private Date updatedOn;
 	
-	@Column(name="transactionType")
+	@Column(name="transaction_type")
 	private String transactionType; //S- sales, SR- sales return, P- purchase, PR- purchase return
 	
-	@Column(name="stockQuantity")
+	@Column(name="stock_quantity")
 	private Double stockQuantity;
 
 	public Long getId() {

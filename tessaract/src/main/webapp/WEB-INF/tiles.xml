@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<!-- basic layouts. do not change anything -->
+	<definition name="baseLayout"
+		template="jsp/templates/baseLayout.jsp">
+		<put-attribute name="title" value="Template" />
+	</definition>
+
+	<definition name="dashBoardLayout"
+		template="jsp/templates/dashBoardLayout.jsp">
+		<put-attribute name="title" value="Template" />
+	</definition>
+
+
+	<!-- custom layouts -->
+	<definition name="goToHome" extends="dashBoardLayout">
+		<put-attribute name="title" value="Dashboard" />
+		<put-attribute name="body" value="/jsp/Home.jsp" />
+	</definition>
+	
+	<definition name="goToTax" extends="baseLayout">
+		<put-attribute name="title" value="Taxes" />
+		<put-attribute name="body" value="/jsp/tax.jsp" />
+	</definition>
+
+	<definition name="goToCategory" extends="baseLayout">
+		<put-attribute name="title" value="Category" />
+		<put-attribute name="body" value="/jsp/category.jsp" />
+	</definition>
+	
+	<definition name="goToProduct" extends="baseLayout">
+		<put-attribute name="title" value="Product" />
+		<put-attribute name="body" value="/jsp/items.jsp" />
+	</definition>
+	
+	<definition name="goToModel" extends="baseLayout">
+		<put-attribute name="title" value="Model" />
+		<put-attribute name="body" value="/jsp/models.jsp" />
+	</definition>
+	
+	<definition name="goToCarat" extends="baseLayout">
+		<put-attribute name="title" value="Karat" />
+		<put-attribute name="body" value="/jsp/carat.jsp" />
+	</definition>
+	
+	<definition name="goToRate" extends="baseLayout">
+		<put-attribute name="title" value="Rate" />
+		<put-attribute name="body" value="/jsp/rate.jsp" />
+	</definition>
+	
+	<definition name="goToCustomer" extends="baseLayout">
+		<put-attribute name="title" value="Customer" />
+		<put-attribute name="body" value="/jsp/customer.jsp" />
+	</definition>
+	
+	<definition name="goToVendor" extends="baseLayout">
+		<put-attribute name="title" value="Vendor" />
+		<put-attribute name="body" value="/jsp/vendors.jsp" />
+	</definition>
+	
+	<definition name="goToPurchase" extends="baseLayout">
+		<put-attribute name="title" value="Purchase" />
+		<put-attribute name="body" value="/jsp/purchase.jsp" />
+	</definition>
+	
+	<definition name="goToPurchaseReturn" extends="baseLayout">
+		<put-attribute name="title" value="Purchase Return" />
+		<put-attribute name="body" value="/jsp/PurchaseReturn.jsp" />
+	</definition>
+	
+	<definition name="goToSales" extends="baseLayout">
+		<put-attribute name="title" value="Sales" />
+		<put-attribute name="body" value="/jsp/salesBase.jsp" />
+	</definition>
+	
+	<definition name="goToSalesReturn" extends="baseLayout">
+		<put-attribute name="title" value="Sales Return" />
+		<put-attribute name="body" value="/jsp/salesReturn.jsp" />
+	</definition>
+	
+	<definition name="editPurchaseDetails" extends="baseLayout">
+		<put-attribute name="title" value="Add/Edit Purchase" />
+		<put-attribute name="body" value="/jsp/AddPurchase.jsp" />
+	</definition>
+
+</tiles-definitions>
