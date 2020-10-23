@@ -21,6 +21,9 @@
   height: 40px;
   text-align: center;
   font-size: 10px;
+  position: absolute;
+  left: 50%;
+  top: 30%;
 }
 
 .spinner > div {
