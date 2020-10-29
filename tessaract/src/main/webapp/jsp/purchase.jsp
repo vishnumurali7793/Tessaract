@@ -6,11 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="resources/js/purchase/Purchase.js"></script>
-<%-- <script type="text/javascript" src="resources/jquery/jquery-3.5.0.js"></script> --%>
-<%-- <script type="text/javascript" src="resources/jquery-ui/jquery-ui.js"></script> --%>
-<%-- <script type="text/javascript" --%>
-<%-- 	src="resources/bootstrap/js/bootstrap.min.js"></script> --%>
+<%-- <script type="text/javascript" src="resources/js/purchase/Purchase.js"></script> --%>
+<script type="text/javascript" src="resources/jquery/jquery-3.5.0.js"></script>
+<script type="text/javascript" src="resources/jquery-ui/jquery-ui.js"></script>
+<script type="text/javascript"
+	src="resources/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- <link rel="stylesheet" type="text/css" -->
 <!-- 	href="resources/bootstrap/css/bootstrap.min.css"> -->
@@ -87,7 +87,6 @@ td, th {
 	function deleteVendor(venid) {
 		location.href = "deleteVendor?vendorBean.vendorId=" + venid;
 	}
-	
 
 	function addvendor() {
 		$('#productModal #modalTitle').html("Add items to purchase bill");
@@ -146,8 +145,8 @@ td, th {
 		</div>
 	</nav> --%>
 	<div class="container-fluid">
-		<%--<div class="row">
-			 <div class="panel">
+		<div class="row">
+			<div class="panel">
 				<h2>PURCHASE</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
@@ -158,123 +157,123 @@ td, th {
 							</h4>
 						</div>
 						<div id="collapse1" class="panel-collapse collapse in">
-							<div class="panel-body ">
-								<s:form action="">
+							<s:form action="">
+								<div class="panel-body ">
 									<div class="row">
 										<div class="col-md-12">
 											<button type="button" class="btn btn-primary"
-												data-toggle="modal" onclick="addvendor()">Add new bill</button>
+												data-toggle="modal" onclick="addvendor()">Add new
+												bill</button>
 										</div>
 									</div>
-									
-							</div>
-							
-							
-							<div class="row">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>INVOICE NO & DATE</th>
-											<th>BILL NO & DATE</th>
-											<th>VENDOR DETAILS</th>
-											<th>GST CODE</th>
-											<th>RATE</th>
-											<th>ACTIONS</th>
-										</tr>
-									</thead>
-									<!-- ***list name from redirectaction*** -->
+								</div>
+
+
+								<div class="row">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>INVOICE NO & DATE</th>
+												<th>BILL NO & DATE</th>
+												<th>VENDOR DETAILS</th>
+												<th>GST CODE</th>
+												<th>RATE</th>
+												<th>ACTIONS</th>
+											</tr>
+										</thead>
+										<!-- ***list name from redirectaction*** -->
 										<s:if test="purchaseList!=null && purchaseList.size()>0">
 
 											<s:iterator value="purchaseList" status="row">
 												<tr>
 													<td><s:property value="#row.count" /></td>
-													<td><s:property value="invoice" />&</br>
-													    <s:property value="invoiceDate" />
-													</td>
-													<td><s:property value="purBillNo" />&</br>
-													    <s:property value="purchaseDate" /></td>
-													<td><s:property value="vendor.vendorCode" /></br>
-													    <s:property value="vendor.vendorName" />,
-													    <s:property value="vendor.address1" />,
-													    <s:property value="vendor.contact" />,
-													    <s:property value="vendor.pin" />
-													</td>
+													<td><s:property value="invoice" />&</br> <s:property
+															value="invoiceDate" /></td>
+													<td><s:property value="purBillNo" />&</br> <s:property
+															value="purchaseDate" /></td>
+													<td><s:property value="vendor.vendorCode" /></br> <s:property
+															value="vendor.vendorName" />, <s:property
+															value="vendor.address1" />, <s:property
+															value="vendor.contact" />, <s:property
+															value="vendor.pin" /></td>
 													<td><s:property value="gstCode" /></td>
-													<td>GOLD :<s:property value="goldRate" /></br>
-												    	SILVER :<s:property value="silverRate" /></br>
-													    PLATINUM :<s:property value="platinumRate" />
+													<td>GOLD :<s:property value="goldRate" /></br> SILVER :<s:property
+															value="silverRate" /></br> PLATINUM :<s:property
+															value="platinumRate" />
 													</td>
-													<td>
-													<a href="editPurchaseDetails?purchaseBean.purchaseId=<s:property value="purchaseId" />" src="tessaract/src/main/webapp/images/edit.png">EDIT</a>
-													</td>
-													
+													<td><a
+														href="editPurchaseDetails?purchaseBean.purchaseId=<s:property value="purchaseId" />"
+														src="tessaract/src/main/webapp/images/edit.png">EDIT</a></td>
+
 
 												</tr>
 											</s:iterator>
 
 
 										</s:if>
-								</table>
-							</div>
+									</table>
+								</div>
 							</s:form>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-primary">
-					<div class="panel-heading" role="tab" id="collapse-two">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion"
-								class="collapsed" role="button" aria-expanded="true"
-								aria-controls="collapse2" href="#collapse2">Vendor Details</a>
-						</h4>
-					</div>
-					<div id="collapse2" class="panel-collapse collapse in"
-						role="tabpanel" aria-labelledby="collapse-two">
-						<div class="panel-body">
-							<div class="container">
-								<h2>Vendor Table</h2>
-								<table class="table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>VENDOR CODE</th>
-											<th>VENDOR NAME</th>
-											<th>VENDOR ADDRESS</th>
-											<th>VENDOR CONTACT</th>
-											<th>DATE</th>
-											<th>Active Status</th>
-											<th>Actions</th>
-										</tr>
-									</thead>
-									<tbody>
-										<!-- ***list name from redirectaction*** -->
-										<s:if test="vendorList!=null && vendorList.size()>0">
-											<s:iterator value="vendorList" status="row">
-												<tr>
-													<td><s:property value="#row.count" /></td>
-													<td><s:property value="vendorCode" /></td>
-													<td><s:property value="vendorName" /></td>
-													<td><s:property value="address1" /><br> <s:property
-															value="address2" /><br> <s:property value="pin" /></td>
-													<td><s:property value="contact" /></td>
-													<td><s:property value="addedOn" /></td>
-													<td><s:property value="activeStatus" /></td>
-													<td><button class="btn-xs btn-link"
-															onclick="editVendor('<s:property value="vendorId"/>')">[EDIT]</button>
-														<button class="btn-xs btn-link"
-															onclick="deleteVendor('<s:property value="vendorId"/>')">[DELETE]</button></td>
-												</tr>
-											</s:iterator>
-										</s:if>
-									</tbody>
-								</table>
-							</div>
+			<%-- <div class="panel panel-primary">
+				<div class="panel-heading" role="tab" id="collapse-two">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							class="collapsed" role="button" aria-expanded="true"
+							aria-controls="collapse2" href="#collapse2">Vendor Details</a>
+					</h4>
+				</div>
+				<div id="collapse2" class="panel-collapse collapse in"
+					role="tabpanel" aria-labelledby="collapse-two">
+					<div class="panel-body">
+						<div class="container">
+							<h2>Vendor Table</h2>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>VENDOR CODE</th>
+										<th>VENDOR NAME</th>
+										<th>VENDOR ADDRESS</th>
+										<th>VENDOR CONTACT</th>
+										<th>DATE</th>
+										<th>Active Status</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- ***list name from redirectaction*** -->
+									<s:if test="vendorList!=null && vendorList.size()>0">
+										<s:iterator value="vendorList" status="row">
+											<tr>
+												<td><s:property value="#row.count" /></td>
+												<td><s:property value="vendorCode" /></td>
+												<td><s:property value="vendorName" /></td>
+												<td><s:property value="address1" /><br> <s:property
+														value="address2" /><br> <s:property value="pin" /></td>
+												<td><s:property value="contact" /></td>
+												<td><s:property value="addedOn" /></td>
+												<td><s:property value="activeStatus" /></td>
+												<td><button class="btn-xs btn-link"
+														onclick="editVendor('<s:property value="vendorId"/>')">[EDIT]</button>
+													<button class="btn-xs btn-link"
+														onclick="deleteVendor('<s:property value="vendorId"/>')">[DELETE]</button></td>
+											</tr>
+										</s:iterator>
+									</s:if>
+								</tbody>
+							</table>
 						</div>
 					</div>
-		</div> --%>
-		<div class="row">
+				</div>
+			</div> --%>
+		</div>
+	</div>
+	<%-- <div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-15 ml-15">
 				<button class="btn btn-sm form-btn-purple pull-right mr-30" onclick="addNewPurchaseBill();">Add New Purchase&nbsp;
 					<i class="fa fa-plus text-20" aria-hidden="true"></i>
@@ -335,11 +334,11 @@ td, th {
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	<div class="modal fade" id="productModal" role="dialog">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
-				<div class="modal-header" style="background-color:  #581845;">
+				<div class="modal-header" style="background-color: #581845;">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>

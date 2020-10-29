@@ -55,18 +55,21 @@
 
 
 	<div class="container-fluid">
+		<div class="row">
+			<h3 class="text-center">Add Purchase</h3>
+		</div>
 		<form id="addSales" action="generateSalesReport">
 			<s:hidden name="itemsBase.salesId" id="salesIdHidden" />
 			<s:hidden name="salesStatus" id="salesStatusHidden" />
 			<div class="row">
 				<div class="col-md-12 col-sm-12 mt-15">
 					<div class="panel panel-default form-panel-primary">
-						<div class="panel-heading">Generate Sales Invoice</div>
+						<div class="panel-heading">Add Purchase Invoice</div>
 						<div class="panel-body">
 							<div class="panel panel-default">
 		  						<div class="panel-body inner-panel">
 			  						<div class="row m-all-15">
-			  							<h4>Customer Details</h4>
+			  							<h4>Vendor Details</h4>
 			  						</div>
 			  						<div class="row">
 			  							<div class="col-lg-3 col-md-6 col-sm-12">
@@ -91,7 +94,7 @@
 			  							<div class="col-lg-3 col-md-6 col-sm-12">
 			  								<div class="form-group m-all-15">
 				  								<label for="supplierCode">Supplier&nbsp;<i class="fa fa-asterisk mandatory icon-small"></i></label>
-				  								<s:textfield id="supplierCode" placeholder="Customer Code" 
+				  								<s:textfield id="supplierCode" placeholder="Vendor Code" 
 				  											 class="input-sm form-control validateImportant" name="itemsBase.customerId.customerCode" />
 				  							</div>
 			  							</div>

@@ -189,7 +189,7 @@
 		</action>
 		
 		<action name="editPurchaseDetails" class="org.tesseract.action.TransactionAction" method="editPurchaseDetails">
-			<result name="success" type="tiles">editPurchaseDetails</result>
+			<result name="success">/jsp/editpurchase.jsp</result>
 		</action>
 		
 		<action name="savepurchaseform" class="org.tesseract.action.TransactionAction" method="savepurchaseform">

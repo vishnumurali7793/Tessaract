@@ -83,9 +83,9 @@
 		<put-attribute name="body" value="/jsp/salesReturn.jsp" />
 	</definition>
 	
-	<definition name="editPurchaseDetails" extends="baseLayout">
+	<!-- <definition name="editPurchaseDetails" extends="baseLayout">
 		<put-attribute name="title" value="Add/Edit Purchase" />
 		<put-attribute name="body" value="/jsp/AddPurchase.jsp" />
-	</definition>
+	</definition> -->
 
 </tiles-definitions>
